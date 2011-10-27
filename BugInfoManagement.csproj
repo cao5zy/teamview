@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{033A9DB1-71C5-4691-8A21-9E1459962524}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BugInfoManagement</RootNamespace>
+    <AssemblyName>BugInfoManagement</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonLibrary, Version=2.57.3923.17249, Culture=neutral, PublicKeyToken=40e781e6bc1921a6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\CommonLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\FxLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssignPointsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AssignPointsControl.Designer.cs">
+      <DependentUpon>AssignPointsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssignPointsControlModule.cs" />
+    <Compile Include="BugInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BugInfoForm.Designer.cs">
+      <DependentUpon>BugInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BugInfoManager.cs" />
+    <Compile Include="BugStatesImpl.cs" />
+    <Compile Include="Configs\BugStatesConfig.cs" />
+    <Compile Include="Configs\NotificationSection.cs" />
+    <Compile Include="CreateBugInfoManager.cs" />
+    <Compile Include="Configs\DealManConfig.cs" />
+    <Compile Include="DealMenImpl.cs" />
+    <Compile Include="EditBugInfoManager.cs" />
+    <Compile Include="IBugStates.cs" />
+    <Compile Include="IDealMen.cs" />
+    <Compile Include="INotificationManager.cs" />
+    <Compile Include="INotificationSetting.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationManagerImpl.cs" />
+    <Compile Include="NotificationSettingImpl.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AssignPointsControl.resx">
+      <DependentUpon>AssignPointsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BugInfoForm.resx">
+      <DependentUpon>BugInfoForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleEditor.resx">
+      <DependentUpon>SimpleEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StateControl.resx">
+      <DependentUpon>StateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\BugInfoManagement.Dao.QueryParameter.datasource" />
+    <None Include="Properties\DataSources\BugInfoManagement.Entity.BugInfo.datasource" />
+    <None Include="Properties\DataSources\BugInfoManagement.Entity.BugStateBaseInfo.datasource" />
+    <None Include="Properties\DataSources\BugInfoManagement.Entity.ProgrammerBaseInfo.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SimpleEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SimpleEditor.Designer.cs">
+      <DependentUpon>SimpleEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Starter.cs" />
+    <Compile Include="StateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StateControl.Designer.cs">
+      <DependentUpon>StateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StateSequence.cs" />
+    <Compile Include="Utility\BindingCollection.cs" />
+    <Compile Include="Utility\ListOrder.cs" />
+    <Compile Include="Utility\ObjectPRopertyCompare.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="BugInfo.Common\BugInfo.Common.csproj">
+      <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
+      <Name>BugInfo.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "f:\BugInfoManagement1\bin\Debug\BugInfoManagement.exe" "c:\Tools\OA Task State Management\"
+copy "f:\BugInfoManagement1\bin\Debug\*.dll" "c:\Tools\OA Task State Management\"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
