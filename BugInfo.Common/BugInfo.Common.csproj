@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BugInfo.Common</RootNamespace>
+    <AssemblyName>BugInfo.Common</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="FxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\FxLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="SubSonic, Version=2.2.0.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Tools\SubSonic2.2\SubSonic.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\AllStructs.cs" />
+    <Compile Include="DAL\BugInfo.cs" />
+    <Compile Include="DAL\BugInfoController.cs" />
+    <Compile Include="DAL\ChangeLog.cs" />
+    <Compile Include="DAL\ChangeLogController.cs" />
+    <Compile Include="DAL\Pointslog.cs" />
+    <Compile Include="DAL\PointslogController.cs" />
+    <Compile Include="DAL\StoredProcedures.cs" />
+    <Compile Include="Logs\BugLogReader.cs" />
+    <Compile Include="Logs\BugNumLogReader.cs" />
+    <Compile Include="DaoImpl\BugInfoManagementImpl.cs" />
+    <Compile Include="DaoImpl\WhereGenerator.cs" />
+    <Compile Include="Dao\BugInfoParameterAttribute.cs" />
+    <Compile Include="Dao\IBugInfoManagement.cs" />
+    <Compile Include="Dao\QueryParameter.cs" />
+    <Compile Include="Logs\DbItem.cs" />
+    <Compile Include="Logs\DBItemReader.cs" />
+    <Compile Include="Logs\DBProvider.cs" />
+    <Compile Include="Entity\BugInfoEntity.cs" />
+    <Compile Include="Entity\BugStateBaseInfo.cs" />
+    <Compile Include="Entity\PointsEnum.cs" />
+    <Compile Include="Entity\ProgrammerBaseInfo.cs" />
+    <Compile Include="Entity\ProgrammerPoint.cs" />
+    <Compile Include="Logs\IDbProvider.cs" />
+    <Compile Include="Logs\LogRecord.cs" />
+    <Compile Include="Logs\LogsModule.cs" />
+    <Compile Include="Logs\PointsLogReader.cs" />
+    <Compile Include="PointsParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States.cs" />
+    <Compile Include="StatesConverter.cs" />
+    <Compile Include="StatesEnum.cs" />
+    <Compile Include="Logs\TaskRecord.cs" />
+    <Compile Include="Logs\TaskRecordParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
