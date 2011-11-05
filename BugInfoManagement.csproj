@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="CommonLibrary, Version=2.57.3923.17249, Culture=neutral, PublicKeyToken=40e781e6bc1921a6, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\CommonLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="FxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FxLib.dll</HintPath>

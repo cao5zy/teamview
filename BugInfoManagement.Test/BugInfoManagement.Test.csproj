@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
+      <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="CommonLibrary, Version=2.57.3923.17249, Culture=neutral, PublicKeyToken=40e781e6bc1921a6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -41,7 +41,7 @@
     </Reference>
     <Reference Include="FxLib.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\FxLib.Controls.dll</HintPath>
+      <HintPath>..\Dependencies\FxLib.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,7 +58,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\Dependencies\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

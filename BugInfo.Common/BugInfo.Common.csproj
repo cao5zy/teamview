@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
+      <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="FxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

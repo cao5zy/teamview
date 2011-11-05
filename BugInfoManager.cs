@@ -7,10 +7,10 @@ using System.Windows.Forms;
 using BugInfoManagement.Dao;
 using BugInfoManagement.DaoImpl;
 using System.IO;
-using OpenCourse.CommonLibrary.Algorithms;
 using BugInfoManagement.Common;
 using System.Transactions;
 using System.IO.Compression;
+using FxLib.Algorithms;
 
 namespace BugInfoManagement
 {

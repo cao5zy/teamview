@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OpenCourse.CommonLibrary.Algorithms;
 using System.Xml;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using FxLib.Algorithms;
 
 namespace BugInfoManagement
 {

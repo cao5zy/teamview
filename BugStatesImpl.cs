@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using BugInfoManagement.Entity;
 using System.Configuration;
-using OpenCourse.CommonLibrary.Algorithms;
+using FxLib.Algorithms;
+
 namespace BugInfoManagement
 {
     public class BugStatesImpl : IBugStates
@@ -16,7 +17,7 @@ namespace BugInfoManagement
             if (string.IsNullOrEmpty(config.BugStates))
                 STATES = new List<BugStateBaseInfo>();
             else
-                STATES = config.BugStates.Split(new char[]{','}).SafeConvetAll(
+                STATES = config.BugStates.Split(new char[]{','}).SafeConvertAll(
                 n => new BugStateBaseInfo { 
                     ID = 0,
                     StateInfo = n,

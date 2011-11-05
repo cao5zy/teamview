@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BugInfoManagement.Entity;
 using System.Configuration;
-using OpenCourse.CommonLibrary.Algorithms;
+using FxLib.Algorithms;
 
 namespace BugInfoManagement
 {
@@ -19,7 +19,7 @@ namespace BugInfoManagement
                 if (string.IsNullOrEmpty(config.DealMen))
                     DEALMEN = new List<ProgrammerBaseInfo>();
                 else
-                    DEALMEN = config.DealMen.Split(new char[]{','}).SafeConvetAll(
+                    DEALMEN = config.DealMen.Split(new char[]{','}).SafeConvertAll(
                     n => new ProgrammerBaseInfo
                     {
                         ID = 0,
