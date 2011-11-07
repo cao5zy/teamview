@@ -13,13 +13,16 @@ namespace BugInfoManagement
 {
     public partial class AssignPointsControl : UserControl
     {
-        
+
         public AssignPointsControl()
         {
             InitializeComponent();
         }
-        public AssignPointsControl(IDealMen dealMen) : this() {
-
+        public AssignPointsControl(IDealMen dealMen)
+            : this()
+        {
+            this.pointsLabel.Text = BugInfoManagement_Resource.pointsLabel;
+            this.estimatedByLabel.Text = BugInfoManagement_Resource.estimatedByLabel;
             mEsitmatedByComboBox.DataSource = dealMen.DealMen;
             mEsitmatedByComboBox.DisplayMember = "Name";
             mEsitmatedByComboBox.ValueMember = "Name";
@@ -37,7 +40,8 @@ namespace BugInfoManagement
 
         public ProgrammerPoint GetProgrammerPoint()
         {
-            return new ProgrammerPoint { 
+            return new ProgrammerPoint
+            {
                 EstimatedBy = mEsitmatedByComboBox.SelectedValue.ToString(),
                 EstimatedLevel = mPointsCombox.Text,
                 EstimatedTime = DateTime.Now

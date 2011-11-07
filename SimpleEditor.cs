@@ -17,6 +17,12 @@ namespace BugInfoManagement
         {
             InitializeComponent();
             mTextBox.TextChanged += (s, e) => mIsUpdated = true;
+            mFeedBackSection.Text = BugInfoManagement_Resource.mFeedBackSection;
+            mSectionButton.Text = BugInfoManagement_Resource.mSectionButton;
+            mNormalButton.Text = BugInfoManagement_Resource.mNormalButton;
+            mBoldButton.Text = BugInfoManagement_Resource.mBoldButton;
+            mGrayButton.Text = BugInfoManagement_Resource.mGrayButton;
+            mMaxButton.Text = BugInfoManagement_Resource.mMaxButton;
         }
 
         public bool IsUpdated

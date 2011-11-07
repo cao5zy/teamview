@@ -28,29 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.estimatedByLabel = new System.Windows.Forms.Label();
+            this.pointsLabel = new System.Windows.Forms.Label();
             this.mPointsCombox = new System.Windows.Forms.ComboBox();
             this.mEsitmatedByComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // label1
+            // estimatedByLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "estimated by";
+            this.estimatedByLabel.AutoSize = true;
+            this.estimatedByLabel.Location = new System.Drawing.Point(7, 34);
+            this.estimatedByLabel.Name = "estimatedByLabel";
+            this.estimatedByLabel.Size = new System.Drawing.Size(77, 12);
+            this.estimatedByLabel.TabIndex = 0;
+            this.estimatedByLabel.Text = "estimated by";
             // 
-            // label3
+            // pointsLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "points";
+            this.pointsLabel.AllowDrop = true;
+            this.pointsLabel.AutoSize = true;
+            this.pointsLabel.Location = new System.Drawing.Point(7, 3);
+            this.pointsLabel.Name = "pointsLabel";
+            this.pointsLabel.Size = new System.Drawing.Size(41, 12);
+            this.pointsLabel.TabIndex = 2;
+            this.pointsLabel.Text = "points";
             // 
             // mPointsCombox
             // 
@@ -76,8 +77,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.mEsitmatedByComboBox);
             this.Controls.Add(this.mPointsCombox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pointsLabel);
+            this.Controls.Add(this.estimatedByLabel);
             this.Name = "AssignPointsControl";
             this.Size = new System.Drawing.Size(182, 59);
             this.ResumeLayout(false);
@@ -87,8 +88,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label estimatedByLabel;
+        private System.Windows.Forms.Label pointsLabel;
         private System.Windows.Forms.ComboBox mPointsCombox;
         private System.Windows.Forms.ComboBox mEsitmatedByComboBox;
     }

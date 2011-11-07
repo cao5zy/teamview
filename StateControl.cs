@@ -15,6 +15,9 @@ namespace BugInfoManagement
         public StateControl()
         {
             InitializeComponent();
+            mStartButton.Text = BugInfoManagement_Resource.mStartButton;
+            mAbortButton.Text = BugInfoManagement_Resource.mAbortButton;
+            mCompleteButton.Text = BugInfoManagement_Resource.mCompleteButton;
         }
 
         private StatesEnum mCurrentState;
@@ -91,6 +94,6 @@ namespace BugInfoManagement
             CurrentState = StatesEnum.Complete;
         }
 
-        
+
     }
 }

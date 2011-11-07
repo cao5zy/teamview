@@ -55,14 +55,14 @@
             this.mDealManBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mQueryGroupBox = new System.Windows.Forms.GroupBox();
             this.mDescriptionTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.mDescriptionLabel = new System.Windows.Forms.Label();
             this.mVersionTextBox = new System.Windows.Forms.TextBox();
             this.mBugNumTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.mVersionNumber = new System.Windows.Forms.Label();
+            this.mBugNumberLabel = new System.Windows.Forms.Label();
             this.mBugStatesComboBox = new System.Windows.Forms.ComboBox();
             this.mStatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.mStateLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -99,7 +99,7 @@
             this.mAddButton.Name = "mAddButton";
             this.mAddButton.Size = new System.Drawing.Size(71, 25);
             this.mAddButton.TabIndex = 22;
-            this.mAddButton.Text = "新增";
+            this.mAddButton.Text = "Add New";
             this.mAddButton.UseVisualStyleBackColor = true;
             this.mAddButton.Click += new System.EventHandler(this.mAddButton_Click);
             // 
@@ -120,7 +120,7 @@
             this.mQueryButton.Name = "mQueryButton";
             this.mQueryButton.Size = new System.Drawing.Size(75, 25);
             this.mQueryButton.TabIndex = 19;
-            this.mQueryButton.Text = "查询";
+            this.mQueryButton.Text = "Query";
             this.mQueryButton.UseVisualStyleBackColor = true;
             this.mQueryButton.Click += new System.EventHandler(this.mQueryButton_Click);
             // 
@@ -131,9 +131,9 @@
             this.mDealManlabel.ForeColor = System.Drawing.SystemColors.Desktop;
             this.mDealManlabel.Location = new System.Drawing.Point(5, 22);
             this.mDealManlabel.Name = "mDealManlabel";
-            this.mDealManlabel.Size = new System.Drawing.Size(68, 17);
+            this.mDealManlabel.Size = new System.Drawing.Size(99, 17);
             this.mDealManlabel.TabIndex = 16;
-            this.mDealManlabel.Text = "程序员：";
+            this.mDealManlabel.Text = "Programer：";
             // 
             // mBugInfoListDataGridView
             // 
@@ -163,56 +163,56 @@
             // version
             // 
             this.version.DataPropertyName = "Version";
-            this.version.HeaderText = "版本号";
+            this.version.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dVersion;
             this.version.Name = "version";
             this.version.ReadOnly = true;
             // 
             // bugNum
             // 
             this.bugNum.DataPropertyName = "bugNum";
-            this.bugNum.HeaderText = "编号";
+            this.bugNum.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dBugNum;
             this.bugNum.Name = "bugNum";
             this.bugNum.ReadOnly = true;
             // 
             // bugStatus
             // 
             this.bugStatus.DataPropertyName = "bugStatus";
-            this.bugStatus.HeaderText = "状态";
+            this.bugStatus.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dState;
             this.bugStatus.Name = "bugStatus";
             this.bugStatus.ReadOnly = true;
             // 
             // dealMan
             // 
             this.dealMan.DataPropertyName = "dealMan";
-            this.dealMan.HeaderText = "处理人";
+            this.dealMan.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dBugDealer;
             this.dealMan.Name = "dealMan";
             this.dealMan.ReadOnly = true;
             // 
             // description
             // 
             this.description.DataPropertyName = "description";
-            this.description.HeaderText = "描述";
+            this.description.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dDescription;
             this.description.Name = "description";
             this.description.ReadOnly = true;
             // 
             // disposeResult
             // 
             this.disposeResult.DataPropertyName = "disposeResult";
-            this.disposeResult.HeaderText = "处理记录";
+            this.disposeResult.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dDealRecord;
             this.disposeResult.Name = "disposeResult";
             this.disposeResult.ReadOnly = true;
             // 
             // Priority
             // 
             this.Priority.DataPropertyName = "Priority";
-            this.Priority.HeaderText = "Priority";
+            this.Priority.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dPriority;
             this.Priority.Name = "Priority";
             this.Priority.ReadOnly = true;
             // 
             // Size
             // 
             this.Size.DataPropertyName = "size";
-            this.Size.HeaderText = "Size";
+            this.Size.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dSize;
             this.Size.Name = "Size";
             this.Size.ReadOnly = true;
             // 
@@ -246,12 +246,13 @@
             // 
             // mEditButton
             // 
+            this.mEditButton.AllowDrop = true;
             this.mEditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mEditButton.Location = new System.Drawing.Point(821, 72);
             this.mEditButton.Name = "mEditButton";
             this.mEditButton.Size = new System.Drawing.Size(75, 25);
             this.mEditButton.TabIndex = 25;
-            this.mEditButton.Text = "修改";
+            this.mEditButton.Text = "Edit";
             this.mEditButton.UseVisualStyleBackColor = true;
             this.mEditButton.Click += new System.EventHandler(this.mEditButton_Click);
             // 
@@ -273,9 +274,9 @@
             this.mDealManComboBox.DisplayMember = "Name";
             this.mDealManComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mDealManComboBox.FormattingEnabled = true;
-            this.mDealManComboBox.Location = new System.Drawing.Point(79, 20);
+            this.mDealManComboBox.Location = new System.Drawing.Point(90, 20);
             this.mDealManComboBox.Name = "mDealManComboBox";
-            this.mDealManComboBox.Size = new System.Drawing.Size(121, 20);
+            this.mDealManComboBox.Size = new System.Drawing.Size(124, 20);
             this.mDealManComboBox.TabIndex = 27;
             this.mDealManComboBox.ValueMember = "Name";
             // 
@@ -290,13 +291,13 @@
             // mQueryGroupBox
             // 
             this.mQueryGroupBox.Controls.Add(this.mDescriptionTextBox);
-            this.mQueryGroupBox.Controls.Add(this.label6);
+            this.mQueryGroupBox.Controls.Add(this.mDescriptionLabel);
             this.mQueryGroupBox.Controls.Add(this.mVersionTextBox);
             this.mQueryGroupBox.Controls.Add(this.mBugNumTextBox);
-            this.mQueryGroupBox.Controls.Add(this.label3);
-            this.mQueryGroupBox.Controls.Add(this.label2);
+            this.mQueryGroupBox.Controls.Add(this.mVersionNumber);
+            this.mQueryGroupBox.Controls.Add(this.mBugNumberLabel);
             this.mQueryGroupBox.Controls.Add(this.mBugStatesComboBox);
-            this.mQueryGroupBox.Controls.Add(this.label1);
+            this.mQueryGroupBox.Controls.Add(this.mStateLabel);
             this.mQueryGroupBox.Controls.Add(this.mDealManComboBox);
             this.mQueryGroupBox.Controls.Add(this.mDealManlabel);
             this.mQueryGroupBox.Controls.Add(this.mQueryButton);
@@ -305,7 +306,7 @@
             this.mQueryGroupBox.Size = new System.Drawing.Size(696, 100);
             this.mQueryGroupBox.TabIndex = 28;
             this.mQueryGroupBox.TabStop = false;
-            this.mQueryGroupBox.Text = "查询条件";
+            this.mQueryGroupBox.Text = "Query Condition";
             // 
             // mDescriptionTextBox
             // 
@@ -315,16 +316,16 @@
             this.mDescriptionTextBox.Size = new System.Drawing.Size(158, 21);
             this.mDescriptionTextBox.TabIndex = 35;
             // 
-            // label6
+            // mDescriptionLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label6.Location = new System.Drawing.Point(430, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 17);
-            this.label6.TabIndex = 34;
-            this.label6.Text = "Description：";
+            this.mDescriptionLabel.AutoSize = true;
+            this.mDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mDescriptionLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.mDescriptionLabel.Location = new System.Drawing.Point(430, 21);
+            this.mDescriptionLabel.Name = "mDescriptionLabel";
+            this.mDescriptionLabel.Size = new System.Drawing.Size(105, 17);
+            this.mDescriptionLabel.TabIndex = 34;
+            this.mDescriptionLabel.Text = "Description：";
             // 
             // mVersionTextBox
             // 
@@ -342,27 +343,27 @@
             this.mBugNumTextBox.Size = new System.Drawing.Size(100, 21);
             this.mBugNumTextBox.TabIndex = 32;
             // 
-            // label3
+            // mVersionNumber
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label3.Location = new System.Drawing.Point(220, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "版本号：";
+            this.mVersionNumber.AutoSize = true;
+            this.mVersionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mVersionNumber.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.mVersionNumber.Location = new System.Drawing.Point(220, 61);
+            this.mVersionNumber.Name = "mVersionNumber";
+            this.mVersionNumber.Size = new System.Drawing.Size(78, 17);
+            this.mVersionNumber.TabIndex = 31;
+            this.mVersionNumber.Text = "Version：";
             // 
-            // label2
+            // mBugNumberLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(220, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Bug编号：";
+            this.mBugNumberLabel.AutoSize = true;
+            this.mBugNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mBugNumberLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.mBugNumberLabel.Location = new System.Drawing.Point(220, 23);
+            this.mBugNumberLabel.Name = "mBugNumberLabel";
+            this.mBugNumberLabel.Size = new System.Drawing.Size(88, 17);
+            this.mBugNumberLabel.TabIndex = 30;
+            this.mBugNumberLabel.Text = "Bug Num：";
             // 
             // mBugStatesComboBox
             // 
@@ -372,9 +373,9 @@
             this.mBugStatesComboBox.DisplayMember = "StateInfo";
             this.mBugStatesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mBugStatesComboBox.FormattingEnabled = true;
-            this.mBugStatesComboBox.Location = new System.Drawing.Point(79, 62);
+            this.mBugStatesComboBox.Location = new System.Drawing.Point(90, 62);
             this.mBugStatesComboBox.Name = "mBugStatesComboBox";
-            this.mBugStatesComboBox.Size = new System.Drawing.Size(121, 20);
+            this.mBugStatesComboBox.Size = new System.Drawing.Size(124, 20);
             this.mBugStatesComboBox.TabIndex = 29;
             this.mBugStatesComboBox.ValueMember = "StateInfo";
             // 
@@ -382,16 +383,16 @@
             // 
             this.mStatesBindingSource.DataSource = typeof(BugInfoManagement.Entity.BugStateBaseInfo);
             // 
-            // label1
+            // mStateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(6, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "状 态：";
+            this.mStateLabel.AutoSize = true;
+            this.mStateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mStateLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.mStateLabel.Location = new System.Drawing.Point(6, 62);
+            this.mStateLabel.Name = "mStateLabel";
+            this.mStateLabel.Size = new System.Drawing.Size(61, 17);
+            this.mStateLabel.TabIndex = 28;
+            this.mStateLabel.Text = "State：";
             // 
             // panel1
             // 
@@ -475,7 +476,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label4);
             this.Name = "MainForm";
-            this.Text = "OA项目状态管理程序";
+            this.Text = BugInfoManagement_Resource.MainFormName;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).EndInit();
@@ -507,7 +508,7 @@
         private System.Windows.Forms.ComboBox mDealManComboBox;
         private System.Windows.Forms.GroupBox mQueryGroupBox;
         private System.Windows.Forms.ComboBox mBugStatesComboBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label mStateLabel;
         private System.Windows.Forms.BindingSource mDealManBindingSource;
         private System.Windows.Forms.BindingSource mStatesBindingSource;
         private System.Windows.Forms.Panel panel1;
@@ -520,8 +521,8 @@
         private System.Windows.Forms.ImageList mImageList;
         private System.Windows.Forms.TextBox mVersionTextBox;
         private System.Windows.Forms.TextBox mBugNumTextBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label mVersionNumber;
+        private System.Windows.Forms.Label mBugNumberLabel;
         private System.Windows.Forms.BindingSource mQueryBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn version;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugNum;
@@ -536,6 +537,6 @@
         private System.Windows.Forms.ToolStripMenuItem abortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem completeToolStripMenuItem;
         private System.Windows.Forms.TextBox mDescriptionTextBox;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label mDescriptionLabel;
     }
 }

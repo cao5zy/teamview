@@ -25,8 +25,8 @@ namespace BugInfoManagement
         public IBugInfoManagement BugInfoManagement { get; set; }
         public INotificationSetting NotificationSetting { get; set; }
         public INotificationManager NotificationManager { get; set; }
-        private EditBugInfoManager.Factiory EditBugInfoManagerFactory{get; set;}
-        private  CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
+        private EditBugInfoManager.Factiory EditBugInfoManagerFactory { get; set; }
+        private CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
 
         private QueryParameter mQueryParameter = new QueryParameter();
@@ -39,6 +39,15 @@ namespace BugInfoManagement
             CreateBugInfoForm = createBugInfoForm;
             EditBugInfoManagerFactory = createEditBugInfoManager;
             CreateBugInfoManagerFactory = createCreateBugInfoManager;
+            mQueryGroupBox.Text = BugInfoManagement_Resource.mQueryGroupBox;
+            mDealManlabel.Text = BugInfoManagement_Resource.mDealManlabel;
+            mBugNumberLabel.Text = BugInfoManagement_Resource.mBugNumberLabel;
+            mDescriptionLabel.Text = BugInfoManagement_Resource.mDescriptionLabel;
+            mStateLabel.Text = BugInfoManagement_Resource.mStateLabel;
+            mVersionNumber.Text = BugInfoManagement_Resource.mVersionNumber;
+            mQueryButton.Text = BugInfoManagement_Resource.mQueryButton;
+            mAddButton.Text = BugInfoManagement_Resource.mAddButton;
+            mEditButton.Text = BugInfoManagement_Resource.mEditButton;
         }
 
         private BugInfoEntity CurrentSelectedItem
@@ -92,6 +101,7 @@ namespace BugInfoManagement
         private void mAddButton_Click(object sender, EventArgs e)
         {
             BugInfoForm f = CreateBugInfoForm();
+            f.Text = BugInfoManagement_Resource.AddBugInfoFormName;
             f.BugInfoManager = CreateBugInfoManagerFactory();
             f.Show();
             //f.Dispose();
@@ -104,6 +114,7 @@ namespace BugInfoManagement
             if (this.mBugInfoListDataGridView.CurrentRow != null)
             {
                 BugInfoForm f = CreateBugInfoForm();
+                BugInfoForm f = CreateBugInfoForm();
                 f.BugInfoManager = EditBugInfoManagerFactory();
                 ((EditBugInfoManager)f.BugInfoManager).Initialize(((BugInfoEntity)mBugInfoListDataGridView.BindingContext[mBugInfoListDataGridView.DataSource].Current).BugNum);
                 f.Show();
@@ -112,7 +123,7 @@ namespace BugInfoManagement
             }
             else
             {
-                MessageBox.Show("请选择所要修改项！！！");
+                MessageBox.Show("Please chose one record what you want to edit！！！");
             }
 
             mQueryButton_Click(null, null);
@@ -138,7 +149,7 @@ namespace BugInfoManagement
 
         private void SetQueryCount(int count, decimal totalHours)
         {
-            mQueryGroupBox.Text = string.Format("记录数:{0}-总时间:{1}", count,totalHours);
+            mQueryGroupBox.Text = string.Format("{0}:{1}-{2}:{3}", BugInfoManagement_Resource.TotalRecord, count, BugInfoManagement_Resource.TotalTime, totalHours);
         }
 
         private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -197,7 +208,7 @@ namespace BugInfoManagement
         private void mBugInfoListDataGridView_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
             mBugInfoListDataGridView.CurrentCell = mBugInfoListDataGridView[e.ColumnIndex, e.RowIndex];
-            
+
         }
 
         private void mFlowMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -207,6 +218,6 @@ namespace BugInfoManagement
             editBugInfoManager.MoveState((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
             LoadBugInfos();
         }
-    
+
     }
 }

@@ -30,13 +30,13 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mMaxButton = new System.Windows.Forms.Button();
             this.mGrayButton = new System.Windows.Forms.Button();
             this.mFeedBackSection = new System.Windows.Forms.Button();
             this.mBoldButton = new System.Windows.Forms.Button();
             this.mNormalButton = new System.Windows.Forms.Button();
             this.mSectionButton = new System.Windows.Forms.Button();
             this.mTextBox = new System.Windows.Forms.RichTextBox();
-            this.mMaxButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -70,13 +70,23 @@
             this.panel1.Size = new System.Drawing.Size(387, 34);
             this.panel1.TabIndex = 0;
             // 
+            // mMaxButton
+            // 
+            this.mMaxButton.Location = new System.Drawing.Point(269, 3);
+            this.mMaxButton.Name = "mMaxButton";
+            this.mMaxButton.Size = new System.Drawing.Size(55, 23);
+            this.mMaxButton.TabIndex = 5;
+            this.mMaxButton.Text = "Maximum";
+            this.mMaxButton.UseVisualStyleBackColor = true;
+            this.mMaxButton.Click += new System.EventHandler(this.mMaxButton_Click);
+            // 
             // mGrayButton
             // 
-            this.mGrayButton.Location = new System.Drawing.Point(180, 3);
+            this.mGrayButton.Location = new System.Drawing.Point(224, 3);
             this.mGrayButton.Name = "mGrayButton";
             this.mGrayButton.Size = new System.Drawing.Size(39, 23);
             this.mGrayButton.TabIndex = 4;
-            this.mGrayButton.Text = "浅";
+            this.mGrayButton.Text = "Gray";
             this.mGrayButton.UseVisualStyleBackColor = true;
             this.mGrayButton.Click += new System.EventHandler(this.mGrayButton_Click);
             // 
@@ -84,39 +94,39 @@
             // 
             this.mFeedBackSection.Location = new System.Drawing.Point(6, 3);
             this.mFeedBackSection.Name = "mFeedBackSection";
-            this.mFeedBackSection.Size = new System.Drawing.Size(37, 23);
+            this.mFeedBackSection.Size = new System.Drawing.Size(62, 23);
             this.mFeedBackSection.TabIndex = 3;
-            this.mFeedBackSection.Text = "反馈";
+            this.mFeedBackSection.Text = "Feedback";
             this.mFeedBackSection.UseVisualStyleBackColor = true;
             this.mFeedBackSection.Click += new System.EventHandler(this.mFeedBackSection_Click);
             // 
             // mBoldButton
             // 
-            this.mBoldButton.Location = new System.Drawing.Point(135, 3);
+            this.mBoldButton.Location = new System.Drawing.Point(179, 3);
             this.mBoldButton.Name = "mBoldButton";
             this.mBoldButton.Size = new System.Drawing.Size(39, 23);
             this.mBoldButton.TabIndex = 2;
-            this.mBoldButton.Text = "粗";
+            this.mBoldButton.Text = "Bold";
             this.mBoldButton.UseVisualStyleBackColor = true;
             this.mBoldButton.Click += new System.EventHandler(this.mBoldButton_Click);
             // 
             // mNormalButton
             // 
-            this.mNormalButton.Location = new System.Drawing.Point(92, 3);
+            this.mNormalButton.Location = new System.Drawing.Point(124, 3);
             this.mNormalButton.Name = "mNormalButton";
-            this.mNormalButton.Size = new System.Drawing.Size(37, 23);
+            this.mNormalButton.Size = new System.Drawing.Size(49, 23);
             this.mNormalButton.TabIndex = 1;
-            this.mNormalButton.Text = "正常";
+            this.mNormalButton.Text = "Normal";
             this.mNormalButton.UseVisualStyleBackColor = true;
             this.mNormalButton.Click += new System.EventHandler(this.mNormalButton_Click);
             // 
             // mSectionButton
             // 
-            this.mSectionButton.Location = new System.Drawing.Point(49, 3);
+            this.mSectionButton.Location = new System.Drawing.Point(74, 3);
             this.mSectionButton.Name = "mSectionButton";
-            this.mSectionButton.Size = new System.Drawing.Size(37, 23);
+            this.mSectionButton.Size = new System.Drawing.Size(44, 23);
             this.mSectionButton.TabIndex = 0;
-            this.mSectionButton.Text = "标题";
+            this.mSectionButton.Text = "Title";
             this.mSectionButton.UseVisualStyleBackColor = true;
             this.mSectionButton.Click += new System.EventHandler(this.mSectionButton_Click);
             // 
@@ -128,16 +138,6 @@
             this.mTextBox.Size = new System.Drawing.Size(387, 298);
             this.mTextBox.TabIndex = 1;
             this.mTextBox.Text = "";
-            // 
-            // mMaxButton
-            // 
-            this.mMaxButton.Location = new System.Drawing.Point(225, 3);
-            this.mMaxButton.Name = "mMaxButton";
-            this.mMaxButton.Size = new System.Drawing.Size(55, 23);
-            this.mMaxButton.TabIndex = 5;
-            this.mMaxButton.Text = "最大化";
-            this.mMaxButton.UseVisualStyleBackColor = true;
-            this.mMaxButton.Click += new System.EventHandler(this.mMaxButton_Click);
             // 
             // SimpleEditor
             // 

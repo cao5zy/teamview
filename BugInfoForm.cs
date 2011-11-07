@@ -45,18 +45,33 @@ namespace BugInfoManagement
             };
             mSimpleEditor.Dock = DockStyle.Fill;
             mEditorPanel.Controls.Add(mSimpleEditor);
+            BIVersionNum.Text = BugInfoManagement_Resource.BIVersionNum;
+            BIBugNum.Text = BugInfoManagement_Resource.BIBugNum;
+            BICreater.Text = BugInfoManagement_Resource.BICreater;
+            BIBugDealMan.Text = BugInfoManagement_Resource.BIBugDealMan;
+            BIBugState.Text = BugInfoManagement_Resource.BIBugState;
+            BIPreTakeTime.Text = BugInfoManagement_Resource.BIPreTakeTime;
+            BITakeTime.Text = BugInfoManagement_Resource.BITakeTime;
+            BIPriority.Text = BugInfoManagement_Resource.BIPriority;
+            BIBugDescription.Text = BugInfoManagement_Resource.BIBugDescription;
+            BIDealRecord.Text = BugInfoManagement_Resource.BIDealRecord;
+            BIAssessment.Text = BugInfoManagement_Resource.BIAssessment;
+            mDoAddButton.Text = BugInfoManagement_Resource.mDoAddButton;
+            mQuitButton.Text = BugInfoManagement_Resource.mQuitButton;
 
         }
 
         private AssignPointsControl mAssignPointsControl;
         public BugInfoForm(AssignPointsControl assignPointsControl,
             IDealMen dealMen,
-            IBugStates bugStates) : this() {
-                mAssignPointsControl = assignPointsControl;
-                mAssignPointsControlContainer.Controls.Add(assignPointsControl);
-                assignPointsControl.Dock = DockStyle.Fill;
-                DealMen = dealMen;
-                BugStates = bugStates;
+            IBugStates bugStates)
+            : this()
+        {
+            mAssignPointsControl = assignPointsControl;
+            mAssignPointsControlContainer.Controls.Add(assignPointsControl);
+            assignPointsControl.Dock = DockStyle.Fill;
+            DealMen = dealMen;
+            BugStates = bugStates;
         }
 
         private void mQuitButton_Click(object sender, EventArgs e)
@@ -118,7 +133,7 @@ namespace BugInfoManagement
                 if (BugInfoManager.BugInfo.BugStatus == States.Pending
                     || BugInfoManager.BugInfo.BugStatus == States.Abort)
                 {
-                    if (MessageBox.Show("点击确定，立即开始任务", "开始任务?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("Click Yes，start task right now!", "Start the tast?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         var oldBugStatus = BugInfoManager.BugInfo.BugStatus;
                         ((EditBugInfoManager)BugInfoManager).MoveState(StatesEnum.Start);
@@ -135,13 +150,13 @@ namespace BugInfoManagement
             }
 
             BugInfoManager.LoadDetail(mSimpleEditor);
-            
+
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void mStateControl_StateChanged(object sender, StateControl.StateChangedArgs e)
