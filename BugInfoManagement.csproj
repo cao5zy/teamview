@@ -33,11 +33,11 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Autofac-2.4.5.724-NET35\Autofac.dll</HintPath>
+      <HintPath>Dependencies\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="FxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\FxLib.dll</HintPath>
+      <HintPath>Dependencies\FxLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -71,6 +71,11 @@
     <Compile Include="BugInfoForm.Designer.cs">
       <DependentUpon>BugInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BugInfoManagement.Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugInfoManagement.Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="BugInfoManager.cs" />
     <Compile Include="BugStatesImpl.cs" />
     <Compile Include="Configs\BugStatesConfig.cs" />
@@ -99,6 +104,10 @@
     <EmbeddedResource Include="BugInfoForm.resx">
       <DependentUpon>BugInfoForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BugInfoManagement.Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BugInfoManagement.Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -165,7 +174,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "f:\BugInfoManagement1\bin\Debug\BugInfoManagement.exe" "c:\Tools\OA Task State Management\"
-copy "f:\BugInfoManagement1\bin\Debug\*.dll" "c:\Tools\OA Task State Management\"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

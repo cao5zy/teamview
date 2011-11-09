@@ -87,7 +87,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(467, 81);
+            this.label5.Location = new System.Drawing.Point(467, 94);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 16);
             this.label5.TabIndex = 24;
@@ -95,9 +95,9 @@
             // mAddButton
             // 
             this.mAddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mAddButton.Location = new System.Drawing.Point(720, 72);
+            this.mAddButton.Location = new System.Drawing.Point(718, 84);
             this.mAddButton.Name = "mAddButton";
-            this.mAddButton.Size = new System.Drawing.Size(71, 25);
+            this.mAddButton.Size = new System.Drawing.Size(71, 29);
             this.mAddButton.TabIndex = 22;
             this.mAddButton.Text = "Add New";
             this.mAddButton.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Desktop;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(779, -18);
+            this.label4.Location = new System.Drawing.Point(779, -21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 16);
             this.label4.TabIndex = 21;
@@ -116,9 +116,9 @@
             // mQueryButton
             // 
             this.mQueryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mQueryButton.Location = new System.Drawing.Point(615, 69);
+            this.mQueryButton.Location = new System.Drawing.Point(603, 78);
             this.mQueryButton.Name = "mQueryButton";
-            this.mQueryButton.Size = new System.Drawing.Size(75, 25);
+            this.mQueryButton.Size = new System.Drawing.Size(75, 29);
             this.mQueryButton.TabIndex = 19;
             this.mQueryButton.Text = "Query";
             this.mQueryButton.UseVisualStyleBackColor = true;
@@ -127,13 +127,13 @@
             // mDealManlabel
             // 
             this.mDealManlabel.AutoSize = true;
-            this.mDealManlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mDealManlabel.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.mDealManlabel.Location = new System.Drawing.Point(5, 22);
+            this.mDealManlabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mDealManlabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mDealManlabel.Location = new System.Drawing.Point(5, 26);
             this.mDealManlabel.Name = "mDealManlabel";
-            this.mDealManlabel.Size = new System.Drawing.Size(99, 17);
+            this.mDealManlabel.Size = new System.Drawing.Size(62, 14);
             this.mDealManlabel.TabIndex = 16;
-            this.mDealManlabel.Text = "Programer：";
+            this.mDealManlabel.Text = "Programer:";
             // 
             // mBugInfoListDataGridView
             // 
@@ -151,11 +151,11 @@
             this.Size});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
             this.mBugInfoListDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mBugInfoListDataGridView.Location = new System.Drawing.Point(3, 113);
+            this.mBugInfoListDataGridView.Location = new System.Drawing.Point(3, 131);
             this.mBugInfoListDataGridView.Name = "mBugInfoListDataGridView";
             this.mBugInfoListDataGridView.ReadOnly = true;
             this.mBugInfoListDataGridView.RowTemplate.Height = 23;
-            this.mBugInfoListDataGridView.Size = new System.Drawing.Size(972, 378);
+            this.mBugInfoListDataGridView.Size = new System.Drawing.Size(972, 442);
             this.mBugInfoListDataGridView.TabIndex = 15;
             this.mBugInfoListDataGridView.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.mBugInfoListDataGridView_CellContextMenuStripNeeded);
             this.mBugInfoListDataGridView.SelectionChanged += new System.EventHandler(this.mBugInfoListDataGridView_SelectionChanged);
@@ -248,9 +248,9 @@
             // 
             this.mEditButton.AllowDrop = true;
             this.mEditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mEditButton.Location = new System.Drawing.Point(821, 72);
+            this.mEditButton.Location = new System.Drawing.Point(821, 84);
             this.mEditButton.Name = "mEditButton";
-            this.mEditButton.Size = new System.Drawing.Size(75, 25);
+            this.mEditButton.Size = new System.Drawing.Size(75, 29);
             this.mEditButton.TabIndex = 25;
             this.mEditButton.Text = "Edit";
             this.mEditButton.UseVisualStyleBackColor = true;
@@ -261,7 +261,7 @@
             this.mTipLabel.AutoSize = true;
             this.mTipLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mTipLabel.ForeColor = System.Drawing.Color.Maroon;
-            this.mTipLabel.Location = new System.Drawing.Point(467, 84);
+            this.mTipLabel.Location = new System.Drawing.Point(467, 98);
             this.mTipLabel.Name = "mTipLabel";
             this.mTipLabel.Size = new System.Drawing.Size(0, 15);
             this.mTipLabel.TabIndex = 26;
@@ -274,9 +274,9 @@
             this.mDealManComboBox.DisplayMember = "Name";
             this.mDealManComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mDealManComboBox.FormattingEnabled = true;
-            this.mDealManComboBox.Location = new System.Drawing.Point(90, 20);
+            this.mDealManComboBox.Location = new System.Drawing.Point(73, 24);
             this.mDealManComboBox.Name = "mDealManComboBox";
-            this.mDealManComboBox.Size = new System.Drawing.Size(124, 20);
+            this.mDealManComboBox.Size = new System.Drawing.Size(124, 22);
             this.mDealManComboBox.TabIndex = 27;
             this.mDealManComboBox.ValueMember = "Name";
             // 
@@ -301,9 +301,10 @@
             this.mQueryGroupBox.Controls.Add(this.mDealManComboBox);
             this.mQueryGroupBox.Controls.Add(this.mDealManlabel);
             this.mQueryGroupBox.Controls.Add(this.mQueryButton);
+            this.mQueryGroupBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mQueryGroupBox.Location = new System.Drawing.Point(3, 3);
             this.mQueryGroupBox.Name = "mQueryGroupBox";
-            this.mQueryGroupBox.Size = new System.Drawing.Size(696, 100);
+            this.mQueryGroupBox.Size = new System.Drawing.Size(685, 117);
             this.mQueryGroupBox.TabIndex = 28;
             this.mQueryGroupBox.TabStop = false;
             this.mQueryGroupBox.Text = "Query Condition";
@@ -311,59 +312,54 @@
             // mDescriptionTextBox
             // 
             this.mDescriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mQueryBindingSource, "Description", true));
-            this.mDescriptionTextBox.Location = new System.Drawing.Point(532, 21);
+            this.mDescriptionTextBox.Location = new System.Drawing.Point(520, 26);
             this.mDescriptionTextBox.Name = "mDescriptionTextBox";
-            this.mDescriptionTextBox.Size = new System.Drawing.Size(158, 21);
+            this.mDescriptionTextBox.Size = new System.Drawing.Size(158, 22);
             this.mDescriptionTextBox.TabIndex = 35;
             // 
             // mDescriptionLabel
             // 
             this.mDescriptionLabel.AutoSize = true;
-            this.mDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mDescriptionLabel.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.mDescriptionLabel.Location = new System.Drawing.Point(430, 21);
+            this.mDescriptionLabel.Location = new System.Drawing.Point(448, 29);
             this.mDescriptionLabel.Name = "mDescriptionLabel";
-            this.mDescriptionLabel.Size = new System.Drawing.Size(105, 17);
+            this.mDescriptionLabel.Size = new System.Drawing.Size(66, 14);
             this.mDescriptionLabel.TabIndex = 34;
-            this.mDescriptionLabel.Text = "Description：";
+            this.mDescriptionLabel.Text = "Description:";
             // 
             // mVersionTextBox
             // 
             this.mVersionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mQueryBindingSource, "Version", true));
-            this.mVersionTextBox.Location = new System.Drawing.Point(307, 61);
+            this.mVersionTextBox.Location = new System.Drawing.Point(305, 72);
             this.mVersionTextBox.Name = "mVersionTextBox";
-            this.mVersionTextBox.Size = new System.Drawing.Size(100, 21);
+            this.mVersionTextBox.Size = new System.Drawing.Size(100, 22);
             this.mVersionTextBox.TabIndex = 33;
             // 
             // mBugNumTextBox
             // 
             this.mBugNumTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mQueryBindingSource, "BugNum", true));
-            this.mBugNumTextBox.Location = new System.Drawing.Point(307, 22);
+            this.mBugNumTextBox.Location = new System.Drawing.Point(305, 26);
             this.mBugNumTextBox.Name = "mBugNumTextBox";
-            this.mBugNumTextBox.Size = new System.Drawing.Size(100, 21);
+            this.mBugNumTextBox.Size = new System.Drawing.Size(100, 22);
             this.mBugNumTextBox.TabIndex = 32;
             // 
             // mVersionNumber
             // 
             this.mVersionNumber.AutoSize = true;
-            this.mVersionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mVersionNumber.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.mVersionNumber.Location = new System.Drawing.Point(220, 61);
+            this.mVersionNumber.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mVersionNumber.Location = new System.Drawing.Point(243, 72);
             this.mVersionNumber.Name = "mVersionNumber";
-            this.mVersionNumber.Size = new System.Drawing.Size(78, 17);
+            this.mVersionNumber.Size = new System.Drawing.Size(47, 14);
             this.mVersionNumber.TabIndex = 31;
-            this.mVersionNumber.Text = "Version：";
+            this.mVersionNumber.Text = "Version:";
             // 
             // mBugNumberLabel
             // 
             this.mBugNumberLabel.AutoSize = true;
-            this.mBugNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mBugNumberLabel.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.mBugNumberLabel.Location = new System.Drawing.Point(220, 23);
+            this.mBugNumberLabel.Location = new System.Drawing.Point(243, 27);
             this.mBugNumberLabel.Name = "mBugNumberLabel";
-            this.mBugNumberLabel.Size = new System.Drawing.Size(88, 17);
+            this.mBugNumberLabel.Size = new System.Drawing.Size(56, 14);
             this.mBugNumberLabel.TabIndex = 30;
-            this.mBugNumberLabel.Text = "Bug Num：";
+            this.mBugNumberLabel.Text = "Bug Num:";
             // 
             // mBugStatesComboBox
             // 
@@ -373,9 +369,9 @@
             this.mBugStatesComboBox.DisplayMember = "StateInfo";
             this.mBugStatesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mBugStatesComboBox.FormattingEnabled = true;
-            this.mBugStatesComboBox.Location = new System.Drawing.Point(90, 62);
+            this.mBugStatesComboBox.Location = new System.Drawing.Point(73, 69);
             this.mBugStatesComboBox.Name = "mBugStatesComboBox";
-            this.mBugStatesComboBox.Size = new System.Drawing.Size(124, 20);
+            this.mBugStatesComboBox.Size = new System.Drawing.Size(124, 22);
             this.mBugStatesComboBox.TabIndex = 29;
             this.mBugStatesComboBox.ValueMember = "StateInfo";
             // 
@@ -386,13 +382,12 @@
             // mStateLabel
             // 
             this.mStateLabel.AutoSize = true;
-            this.mStateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mStateLabel.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.mStateLabel.Location = new System.Drawing.Point(6, 62);
+            this.mStateLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mStateLabel.Location = new System.Drawing.Point(6, 72);
             this.mStateLabel.Name = "mStateLabel";
-            this.mStateLabel.Size = new System.Drawing.Size(61, 17);
+            this.mStateLabel.Size = new System.Drawing.Size(36, 14);
             this.mStateLabel.TabIndex = 28;
-            this.mStateLabel.Text = "State：";
+            this.mStateLabel.Text = "State:";
             // 
             // panel1
             // 
@@ -404,7 +399,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(972, 104);
+            this.panel1.Size = new System.Drawing.Size(972, 122);
             this.panel1.TabIndex = 29;
             // 
             // tableLayoutPanel1
@@ -417,9 +412,9 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(978, 494);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(978, 576);
             this.tableLayoutPanel1.TabIndex = 30;
             // 
             // mNotifyIcon
@@ -470,13 +465,14 @@
             // MainForm
             // 
             this.AcceptButton = this.mQueryButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 494);
+            this.ClientSize = new System.Drawing.Size(978, 576);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label4);
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
-            this.Text = BugInfoManagement_Resource.MainFormName;
+            this.Text = "TeamView";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).EndInit();

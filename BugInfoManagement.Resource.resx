@@ -117,38 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddBugInfoFormName" xml:space="preserve">
+    <value>Add New</value>
+  </data>
   <data name="BIAssessment" xml:space="preserve">
-    <value>Difficult Assessment：</value>
+    <value>Difficult Assessment:</value>
   </data>
   <data name="BIBugDealMan" xml:space="preserve">
-    <value>Bug Dealer：</value>
+    <value>Bug Dealer:</value>
   </data>
   <data name="BIBugDescription" xml:space="preserve">
-    <value>Description：</value>
+    <value>Description:</value>
   </data>
   <data name="BIBugNum" xml:space="preserve">
-    <value>Bug Num：</value>
+    <value>Bug Num:</value>
   </data>
   <data name="BIBugState" xml:space="preserve">
-    <value>State：</value>
+    <value>State:</value>
   </data>
   <data name="BICreater" xml:space="preserve">
-    <value>Creater：</value>
+    <value>Creater:</value>
   </data>
   <data name="BIDealRecord" xml:space="preserve">
-    <value>Deal Record：</value>
+    <value>Deal Record:</value>
   </data>
   <data name="BIPreTakeTime" xml:space="preserve">
-    <value>Time Assessment(H)：</value>
+    <value>Time Assessment(H):</value>
   </data>
   <data name="BIPriority" xml:space="preserve">
-    <value>Priority：</value>
+    <value>Priority:</value>
   </data>
   <data name="BITakeTime" xml:space="preserve">
-    <value>Time consuming(H)：</value>
+    <value>Time consuming(H):</value>
   </data>
   <data name="BIVersionNum" xml:space="preserve">
-    <value>Version：</value>
+    <value>Version:</value>
   </data>
   <data name="dBugDealer" xml:space="preserve">
     <value>Bug Dealer</value>
@@ -174,14 +177,20 @@
   <data name="dVersion" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="EditBugInfoFormName" xml:space="preserve">
+    <value>Edit The Bug</value>
+  </data>
   <data name="estimatedByLabel" xml:space="preserve">
-    <value>Estimate by</value>
+    <value>Estimate by:</value>
   </data>
   <data name="mAbortButton" xml:space="preserve">
     <value>Abort</value>
   </data>
   <data name="mAddButton" xml:space="preserve">
     <value>Add New</value>
+  </data>
+  <data name="MainFormName" xml:space="preserve">
+    <value>TeamView</value>
   </data>
   <data name="mBaseInfoGroupBox" xml:space="preserve">
     <value>Base Information</value>
@@ -190,16 +199,16 @@
     <value>Bold</value>
   </data>
   <data name="mBugNumberLabel" xml:space="preserve">
-    <value>Bug Num：</value>
+    <value>Bug Num:</value>
   </data>
   <data name="mCompleteButton" xml:space="preserve">
     <value>Complete</value>
   </data>
   <data name="mDealManlabel" xml:space="preserve">
-    <value>Programer：</value>
+    <value>Programer:</value>
   </data>
   <data name="mDescriptionLabel" xml:space="preserve">
-    <value>Description：</value>
+    <value>Description:</value>
   </data>
   <data name="mDoAddButton" xml:space="preserve">
     <value>Save</value>
@@ -207,14 +216,50 @@
   <data name="mEditButton" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Message1" xml:space="preserve">
+    <value>The state can't be changed ！</value>
+  </data>
+  <data name="Message2" xml:space="preserve">
+    <value>Only one task's state can be Dealing at one time ！</value>
+  </data>
+  <data name="Message3" xml:space="preserve">
+    <value>The data has been out of the time ！</value>
+  </data>
+  <data name="Message4" xml:space="preserve">
+    <value>Please chose one record what you want to edit！！！</value>
+  </data>
+  <data name="Message5" xml:space="preserve">
+    <value>Are you sure to delete！</value>
+  </data>
+  <data name="Message6" xml:space="preserve">
+    <value>The record has been deleted ！</value>
+  </data>
+  <data name="Message7" xml:space="preserve">
+    <value>Information Message</value>
+  </data>
+  <data name="Message8" xml:space="preserve">
+    <value>Please chose one record which you want to delete ！</value>
+  </data>
+  <data name="MessageBugNum" xml:space="preserve">
+    <value>The Bug Num can't be null ！</value>
+  </data>
+  <data name="MessageCreater" xml:space="preserve">
+    <value>The Creater Can't be null ！</value>
+  </data>
+  <data name="MessageVersion" xml:space="preserve">
+    <value>The Version can't be null ！</value>
+  </data>
   <data name="mFeedBackSection" xml:space="preserve">
     <value>Feedback</value>
   </data>
   <data name="mGrayButton" xml:space="preserve">
     <value>Gray</value>
   </data>
-  <data name="mMaxButton" xml:space="preserve">
-    <value>Maximum</value>
+  <data name="mMaxButtonText1" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="mMaxButtonText2" xml:space="preserve">
+    <value>Min</value>
   </data>
   <data name="mNormalButton" xml:space="preserve">
     <value>Normal</value>
@@ -235,24 +280,18 @@
     <value>Start</value>
   </data>
   <data name="mStateLabel" xml:space="preserve">
-    <value>State：</value>
+    <value>State:</value>
   </data>
   <data name="mVersionNumber" xml:space="preserve">
-    <value>Version：</value>
+    <value>Version:</value>
   </data>
   <data name="pointsLabel" xml:space="preserve">
-    <value>Points</value>
+    <value>Points:</value>
   </data>
   <data name="TotalRecord" xml:space="preserve">
     <value>Total Records</value>
   </data>
   <data name="TotalTime" xml:space="preserve">
     <value>Total Time</value>
-  </data>
-  <data name="AddBugInfoFormName" xml:space="preserve">
-    <value>Add A Bug</value>
-  </data>
-  <data name="EditBugInfoFormName" xml:space="preserve">
-    <value>Edit The Bug</value>
   </data>
 </root>

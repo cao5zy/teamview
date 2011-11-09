@@ -22,7 +22,7 @@ namespace BugInfoManagement
             mNormalButton.Text = BugInfoManagement_Resource.mNormalButton;
             mBoldButton.Text = BugInfoManagement_Resource.mBoldButton;
             mGrayButton.Text = BugInfoManagement_Resource.mGrayButton;
-            mMaxButton.Text = BugInfoManagement_Resource.mMaxButton;
+            mMaxButton.Text = BugInfoManagement_Resource.mMaxButtonText1;
         }
 
         public bool IsUpdated
@@ -87,14 +87,14 @@ namespace BugInfoManagement
                 if (MinEditor != null)
                     MinEditor(null, null);
                 mIsMaxed = false;
-                mMaxButton.Text = "最大化";
+                mMaxButton.Text = BugInfoManagement_Resource.mMaxButtonText1;
             }
             else
             {
                 if (MaxEditor != null)
                     MaxEditor(null, null);
                 mIsMaxed = true;
-                mMaxButton.Text = "最小化";
+                mMaxButton.Text = BugInfoManagement_Resource.mMaxButtonText2;
             }
         }
 

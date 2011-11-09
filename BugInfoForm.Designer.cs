@@ -87,7 +87,7 @@ namespace BugInfoManagement
             // mBugNumTextBox
             // 
             this.mBugNumTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "BugNum", true));
-            this.mBugNumTextBox.Location = new System.Drawing.Point(296, 12);
+            this.mBugNumTextBox.Location = new System.Drawing.Point(301, 12);
             this.mBugNumTextBox.Name = "mBugNumTextBox";
             this.mBugNumTextBox.Size = new System.Drawing.Size(100, 21);
             this.mBugNumTextBox.TabIndex = 3;
@@ -118,54 +118,54 @@ namespace BugInfoManagement
             this.BIVersionNum.AutoSize = true;
             this.BIVersionNum.Location = new System.Drawing.Point(6, 17);
             this.BIVersionNum.Name = "BIVersionNum";
-            this.BIVersionNum.Size = new System.Drawing.Size(59, 12);
+            this.BIVersionNum.Size = new System.Drawing.Size(53, 12);
             this.BIVersionNum.TabIndex = 0;
-            this.BIVersionNum.Text = "Version：";
+            this.BIVersionNum.Text = "Version:";
             // 
             // BIBugNum
             // 
             this.BIBugNum.AutoSize = true;
-            this.BIBugNum.Location = new System.Drawing.Point(242, 15);
+            this.BIBugNum.Location = new System.Drawing.Point(185, 18);
             this.BIBugNum.Name = "BIBugNum";
-            this.BIBugNum.Size = new System.Drawing.Size(59, 12);
+            this.BIBugNum.Size = new System.Drawing.Size(53, 12);
             this.BIBugNum.TabIndex = 2;
-            this.BIBugNum.Text = "Bug Num：";
+            this.BIBugNum.Text = "Bug Num:";
             // 
             // BIBugState
             // 
             this.BIBugState.AutoSize = true;
             this.BIBugState.Location = new System.Drawing.Point(6, 49);
             this.BIBugState.Name = "BIBugState";
-            this.BIBugState.Size = new System.Drawing.Size(47, 12);
+            this.BIBugState.Size = new System.Drawing.Size(41, 12);
             this.BIBugState.TabIndex = 8;
-            this.BIBugState.Text = "State：";
+            this.BIBugState.Text = "State:";
             // 
             // BIBugDealMan
             // 
             this.BIBugDealMan.AutoSize = true;
             this.BIBugDealMan.Location = new System.Drawing.Point(646, 15);
             this.BIBugDealMan.Name = "BIBugDealMan";
-            this.BIBugDealMan.Size = new System.Drawing.Size(77, 12);
+            this.BIBugDealMan.Size = new System.Drawing.Size(71, 12);
             this.BIBugDealMan.TabIndex = 6;
-            this.BIBugDealMan.Text = "Bug Dealer：";
+            this.BIBugDealMan.Text = "Bug Dealer:";
             // 
             // BIBugDescription
             // 
             this.BIBugDescription.AutoSize = true;
             this.BIBugDescription.Location = new System.Drawing.Point(6, 72);
             this.BIBugDescription.Name = "BIBugDescription";
-            this.BIBugDescription.Size = new System.Drawing.Size(83, 12);
+            this.BIBugDescription.Size = new System.Drawing.Size(77, 12);
             this.BIBugDescription.TabIndex = 16;
-            this.BIBugDescription.Text = "Description：";
+            this.BIBugDescription.Text = "Description:";
             // 
             // BIDealRecord
             // 
             this.BIDealRecord.AutoSize = true;
             this.BIDealRecord.Location = new System.Drawing.Point(6, 118);
             this.BIDealRecord.Name = "BIDealRecord";
-            this.BIDealRecord.Size = new System.Drawing.Size(83, 12);
+            this.BIDealRecord.Size = new System.Drawing.Size(77, 12);
             this.BIDealRecord.TabIndex = 19;
-            this.BIDealRecord.Text = "Deal Record：";
+            this.BIDealRecord.Text = "Deal Record:";
             // 
             // label2
             // 
@@ -205,7 +205,7 @@ namespace BugInfoManagement
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.LightCoral;
-            this.label1.Location = new System.Drawing.Point(815, 11);
+            this.label1.Location = new System.Drawing.Point(815, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(14, 16);
             this.label1.TabIndex = 10;
@@ -265,9 +265,9 @@ namespace BugInfoManagement
             this.BIAssessment.AutoSize = true;
             this.BIAssessment.Location = new System.Drawing.Point(370, 120);
             this.BIAssessment.Name = "BIAssessment";
-            this.BIAssessment.Size = new System.Drawing.Size(137, 12);
+            this.BIAssessment.Size = new System.Drawing.Size(131, 12);
             this.BIAssessment.TabIndex = 24;
-            this.BIAssessment.Text = "Difficult Assessment：";
+            this.BIAssessment.Text = "Difficult Assessment:";
             // 
             // mAssignPointsControlContainer
             // 
@@ -316,16 +316,16 @@ namespace BugInfoManagement
             // BIPriority
             // 
             this.BIPriority.AutoSize = true;
-            this.BIPriority.Location = new System.Drawing.Point(658, 44);
+            this.BIPriority.Location = new System.Drawing.Point(646, 44);
             this.BIPriority.Name = "BIPriority";
-            this.BIPriority.Size = new System.Drawing.Size(65, 12);
+            this.BIPriority.Size = new System.Drawing.Size(59, 12);
             this.BIPriority.TabIndex = 14;
-            this.BIPriority.Text = "Priority：";
+            this.BIPriority.Text = "Priority:";
             // 
             // mSizeTextBox
             // 
             this.mSizeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "Size", true));
-            this.mSizeTextBox.Location = new System.Drawing.Point(296, 45);
+            this.mSizeTextBox.Location = new System.Drawing.Point(301, 45);
             this.mSizeTextBox.Name = "mSizeTextBox";
             this.mSizeTextBox.Size = new System.Drawing.Size(100, 21);
             this.mSizeTextBox.TabIndex = 11;
@@ -333,11 +333,11 @@ namespace BugInfoManagement
             // BIPreTakeTime
             // 
             this.BIPreTakeTime.AutoSize = true;
-            this.BIPreTakeTime.Location = new System.Drawing.Point(176, 49);
+            this.BIPreTakeTime.Location = new System.Drawing.Point(185, 49);
             this.BIPreTakeTime.Name = "BIPreTakeTime";
-            this.BIPreTakeTime.Size = new System.Drawing.Size(125, 12);
+            this.BIPreTakeTime.Size = new System.Drawing.Size(119, 12);
             this.BIPreTakeTime.TabIndex = 10;
-            this.BIPreTakeTime.Text = "Time Assessment(H)：";
+            this.BIPreTakeTime.Text = "Time Assessment(H):";
             // 
             // mCreatedComboBox
             // 
@@ -356,11 +356,11 @@ namespace BugInfoManagement
             // BICreater
             // 
             this.BICreater.AutoSize = true;
-            this.BICreater.Location = new System.Drawing.Point(474, 17);
+            this.BICreater.Location = new System.Drawing.Point(414, 15);
             this.BICreater.Name = "BICreater";
-            this.BICreater.Size = new System.Drawing.Size(59, 12);
+            this.BICreater.Size = new System.Drawing.Size(53, 12);
             this.BICreater.TabIndex = 4;
-            this.BICreater.Text = "Creater：";
+            this.BICreater.Text = "Creater:";
             // 
             // mTotalHoursBox
             // 
@@ -376,9 +376,9 @@ namespace BugInfoManagement
             this.BITakeTime.AutoSize = true;
             this.BITakeTime.Location = new System.Drawing.Point(414, 49);
             this.BITakeTime.Name = "BITakeTime";
-            this.BITakeTime.Size = new System.Drawing.Size(119, 12);
+            this.BITakeTime.Size = new System.Drawing.Size(113, 12);
             this.BITakeTime.TabIndex = 12;
-            this.BITakeTime.Text = "Time consuming(H)：";
+            this.BITakeTime.Text = "Time consuming(H):";
             // 
             // mDealManComboBox
             // 
@@ -388,7 +388,7 @@ namespace BugInfoManagement
             this.mDealManComboBox.DisplayMember = "Name";
             this.mDealManComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mDealManComboBox.FormattingEnabled = true;
-            this.mDealManComboBox.Location = new System.Drawing.Point(719, 9);
+            this.mDealManComboBox.Location = new System.Drawing.Point(719, 14);
             this.mDealManComboBox.Name = "mDealManComboBox";
             this.mDealManComboBox.Size = new System.Drawing.Size(96, 20);
             this.mDealManComboBox.TabIndex = 7;

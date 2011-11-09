@@ -37,38 +37,38 @@
             // estimatedByLabel
             // 
             this.estimatedByLabel.AutoSize = true;
-            this.estimatedByLabel.Location = new System.Drawing.Point(7, 34);
+            this.estimatedByLabel.Location = new System.Drawing.Point(7, 37);
             this.estimatedByLabel.Name = "estimatedByLabel";
-            this.estimatedByLabel.Size = new System.Drawing.Size(77, 12);
+            this.estimatedByLabel.Size = new System.Drawing.Size(83, 12);
             this.estimatedByLabel.TabIndex = 0;
-            this.estimatedByLabel.Text = "estimated by";
+            this.estimatedByLabel.Text = "estimated by:";
             // 
             // pointsLabel
             // 
             this.pointsLabel.AllowDrop = true;
             this.pointsLabel.AutoSize = true;
-            this.pointsLabel.Location = new System.Drawing.Point(7, 3);
+            this.pointsLabel.Location = new System.Drawing.Point(7, 6);
             this.pointsLabel.Name = "pointsLabel";
-            this.pointsLabel.Size = new System.Drawing.Size(41, 12);
+            this.pointsLabel.Size = new System.Drawing.Size(47, 12);
             this.pointsLabel.TabIndex = 2;
-            this.pointsLabel.Text = "points";
+            this.pointsLabel.Text = "points:";
             // 
             // mPointsCombox
             // 
             this.mPointsCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mPointsCombox.FormattingEnabled = true;
-            this.mPointsCombox.Location = new System.Drawing.Point(102, 3);
+            this.mPointsCombox.Location = new System.Drawing.Point(96, 3);
             this.mPointsCombox.Name = "mPointsCombox";
-            this.mPointsCombox.Size = new System.Drawing.Size(80, 20);
+            this.mPointsCombox.Size = new System.Drawing.Size(86, 20);
             this.mPointsCombox.TabIndex = 4;
             // 
             // mEsitmatedByComboBox
             // 
             this.mEsitmatedByComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mEsitmatedByComboBox.FormattingEnabled = true;
-            this.mEsitmatedByComboBox.Location = new System.Drawing.Point(102, 34);
+            this.mEsitmatedByComboBox.Location = new System.Drawing.Point(96, 34);
             this.mEsitmatedByComboBox.Name = "mEsitmatedByComboBox";
-            this.mEsitmatedByComboBox.Size = new System.Drawing.Size(80, 20);
+            this.mEsitmatedByComboBox.Size = new System.Drawing.Size(86, 20);
             this.mEsitmatedByComboBox.TabIndex = 5;
             // 
             // AssignPointsControl

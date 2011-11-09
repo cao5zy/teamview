@@ -61,7 +61,16 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Difficult Assessment：.
+        ///   Looks up a localized string similar to Add New.
+        /// </summary>
+        internal static string AddBugInfoFormName {
+            get {
+                return ResourceManager.GetString("AddBugInfoFormName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Difficult Assessment:.
         /// </summary>
         internal static string BIAssessment {
             get {
@@ -70,7 +79,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bug Dealer：.
+        ///   Looks up a localized string similar to Bug Dealer:.
         /// </summary>
         internal static string BIBugDealMan {
             get {
@@ -79,7 +88,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description：.
+        ///   Looks up a localized string similar to Description:.
         /// </summary>
         internal static string BIBugDescription {
             get {
@@ -88,7 +97,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bug Num：.
+        ///   Looks up a localized string similar to Bug Num:.
         /// </summary>
         internal static string BIBugNum {
             get {
@@ -97,7 +106,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to State：.
+        ///   Looks up a localized string similar to State:.
         /// </summary>
         internal static string BIBugState {
             get {
@@ -106,7 +115,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creater：.
+        ///   Looks up a localized string similar to Creater:.
         /// </summary>
         internal static string BICreater {
             get {
@@ -115,7 +124,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deal Record：.
+        ///   Looks up a localized string similar to Deal Record:.
         /// </summary>
         internal static string BIDealRecord {
             get {
@@ -124,7 +133,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time Assessment(H)：.
+        ///   Looks up a localized string similar to Time Assessment(H):.
         /// </summary>
         internal static string BIPreTakeTime {
             get {
@@ -133,7 +142,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Priority：.
+        ///   Looks up a localized string similar to Priority:.
         /// </summary>
         internal static string BIPriority {
             get {
@@ -142,7 +151,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time consuming(H)：.
+        ///   Looks up a localized string similar to Time consuming(H):.
         /// </summary>
         internal static string BITakeTime {
             get {
@@ -151,7 +160,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version：.
+        ///   Looks up a localized string similar to Version:.
         /// </summary>
         internal static string BIVersionNum {
             get {
@@ -232,7 +241,16 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estimate by.
+        ///   Looks up a localized string similar to Edit The Bug.
+        /// </summary>
+        internal static string EditBugInfoFormName {
+            get {
+                return ResourceManager.GetString("EditBugInfoFormName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimate by:.
         /// </summary>
         internal static string estimatedByLabel {
             get {
@@ -259,6 +277,15 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TeamView.
+        /// </summary>
+        internal static string MainFormName {
+            get {
+                return ResourceManager.GetString("MainFormName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Information.
         /// </summary>
         internal static string mBaseInfoGroupBox {
@@ -277,7 +304,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bug Num：.
+        ///   Looks up a localized string similar to Bug Num:.
         /// </summary>
         internal static string mBugNumberLabel {
             get {
@@ -295,7 +322,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Programer：.
+        ///   Looks up a localized string similar to Programer:.
         /// </summary>
         internal static string mDealManlabel {
             get {
@@ -304,7 +331,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description：.
+        ///   Looks up a localized string similar to Description:.
         /// </summary>
         internal static string mDescriptionLabel {
             get {
@@ -331,6 +358,105 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The state can&apos;t be changed ！.
+        /// </summary>
+        internal static string Message1 {
+            get {
+                return ResourceManager.GetString("Message1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one task&apos;s state can be Dealing at one time ！.
+        /// </summary>
+        internal static string Message2 {
+            get {
+                return ResourceManager.GetString("Message2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data has been out of the time ！.
+        /// </summary>
+        internal static string Message3 {
+            get {
+                return ResourceManager.GetString("Message3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please chose one record what you want to edit！！！.
+        /// </summary>
+        internal static string Message4 {
+            get {
+                return ResourceManager.GetString("Message4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete！.
+        /// </summary>
+        internal static string Message5 {
+            get {
+                return ResourceManager.GetString("Message5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The record has been deleted ！.
+        /// </summary>
+        internal static string Message6 {
+            get {
+                return ResourceManager.GetString("Message6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information Message.
+        /// </summary>
+        internal static string Message7 {
+            get {
+                return ResourceManager.GetString("Message7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please chose one record which you want to delete ！.
+        /// </summary>
+        internal static string Message8 {
+            get {
+                return ResourceManager.GetString("Message8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Bug Num can&apos;t be null ！.
+        /// </summary>
+        internal static string MessageBugNum {
+            get {
+                return ResourceManager.GetString("MessageBugNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Creater Can&apos;t be null ！.
+        /// </summary>
+        internal static string MessageCreater {
+            get {
+                return ResourceManager.GetString("MessageCreater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Version can&apos;t be null ！.
+        /// </summary>
+        internal static string MessageVersion {
+            get {
+                return ResourceManager.GetString("MessageVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feedback.
         /// </summary>
         internal static string mFeedBackSection {
@@ -349,11 +475,20 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum.
+        ///   Looks up a localized string similar to Max.
         /// </summary>
-        internal static string mMaxButton {
+        internal static string mMaxButtonText1 {
             get {
-                return ResourceManager.GetString("mMaxButton", resourceCulture);
+                return ResourceManager.GetString("mMaxButtonText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min.
+        /// </summary>
+        internal static string mMaxButtonText2 {
+            get {
+                return ResourceManager.GetString("mMaxButtonText2", resourceCulture);
             }
         }
         
@@ -412,7 +547,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to State：.
+        ///   Looks up a localized string similar to State:.
         /// </summary>
         internal static string mStateLabel {
             get {
@@ -421,7 +556,7 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version：.
+        ///   Looks up a localized string similar to Version:.
         /// </summary>
         internal static string mVersionNumber {
             get {
@@ -430,11 +565,29 @@ namespace BugInfoManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Points.
+        ///   Looks up a localized string similar to Points:.
         /// </summary>
         internal static string pointsLabel {
             get {
                 return ResourceManager.GetString("pointsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Records.
+        /// </summary>
+        internal static string TotalRecord {
+            get {
+                return ResourceManager.GetString("TotalRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Time.
+        /// </summary>
+        internal static string TotalTime {
+            get {
+                return ResourceManager.GetString("TotalTime", resourceCulture);
             }
         }
     }

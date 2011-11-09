@@ -114,16 +114,16 @@ namespace BugInfoManagement
             if (this.mBugInfoListDataGridView.CurrentRow != null)
             {
                 BugInfoForm f = CreateBugInfoForm();
-                BugInfoForm f = CreateBugInfoForm();
                 f.BugInfoManager = EditBugInfoManagerFactory();
                 ((EditBugInfoManager)f.BugInfoManager).Initialize(((BugInfoEntity)mBugInfoListDataGridView.BindingContext[mBugInfoListDataGridView.DataSource].Current).BugNum);
+                f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+((BugInfoEntity)mBugInfoListDataGridView.BindingContext[mBugInfoListDataGridView.DataSource].Current).BugNum;
                 f.Show();
                 //f.Dispose();
                 //GC.Collect();
             }
             else
             {
-                MessageBox.Show("Please chose one record what you want to edit！！！");
+                MessageBox.Show(BugInfoManagement_Resource.Message4);
             }
 
             mQueryButton_Click(null, null);
@@ -134,16 +134,16 @@ namespace BugInfoManagement
         {
             if (this.mBugInfoListDataGridView.CurrentRow != null)
             {
-                if (MessageBox.Show("确定是否要删除？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(BugInfoManagement_Resource.Message5, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     BugInfoManagement.DeleteByBugNum(mBugInfoListDataGridView.CurrentRow.Cells[1].Value.ToString());
                     mQueryButton_Click(null, null);
-                    MessageBox.Show("记录删除成功！", "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(BugInfoManagement_Resource.Message6, BugInfoManagement_Resource.Message7, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("请选择所要删除的项！！！");
+                MessageBox.Show(BugInfoManagement_Resource.Message8);
             }
         }
 

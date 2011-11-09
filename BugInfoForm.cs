@@ -181,5 +181,6 @@ namespace BugInfoManagement
             }
             mSimpleEditor.Clear();
         }
+
     }
 }
