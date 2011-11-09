@@ -94,7 +94,6 @@ namespace BugInfoManagement
             // 
             // mDoAddButton
             // 
-            this.mDoAddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mDoAddButton.Location = new System.Drawing.Point(740, 157);
             this.mDoAddButton.Name = "mDoAddButton";
             this.mDoAddButton.Size = new System.Drawing.Size(75, 23);
@@ -191,7 +190,6 @@ namespace BugInfoManagement
             // 
             // mQuitButton
             // 
-            this.mQuitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mQuitButton.Location = new System.Drawing.Point(835, 157);
             this.mQuitButton.Name = "mQuitButton";
             this.mQuitButton.Size = new System.Drawing.Size(75, 23);

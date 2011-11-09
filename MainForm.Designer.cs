@@ -94,7 +94,6 @@
             // 
             // mAddButton
             // 
-            this.mAddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mAddButton.Location = new System.Drawing.Point(718, 84);
             this.mAddButton.Name = "mAddButton";
             this.mAddButton.Size = new System.Drawing.Size(71, 29);
@@ -115,7 +114,6 @@
             // 
             // mQueryButton
             // 
-            this.mQueryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mQueryButton.Location = new System.Drawing.Point(603, 78);
             this.mQueryButton.Name = "mQueryButton";
             this.mQueryButton.Size = new System.Drawing.Size(75, 29);
@@ -127,11 +125,10 @@
             // mDealManlabel
             // 
             this.mDealManlabel.AutoSize = true;
-            this.mDealManlabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mDealManlabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mDealManlabel.Location = new System.Drawing.Point(5, 26);
             this.mDealManlabel.Name = "mDealManlabel";
-            this.mDealManlabel.Size = new System.Drawing.Size(62, 14);
+            this.mDealManlabel.Size = new System.Drawing.Size(65, 14);
             this.mDealManlabel.TabIndex = 16;
             this.mDealManlabel.Text = "Programer:";
             // 
@@ -247,7 +244,6 @@
             // mEditButton
             // 
             this.mEditButton.AllowDrop = true;
-            this.mEditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mEditButton.Location = new System.Drawing.Point(821, 84);
             this.mEditButton.Name = "mEditButton";
             this.mEditButton.Size = new System.Drawing.Size(75, 29);
@@ -301,7 +297,6 @@
             this.mQueryGroupBox.Controls.Add(this.mDealManComboBox);
             this.mQueryGroupBox.Controls.Add(this.mDealManlabel);
             this.mQueryGroupBox.Controls.Add(this.mQueryButton);
-            this.mQueryGroupBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mQueryGroupBox.Location = new System.Drawing.Point(3, 3);
             this.mQueryGroupBox.Name = "mQueryGroupBox";
             this.mQueryGroupBox.Size = new System.Drawing.Size(685, 117);
@@ -322,7 +317,7 @@
             this.mDescriptionLabel.AutoSize = true;
             this.mDescriptionLabel.Location = new System.Drawing.Point(448, 29);
             this.mDescriptionLabel.Name = "mDescriptionLabel";
-            this.mDescriptionLabel.Size = new System.Drawing.Size(66, 14);
+            this.mDescriptionLabel.Size = new System.Drawing.Size(73, 14);
             this.mDescriptionLabel.TabIndex = 34;
             this.mDescriptionLabel.Text = "Description:";
             // 
@@ -345,10 +340,9 @@
             // mVersionNumber
             // 
             this.mVersionNumber.AutoSize = true;
-            this.mVersionNumber.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mVersionNumber.Location = new System.Drawing.Point(243, 72);
             this.mVersionNumber.Name = "mVersionNumber";
-            this.mVersionNumber.Size = new System.Drawing.Size(47, 14);
+            this.mVersionNumber.Size = new System.Drawing.Size(52, 14);
             this.mVersionNumber.TabIndex = 31;
             this.mVersionNumber.Text = "Version:";
             // 
@@ -357,7 +351,7 @@
             this.mBugNumberLabel.AutoSize = true;
             this.mBugNumberLabel.Location = new System.Drawing.Point(243, 27);
             this.mBugNumberLabel.Name = "mBugNumberLabel";
-            this.mBugNumberLabel.Size = new System.Drawing.Size(56, 14);
+            this.mBugNumberLabel.Size = new System.Drawing.Size(58, 14);
             this.mBugNumberLabel.TabIndex = 30;
             this.mBugNumberLabel.Text = "Bug Num:";
             // 
@@ -382,10 +376,9 @@
             // mStateLabel
             // 
             this.mStateLabel.AutoSize = true;
-            this.mStateLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mStateLabel.Location = new System.Drawing.Point(6, 72);
             this.mStateLabel.Name = "mStateLabel";
-            this.mStateLabel.Size = new System.Drawing.Size(36, 14);
+            this.mStateLabel.Size = new System.Drawing.Size(38, 14);
             this.mStateLabel.TabIndex = 28;
             this.mStateLabel.Text = "State:";
             // 
