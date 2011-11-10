@@ -81,6 +81,11 @@ namespace BugInfoManagement
 
         private bool ValidateData()
         {
+            if (!BugInfoManager.HasEvalValue())
+            {
+                MessageBox.Show("Please set the estimated value");
+                return false;
+            }
             bool result = !mAssignPointsControl.IsChanged || mAssignPointsControl.CanAssign;
             if (!result)
             {

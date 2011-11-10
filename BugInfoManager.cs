@@ -337,5 +337,13 @@ namespace BugInfoManagement
 
         protected abstract System.IO.Stream GetDetailStream();
 
+        public bool HasEvalValue()
+        {
+            var coll = new DAL.PointslogCollection()
+                .Where("bugnum", BugInfo.BugNum)
+                .Load();
+            return coll.Count > 0;
+        }
+
     }
 }
