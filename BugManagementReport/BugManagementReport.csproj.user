@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>\week:previousweek weekReport \sort:bugNum \past:false \u:曹宗颖</StartArguments>
+    <StartArguments>\snapbugnum \u:方绍军,彭长生,张果,成小平,叶伟 \version:2011.2</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>http://localhost/BugManagementReport/</PublishUrlHistory>

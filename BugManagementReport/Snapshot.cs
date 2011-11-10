@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FxLib.Algorithms;
 using BugInfo.Common.Logs;
+using System.IO;
 
 namespace BugManagementReport
 {
@@ -14,10 +15,30 @@ namespace BugManagementReport
 
         public void Take(IEnumerable<string> userNames, string outFileName)
         {
-            FileProvider.WriteSnapShot(outFileName, 
-                userNames.SafeConvertAllItems(n=>
+            FileProvider.WriteSnapShot(outFileName,
+                userNames.SafeConvertAllItems(n =>
                 DBProvider.Read(n))
-                .SafeSort(n=>n.Add(m=>m.dealMan).Add(m=>m.version).Add(m=>m.priority)));
+                .SafeSort(n => n.Add(m => m.dealMan).Add(m => m.version).Add(m => m.priority)));
+        }
+
+        public static void TakeBugNumList(IEnumerable<string> usernames, string versionnumber, string outFileName)
+        {
+            using (var stream = new FileStream(outFileName, FileMode.Create))
+            {
+                using (var streamWriter = new StreamWriter(stream))
+                {
+                    foreach (var username in usernames)
+                    {
+                        DAL.BugInfoCollection bugs = new DAL.BugInfoCollection()
+                            .Where("dealman", username)
+                            .Where("version", versionnumber)
+                            .Load();
+
+                        bugs.SafeForEach(n =>
+                            streamWriter.WriteLine(n.BugNum));
+                    }
+                }
+            }
         }
     }
 }

@@ -28,6 +28,8 @@ namespace BugManagementReport
             bool sortByBugNum = false;
             bool includePast = true;
             bool onlyTask = false;
+            bool snapbugnum = false;
+            string versionnumber = string.Empty;
 
             foreach (var arg in args)
             {
@@ -39,6 +41,16 @@ namespace BugManagementReport
                     if (match.Groups[1].Value == "snap")
                     {
                         snap = true;
+                        continue;
+                    }
+                    else if (match.Groups[1].Value == "snapbugnum")
+                    {
+                        snapbugnum = true;
+                        continue;
+                    }
+                    else if (match.Groups[1].Value == "version")
+                    {
+                        versionnumber = match.Groups[2].Value.Substring(1);
                         continue;
                     }
                     else if (match.Groups[1].Value == "onlyTask")
@@ -102,6 +114,14 @@ namespace BugManagementReport
                 s.Take(userNames.UnSafeItem("user names should be set").Split(new char[]{','}), outFileName);
                 Console.WriteLine("taking snapshot completed");
             }
+            else if (snapbugnum)
+            {
+                Console.WriteLine("taking snapshot bugnum");
+                outFileName += DateTime.Now.ToString().Replace(':', '_') + ".csv";
+                Snapshot.TakeBugNumList(userNames.UnSafeItem("user names should be set").Split(new char[] { ',' }), versionnumber, 
+                    userNames.Replace(",","_") + ".txt");
+                Console.WriteLine("taking snapshot bugnum completed");
+            }
             else
             {
                 Console.WriteLine("parsing");
@@ -110,15 +130,16 @@ namespace BugManagementReport
                 outFileName += ".csv";
                 if (File.Exists(outFileName))
                     File.Delete(outFileName);
-                s.ParseTask(outFileName, 
-                    start, 
-                    end, 
-                    string.IsNullOrEmpty(userNames) ? null: userNames.Split(new char[]{','}),
+                s.ParseTask(outFileName,
+                    start,
+                    end,
+                    string.IsNullOrEmpty(userNames) ? null : userNames.Split(new char[] { ',' }),
                     sortByBugNum,
                     includePast,
                     onlyTask);
                 Console.WriteLine("parsing completed");
             }
         }
+
     }
 }
