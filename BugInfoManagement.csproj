@@ -168,6 +168,10 @@
       <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
       <Name>BugInfo.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="INIDB\INIDB.csproj">
+      <Project>{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}</Project>
+      <Name>INIDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

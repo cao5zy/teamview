@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Resources;
+using System.Xml;
 
 namespace CreatLocalDataBase
 {
@@ -11,11 +13,11 @@ namespace CreatLocalDataBase
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreatDBForm());
+            Application.Run(new CreateDBForm());
         }
     }
 }
