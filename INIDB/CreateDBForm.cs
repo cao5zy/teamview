@@ -22,7 +22,6 @@ namespace CreatLocalDataBase
         public CreateDBForm()
         {
             InitializeComponent();
-            //加载上次保留信息
             if (File.Exists(Application.StartupPath + @"\ConnectRecord.resx"))
             {
                 using (ResXResourceReader resr = new ResXResourceReader(@"ConnectRecord.resx"))
@@ -63,76 +62,78 @@ namespace CreatLocalDataBase
             }
         }
 
-        //创建表
         private void CreatTable()
         {
             string source = GetConn() + ";database=" + DBNameTextBox.Text;
-            SqlConnection conn = new SqlConnection(source);
-            conn.Open();
 
-            string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdBy VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
-            string sqlTwo = "CREATE TABLE ChangeLog" + "(LogID BIGINT PRIMARY KEY,BugNum VARCHAR(500) not null,CreateDate datetime not null, Description VARCHAR(80) not null,LogTypeID int not null)";
-            string sqlThree = "CREATE TABLE pointslog" + "(pointslogid BIGINT PRIMARY KEY,bugnum VARCHAR(500) not null,[log] VARCHAR(100) not null, createdtime datetime not null)";
-
-            SqlCommand cmdOne = new SqlCommand(sqlOne, conn);
-            SqlCommand cmdTwo = new SqlCommand(sqlTwo, conn);
-            SqlCommand cmdThree = new SqlCommand(sqlThree, conn);
-
-            try
+            using (SqlConnection conn = new SqlConnection(source))
             {
-                cmdOne.ExecuteNonQuery();
-                cmdTwo.ExecuteNonQuery();
-                cmdThree.ExecuteNonQuery();
+                conn.Open();
+                string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdBy VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
+                string sqlTwo = "CREATE TABLE ChangeLog" + "(LogID BIGINT PRIMARY KEY,BugNum VARCHAR(500) not null,CreateDate datetime not null, Description VARCHAR(80) not null,LogTypeID int not null)";
+                string sqlThree = "CREATE TABLE pointslog" + "(pointslogid BIGINT PRIMARY KEY,bugnum VARCHAR(500) not null,[log] VARCHAR(100) not null, createdtime datetime not null)";
+
+                SqlCommand cmdOne = new SqlCommand(sqlOne, conn);
+                SqlCommand cmdTwo = new SqlCommand(sqlTwo, conn);
+                SqlCommand cmdThree = new SqlCommand(sqlThree, conn);
+
+                SqlTransaction tx = conn.BeginTransaction();
+                cmdOne.Transaction = tx;
+                cmdTwo.Transaction = tx;
+                cmdThree.Transaction = tx;
+
+                try
+                {
+                    cmdOne.ExecuteNonQuery();
+                    cmdTwo.ExecuteNonQuery();
+                    cmdThree.ExecuteNonQuery();
+                    tx.Commit();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    tx.Rollback();
+                }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            conn.Close();
         }
 
-        //创建 数据库函数
         private void CreatDBFun()
         {
             string source = GetConn() + ";database=" + DBNameTextBox.Text;
-            SqlConnection conn = new SqlConnection(source);
-            conn.Open();
-            string sql = @"
-CREATE function [MergeLog](@BugNum varchar(500))
-returns varchar(1000)
-as
-begin
-    declare @S varchar(1000)
-    select @S=isnull(@S+' , ','') + Convert(varchar(10),L.CreateDate, 120) + ':'  + L.[Description] + char(13) + char(10) from [ChangeLog] L 
-    where L.BugNum = @BugNum
-    return @S
-end";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            try
+            using (SqlConnection conn = new SqlConnection(source))
             {
-                cmd.ExecuteNonQuery();
+                conn.Open();
+                string sql = @"
+                    CREATE function [MergeLog](@BugNum varchar(500))
+                    returns varchar(1000)
+                    as
+                    begin
+                        declare @S varchar(1000)
+                        select @S=isnull(@S+' , ','') + Convert(varchar(10),L.CreateDate, 120) + ':'  + L.[Description] + char(13) + char(10) from [ChangeLog] L 
+                        where L.BugNum = @BugNum
+                        return @S
+                    end";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            conn.Close();
         }
 
-        //创建数据库的函数
         private void ExecuteSql(string conn, string DatabaseName, string Sql)
         {
             System.Data.SqlClient.SqlConnection mySqlConnection = new System.Data.SqlClient.SqlConnection(conn);
             System.Data.SqlClient.SqlCommand Command = new System.Data.SqlClient.SqlCommand(Sql, mySqlConnection);
-            Command.Connection.Open();
-            Command.Connection.ChangeDatabase(DatabaseName);
-            try
+            using (Command.Connection)
             {
+                Command.Connection.Open();
+                Command.Connection.ChangeDatabase(DatabaseName);
                 Command.ExecuteNonQuery();
-            }
-            finally
-            {
-                Command.Connection.Close();
             }
         }
 
@@ -145,7 +146,6 @@ end";
                 string s1 = PathComboBox.Text + @"\" + DBName + ".mdf";
                 string s2 = PathComboBox.Text + @"\" + DBName + "_log.ldf";
                 string sql = "CREATE DATABASE " + DBName + " ON PRIMARY" + "(name=" + DBName + ",filename ='" + s1 + "', size=3," + "maxsize=5,filegrowth=10%)log on" + "(name=" + DBName + "_log,filename='" + s2 + "',size=3," + "maxsize=20,filegrowth=1)";
-                //调用ExecuteNonQuery()来创建数据库
                 ExecuteSql(connStr, "master", sql);
                 CreatTable();
                 CreatDBFun();
@@ -157,6 +157,7 @@ end";
                 return false;
             }
         }
+
         private bool ConnectFile()
         {
             try
@@ -174,7 +175,6 @@ end";
             }
         }
 
-        //登录方式选择（Windows身份验证/sql server身份验证）
         private void Authentication_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AuthenticationComboBox.Text == "Windows Authentication")
@@ -194,7 +194,6 @@ end";
             }
         }
 
-        //重置操作
         private void Reset_button_Click(object sender, EventArgs e)
         {
             DBNameTextBox.Text = "";
@@ -205,8 +204,13 @@ end";
             UserNameComboBox.Text = "";
         }
 
-        //创建数据库
         private void Creat_button_Click(object sender, EventArgs e)
+        {
+            CreateDb();
+
+        }
+
+        private void CreateDb()
         {
             if (AuthenticationComboBox.Text == "Windows Authentication" || AuthenticationComboBox.Text == "SQL Server Authentication")
             {
@@ -229,7 +233,6 @@ end";
                             return;
                         }
                     }
-                    //创建数据库操作
                     if (isCreatDB)
                     {
                         if (PathComboBox.Text == "")
@@ -245,7 +248,6 @@ end";
                             }
                         }
                     }
-                    //连接数据库操作
                     else
                     {
                         if (ConnectFile())
@@ -260,7 +262,6 @@ end";
             {
                 MessageBox.Show("Please choese the correct Authentication Method.");
             }
-
         }
 
         private void ChoeseCreatButton_Click(object sender, EventArgs e)
