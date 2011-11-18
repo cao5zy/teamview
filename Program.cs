@@ -32,7 +32,6 @@ namespace BugInfoManagement
 
         }
 
-        //修改配置文件
         public static void EditConfig(string connString)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -54,7 +53,6 @@ namespace BugInfoManagement
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        //获取连接字符串
         public static string GetConnString()
         {
             if (File.Exists(Application.StartupPath + @"\ConnectString.resx"))

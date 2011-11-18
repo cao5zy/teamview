@@ -238,7 +238,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 347);
+            this.ClientSize = new System.Drawing.Size(434, 347);
             this.Controls.Add(this.RememberPasswordCheckBox);
             this.Controls.Add(this.ChoesePathButton);
             this.Controls.Add(this.CancelOperationButton);
