@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Xml;
 using System.Resources;
 using System.Collections;
+using System.IO;
 
 namespace BugInfoManagement
 {
@@ -38,11 +39,11 @@ namespace BugInfoManagement
             xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             foreach (XmlElement element in xmlDoc.DocumentElement)
             {
-                if (element.Name=="connectionStrings")
+                if (element.Name == "connectionStrings")
                 {
                     foreach (XmlNode node in element.ChildNodes)
                     {
-                        if (node.Attributes[0].Value.Equals("bug_Db"))
+                        if (node.Attributes[0].Value == "bug_Db")
                         {
                             node.Attributes[1].Value = connString;
                         }
@@ -56,7 +57,7 @@ namespace BugInfoManagement
         //获取连接字符串
         public static string GetConnString()
         {
-            try
+            if (File.Exists(Application.StartupPath + @"\ConnectString.resx"))
             {
                 using (ResXResourceReader resr = new ResXResourceReader(@"ConnectString.resx"))
                 {
@@ -68,12 +69,8 @@ namespace BugInfoManagement
                     return ConnectString;
                 }
             }
-            catch (Exception e)
-            {
-                //使用e，消除警告
-                string s=e.Message;
+            else
                 return "";
-            }
         }
     }
 }
