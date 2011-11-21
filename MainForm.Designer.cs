@@ -324,7 +324,7 @@
             // mVersionTextBox
             // 
             this.mVersionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mQueryBindingSource, "Version", true));
-            this.mVersionTextBox.Location = new System.Drawing.Point(305, 72);
+            this.mVersionTextBox.Location = new System.Drawing.Point(305, 69);
             this.mVersionTextBox.Name = "mVersionTextBox";
             this.mVersionTextBox.Size = new System.Drawing.Size(100, 22);
             this.mVersionTextBox.TabIndex = 33;

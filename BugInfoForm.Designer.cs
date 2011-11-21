@@ -305,7 +305,7 @@ namespace BugInfoManagement
             "2",
             "3",
             "4"});
-            this.mPriorityCombo.Location = new System.Drawing.Point(719, 41);
+            this.mPriorityCombo.Location = new System.Drawing.Point(719, 46);
             this.mPriorityCombo.Name = "mPriorityCombo";
             this.mPriorityCombo.Size = new System.Drawing.Size(96, 20);
             this.mPriorityCombo.TabIndex = 15;
@@ -314,7 +314,7 @@ namespace BugInfoManagement
             // BIPriority
             // 
             this.BIPriority.AutoSize = true;
-            this.BIPriority.Location = new System.Drawing.Point(646, 44);
+            this.BIPriority.Location = new System.Drawing.Point(646, 49);
             this.BIPriority.Name = "BIPriority";
             this.BIPriority.Size = new System.Drawing.Size(59, 12);
             this.BIPriority.TabIndex = 14;

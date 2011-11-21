@@ -11,13 +11,14 @@ using System.Resources;
 using System.Reflection;
 using System.Collections;
 using System.IO;
+using System.Xml;
+using System.Configuration;
 
 namespace CreatLocalDataBase
 {
     public partial class CreateDBForm : Form
     {
         private bool isCreatDB = false;
-        private bool isRememberPassword = false;
 
         public CreateDBForm()
         {
@@ -32,7 +33,6 @@ namespace CreatLocalDataBase
                     {
                         ConnectRecord[i] = d.Value as string;
                         i++;
-                        Console.WriteLine(ConnectRecord);
                     }
                     DBNameTextBox.Text = ConnectRecord[1];
                     ServerNameComboBox.Text = ConnectRecord[2];
@@ -48,58 +48,207 @@ namespace CreatLocalDataBase
                     }
                 }
             }
+            if (File.Exists(Application.StartupPath + @"\CreateRecord.resx"))
+            {
+                using (ResXResourceReader resr = new ResXResourceReader(@"CreateRecord.resx"))
+                {
+                    string[] CreateRecord = new string[7];
+                    int i = 0;
+                    foreach (DictionaryEntry d in resr)
+                    {
+                        CreateRecord[i] = d.Value as string;
+                        i++;
+                    }
+                    CPathComboBox.Text = CreateRecord[2];
+                    CServerNameComboBox.Text = CreateRecord[3];
+                    CAuthenticationComboBox.Text = CreateRecord[4];
+                    if (CreateRecord[4] == "SQL Server Authentication")
+                    {
+                        CUserNameComboBox.Text = CreateRecord[5];
+                        if (CreateRecord[0] == "true")
+                        {
+                            CPasswordTextBox.Text = CreateRecord[6];
+                            CRememberPasswordCheckBox.Checked = true;
+                        }
+                    }
+                }
+            }
+            this.DeleteMemberComboBox.Items.Clear();
+            this.SetFMComboBox.Items.Clear();
+            this.DeleteMemberComboBox.Items.AddRange(ChangeStringToArray(GetMember()));
+            this.SetFMComboBox.Items.AddRange(ChangeStringToArray(GetMember()));
+        }
+
+        private string[] ChangeStringToArray(string s)
+        {
+            return s.Split(',');
+        }
+
+        private string GetMember()
+        {
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name == "DealManConfig")
+                    {
+                        return element.GetAttribute("DealMen");
+                    }
+                }
+            }
+            return "";
+        }
+
+        private void SetMember(string Member)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name == "DealManConfig")
+                    {
+                        element.SetAttribute("DealMen", Member);
+                    }
+                }
+                xmlDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                ConfigurationManager.RefreshSection("DealManConfig");
+            }
+        }
+
+        private string GetFirstMember()
+        {
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name == "NotificationSection")
+                    {
+                        return element.GetAttribute("Programmer");
+                    }
+                }
+            }
+            return "";
+        }
+
+        private void SetFirstMember(string People)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name == "NotificationSection")
+                    {
+                        element.SetAttribute("Programmer", People);
+                    }
+                }
+                xmlDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                ConfigurationManager.RefreshSection("NotificationSection");
+            }
         }
 
         private string GetConn()
         {
-            if (AuthenticationComboBox.Text == "Windows Authentication")
+            if (isCreatDB)
             {
-                return "server=" + ServerNameComboBox.Text + ";Integrated Security=true";
+                if (CAuthenticationComboBox.Text == "Windows Authentication")
+                {
+                    return "server=" + CServerNameComboBox.Text + ";Integrated Security=true";
+                }
+                else
+                {
+                    return "server=" + CServerNameComboBox.Text + ";Integrated Security=false;User ID=" + CUserNameComboBox.Text + ";password=" + CPasswordTextBox.Text;
+                }
             }
             else
             {
-                return "server=" + ServerNameComboBox.Text + ";Integrated Security=false;User ID=" + UserNameComboBox.Text + ";password=" + PasswordTextBox.Text;
+                if (AuthenticationComboBox.Text == "Windows Authentication")
+                {
+                    return "server=" + ServerNameComboBox.Text + ";Integrated Security=true";
+                }
+                else
+                {
+                    return "server=" + ServerNameComboBox.Text + ";Integrated Security=false;User ID=" + UserNameComboBox.Text + ";password=" + PasswordTextBox.Text;
+                }
             }
         }
 
-        private void CreatTable()
+        private void CreatResourceFile()
         {
-            string source = GetConn() + ";database=" + DBNameTextBox.Text;
-
-            using (SqlConnection conn = new SqlConnection(source))
+            if (isCreatDB)
             {
-                conn.Open();
-                string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdBy VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
-                string sqlTwo = "CREATE TABLE ChangeLog" + "(LogID BIGINT PRIMARY KEY,BugNum VARCHAR(500) not null,CreateDate datetime not null, Description VARCHAR(80) not null,LogTypeID int not null)";
-                string sqlThree = "CREATE TABLE pointslog" + "(pointslogid BIGINT PRIMARY KEY,bugnum VARCHAR(500) not null,[log] VARCHAR(100) not null, createdtime datetime not null)";
-
-                SqlCommand cmdOne = new SqlCommand(sqlOne, conn);
-                SqlCommand cmdTwo = new SqlCommand(sqlTwo, conn);
-                SqlCommand cmdThree = new SqlCommand(sqlThree, conn);
-
-                SqlTransaction tx = conn.BeginTransaction();
-                cmdOne.Transaction = tx;
-                cmdTwo.Transaction = tx;
-                cmdThree.Transaction = tx;
-
-                try
+                string ConnectString = GetConn() + ";database=" + CDBNameTextBox.Text;
+                using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectString.resx"))
                 {
-                    cmdOne.ExecuteNonQuery();
-                    cmdTwo.ExecuteNonQuery();
-                    cmdThree.ExecuteNonQuery();
-                    tx.Commit();
+                    resx.AddResource("ConnectString", ConnectString);
                 }
-                catch (Exception e)
+                using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectRecord.resx"))
                 {
-                    MessageBox.Show(e.Message);
-                    tx.Rollback();
+                    if (CRememberPasswordCheckBox.Checked)
+                       resx.AddResource("isRememberPassword", "true");
+                    else
+                        resx.AddResource("isRememberPassword", "false");
+                    resx.AddResource("DBName", CDBNameTextBox.Text);
+                    resx.AddResource("ServerName", CServerNameComboBox.Text);
+                    resx.AddResource("Authentication", CAuthenticationComboBox.Text);
+                    if (CAuthenticationComboBox.Text.Equals("SQL Server Authentication"))
+                    {
+                        resx.AddResource("UserName", CUserNameComboBox.Text);
+                        resx.AddResource("Password", CPasswordTextBox.Text);
+                    }
+                }
+                using (ResXResourceWriter resx = new ResXResourceWriter(@"CreateRecord.resx"))
+                {
+                    if (CRememberPasswordCheckBox.Checked)
+                        resx.AddResource("isRememberPassword", "true");
+                    else
+                        resx.AddResource("isRememberPassword", "false");
+                    resx.AddResource("DBName", CDBNameTextBox.Text);
+                    resx.AddResource("Path",CPathComboBox.Text);
+                    resx.AddResource("ServerName", CServerNameComboBox.Text);
+                    resx.AddResource("Authentication", CAuthenticationComboBox.Text);
+                    if (CAuthenticationComboBox.Text.Equals("SQL Server Authentication"))
+                    {
+                        resx.AddResource("UserName", CUserNameComboBox.Text);
+                        resx.AddResource("Password", CPasswordTextBox.Text);
+                    }
+                }
+            }
+            else
+            {
+                string ConnectString = GetConn() + ";database=" + DBNameTextBox.Text;
+                using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectString.resx"))
+                {
+                    resx.AddResource("ConnectString", ConnectString);
+                }
+                using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectRecord.resx"))
+                {
+                    if (RememberPasswordCheckBox.Checked)
+                        resx.AddResource("isRememberPassword", "true");
+                    else
+                        resx.AddResource("isRememberPassword", "false");
+                    resx.AddResource("DBName", DBNameTextBox.Text);
+                    resx.AddResource("ServerName", ServerNameComboBox.Text);
+                    resx.AddResource("Authentication", AuthenticationComboBox.Text);
+                    if (AuthenticationComboBox.Text.Equals("SQL Server Authentication"))
+                    {
+                        resx.AddResource("UserName", UserNameComboBox.Text);
+                        resx.AddResource("Password", PasswordTextBox.Text);
+                    }
                 }
             }
         }
 
         private void CreatDBFun()
         {
-            string source = GetConn() + ";database=" + DBNameTextBox.Text;
+            string source = GetConn() + ";database=" + CDBNameTextBox.Text;
             using (SqlConnection conn = new SqlConnection(source))
             {
                 conn.Open();
@@ -137,14 +286,49 @@ namespace CreatLocalDataBase
             }
         }
 
+        private void CreatTable()
+        {
+            string source = GetConn() + ";database=" + CDBNameTextBox.Text;
+
+            using (SqlConnection conn = new SqlConnection(source))
+            {
+                conn.Open();
+                string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdBy VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
+                string sqlTwo = "CREATE TABLE ChangeLog" + "(LogID BIGINT PRIMARY KEY,BugNum VARCHAR(500) not null,CreateDate datetime not null, Description VARCHAR(80) not null,LogTypeID int not null)";
+                string sqlThree = "CREATE TABLE pointslog" + "(pointslogid BIGINT PRIMARY KEY,bugnum VARCHAR(500) not null,[log] VARCHAR(100) not null, createdtime datetime not null)";
+
+                SqlCommand cmdOne = new SqlCommand(sqlOne, conn);
+                SqlCommand cmdTwo = new SqlCommand(sqlTwo, conn);
+                SqlCommand cmdThree = new SqlCommand(sqlThree, conn);
+
+                SqlTransaction tx = conn.BeginTransaction();
+                cmdOne.Transaction = tx;
+                cmdTwo.Transaction = tx;
+                cmdThree.Transaction = tx;
+
+                try
+                {
+                    cmdOne.ExecuteNonQuery();
+                    cmdTwo.ExecuteNonQuery();
+                    cmdThree.ExecuteNonQuery();
+                    tx.Commit();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    tx.Rollback();
+                }
+            }
+        }
+
         private bool CreatFile()
         {
             try
             {
-                string DBName = DBNameTextBox.Text;
+                string DBName = CDBNameTextBox.Text;
                 string connStr = GetConn();
-                string s1 = PathComboBox.Text + @"\" + DBName + ".mdf";
-                string s2 = PathComboBox.Text + @"\" + DBName + "_log.ldf";
+                string s1 = CPathComboBox.Text + @"\" + DBName + ".mdf";
+                string s2 = CPathComboBox.Text + @"\" + DBName + "_log.ldf";
                 string sql = "CREATE DATABASE " + DBName + " ON PRIMARY" + "(name=" + DBName + ",filename ='" + s1 + "', size=3," + "maxsize=5,filegrowth=10%)log on" + "(name=" + DBName + "_log,filename='" + s2 + "',size=3," + "maxsize=20,filegrowth=1)";
                 ExecuteSql(connStr, "master", sql);
                 CreatTable();
@@ -158,59 +342,50 @@ namespace CreatLocalDataBase
             }
         }
 
-        private bool ConnectFile()
+        private void CreateDb()
         {
-            try
+            if (CAuthenticationComboBox.Text == "Windows Authentication" || CAuthenticationComboBox.Text == "SQL Server Authentication")
             {
-                string source = GetConn() + ";database=" + DBNameTextBox.Text;
-                SqlConnection conn = new SqlConnection(source);
-                conn.Open();
-                conn.Close();
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return false;
-            }
-        }
-
-        private void Authentication_comboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (AuthenticationComboBox.Text == "Windows Authentication")
-            {
-                UserNameComboBox.Enabled = false;
-                PasswordTextBox.Enabled = false;
-                RememberPasswordCheckBox.Enabled = false;
-                RememberPasswordCheckBox.Checked = false;
-                UserNameComboBox.Text = "";
-                PasswordTextBox.Text = "";
+                if (CDBNameTextBox.Text == "")
+                {
+                    MessageBox.Show("The DataBase Name cann't be empty.");
+                }
+                else
+                {
+                    if (CAuthenticationComboBox.Text == "SQL Server Authentication")
+                    {
+                        if (CUserNameComboBox.Text == "")
+                        {
+                            MessageBox.Show("The User Name cann't be empty.");
+                            return;
+                        }
+                        if (CPasswordTextBox.Text == "")
+                        {
+                            MessageBox.Show("The Password cann't be empty.");
+                            return;
+                        }
+                    }
+                    if (CPathComboBox.Text == "")
+                    {
+                        MessageBox.Show("The path cann't be empty.");
+                    }
+                    else
+                    {
+                        if (CreatFile())
+                        {
+                            CreatResourceFile();
+                            this.Close();
+                        }
+                    }
+                }
             }
             else
             {
-                UserNameComboBox.Enabled = true;
-                PasswordTextBox.Enabled = true;
-                RememberPasswordCheckBox.Enabled = true;
+                MessageBox.Show("Please choese the correct Authentication Method.");
             }
         }
 
-        private void Reset_button_Click(object sender, EventArgs e)
-        {
-            DBNameTextBox.Text = "";
-            PasswordTextBox.Text = "";
-            PathComboBox.Text = "";
-            ServerNameComboBox.Text = "(local)";
-            AuthenticationComboBox.Text = "Windows Authentication";
-            UserNameComboBox.Text = "";
-        }
-
-        private void Creat_button_Click(object sender, EventArgs e)
-        {
-            CreateDb();
-
-        }
-
-        private void CreateDb()
+        private void ConnectDb()
         {
             if (AuthenticationComboBox.Text == "Windows Authentication" || AuthenticationComboBox.Text == "SQL Server Authentication")
             {
@@ -233,28 +408,11 @@ namespace CreatLocalDataBase
                             return;
                         }
                     }
-                    if (isCreatDB)
+
+                    if (ConnectFile())
                     {
-                        if (PathComboBox.Text == "")
-                        {
-                            MessageBox.Show("The path cann't be empty.");
-                        }
-                        else
-                        {
-                            if (CreatFile())
-                            {
-                                CreatResourceFile();
-                                this.Close();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (ConnectFile())
-                        {
-                            CreatResourceFile();
-                            base.Close();
-                        }
+                        CreatResourceFile();
+                        this.Close();
                     }
                 }
             }
@@ -264,77 +422,148 @@ namespace CreatLocalDataBase
             }
         }
 
-        private void ChoeseCreatButton_Click(object sender, EventArgs e)
+
+        private bool ConnectFile()
         {
-            if (!isCreatDB)
+            try
             {
-                this.Text = "Create DataBase";
-                DBNameTextBox.Text = "";
-                PathComboBox.Enabled = true;
-                ChoesePathButton.Enabled = true;
-                CreatButton.Text = "Create";
-                isCreatDB = true;
+                string source = GetConn() + ";database=" + DBNameTextBox.Text;
+                SqlConnection conn = new SqlConnection(source);
+                conn.Open();
+                conn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
             }
         }
 
-        private void ChoeseConnectButton_Click(object sender, EventArgs e)
+        private void CChoesePathButton_Click(object sender, EventArgs e)
         {
-            if (isCreatDB)
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                this.CPathComboBox.Text = this.folderBrowserDialog1.SelectedPath;
+        }
+
+        private void CAuthenticationComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CAuthenticationComboBox.Text == "Windows Authentication")
             {
-                this.Text = "Connect DataBase";
-                DBNameTextBox.Text = "";
-                PathComboBox.Enabled = false;
-                PathComboBox.Text = "";
-                ChoesePathButton.Enabled = false;
-                CreatButton.Text = "Connect";
-                isCreatDB = false;
+                CUserNameComboBox.Enabled = false;
+                CPasswordTextBox.Enabled = false;
+                CRememberPasswordCheckBox.Enabled = false;
+                CRememberPasswordCheckBox.Checked = false;
+                CUserNameComboBox.Text = "";
+                CPasswordTextBox.Text = "";
+            }
+            else
+            {
+                CUserNameComboBox.Enabled = true;
+                CPasswordTextBox.Enabled = true;
+                CRememberPasswordCheckBox.Enabled = true;
             }
         }
 
-        private void Cancel_button_Click(object sender, EventArgs e)
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            isCreatDB = true;
+            CreateDb();
+        }
+
+        private void CReset_Click(object sender, EventArgs e)
+        {
+            CDBNameTextBox.Text = "";
+            CPathComboBox.Text = "";
+            CServerNameComboBox.Text = "(local)";
+            CAuthenticationComboBox.Text = "Windows Authentication";
+        }
+
+        private void CancelCreateButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void ChoesePath_Click(object sender, EventArgs e)
+        private void AuthenticationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                this.PathComboBox.Text = this.folderBrowserDialog1.SelectedPath;
-        }
-
-
-
-        private void RememberPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RememberPasswordCheckBox.Checked)
-                isRememberPassword = true;
+            if (AuthenticationComboBox.Text == "Windows Authentication")
+            {
+                UserNameComboBox.Enabled = false;
+                PasswordTextBox.Enabled = false;
+                RememberPasswordCheckBox.Enabled = false;
+                RememberPasswordCheckBox.Checked = false;
+                UserNameComboBox.Text = "";
+                PasswordTextBox.Text = "";
+            }
             else
-                isRememberPassword = false;
+            {
+                UserNameComboBox.Enabled = true;
+                PasswordTextBox.Enabled = true;
+                RememberPasswordCheckBox.Enabled = true;
+            }
         }
 
-        private void CreatResourceFile()
+        private void ConnectButton_Click(object sender, EventArgs e)
         {
-            string ConnectString = GetConn() + ";database=" + DBNameTextBox.Text;
-            using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectString.resx"))
-            {
-                resx.AddResource("ConnectString", ConnectString);
-            }
-            using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectRecord.resx"))
-            {
-                if (isRememberPassword)
-                    resx.AddResource("isRememberPassword", "true");
-                else
-                    resx.AddResource("isRememberPassword", "false");
-                resx.AddResource("DBName", DBNameTextBox.Text);
-                resx.AddResource("ServerName", ServerNameComboBox.Text);
-                resx.AddResource("Authentication", AuthenticationComboBox.Text);
-                if (AuthenticationComboBox.Text.Equals("SQL Server Authentication"))
-                {
-                    resx.AddResource("UserName", UserNameComboBox.Text);
-                    resx.AddResource("Password", PasswordTextBox.Text);
-                }
-            }
+            isCreatDB = false;
+            ConnectDb();
         }
 
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            DBNameTextBox.Text = "";
+            PathComboBox.Text = "";
+            ServerNameComboBox.Text = "(local)";
+            AuthenticationComboBox.Text = "Windows Authentication";
+        }
+
+        private void CancelConnectButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            if(DeleteMemberComboBox.Text!="")
+            {
+                if (GetMember().IndexOf("," + DeleteMemberComboBox.Text) > 0)
+                    SetMember(GetMember().Replace("," + DeleteMemberComboBox.Text, ""));
+                else
+                    MessageBox.Show("Please choese the right name to delete.");
+            }
+            if (AddMemberComboBox.Text != "")
+            {
+                if (GetMember().IndexOf("," + AddMemberComboBox.Text) < 0)
+                    SetMember(GetMember() + "," + AddMemberComboBox.Text);
+                else
+                    MessageBox.Show("The name " + AddMemberComboBox.Text + " already exists.");
+            }
+            if (SetFMComboBox.Text != "")
+            {
+                if (GetMember().IndexOf("," + SetFMComboBox.Text) > 0)
+                    SetFirstMember(SetFMComboBox.Text);
+                else
+                    MessageBox.Show("Please choese the right name to Set.");
+            }
+            DeleteMemberComboBox.Text = "";
+            AddMemberComboBox.Text = "";
+            SetFMComboBox.Text = "";
+            this.DeleteMemberComboBox.Items.Clear();
+            this.SetFMComboBox.Items.Clear();
+            this.DeleteMemberComboBox.Items.AddRange(ChangeStringToArray(GetMember()));
+            this.SetFMComboBox.Items.AddRange(ChangeStringToArray(GetMember()));
+        }
+
+        private void ResetSetingButton_Click(object sender, EventArgs e)
+        {
+            DeleteMemberComboBox.Text = "";
+            AddMemberComboBox.Text = "";
+            SetFMComboBox.Text = "";
+        }
+
+        private void CancelSetButton_Click(object sender, EventArgs e)
+        { 
+            this.tabControl1.SelectedIndex=0;
+        }
     }
 }
