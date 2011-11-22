@@ -21,6 +21,8 @@ namespace BugInfoManagement.Dao
 
         List<BugInfoEntity> QueryByParameter(QueryParameter parameter);
 
+        List<BugInfoEntity> QueryByProgrammerStatus(string programmer, string status);
+
         BugInfoEntity QueryByBugNum(String bugNum);
 
         void DeleteByBugNum(String bugNum);
@@ -40,5 +42,7 @@ namespace BugInfoManagement.Dao
         void AssignPoints(string bugNum, string log);
 
         bool TryToUpdate(string bugNum, DateTime timeStamp, out DateTime newtimeStamp);
+
+
     }
 }

@@ -12,6 +12,8 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using FxLib.Algorithms;
 using System.IO;
 using BugInfo.Common.Logs;
+using BugInfoManagement.Common;
+using System.Diagnostics;
 
 namespace BugInfoManagement.DaoImpl
 {
@@ -47,24 +49,24 @@ namespace BugInfoManagement.DaoImpl
 
         public BugInfoEntity QueryByBugNum(String bugNum)
         {
-            var database = CreateDataBase();
+            BugInfoEntity bugInfoEntity = new BugInfoEntity();
 
-            var cmd = database.GetSqlStringCommand(@"select version,bugNum,bugStatus,dealMan,description,dbo.MergeLog(bugNum) as disposeResult,createdBy,size,timeStamp,priority
-                from bugInfo where bugNum=@bugnum");
-
-            database.AddInParameter(cmd, "@bugnum", DbType.String, bugNum);
-
-            BugInfoEntity bugInfoEntity = null;
-            using (var reader = database.ExecuteReader(cmd))
+            DAL.BugInfo bugInfo = new DAL.BugInfo();
+            bugInfo.LoadByKey(bugNum);
+            if (bugInfo.IsLoaded)
             {
-                var func = BuildRead(reader);
-                if (reader.Read())
-                {
-                    bugInfoEntity = func();
-                }
-                else
-                    return null;
+                bugInfoEntity.BugNum = bugInfo.BugNum;
+                bugInfoEntity.Version = bugInfo.Version;
+                bugInfoEntity.DealMan = bugInfo.DealMan;
+                bugInfoEntity.Description = bugInfo.Description;
+                bugInfoEntity.CreatedBy = bugInfo.CreatedBy;
+                bugInfoEntity.Size = bugInfo.Size;
+                bugInfoEntity.Priority = bugInfo.Priority;
+                bugInfoEntity.TimeStamp = bugInfo.TimeStamp;
+                bugInfoEntity.BugStatus = bugInfo.BugStatus;
             }
+            else
+                return bugInfoEntity;
 
             bugInfoEntity.TotalHours = GetTotalHous(bugNum);
             bugInfoEntity.LevelHistroy = GetLevelHistroy(bugNum);
@@ -74,15 +76,20 @@ namespace BugInfoManagement.DaoImpl
         private string GetLevelHistroy(string bugNum)
         {
             return string.Join("\r\n",
-            this.mDbProvider.ReadPoints(bugNum)
-                .SafeConvertAll(n => n.EstimatedLevel + " " + n.EstimatedBy)
-                .ToArray());
+            new DAL.PointslogCollection().Where("bugnum", bugNum).Load()
+                .SafeConvertAll(n => PointsParser.ToPoint(n.Log))
+                 .SafeConvertAll(n => n.EstimatedLevel + " " + n.EstimatedBy)
+                 .ToArray());
         }
 
         private decimal GetTotalHous(string bugNum)
         {
             return this.mTaskRecordParser.Read(
-            this.mDbProvider.ReadBugLog(bugNum))
+            new DAL.ChangeLogCollection()
+            .Where("bugnum", bugNum).Load()
+            .SafeConvertAll(n =>
+                string.Format("BugNum:{0};Time:{1};{2}", n.BugNum, n.CreateDate, n.Description))
+            )
             .Sum(n => n.Duration);
         }
 
@@ -112,52 +119,40 @@ namespace BugInfoManagement.DaoImpl
 
         public void AddBugInfo(BugInfoEntity bugInfo)
         {
-            var db = CreateDataBase();
-            String addBugInfoString = @"insert into bugInfo (version,bugNum,bugStatus,dealMan,description,createdBy,size,priority) 
-                                                            VALUES (@version,@bugnum,@bugstatus,@dealman,
-                                                                @description,@createdBy,
-                                                                @size,
-                                                                @priority)";
-            var cmd = db.GetSqlStringCommand(addBugInfoString);
+            DAL.BugInfo bugInfo1 = new DAL.BugInfo();
 
-            db.AddInParameter(cmd, "@version", DbType.String, bugInfo.Version);
-            db.AddInParameter(cmd, "@bugnum", DbType.String, bugInfo.BugNum);
-            db.AddInParameter(cmd, "@bugstatus", DbType.String, bugInfo.BugStatus);
-            db.AddInParameter(cmd, "@dealman", DbType.String, bugInfo.DealMan);
-            db.AddInParameter(cmd, "@description", DbType.String, bugInfo.Description);
-            db.AddInParameter(cmd, "@createdBy", DbType.String, bugInfo.CreatedBy);
-            db.AddInParameter(cmd, "@size", DbType.Int16, bugInfo.Size);
-            db.AddInParameter(cmd, "@priority", DbType.Int16, bugInfo.Priority);
+            bugInfo1.Version = bugInfo.Version;
+            bugInfo1.BugNum = bugInfo.BugNum;
+            bugInfo1.BugStatus = bugInfo.BugStatus;
+            bugInfo1.DealMan = bugInfo.DealMan;
+            bugInfo1.Description = bugInfo.Description;
+            bugInfo1.CreatedBy = bugInfo.CreatedBy;
+            bugInfo1.Size = bugInfo.Size;
+            bugInfo1.Priority = bugInfo.Priority;
 
-            db.ExecuteNonQuery(cmd);
+            bugInfo1.Save();
         }
 
 
 
         public bool UpdateBugInfoByBugNum(BugInfoEntity bugInfo)
         {
-            var db = CreateDataBase();
+            DAL.BugInfo bugInfo1 = new DAL.BugInfo();
 
-            String updateBugInfoString = @"update bugInfo set version = @version
-                ,bugStatus = @bugstatus
-                ,dealMan = @dealMan
-                ,description = @description
-                ,size = @size
-                ,priority = @priority
-                where bugNum = @bugNum";
+            bugInfo1.LoadByKey(bugInfo.BugNum);
 
-            var cmd = db.GetSqlStringCommand(updateBugInfoString);
+            Trace.Assert(bugInfo1.IsLoaded);
 
-            db.AddInParameter(cmd, "@version", DbType.String, bugInfo.Version);
-            db.AddInParameter(cmd, "@bugstatus", DbType.String, bugInfo.BugStatus);
-            db.AddInParameter(cmd, "@dealMan", DbType.String, bugInfo.DealMan);
-            db.AddInParameter(cmd, "@description", DbType.String, bugInfo.Description);
-            db.AddInParameter(cmd, "@size", DbType.Int16, bugInfo.Size);
-            db.AddInParameter(cmd, "@priority", DbType.Int16, bugInfo.Priority);
-            db.AddInParameter(cmd, "@bugNum", DbType.String, bugInfo.BugNum);
+            bugInfo1.Version = bugInfo.Version;
+            bugInfo1.BugStatus = bugInfo.BugStatus;
+            bugInfo1.DealMan = bugInfo.DealMan;
+            bugInfo1.Description = bugInfo.Description;
+            bugInfo1.Size = bugInfo.Size;
+            bugInfo1.Priority = bugInfo.Priority;
 
+            bugInfo1.Save();
 
-            return db.ExecuteNonQuery(cmd) != 0;
+            return bugInfo1.Errors.Count == 0;
         }
 
         public void UpdateBugDetail(string bugNum, byte[] detailsBuffer)
@@ -276,31 +271,24 @@ where CreateDate >= @start and CreateDate <= @end");
 
         public void AddLog(string bugNum, string Log)
         {
-            var db = CreateDataBase();
+            DAL.ChangeLog changeLog = new DAL.ChangeLog();
 
-            String addBugInfoString = @"insert into changelog (bugNum,Description) 
-                values(@bugnum,@description)";
+            changeLog.BugNum = bugNum;
+            changeLog.Description = Log;
 
-            var cmd = db.GetSqlStringCommand(addBugInfoString);
-
-            db.AddInParameter(cmd, "@bugnum", DbType.String, bugNum);
-            db.AddInParameter(cmd, "@description", DbType.String, Log);
-
-            db.ExecuteNonQuery(cmd);
+            changeLog.Save();
         }
 
         public void AssignPoints(string bugNum, string log)
         {
-            var db = CreateDataBase();
+            DAL.Pointslog pointLog = new DAL.Pointslog();
 
-            var cmd = db.GetSqlStringCommand(@"insert into pointslog (bugnum, log, createdtime)
-                        values(@bugnum, @log, @createdtime)");
+            pointLog.Bugnum = bugNum;
+            pointLog.Log = log;
+            pointLog.Createdtime = DateTime.Now;
 
-            db.AddInParameter(cmd, "@bugnum", DbType.String, bugNum);
-            db.AddInParameter(cmd, "@log", DbType.String, log);
-            db.AddInParameter(cmd, "@createdtime", DbType.DateTime, DateTime.Now);
+            pointLog.Save();
 
-            db.ExecuteNonQuery(cmd);
         }
 
 
@@ -309,34 +297,49 @@ where CreateDate >= @start and CreateDate <= @end");
 
         public bool TryToUpdate(string bugNum, DateTime timeStamp, out DateTime newTimeStamp)
         {
-            var db = CreateDataBase();
-
             newTimeStamp = DateTime.MinValue;
 
-            var cmd = db.GetSqlStringCommand(@"update buginfo set timeStamp = getdate()
-                                where bugnum = @bugnum and timeStamp = @timeStamp
-                                if(@@ROWCOUNT = 1)
-                                begin
-                                    select @newtimestamp = timeStamp from buginfo where bugnum = @bugnum
-                                    select 1
-                                end
-                                else
-                                    select 0");
-
-            db.AddInParameter(cmd, "@bugnum", DbType.String, bugNum);
-            db.AddInParameter(cmd, "@timeStamp", DbType.DateTime, timeStamp);
-            db.AddOutParameter(cmd, "@newtimestamp", DbType.DateTime, 64);
+            DAL.BugInfo bugInfo = new DAL.BugInfoCollection()
+            .Where("bugnum", bugNum)
+            .Where("timeStamp", timeStamp)
+            .Load()
+            .SafeFirst();
 
 
-            if (db.ExecuteNonQuery(cmd) == 1)
-            {
-                newTimeStamp = Convert.ToDateTime(db.GetParameterValue(cmd, "@newtimestamp"));
-                return true;
-            }
-            else
+            if (bugInfo == null)
                 return false;
+
+            bugInfo.TimeStamp = DateTime.Now;
+            bugInfo.Save();
+
+            newTimeStamp = bugInfo.TimeStamp;
+
+            return bugInfo.Errors.Count == 0;
+
         }
 
         #endregion
+
+        public List<BugInfoEntity> QueryByProgrammerStatus(string programmer, string status)
+        {
+            return new DAL.BugInfoCollection()
+                .Where("dealman", programmer)
+                .Where("bugstatus", status)
+                .Load()
+                .SafeConvertAll(
+                n => new BugInfoEntity
+                {
+                    BugStatus = n.BugStatus,
+                    Description = n.Description,
+                    CreatedBy = n.CreatedBy,
+                    DealMan = n.DealMan,
+                    BugNum = n.BugNum,
+                    Version = n.Version,
+                    Size = n.Size,
+                    Priority = n.Priority,
+                    TimeStamp = n.TimeStamp,
+                });
+        }
+
     }
 }

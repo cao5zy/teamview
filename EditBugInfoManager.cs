@@ -113,15 +113,13 @@ namespace BugInfoManagement
 
                 string bugNum = mBugInfo.BugNum;
 
-                
+
 
                 if (bugStatus == StatesEnum.Start)
                 {
-                    var otherProcessingItem = BugInfoManagement.QueryByParameter(new QueryParameter
-                    {
-                        Programmer = mOriginalBugInfo.DealMan,
-                        Status = States.Start
-                    }).SafeFind(n => n.BugNum != mBugInfo.BugNum);
+                    var otherProcessingItem = BugInfoManagement.QueryByProgrammerStatus(
+                        mOriginalBugInfo.DealMan
+                     , States.Start).SafeFind(n => n.BugNum != mBugInfo.BugNum);
 
                     if (otherProcessingItem != null)
                     {
