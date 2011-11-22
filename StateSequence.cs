@@ -30,7 +30,7 @@ namespace BugInfoManagement
 
         public bool IsNextStateValid(string state)
         {
-            return mCurrentState == state || StatesList.FindAll(n => n.Current == mCurrentState)
+            return StatesList.FindAll(n => n.Current == mCurrentState)
                 .Exists(n => n.Next == state);
         }
     }
