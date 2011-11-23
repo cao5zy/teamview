@@ -31,6 +31,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SettingButton = new System.Windows.Forms.Button();
             this.CancelConnectButton = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
             this.ConnectButton = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@
             this.AuthenticationComboBox = new System.Windows.Forms.ComboBox();
             this.ServerNameComboBox = new System.Windows.Forms.ComboBox();
             this.PathComboBox = new System.Windows.Forms.ComboBox();
-            this.DBNameTextBox = new System.Windows.Forms.TextBox();
+            this.DBNameComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,27 +67,15 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.CancelSetButton = new System.Windows.Forms.Button();
-            this.ResetSetingButton = new System.Windows.Forms.Button();
-            this.ApplyButton = new System.Windows.Forms.Button();
-            this.SetFMComboBox = new System.Windows.Forms.ComboBox();
-            this.AddMemberComboBox = new System.Windows.Forms.ComboBox();
-            this.DeleteMemberComboBox = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-4, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -95,6 +84,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.SettingButton);
             this.tabPage1.Controls.Add(this.CancelConnectButton);
             this.tabPage1.Controls.Add(this.ResetButton);
             this.tabPage1.Controls.Add(this.ConnectButton);
@@ -105,7 +95,7 @@
             this.tabPage1.Controls.Add(this.AuthenticationComboBox);
             this.tabPage1.Controls.Add(this.ServerNameComboBox);
             this.tabPage1.Controls.Add(this.PathComboBox);
-            this.tabPage1.Controls.Add(this.DBNameTextBox);
+            this.tabPage1.Controls.Add(this.DBNameComboBox);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
@@ -120,9 +110,19 @@
             this.tabPage1.Text = "Connet";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // SettingButton
+            // 
+            this.SettingButton.Location = new System.Drawing.Point(210, 236);
+            this.SettingButton.Name = "SettingButton";
+            this.SettingButton.Size = new System.Drawing.Size(75, 23);
+            this.SettingButton.TabIndex = 28;
+            this.SettingButton.Text = "Setting";
+            this.SettingButton.UseVisualStyleBackColor = true;
+            this.SettingButton.Click += new System.EventHandler(this.SettingButton_Click);
+            // 
             // CancelConnectButton
             // 
-            this.CancelConnectButton.Location = new System.Drawing.Point(236, 236);
+            this.CancelConnectButton.Location = new System.Drawing.Point(302, 236);
             this.CancelConnectButton.Name = "CancelConnectButton";
             this.CancelConnectButton.Size = new System.Drawing.Size(75, 23);
             this.CancelConnectButton.TabIndex = 27;
@@ -132,7 +132,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(129, 236);
+            this.ResetButton.Location = new System.Drawing.Point(118, 236);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 23);
             this.ResetButton.TabIndex = 26;
@@ -220,13 +220,14 @@
             this.PathComboBox.Size = new System.Drawing.Size(202, 20);
             this.PathComboBox.TabIndex = 18;
             // 
-            // DBNameTextBox
+            // DBNameComboBox
             // 
-            this.DBNameTextBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.DBNameTextBox.Location = new System.Drawing.Point(132, 30);
-            this.DBNameTextBox.Name = "DBNameTextBox";
-            this.DBNameTextBox.Size = new System.Drawing.Size(245, 21);
-            this.DBNameTextBox.TabIndex = 17;
+            this.DBNameComboBox.FormattingEnabled = true;
+            this.DBNameComboBox.Location = new System.Drawing.Point(132, 30);
+            this.DBNameComboBox.Name = "DBNameComboBox";
+            this.DBNameComboBox.Size = new System.Drawing.Size(245, 20);
+            this.DBNameComboBox.TabIndex = 17;
+            this.DBNameComboBox.SelectedIndexChanged += new System.EventHandler(this.DBNameComboBox_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -470,106 +471,6 @@
             this.label15.TabIndex = 28;
             this.label15.Text = "DataBase name:";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.CancelSetButton);
-            this.tabPage3.Controls.Add(this.ResetSetingButton);
-            this.tabPage3.Controls.Add(this.ApplyButton);
-            this.tabPage3.Controls.Add(this.SetFMComboBox);
-            this.tabPage3.Controls.Add(this.AddMemberComboBox);
-            this.tabPage3.Controls.Add(this.DeleteMemberComboBox);
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(406, 286);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Setting";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // CancelSetButton
-            // 
-            this.CancelSetButton.Location = new System.Drawing.Point(263, 194);
-            this.CancelSetButton.Name = "CancelSetButton";
-            this.CancelSetButton.Size = new System.Drawing.Size(62, 23);
-            this.CancelSetButton.TabIndex = 17;
-            this.CancelSetButton.Text = "Cancel";
-            this.CancelSetButton.UseVisualStyleBackColor = true;
-            this.CancelSetButton.Click += new System.EventHandler(this.CancelSetButton_Click);
-            // 
-            // ResetSetingButton
-            // 
-            this.ResetSetingButton.Location = new System.Drawing.Point(160, 194);
-            this.ResetSetingButton.Name = "ResetSetingButton";
-            this.ResetSetingButton.Size = new System.Drawing.Size(63, 23);
-            this.ResetSetingButton.TabIndex = 16;
-            this.ResetSetingButton.Text = "Reset";
-            this.ResetSetingButton.UseVisualStyleBackColor = true;
-            this.ResetSetingButton.Click += new System.EventHandler(this.ResetSetingButton_Click);
-            // 
-            // ApplyButton
-            // 
-            this.ApplyButton.Location = new System.Drawing.Point(47, 194);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(69, 23);
-            this.ApplyButton.TabIndex = 15;
-            this.ApplyButton.Text = "Apply";
-            this.ApplyButton.UseVisualStyleBackColor = true;
-            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
-            // 
-            // SetFMComboBox
-            // 
-            this.SetFMComboBox.FormattingEnabled = true;
-            this.SetFMComboBox.Location = new System.Drawing.Point(190, 123);
-            this.SetFMComboBox.Name = "SetFMComboBox";
-            this.SetFMComboBox.Size = new System.Drawing.Size(135, 20);
-            this.SetFMComboBox.TabIndex = 14;
-            // 
-            // AddMemberComboBox
-            // 
-            this.AddMemberComboBox.FormattingEnabled = true;
-            this.AddMemberComboBox.Location = new System.Drawing.Point(190, 87);
-            this.AddMemberComboBox.Name = "AddMemberComboBox";
-            this.AddMemberComboBox.Size = new System.Drawing.Size(135, 20);
-            this.AddMemberComboBox.TabIndex = 13;
-            // 
-            // DeleteMemberComboBox
-            // 
-            this.DeleteMemberComboBox.FormattingEnabled = true;
-            this.DeleteMemberComboBox.Location = new System.Drawing.Point(190, 51);
-            this.DeleteMemberComboBox.Name = "DeleteMemberComboBox";
-            this.DeleteMemberComboBox.Size = new System.Drawing.Size(135, 20);
-            this.DeleteMemberComboBox.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(45, 126);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 12);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Set First Member:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(45, 90);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 12);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Add Member:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(45, 54);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 12);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Delete Member:";
-            // 
             // CreateDBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -583,8 +484,6 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -604,7 +503,7 @@
         private System.Windows.Forms.ComboBox AuthenticationComboBox;
         public System.Windows.Forms.ComboBox ServerNameComboBox;
         public System.Windows.Forms.ComboBox PathComboBox;
-        private System.Windows.Forms.TextBox DBNameTextBox;
+        private System.Windows.Forms.ComboBox DBNameComboBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -612,16 +511,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button CancelSetButton;
-        private System.Windows.Forms.Button ResetSetingButton;
-        private System.Windows.Forms.Button ApplyButton;
-        private System.Windows.Forms.ComboBox SetFMComboBox;
-        private System.Windows.Forms.ComboBox AddMemberComboBox;
-        private System.Windows.Forms.ComboBox DeleteMemberComboBox;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button CancelCreateButton;
         private System.Windows.Forms.Button CReset;
         private System.Windows.Forms.Button CreateButton;
@@ -639,5 +528,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button SettingButton;
     }
 }

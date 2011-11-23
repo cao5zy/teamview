@@ -29,7 +29,6 @@ namespace BugInfoManagement
                 EditConfig(GetConnString());
             }
             Application.Run(new Starter().Start());
-
         }
 
         public static void EditConfig(string connString)

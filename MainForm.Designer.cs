@@ -94,7 +94,7 @@
             // 
             // mAddButton
             // 
-            this.mAddButton.Location = new System.Drawing.Point(718, 84);
+            this.mAddButton.Location = new System.Drawing.Point(721, 81);
             this.mAddButton.Name = "mAddButton";
             this.mAddButton.Size = new System.Drawing.Size(71, 29);
             this.mAddButton.TabIndex = 22;
@@ -244,7 +244,7 @@
             // mEditButton
             // 
             this.mEditButton.AllowDrop = true;
-            this.mEditButton.Location = new System.Drawing.Point(821, 84);
+            this.mEditButton.Location = new System.Drawing.Point(823, 81);
             this.mEditButton.Name = "mEditButton";
             this.mEditButton.Size = new System.Drawing.Size(75, 29);
             this.mEditButton.TabIndex = 25;

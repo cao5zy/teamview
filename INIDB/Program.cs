@@ -17,7 +17,8 @@ namespace CreatLocalDataBase
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateDBForm());
+            //Application.Run(new CreateDBForm());
+            Application.Run(new Setting());
         }
     }
 }
