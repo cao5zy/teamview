@@ -104,13 +104,8 @@ namespace BugInfoManagement
 
             if (mBugInfo.BugStatus == States.Start)
             {
-                var currents = bugInfoManagement.QueryByParameter(
-                    new QueryParameter
-                    {
-                        Programmer = mBugInfo.DealMan,
-                        Status = States.Start,
-                    }
-                    );
+                var currents = bugInfoManagement.QueryByProgrammerStatus(mBugInfo.DealMan,
+                    States.Start);
                 if (currents.SafeFindAll(n => n.BugNum != mBugInfo.BugNum).SafeCount() != 0)
                 {
                     ShowMessage("只允许一项任务处于 正在处理状态");

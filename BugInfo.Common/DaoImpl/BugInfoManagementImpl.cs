@@ -59,14 +59,14 @@ namespace BugInfoManagement.DaoImpl
                 bugInfoEntity.Version = bugInfo.Version;
                 bugInfoEntity.DealMan = bugInfo.DealMan;
                 bugInfoEntity.Description = bugInfo.Description;
-                bugInfoEntity.CreatedBy = bugInfo.CreatedBy;
+                bugInfoEntity.CreatedBy = bugInfo.CreatedMan;
                 bugInfoEntity.Size = bugInfo.Size;
                 bugInfoEntity.Priority = bugInfo.Priority;
                 bugInfoEntity.TimeStamp = bugInfo.TimeStamp;
                 bugInfoEntity.BugStatus = bugInfo.BugStatus;
             }
             else
-                return bugInfoEntity;
+                return null;
 
             bugInfoEntity.TotalHours = GetTotalHous(bugNum);
             bugInfoEntity.LevelHistroy = GetLevelHistroy(bugNum);
@@ -102,7 +102,7 @@ namespace BugInfoManagement.DaoImpl
                 DealMan = reader["dealMan"].ToString(),
                 Description = reader["description"].ToString(),
                 DisposeResult = reader["disposeResult"].ToString(),
-                CreatedBy = reader["createdBy"].ToString(),
+                CreatedBy = reader["createdMan"].ToString(),
                 Size = Convert.ToInt32(reader["size"]),
                 Priority = Convert.ToInt16(reader["priority"]),
                 TimeStamp = Convert.ToDateTime(reader["timeStamp"]),
@@ -126,9 +126,10 @@ namespace BugInfoManagement.DaoImpl
             bugInfo1.BugStatus = bugInfo.BugStatus;
             bugInfo1.DealMan = bugInfo.DealMan;
             bugInfo1.Description = bugInfo.Description;
-            bugInfo1.CreatedBy = bugInfo.CreatedBy;
+            bugInfo1.CreatedMan = bugInfo.CreatedBy;
             bugInfo1.Size = bugInfo.Size;
             bugInfo1.Priority = bugInfo.Priority;
+            bugInfo1.TimeStamp = DateTime.Now;
 
             bugInfo1.Save();
         }
@@ -228,7 +229,7 @@ namespace BugInfoManagement.DaoImpl
 
 
             List<BugInfoEntity> list = new List<BugInfoEntity>();
-            String queryByDealManString = @"select version,bugNum,bugStatus,dealMan,description,dbo.MergeLog(bugNum) as disposeResult,createdBy,size,timeStamp,priority
+            String queryByDealManString = @"select version,bugNum,bugStatus,dealMan,description,dbo.MergeLog(bugNum) as disposeResult,createdMan,size,timeStamp,priority
                 from bugInfo where " + ((string.IsNullOrEmpty(g.WhereClause) ? "1=1" : g.WhereClause)
                                      + " order by priority, timeStamp desc");
 
@@ -306,8 +307,8 @@ where CreateDate >= @start and CreateDate <= @end");
             .SafeFirst();
 
 
-            if (bugInfo == null)
-                return false;
+
+            Trace.Assert(bugInfo != null);
 
             bugInfo.TimeStamp = DateTime.Now;
             bugInfo.Save();
@@ -331,7 +332,7 @@ where CreateDate >= @start and CreateDate <= @end");
                 {
                     BugStatus = n.BugStatus,
                     Description = n.Description,
-                    CreatedBy = n.CreatedBy,
+                    CreatedBy = n.CreatedMan,
                     DealMan = n.DealMan,
                     BugNum = n.BugNum,
                     Version = n.Version,

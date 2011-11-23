@@ -83,14 +83,19 @@ namespace BugInfoManagement
         {
             if (!BugInfoManager.HasEvalValue())
             {
-                MessageBox.Show("Please set the estimated value");
-                return false;
+                if (!mAssignPointsControl.IsChanged)
+                {
+                    MessageBox.Show("Please set the estimated value");
+                    return false;
+                }
             }
+
             bool result = !mAssignPointsControl.IsChanged || mAssignPointsControl.CanAssign;
             if (!result)
             {
                 MessageBox.Show("Please set the estimatedValue completely");
             }
+
 
             return result;
         }

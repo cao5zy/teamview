@@ -192,7 +192,7 @@ namespace CreatLocalDataBase
                 using (ResXResourceWriter resx = new ResXResourceWriter(@"ConnectRecord.resx"))
                 {
                     if (CRememberPasswordCheckBox.Checked)
-                       resx.AddResource("isRememberPassword", "true");
+                        resx.AddResource("isRememberPassword", "true");
                     else
                         resx.AddResource("isRememberPassword", "false");
                     resx.AddResource("DBName", CDBNameTextBox.Text);
@@ -211,7 +211,7 @@ namespace CreatLocalDataBase
                     else
                         resx.AddResource("isRememberPassword", "false");
                     resx.AddResource("DBName", CDBNameTextBox.Text);
-                    resx.AddResource("Path",CPathComboBox.Text);
+                    resx.AddResource("Path", CPathComboBox.Text);
                     resx.AddResource("ServerName", CServerNameComboBox.Text);
                     resx.AddResource("Authentication", CAuthenticationComboBox.Text);
                     if (CAuthenticationComboBox.Text.Equals("SQL Server Authentication"))
@@ -293,7 +293,7 @@ namespace CreatLocalDataBase
             using (SqlConnection conn = new SqlConnection(source))
             {
                 conn.Open();
-                string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdBy VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
+                string sqlOne = "CREATE TABLE bugInfo" + "(version VARCHAR(15) not null,bugNum VARCHAR(500) PRIMARY KEY,bugStatus VARCHAR(20),dealMan VARCHAR(50), description VARCHAR(500),detailDoc IMAGE, createdMan VARCHAR(50),size int not null, timeStamp datetime not null, priority smallint not null, createdTime datetime not null)";
                 string sqlTwo = "CREATE TABLE ChangeLog" + "(LogID BIGINT PRIMARY KEY,BugNum VARCHAR(500) not null,CreateDate datetime not null, Description VARCHAR(80) not null,LogTypeID int not null)";
                 string sqlThree = "CREATE TABLE pointslog" + "(pointslogid BIGINT PRIMARY KEY,bugnum VARCHAR(500) not null,[log] VARCHAR(100) not null, createdtime datetime not null)";
 
@@ -524,7 +524,7 @@ namespace CreatLocalDataBase
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            if(DeleteMemberComboBox.Text!="")
+            if (DeleteMemberComboBox.Text != "")
             {
                 if (GetMember().IndexOf("," + DeleteMemberComboBox.Text) > 0)
                     SetMember(GetMember().Replace("," + DeleteMemberComboBox.Text, ""));
@@ -562,8 +562,8 @@ namespace CreatLocalDataBase
         }
 
         private void CancelSetButton_Click(object sender, EventArgs e)
-        { 
-            this.tabControl1.SelectedIndex=0;
+        {
+            this.tabControl1.SelectedIndex = 0;
         }
     }
 }

@@ -204,18 +204,18 @@ namespace DAL
 				colvarDetailDoc.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarDetailDoc);
 				
-				TableSchema.TableColumn colvarCreatedBy = new TableSchema.TableColumn(schema);
-				colvarCreatedBy.ColumnName = "createdBy";
-				colvarCreatedBy.DataType = DbType.AnsiString;
-				colvarCreatedBy.MaxLength = 50;
-				colvarCreatedBy.AutoIncrement = false;
-				colvarCreatedBy.IsNullable = true;
-				colvarCreatedBy.IsPrimaryKey = false;
-				colvarCreatedBy.IsForeignKey = false;
-				colvarCreatedBy.IsReadOnly = false;
-				colvarCreatedBy.DefaultSetting = @"";
-				colvarCreatedBy.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarCreatedBy);
+				TableSchema.TableColumn colvarCreatedMan = new TableSchema.TableColumn(schema);
+				colvarCreatedMan.ColumnName = "createdMan";
+				colvarCreatedMan.DataType = DbType.AnsiString;
+				colvarCreatedMan.MaxLength = 50;
+				colvarCreatedMan.AutoIncrement = false;
+				colvarCreatedMan.IsNullable = true;
+				colvarCreatedMan.IsPrimaryKey = false;
+				colvarCreatedMan.IsForeignKey = false;
+				colvarCreatedMan.IsReadOnly = false;
+				colvarCreatedMan.DefaultSetting = @"";
+				colvarCreatedMan.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarCreatedMan);
 				
 				TableSchema.TableColumn colvarSize = new TableSchema.TableColumn(schema);
 				colvarSize.ColumnName = "size";
@@ -317,12 +317,12 @@ namespace DAL
 			set { SetColumnValue(Columns.DetailDoc, value); }
 		}
 		  
-		[XmlAttribute("CreatedBy")]
+		[XmlAttribute("CreatedMan")]
 		[Bindable(true)]
-		public string CreatedBy 
+		public string CreatedMan 
 		{
-			get { return GetColumnValue<string>(Columns.CreatedBy); }
-			set { SetColumnValue(Columns.CreatedBy, value); }
+			get { return GetColumnValue<string>(Columns.CreatedMan); }
+			set { SetColumnValue(Columns.CreatedMan, value); }
 		}
 		  
 		[XmlAttribute("Size")]
@@ -384,7 +384,7 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedBy,int varSize,DateTime varTimeStamp,short varPriority)
+		public static void Insert(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime varTimeStamp,short varPriority)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -400,7 +400,7 @@ namespace DAL
 			
 			item.DetailDoc = varDetailDoc;
 			
-			item.CreatedBy = varCreatedBy;
+			item.CreatedMan = varCreatedMan;
 			
 			item.Size = varSize;
 			
@@ -418,7 +418,7 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedBy,int varSize,DateTime varTimeStamp,short varPriority)
+		public static void Update(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime varTimeStamp,short varPriority)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -434,7 +434,7 @@ namespace DAL
 			
 				item.DetailDoc = varDetailDoc;
 			
-				item.CreatedBy = varCreatedBy;
+				item.CreatedMan = varCreatedMan;
 			
 				item.Size = varSize;
 			
@@ -497,7 +497,7 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn CreatedByColumn
+        public static TableSchema.TableColumn CreatedManColumn
         {
             get { return Schema.Columns[6]; }
         }
@@ -535,7 +535,7 @@ namespace DAL
 			 public static string DealMan = @"dealMan";
 			 public static string Description = @"description";
 			 public static string DetailDoc = @"detailDoc";
-			 public static string CreatedBy = @"createdBy";
+			 public static string CreatedMan = @"createdMan";
 			 public static string Size = @"size";
 			 public static string TimeStamp = @"timeStamp";
 			 public static string Priority = @"priority";
