@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BugInfo.Common.Entity;
 using FxLib;
-using FxLib.Algorithms;
+
 
 namespace BugInfoManagement.Common
 {

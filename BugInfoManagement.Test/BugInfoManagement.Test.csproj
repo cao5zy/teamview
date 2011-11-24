@@ -35,26 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="CommonLibrary, Version=2.57.3923.17249, Culture=neutral, PublicKeyToken=40e781e6bc1921a6, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dependencies\CommonLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="FxLib.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\FxLib.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BinRef\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BinRef\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BinRef\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -78,13 +58,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssignPointsControlTest.cs" />
     <Compile Include="DealMenTestImpl.cs" />
     <Compile Include="EditorTest.cs" />
     <Compile Include="LogReader_Test.cs" />
     <Compile Include="NotificationManagerImplTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateControlTest.cs" />
     <Compile Include="WhereGeneratorTest.cs" />
   </ItemGroup>
   <ItemGroup>

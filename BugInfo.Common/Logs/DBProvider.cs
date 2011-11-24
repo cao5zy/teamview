@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
-using DAL1.Common;
 using BugInfo.Common.Entity;
 using System.Data;
 using System.Configuration;
@@ -13,26 +12,11 @@ namespace BugInfo.Common.Logs
 {
     public class DBProvider : IDbProvider
     {
-        private SqlConnection Connection { get; set; }
-
-        public DBProvider(SqlConnection connection)
-        {
-            Connection = connection;
-        }
         #region IDbProvider Members
 
         public IEnumerable<DbItem> Read(string userName)
         {
-            Connection.Open();
-            try
-            {
-                DBContext context = new DBContext(Connection, null);
-                return context.CreateReader<DBItemReader>().Search(userName);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+            return new DBItemReader().Search(userName);
         }
 
         #endregion
@@ -42,30 +26,12 @@ namespace BugInfo.Common.Logs
 
         public IEnumerable<string> ReadBugNums(DateTime start, DateTime end)
         {
-            Connection.Open();
-            try
-            {
-                DBContext context = new DBContext(Connection, null);
-                return context.CreateReader<BugNumLogReader>().SearchBugNumByDateRange(start, end);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+            return new BugNumLogReader().SearchBugNumByDateRange(start, end);
         }
 
         public IEnumerable<string> ReadBugLog(string bugNum)
         {
-            Connection.Open();
-            try
-            {
-                DBContext context = new DBContext(Connection, null);
-                return context.CreateReader<BugLogReader>().GetLogList(bugNum);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+            return new BugLogReader().GetLogList(bugNum);
         }
 
         #endregion
@@ -75,16 +41,7 @@ namespace BugInfo.Common.Logs
 
         public IEnumerable<ProgrammerPoint> ReadPoints(string bugNum)
         {
-            Connection.Open();
-            try
-            {
-                DBContext context = new DBContext(Connection, null);
-                return context.CreateReader<PointsLogReader>().GetPointList(bugNum);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+            return new PointsLogReader().GetPointList(bugNum);
         }
         #endregion
     }

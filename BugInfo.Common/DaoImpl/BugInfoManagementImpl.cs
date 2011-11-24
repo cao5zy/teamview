@@ -9,7 +9,6 @@ using System.Collections;
 using System.Data.SqlClient;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using FxLib.Algorithms;
 using System.IO;
 using BugInfo.Common.Logs;
 using BugInfoManagement.Common;
@@ -77,8 +76,8 @@ namespace BugInfoManagement.DaoImpl
         {
             return string.Join("\r\n",
             new DAL.PointslogCollection().Where("bugnum", bugNum).Load()
-                .SafeConvertAll(n => PointsParser.ToPoint(n.Log))
-                 .SafeConvertAll(n => n.EstimatedLevel + " " + n.EstimatedBy)
+                .Select(n => PointsParser.ToPoint(n.Log))
+                 .Select(n => n.EstimatedLevel + " " + n.EstimatedBy)
                  .ToArray());
         }
 
@@ -87,7 +86,7 @@ namespace BugInfoManagement.DaoImpl
             return this.mTaskRecordParser.Read(
             new DAL.ChangeLogCollection()
             .Where("bugnum", bugNum).Load()
-            .SafeConvertAll(n =>
+            .Select(n =>
                 string.Format("BugNum:{0};Time:{1};{2}", n.BugNum, n.CreateDate, n.Description))
             )
             .Sum(n => n.Duration);
@@ -276,6 +275,7 @@ where CreateDate >= @start and CreateDate <= @end");
 
             changeLog.BugNum = bugNum;
             changeLog.Description = Log;
+            changeLog.CreateDate = DateTime.Now;
 
             changeLog.Save();
         }
@@ -304,7 +304,7 @@ where CreateDate >= @start and CreateDate <= @end");
             .Where("bugnum", bugNum)
             .Where("timeStamp", timeStamp)
             .Load()
-            .SafeFirst();
+            .FirstOrDefault();
 
 
 
@@ -327,7 +327,7 @@ where CreateDate >= @start and CreateDate <= @end");
                 .Where("dealman", programmer)
                 .Where("bugstatus", status)
                 .Load()
-                .SafeConvertAll(
+                .Select(
                 n => new BugInfoEntity
                 {
                     BugStatus = n.BugStatus,
@@ -339,7 +339,7 @@ where CreateDate >= @start and CreateDate <= @end");
                     Size = n.Size,
                     Priority = n.Priority,
                     TimeStamp = n.TimeStamp,
-                });
+                }).ToList();
         }
 
     }

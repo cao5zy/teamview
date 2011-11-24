@@ -54,7 +54,8 @@ namespace BugInfoManagement
 
             if (mOriginalBugInfo != null)
             {
-                if (mOriginalBugInfo.DealMan == mBugInfo.DealMan)
+                if (mOriginalBugInfo.DealMan == mBugInfo.DealMan 
+                    && mBugInfo.BugStatus != this.BugInfoManagement.QueryByBugNum(mBugInfo.BugNum).BugStatus)
                 {
                     StateSequence stateSequence = new StateSequence(mOriginalBugInfo.BugStatus);
                     if (!stateSequence.IsNextStateValid(mBugInfo.BugStatus))

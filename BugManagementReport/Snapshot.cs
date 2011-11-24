@@ -18,7 +18,8 @@ namespace BugManagementReport
             FileProvider.WriteSnapShot(outFileName,
                 userNames.SafeConvertAllItems(n =>
                 DBProvider.Read(n))
-                .SafeSort(n => n.Add(m => m.dealMan).Add(m => m.version).Add(m => m.priority)));
+                .SafeToEnumerable()
+                .OrderBy(n=>new {n.dealMan, n.version,n.priority}));
         }
 
         public static void TakeBugNumList(IEnumerable<string> usernames, string versionnumber, string outFileName)

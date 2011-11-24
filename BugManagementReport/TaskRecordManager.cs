@@ -61,7 +61,12 @@ namespace BugManagementReport
             if (!onlyTask)
             {
                 list.Sort((x, y) => x.StartTime.CompareTo(y.StartTime));
-                var uniqueIndexes = list.SafeUniqueItems(n => n.Add(m => m.TaskIndex)).SafeConvertAll(n => n.TaskIndex);
+                var uniqueIndexes = list
+                    .SafeToEnumerable()
+                    .Select(n=>n.TaskIndex)
+                    .Distinct()
+                    .ToList();
+
 
                 List<TaskRecord> taskRecords = new List<TaskRecord>();
                 foreach (var index in uniqueIndexes)
@@ -78,17 +83,17 @@ namespace BugManagementReport
             }
             else
             {
-                list = list.SafeUniqueItems(n => n.Add(m => m.BugNum).Add(m => m.Programmer)).ToList();
+                list = list.SafeUniqueItems(n =>  n.Add(m => m.BugNum).Add(m => m.Programmer)).ToList();
             }
 
             if (sortByBugNum)
             {
-                list = new List<TaskRecord>(list.SafeSort(n => n.Add(m => m.BugNum).Add(m => m.StartTime)));
+                list = new List<TaskRecord>(list.SafeSort(n=>n.Add(m=>m.BugNum).Add(m=>m.StartTime)));
                 Console.WriteLine("by bugNum");
             }
             else
             {
-                list = new List<TaskRecord>(list.SafeSort(n => n.Add(m => m.StartTime).Add(m => m.BugNum)));
+                list = new List<TaskRecord>(list.SafeSort(n=>n.Add(m=>m.StartTime).Add(m=>m.BugNum)));
                 Console.WriteLine("by Time");
             }
 
@@ -122,7 +127,7 @@ namespace BugManagementReport
         {
             var items = DBProvider.ReadPoints(bugNum)
                 .SafeFindAll(n => n.Assignee == programmer && !string.IsNullOrEmpty(n.EstimatedLevel))
-                .SafeSort(n => n.Add(m => m.EstimatedTime));
+                .OrderBy(n => n.EstimatedTime);
 
             if (items.SafeCount() == 0)
                 return string.Empty;

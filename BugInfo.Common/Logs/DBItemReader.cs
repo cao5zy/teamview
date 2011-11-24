@@ -2,30 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DAL1.Common;
 
 namespace BugInfo.Common.Logs
 {
-    class DBItemReader : ObjectBaseReader<DbItem>
+    class DBItemReader
     {
-        public DBItemReader() :
-            base("select version,bugNum,bugStatus,dealMan,description,priority from bugInfo ") { }
-        protected override DbItem ConvertObject(System.Data.SqlClient.SqlDataReader reader)
-        {
-            return new DbItem {
-                version = Convert.ToString(reader[0]),
-                bugNum = Convert.ToString(reader[1]),
-                bugStatus = reader.IsDBNull(2) ? string.Empty : Convert.ToString(reader[2]),
-                dealMan = reader.IsDBNull(3) ? string.Empty : Convert.ToString(reader[3]),
-                description = reader.IsDBNull(4) ? string.Empty : Convert.ToString(reader[4]).Replace("\r\n",string.Empty),
-                priority = reader.IsDBNull(5) ? 0 : Convert.ToInt32(reader[5])
-            };
-        }
-
         public IEnumerable<DbItem> Search(string dealMan)
         {
-            AddParameter("dealMan", "dealMan", dealMan);
-            return base.ToList();
+            return new DAL.BugInfoCollection()
+                .Where("dealman", dealMan).Load()
+                .Select(n => new DbItem
+                {
+                    version = n.Version,
+                    bugNum = n.BugNum,
+                    bugStatus = string.IsNullOrEmpty(n.BugStatus) ? string.Empty : n.BugStatus,
+                    dealMan = string.IsNullOrEmpty(n.DealMan) ? string.Empty : n.DealMan,
+                    description = string.IsNullOrEmpty(n.Description) ? string.Empty : n.Description,
+                    priority = n.Priority,
+                }).ToArray();
         }
     }
 }
