@@ -77,6 +77,15 @@
       <DependentUpon>BugInfoManagement.Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="BugInfoManager.cs" />
+    <Compile Include="BugInfoSet.cs">
+      <DependentUpon>BugInfoSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BugInfoSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugInfoSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="BugStatesImpl.cs" />
     <Compile Include="Configs\BugStatesConfig.cs" />
     <Compile Include="Configs\NotificationSection.cs" />
@@ -111,11 +120,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QueryControl.resx">
+      <DependentUpon>QueryControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleEditor.resx">
       <DependentUpon>SimpleEditor.cs</DependentUpon>
@@ -128,6 +141,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="BugInfoSet.xsc">
+      <DependentUpon>BugInfoSet.xsd</DependentUpon>
+    </None>
+    <None Include="BugInfoSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BugInfoSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="BugInfoSet.xss">
+      <DependentUpon>BugInfoSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\BugInfoManagement.Dao.QueryParameter.datasource" />
     <None Include="Properties\DataSources\BugInfoManagement.Entity.BugInfo.datasource" />
     <None Include="Properties\DataSources\BugInfoManagement.Entity.BugStateBaseInfo.datasource" />
@@ -141,6 +165,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="QueryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QueryControl.Designer.cs">
+      <DependentUpon>QueryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QueryControlModel.cs" />
     <Compile Include="SimpleEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

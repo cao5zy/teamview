@@ -13,10 +13,11 @@ using BugInfoManagement.Entity;
 using BugInfoManagement.Utility;
 using System.Configuration;
 using BugInfoManagement.Common;
+using FxLib.Algorithms;
 
 namespace BugInfoManagement
 {
-    public partial class MainForm : Form
+    partial class MainForm : Form
     {
         ListOrder lo = new ListOrder();
 
@@ -28,74 +29,87 @@ namespace BugInfoManagement
         private EditBugInfoManager.Factiory EditBugInfoManagerFactory { get; set; }
         private CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
-
-        private QueryParameter mQueryParameter = new QueryParameter();
+        private QueryControl mQueryControl;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
             EditBugInfoManager.Factiory createEditBugInfoManager,
-            CreateBugInfoManager.Factory createCreateBugInfoManager)
+            CreateBugInfoManager.Factory createCreateBugInfoManager, 
+            QueryControl queryControl)
         {
             InitializeComponent();
             CreateBugInfoForm = createBugInfoForm;
             EditBugInfoManagerFactory = createEditBugInfoManager;
             CreateBugInfoManagerFactory = createCreateBugInfoManager;
-            mQueryGroupBox.Text = BugInfoManagement_Resource.mQueryGroupBox;
-            mDealManlabel.Text = BugInfoManagement_Resource.mDealManlabel;
-            mBugNumberLabel.Text = BugInfoManagement_Resource.mBugNumberLabel;
-            mDescriptionLabel.Text = BugInfoManagement_Resource.mDescriptionLabel;
-            mStateLabel.Text = BugInfoManagement_Resource.mStateLabel;
-            mVersionNumber.Text = BugInfoManagement_Resource.mVersionNumber;
-            mQueryButton.Text = BugInfoManagement_Resource.mQueryButton;
+           
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
+
+            mQueryControl = queryControl;
+            mQueryControlContainer.Controls.Add(queryControl);
+            queryControl.Dock = DockStyle.Fill;
+            queryControl.Query += (s, e) => {
+                LoadBugInfos();
+            };
         }
 
-        private BugInfoEntity CurrentSelectedItem
+        private BugInfoSet.BugInfoTableRow CurrentSelectedItem
         {
             get
             {
-                if (mBugInfoListDataGridView.CurrentRow == null)
+                if (mBugInfoSet.BugInfoTable.Rows.Count == 0 || mBugInfoListDataGridView.CurrentRow == null)
                     return null;
 
-                return ((List<BugInfoEntity>)mBugInfoListDataGridView.DataSource)[mBugInfoListDataGridView.CurrentRow.Index];
+                if (mBugInfoSet.BugInfoTable.Rows.Count <= mBugInfoListDataGridView.CurrentRow.Index)
+                    return null;
+
+                return (BugInfoSet.BugInfoTableRow)mBugInfoSet.BugInfoTable.Rows[mBugInfoListDataGridView.CurrentRow.Index];
             }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             mBugInfoListDataGridView.AutoGenerateColumns = false;
-            mDealManBindingSource.DataSource = DealMen.DealMen;
-            mStatesBindingSource.DataSource = BugStates.States;
-            mQueryBindingSource.Add(mQueryParameter);
 
-            mDealManComboBox.SelectedValue = NotificationSetting.ProgrammerName;
-            mQueryBindingSource.EndEdit();
+            var model = mQueryControl.Model;
+           
 
-            //DataGridView绑定List排序
-            this.mBugInfoListDataGridView.DataSource = BugInfoManagement.QueryByParameter(mQueryParameter); ;
+            mQueryControl.Init();
 
-
-
-
-            mTimer.Interval = NotificationSetting.FrequenceInMinutes * 1000 * 60;
-            mTimer.Start();
+            LoadBugInfos();
 
             NotificationManager.Refresh();
         }
 
-        //查询按钮事件处理
-        private void mQueryButton_Click(object sender, EventArgs e)
-        {
-            LoadBugInfos();
-        }
-
         private void LoadBugInfos()
         {
-            var results = BugInfoManagement.QueryByParameter(mQueryParameter);
-            this.mBugInfoListDataGridView.DataSource = results;
+            var model = mQueryControl.Model;
+            var results = BugInfoManagement.QueryByParameter(
+                model.SelectedProgrammers,
+                model.BugNum,
+                model.Version,
+                model.Description,
+                model.Priority,
+                model.SelectedState
+                );
+
+            mBugInfoSet.BugInfoTable.Clear();
+            results.SafeForEach(
+                n => {
+                    var row = mBugInfoSet.BugInfoTable.NewBugInfoTableRow();
+                    row.bugNum = n.BugNum;
+                    row.bugStatus = n.BugStatus;
+                    row.dealMan = n.DealMan;
+                    row.description = n.Description;
+                    row.Version = n.Version;
+                    row.size = n.Size;
+                    row.Priority = n.Priority;
+                    mBugInfoSet.BugInfoTable.Rows.Add(row);
+                }
+                );
 
             SetQueryCount(mBugInfoListDataGridView.Rows.Count, results.Sum(b => b.Size));
         }
+
 
         //新增按钮事件处理
         private void mAddButton_Click(object sender, EventArgs e)
@@ -125,8 +139,7 @@ namespace BugInfoManagement
             {
                 MessageBox.Show(BugInfoManagement_Resource.Message4);
             }
-
-            mQueryButton_Click(null, null);
+            LoadBugInfos();
         }
 
         //删除按钮事件处理
@@ -137,7 +150,7 @@ namespace BugInfoManagement
                 if (MessageBox.Show(BugInfoManagement_Resource.Message5, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     BugInfoManagement.DeleteByBugNum(mBugInfoListDataGridView.CurrentRow.Cells[1].Value.ToString());
-                    mQueryButton_Click(null, null);
+                    LoadBugInfos();
                     MessageBox.Show(BugInfoManagement_Resource.Message6, BugInfoManagement_Resource.Message7, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -149,7 +162,7 @@ namespace BugInfoManagement
 
         private void SetQueryCount(int count, decimal totalHours)
         {
-            mQueryGroupBox.Text = string.Format("{0}:{1}-{2}:{3}", BugInfoManagement_Resource.TotalRecord, count, BugInfoManagement_Resource.TotalTime, totalHours);
+            //mQueryGroupBox.Text = string.Format("{0}:{1}-{2}:{3}", BugInfoManagement_Resource.TotalRecord, count, BugInfoManagement_Resource.TotalTime, totalHours);
         }
 
         private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -182,27 +195,22 @@ namespace BugInfoManagement
             this.Close();
         }
 
-        private void mTimer_Tick(object sender, EventArgs e)
-        {
-            NotificationManager.Refresh();
-
-            if (NotificationManager.HasIncommingList)
-            {
-                mNotifyIcon.ShowBalloonTip(0);
-            }
-        }
-
         private void mBugInfoListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (CurrentSelectedItem == null)
+            {
+                mFlowMenu.Items[0].Enabled = false;
+                mFlowMenu.Items[1].Enabled = false;
+                mFlowMenu.Items[2].Enabled = false;
                 return;
+            }
 
             var currentSelectedItem = CurrentSelectedItem;
-            mFlowMenu.Items[0].Enabled = currentSelectedItem.BugStatus == States.Abort
-                || currentSelectedItem.BugStatus == States.Complete
-                || currentSelectedItem.BugStatus == States.Pending;
-            mFlowMenu.Items[1].Enabled = currentSelectedItem.BugStatus == States.Start;
-            mFlowMenu.Items[2].Enabled = currentSelectedItem.BugStatus == States.Start;
+            mFlowMenu.Items[0].Enabled = currentSelectedItem.bugStatus == States.Abort
+                || currentSelectedItem.bugStatus == States.Complete
+                || currentSelectedItem.bugStatus == States.Pending;
+            mFlowMenu.Items[1].Enabled = currentSelectedItem.bugStatus == States.Start;
+            mFlowMenu.Items[2].Enabled = currentSelectedItem.bugStatus == States.Start;
         }
 
         private void mBugInfoListDataGridView_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
@@ -214,7 +222,7 @@ namespace BugInfoManagement
         private void mFlowMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var editBugInfoManager = EditBugInfoManagerFactory();
-            editBugInfoManager.Initialize(CurrentSelectedItem.BugNum);
+            editBugInfoManager.Initialize(CurrentSelectedItem.bugNum);
             editBugInfoManager.MoveState((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
             LoadBugInfos();
         }

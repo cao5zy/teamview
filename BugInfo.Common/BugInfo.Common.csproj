@@ -82,10 +82,8 @@
     <Compile Include="Logs\BugLogReader.cs" />
     <Compile Include="Logs\BugNumLogReader.cs" />
     <Compile Include="DaoImpl\BugInfoManagementImpl.cs" />
-    <Compile Include="DaoImpl\WhereGenerator.cs" />
     <Compile Include="Dao\BugInfoParameterAttribute.cs" />
     <Compile Include="Dao\IBugInfoManagement.cs" />
-    <Compile Include="Dao\QueryParameter.cs" />
     <Compile Include="Logs\DbItem.cs" />
     <Compile Include="Logs\DBItemReader.cs" />
     <Compile Include="Logs\DBProvider.cs" />

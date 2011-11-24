@@ -22,6 +22,8 @@ namespace BugInfoManagement
             container.RegisterType<CreateBugInfoManager>().InstancePerDependency();
             container.RegisterType<EditBugInfoManager>().InstancePerDependency();
             container.RegisterType<BugInfoForm>().InstancePerDependency();
+            container.RegisterType<QueryControl>();
+            container.RegisterType<QueryControlModel>();
             container.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
             container.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
             container.RegisterType<BugInfoManagementImpl>().As<IBugInfoManagement>().PropertiesAutowired().InstancePerDependency();

@@ -13,6 +13,7 @@ using System.IO;
 using BugInfo.Common.Logs;
 using BugInfoManagement.Common;
 using System.Diagnostics;
+using FxLib.Algorithms;
 
 namespace BugInfoManagement.DaoImpl
 {
@@ -30,15 +31,25 @@ namespace BugInfoManagement.DaoImpl
         }
         public List<BugInfoEntity> QueryAll()
         {
-            return QueryByParameter(new QueryParameter { });
+            return QueryByParameter(
+               null,
+               null,
+               null,
+               null,
+               null,
+               null
+                );
         }
 
         public List<BugInfoEntity> QueryByDealMan(String dealMan)
         {
-            return QueryByParameter(new QueryParameter
-            {
-                Programmer = dealMan
-            });
+            return QueryByParameter(
+                new string[] { dealMan },
+                null,
+                null,
+                null,
+                null,
+                null);
         }
 
         private Database CreateDataBase()
@@ -209,42 +220,69 @@ namespace BugInfoManagement.DaoImpl
 
         public List<BugInfoEntity> Query(string dealMan, string state)
         {
-            return QueryByParameter(new QueryParameter
-            {
-                Programmer = dealMan,
-                Status = state
-            });
+            return QueryByParameter(
+                new string[] { dealMan },
+                null,
+                null,
+                null,
+                null,
+                state);
         }
 
         public List<BugInfoEntity> QueryByStates(string state)
         {
-            return QueryByParameter(new QueryParameter { Status = state });
+            return QueryByParameter(
+                null,
+                null,
+                null,
+                null,
+                null,
+                state);
         }
 
 
-        public List<BugInfoEntity> QueryByParameter(QueryParameter parameter)
+        public List<BugInfoEntity> QueryByParameter(IEnumerable<string> programmers, 
+            string bugNum, 
+            string version, 
+            string description, 
+            int ? priority, 
+            string bugState)
         {
-            WhereGenerator g = new WhereGenerator(parameter);
+            DAL.BugInfoCollection bugInfoCol = new DAL.BugInfoCollection();
 
+            if (programmers.SafeCount() != 0)
+                bugInfoCol = bugInfoCol.Where(
+                    DAL.BugInfo.Columns.DealMan, SubSonic.Comparison.In, programmers
+                    );
 
-            List<BugInfoEntity> list = new List<BugInfoEntity>();
-            String queryByDealManString = @"select version,bugNum,bugStatus,dealMan,description,dbo.MergeLog(bugNum) as disposeResult,createdMan,size,timeStamp,priority
-                from bugInfo where " + ((string.IsNullOrEmpty(g.WhereClause) ? "1=1" : g.WhereClause)
-                                     + " order by priority, timeStamp desc");
+            if (!string.IsNullOrEmpty(bugNum))
+                bugInfoCol = bugInfoCol.Where(DAL.BugInfo.Columns.BugNum,SubSonic.Comparison.Like, bugNum + "%");
 
-            var db = CreateDataBase();
+            if (!string.IsNullOrEmpty(version))
+                bugInfoCol = bugInfoCol.Where(
+                    DAL.BugInfo.Columns.Version, version);
 
-            var cmd = db.GetSqlStringCommand(queryByDealManString);
-
-            using (var reader = db.ExecuteReader(cmd))
+            if (!string.IsNullOrEmpty(description))
+                bugInfoCol = bugInfoCol.Where(
+                    DAL.BugInfo.Columns.Description,
+                     SubSonic.Comparison.Like,
+                     "%" + description);
+            if (priority != null)
             {
-
-                var func = BuildRead(reader);
-
-                while (reader.Read())
-                    list.Add(func());
-                return list;
+                bugInfoCol = bugInfoCol.Where(
+                    DAL.BugInfo.Columns.Priority, 
+                    SubSonic.Comparison.LessOrEquals,
+                    priority.Value);
             }
+
+            if (!string.IsNullOrEmpty(bugState))
+            {
+                bugInfoCol = bugInfoCol.Where(DAL.BugInfo.Columns.BugStatus, bugState);
+            }
+
+            return bugInfoCol.Load().SafeConvertAll(
+                n => ConvertToBugInfoEntity(n)
+                );
         }
 
         public IEnumerable<string> SearchBugNumByDateRange(DateTime start, DateTime end)
@@ -323,23 +361,23 @@ where CreateDate >= @start and CreateDate <= @end");
 
         public List<BugInfoEntity> QueryByProgrammerStatus(string programmer, string status)
         {
-            return new DAL.BugInfoCollection()
-                .Where("dealman", programmer)
-                .Where("bugstatus", status)
-                .Load()
-                .Select(
-                n => new BugInfoEntity
-                {
-                    BugStatus = n.BugStatus,
-                    Description = n.Description,
-                    CreatedBy = n.CreatedMan,
-                    DealMan = n.DealMan,
-                    BugNum = n.BugNum,
-                    Version = n.Version,
-                    Size = n.Size,
-                    Priority = n.Priority,
-                    TimeStamp = n.TimeStamp,
-                }).ToList();
+            return QueryByParameter(new string[] { programmer }, null, null, null, null, status);
+        }
+
+        private static BugInfoEntity ConvertToBugInfoEntity(DAL.BugInfo n)
+        {
+            return new BugInfoEntity
+            {
+                BugStatus = n.BugStatus,
+                Description = n.Description,
+                CreatedBy = n.CreatedMan,
+                DealMan = n.DealMan,
+                BugNum = n.BugNum,
+                Version = n.Version,
+                Size = n.Size,
+                Priority = n.Priority,
+                TimeStamp = n.TimeStamp,
+            };
         }
 
     }

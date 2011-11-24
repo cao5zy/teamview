@@ -297,8 +297,6 @@ namespace FxLib.Algorithms
             return !(source.SafeExists(n => !target.SafeExists(m => Comparer<T>.Default.Compare(m, n) == 0))
                 || target.SafeExists(n => !source.SafeExists(m => Comparer<T>.Default.Compare(m, n) == 0)));
         }
-
-
     }
 
 

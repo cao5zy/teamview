@@ -19,7 +19,7 @@ namespace BugInfoManagement.Dao
 
         List<BugInfoEntity> QueryByStates(string state);
 
-        List<BugInfoEntity> QueryByParameter(QueryParameter parameter);
+        List<BugInfoEntity> QueryByParameter(IEnumerable<string> programmers, string bugNum, string version, string description, int ? priority, string bugState);
 
         List<BugInfoEntity> QueryByProgrammerStatus(string programmer, string status);
 
