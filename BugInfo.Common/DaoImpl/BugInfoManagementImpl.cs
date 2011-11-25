@@ -266,7 +266,8 @@ namespace BugInfoManagement.DaoImpl
                 bugInfoCol = bugInfoCol.Where(
                     DAL.BugInfo.Columns.Description,
                      SubSonic.Comparison.Like,
-                     "%" + description);
+                     "%"+
+                     description+"%");
             if (priority != null)
             {
                 bugInfoCol = bugInfoCol.Where(

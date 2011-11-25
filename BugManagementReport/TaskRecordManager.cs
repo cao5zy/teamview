@@ -127,7 +127,7 @@ namespace BugManagementReport
         {
             var items = DBProvider.ReadPoints(bugNum)
                 .SafeFindAll(n => n.Assignee == programmer && !string.IsNullOrEmpty(n.EstimatedLevel))
-                .OrderBy(n => n.EstimatedTime);
+                .SafeSort(n => n.Add(m => m.EstimatedTime));
 
             if (items.SafeCount() == 0)
                 return string.Empty;

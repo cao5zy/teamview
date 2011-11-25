@@ -19,7 +19,7 @@ namespace BugManagementReport
                 userNames.SafeConvertAllItems(n =>
                 DBProvider.Read(n))
                 .SafeToEnumerable()
-                .OrderBy(n=>new {n.dealMan, n.version,n.priority}));
+                .SafeSort(n=>n.Add(m=>m.dealMan).Add(m=>m.version).Add(m=>m.priority)));
         }
 
         public static void TakeBugNumList(IEnumerable<string> usernames, string versionnumber, string outFileName)

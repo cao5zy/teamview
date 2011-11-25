@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BugInfoSet" targetNamespace="http://tempuri.org/BugInfoSet.xsd" xmlns:mstns="http://tempuri.org/BugInfoSet.xsd" xmlns="http://tempuri.org/BugInfoSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BugInfoSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="BugInfoSet" msprop:Generator_UserDSName="BugInfoSet" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BugInfoTable" msprop:Generator_UserTableName="BugInfoTable" msprop:Generator_RowDeletedName="BugInfoTableRowDeleted" msprop:Generator_TableClassName="BugInfoTableDataTable" msprop:Generator_RowChangedName="BugInfoTableRowChanged" msprop:Generator_RowClassName="BugInfoTableRow" msprop:Generator_RowChangingName="BugInfoTableRowChanging" msprop:Generator_RowEvArgName="BugInfoTableRowChangeEvent" msprop:Generator_RowEvHandlerName="BugInfoTableRowChangeEventHandler" msprop:Generator_TablePropName="BugInfoTable" msprop:Generator_TableVarName="tableBugInfoTable" msprop:Generator_RowDeletingName="BugInfoTableRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Version" msprop:Generator_UserColumnName="Version" msprop:Generator_ColumnPropNameInRow="Version" msprop:Generator_ColumnVarNameInTable="columnVersion" msprop:Generator_ColumnPropNameInTable="VersionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="bugNum" msprop:Generator_UserColumnName="bugNum" msprop:Generator_ColumnPropNameInRow="bugNum" msprop:Generator_ColumnVarNameInTable="columnbugNum" msprop:Generator_ColumnPropNameInTable="bugNumColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="bugStatus" msprop:Generator_UserColumnName="bugStatus" msprop:Generator_ColumnPropNameInRow="bugStatus" msprop:Generator_ColumnVarNameInTable="columnbugStatus" msprop:Generator_ColumnPropNameInTable="bugStatusColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="dealMan" msprop:Generator_UserColumnName="dealMan" msprop:Generator_ColumnPropNameInRow="dealMan" msprop:Generator_ColumnVarNameInTable="columndealMan" msprop:Generator_ColumnPropNameInTable="dealManColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="description" msprop:Generator_UserColumnName="description" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInTable="descriptionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Priority" msprop:Generator_UserColumnName="Priority" msprop:Generator_ColumnPropNameInRow="Priority" msprop:Generator_ColumnVarNameInTable="columnPriority" msprop:Generator_ColumnPropNameInTable="PriorityColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="size" msprop:Generator_UserColumnName="size" msprop:Generator_ColumnPropNameInRow="size" msprop:Generator_ColumnVarNameInTable="columnsize" msprop:Generator_ColumnPropNameInTable="sizeColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
