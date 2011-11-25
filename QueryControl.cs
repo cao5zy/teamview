@@ -51,6 +51,8 @@ namespace BugInfoManagement
 
             mModel.BugStates.SafeForEach(n =>
                 mBugStatesComboBox.Items.Add(n));
+
+            mPriorityCombo.Text = Model.Priority.HasValue ? Model.Priority.Value.ToString() : string.Empty;
         }
         private void mQueryButton_Click(object sender, EventArgs e)
         {

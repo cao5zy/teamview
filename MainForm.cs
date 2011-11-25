@@ -62,7 +62,7 @@ namespace BugInfoManagement
                 if (mBugInfoSet.BugInfoTable.Rows.Count <= mBugInfoListDataGridView.CurrentRow.Index)
                     return null;
 
-                return (BugInfoSet.BugInfoTableRow)mBugInfoSet.BugInfoTable.Rows[mBugInfoListDataGridView.CurrentRow.Index];
+                return (BugInfoSet.BugInfoTableRow)((DataRowView)mBugInfoListDataGridView.CurrentRow.DataBoundItem).Row;
             }
         }
 
@@ -129,8 +129,9 @@ namespace BugInfoManagement
             {
                 BugInfoForm f = CreateBugInfoForm();
                 f.BugInfoManager = EditBugInfoManagerFactory();
-                ((EditBugInfoManager)f.BugInfoManager).Initialize(((BugInfoEntity)mBugInfoListDataGridView.BindingContext[mBugInfoListDataGridView.DataSource].Current).BugNum);
-                f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+((BugInfoEntity)mBugInfoListDataGridView.BindingContext[mBugInfoListDataGridView.DataSource].Current).BugNum;
+                var bugNum = CurrentSelectedItem.bugNum;
+                ((EditBugInfoManager)f.BugInfoManager).Initialize(bugNum);
+                f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+bugNum;
                 f.Show();
                 //f.Dispose();
                 //GC.Collect();

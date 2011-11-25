@@ -51,6 +51,7 @@ namespace BugInfoManagement
             }
         }
 
+        private int ? mPrioirty = 1;
         public string SelectedState { get; set; }
 
         public string BugNum { get; set; }
@@ -59,7 +60,15 @@ namespace BugInfoManagement
 
         public string Version { get; set; }
 
-        public int ? Priority { get; set; }
+        public int? Priority
+        {
+            get
+            { return mPrioirty; }
+            set
+            {
+                mPrioirty = value;
+            }
+        }
 
     }
 }
