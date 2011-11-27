@@ -248,29 +248,30 @@ namespace BugInfoManagement.DaoImpl
             int ? priority, 
             string bugState)
         {
-            DAL.BugInfoCollection bugInfoCol = new DAL.BugInfoCollection();
-
+            SubSonic.Query query = DAL.BugInfo.CreateQuery();
+            query.QueryType = SubSonic.QueryType.Select;
+            
             if (programmers.SafeCount() != 0)
-                bugInfoCol = bugInfoCol.Where(
+                query = query.WHERE(
                     DAL.BugInfo.Columns.DealMan, SubSonic.Comparison.In, programmers
                     );
 
             if (!string.IsNullOrEmpty(bugNum))
-                bugInfoCol = bugInfoCol.Where(DAL.BugInfo.Columns.BugNum,SubSonic.Comparison.Like, bugNum + "%");
+                query = query.WHERE(DAL.BugInfo.Columns.BugNum, SubSonic.Comparison.Like, bugNum + "%");
 
             if (!string.IsNullOrEmpty(version))
-                bugInfoCol = bugInfoCol.Where(
+                query = query.WHERE(
                     DAL.BugInfo.Columns.Version, version);
 
             if (!string.IsNullOrEmpty(description))
-                bugInfoCol = bugInfoCol.Where(
+                query = query.WHERE(
                     DAL.BugInfo.Columns.Description,
                      SubSonic.Comparison.Like,
                      "%"+
                      description+"%");
             if (priority != null)
             {
-                bugInfoCol = bugInfoCol.Where(
+                query = query.WHERE(
                     DAL.BugInfo.Columns.Priority, 
                     SubSonic.Comparison.LessOrEquals,
                     priority.Value);
@@ -278,12 +279,34 @@ namespace BugInfoManagement.DaoImpl
 
             if (!string.IsNullOrEmpty(bugState))
             {
-                bugInfoCol = bugInfoCol.Where(DAL.BugInfo.Columns.BugStatus, bugState);
+                query = query.WHERE(DAL.BugInfo.Columns.BugStatus, bugState);
             }
 
-            return bugInfoCol.Load().SafeConvertAll(
-                n => ConvertToBugInfoEntity(n)
-                );
+            return ToList(query.ExecuteReader());
+        }
+
+        private List<BugInfoEntity> ToList(IDataReader reader)
+        {
+            List<BugInfoEntity> list = new List<BugInfoEntity>();
+
+            while (reader.Read())
+            {
+                list.Add(
+                    new BugInfoEntity { 
+                        BugNum = reader[DAL.BugInfo.Columns.BugNum].ToString(),
+                        BugStatus = reader[DAL.BugInfo.Columns.BugStatus].ToString(),
+                        CreatedBy = reader[DAL.BugInfo.Columns.CreatedMan].ToString(),
+                        DealMan = reader[DAL.BugInfo.Columns.DealMan].ToString(),
+                        Description = reader[DAL.BugInfo.Columns.Description].ToString(),
+                        Priority = Convert.ToInt16(reader[DAL.BugInfo.Columns.Priority]),
+                        Size = Convert.ToInt32(reader[DAL.BugInfo.Columns.Size]),
+                        TimeStamp = Convert.ToDateTime(reader[DAL.BugInfo.Columns.TimeStamp]),
+                        Version = reader[DAL.BugInfo.Columns.Version].ToString()
+                    }
+                    );
+            }
+
+            return list;
         }
 
         public IEnumerable<string> SearchBugNumByDateRange(DateTime start, DateTime end)
