@@ -77,7 +77,6 @@ namespace BugInfoManagement
 
             LoadBugInfos();
 
-            NotificationManager.Refresh();
         }
 
         private void LoadBugInfos()
@@ -133,14 +132,11 @@ namespace BugInfoManagement
                 ((EditBugInfoManager)f.BugInfoManager).Initialize(bugNum);
                 f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+bugNum;
                 f.Show();
-                //f.Dispose();
-                //GC.Collect();
             }
             else
             {
                 MessageBox.Show(BugInfoManagement_Resource.Message4);
             }
-            LoadBugInfos();
         }
 
         //删除按钮事件处理

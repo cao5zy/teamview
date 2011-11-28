@@ -385,7 +385,19 @@ where CreateDate >= @start and CreateDate <= @end");
 
         public List<BugInfoEntity> QueryByProgrammerStatus(string programmer, string status)
         {
-            return QueryByParameter(new string[] { programmer }, null, null, null, null, status);
+            DAL.BugInfoCollection bugInfoCol = new DAL.BugInfoCollection();
+
+
+            bugInfoCol = bugInfoCol.Where(
+                DAL.BugInfo.Columns.DealMan, programmer
+                )
+                .Where(DAL.BugInfo.Columns.BugStatus, status);
+
+
+            return bugInfoCol.Load().SafeConvertAll(
+                n => ConvertToBugInfoEntity(n)
+                );
+
         }
 
         private static BugInfoEntity ConvertToBugInfoEntity(DAL.BugInfo n)
