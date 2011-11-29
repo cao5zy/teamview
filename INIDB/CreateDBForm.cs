@@ -13,6 +13,7 @@ using System.Collections;
 using System.IO;
 using System.Xml;
 using System.Configuration;
+using BugInfo.Common;
 
 namespace CreatLocalDataBase
 {
@@ -20,6 +21,12 @@ namespace CreatLocalDataBase
     {
         private bool isCreatDB = false;
         public static string DbName = "";
+
+        private IItemImporter mImporter;
+        public CreateDBForm(IItemImporter importer):this()
+        {
+            mImporter = importer;
+        }
         public CreateDBForm()
         {
             InitializeComponent();
@@ -538,6 +545,11 @@ namespace CreatLocalDataBase
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mImporter.Import(@"z:\temp\JIRA.xml", "3.1", "客户", "导入中心", 1);
         }
 
     }

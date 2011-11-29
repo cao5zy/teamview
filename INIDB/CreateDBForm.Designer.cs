@@ -67,6 +67,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.SettingButton);
             this.tabPage1.Controls.Add(this.CancelConnectButton);
             this.tabPage1.Controls.Add(this.ResetButton);
@@ -471,6 +473,16 @@
             this.label15.TabIndex = 28;
             this.label15.Text = "DataBase name:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(302, 263);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "Import";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CreateDBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -529,5 +541,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button SettingButton;
+        private System.Windows.Forms.Button button1;
     }
 }

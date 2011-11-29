@@ -76,7 +76,9 @@ namespace BugInfoManagement
             mModel.BugNum = mBugNumTextBox.Text;
 
             if (!string.IsNullOrEmpty(mVersionTextBox.Text))
-                mModel.Version = mVersionNumber.Text;
+                mModel.Version = mVersionTextBox.Text;
+            else
+                mModel.Version = string.Empty;
 
             OnQuery();
         }

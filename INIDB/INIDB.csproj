@@ -95,6 +95,12 @@
   <ItemGroup>
     <None Include="Resources\reduceitem.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugInfo.Common\BugInfo.Common.csproj">
+      <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
+      <Name>BugInfo.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -21,14 +21,16 @@ namespace BugInfoManagement
         [STAThread]
         static void Main()
         {
+            Starter starter = new Starter();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreatLocalDataBase.CreateDBForm());
+            Application.Run(starter.StartCreateDbForm());
             if (!GetConnString().Equals(""))
             {
                 EditConfig(GetConnString());
             }
-            Application.Run(new Starter().Start());
+            Application.Run(starter.StartMainForm());
         }
 
         public static void EditConfig(string connString)
