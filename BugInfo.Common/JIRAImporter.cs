@@ -13,11 +13,12 @@ namespace BugInfo.Common
     {
         #region IItemImporter Members
         private IBugInfoManagement mBugInfoManagement;
+        private List<string> mImportedList = new List<string>();
         public JIRAImporter(IBugInfoManagement bugInfoManagement)
         {
             mBugInfoManagement = bugInfoManagement;
         }
-        public void Import(string xmlFileName, string version, string reporter, string iniDealMan, int priority)
+        public void Import(string xmlFileName, string version, string reporter, string iniDealMan)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(xmlFileName);
@@ -34,10 +35,11 @@ namespace BugInfo.Common
                         Description = GetSubElementInnerText(n, "summary"),
                         DealMan = iniDealMan,
                         CreatedBy = reporter,
-                        Priority = (short)priority,
+                        Priority = short.Parse(GetSubElementInnerText(n,"priority").Substring(0,1)),
                         Size = 0,
                         TimeStamp = DateTime.Now,
-                        BugStatus = States.Pending
+                        BugStatus = States.Pending,
+                        Version = version,
                     }
                     );
             }
@@ -48,6 +50,7 @@ namespace BugInfo.Common
                     try
                     {
                         mBugInfoManagement.AddBugInfo(n);
+                        mImportedList.Add(n.BugNum);
                     }
                     catch (Exception ex)
                     { }
@@ -58,6 +61,16 @@ namespace BugInfo.Common
         private static string GetSubElementInnerText(XmlElement element, string subElementName)
         {
             return element.GetElementsByTagName(subElementName).Item(0).InnerText;
+        }
+
+        #endregion
+
+        #region IItemImporter Members
+
+
+        public IEnumerable<string> ImportedList
+        {
+            get { return mImportedList; }
         }
 
         #endregion

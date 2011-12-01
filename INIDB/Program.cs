@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Resources;
 using System.Xml;
 
-namespace CreatLocalDataBase
+namespace IniTeamView
 {
     static class Program
     {

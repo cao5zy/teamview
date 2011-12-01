@@ -14,18 +14,21 @@ using System.IO;
 using System.Xml;
 using System.Configuration;
 using BugInfo.Common;
+using IniTeamView.UserControls;
 
-namespace CreatLocalDataBase
+namespace IniTeamView
 {
     public partial class CreateDBForm : Form
     {
         private bool isCreatDB = false;
         public static string DbName = "";
 
-        private IItemImporter mImporter;
-        public CreateDBForm(IItemImporter importer):this()
+        private JIRAImportControl mImportControl;
+        public CreateDBForm(JIRAImportControl importControl):this()
         {
-            mImporter = importer;
+            mImportControl = importControl;
+            mJIRAImportContainer.Controls.Add(mImportControl);
+            mImportControl.Dock = DockStyle.Fill;
         }
         public CreateDBForm()
         {
@@ -547,10 +550,7 @@ namespace CreatLocalDataBase
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            mImporter.Import(@"z:\temp\JIRA.xml", "3.1", "客户", "导入中心", 1);
-        }
+       
 
     }
 }

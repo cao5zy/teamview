@@ -7,7 +7,7 @@ using BugInfoManagement.DaoImpl;
 using BugInfoManagement.Dao;
 using BugInfo.Common.Logs;
 using BugInfo.Common;
-using CreatLocalDataBase;
+using IniTeamView;
 
 namespace BugInfoManagement
 {
@@ -34,7 +34,7 @@ namespace BugInfoManagement
             builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterModule<AssignPointsControlModule>();
             builder.RegisterType<JIRAImporter>().As<IItemImporter>();
-            builder.RegisterType<CreateDBForm>();
+            builder.RegisterModule<IniDbModule>();
             builder.RegisterModule<LogsModule>();
 
             mContainer = builder.Build();

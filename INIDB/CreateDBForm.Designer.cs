@@ -1,4 +1,4 @@
-﻿namespace CreatLocalDataBase
+﻿namespace IniTeamView
 {
     partial class CreateDBForm
     {
@@ -31,6 +31,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.SettingButton = new System.Windows.Forms.Button();
             this.CancelConnectButton = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
@@ -67,16 +68,19 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.mImportJIRA = new System.Windows.Forms.TabPage();
+            this.mJIRAImportContainer = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.mImportJIRA.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.mImportJIRA);
             this.tabControl1.Location = new System.Drawing.Point(-4, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -111,6 +115,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connet";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(302, 263);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "Import";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // SettingButton
             // 
@@ -473,15 +486,24 @@
             this.label15.TabIndex = 28;
             this.label15.Text = "DataBase name:";
             // 
-            // button1
+            // mImportJIRA
             // 
-            this.button1.Location = new System.Drawing.Point(302, 263);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Import";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.mImportJIRA.Controls.Add(this.mJIRAImportContainer);
+            this.mImportJIRA.Location = new System.Drawing.Point(4, 21);
+            this.mImportJIRA.Name = "mImportJIRA";
+            this.mImportJIRA.Padding = new System.Windows.Forms.Padding(3);
+            this.mImportJIRA.Size = new System.Drawing.Size(406, 286);
+            this.mImportJIRA.TabIndex = 2;
+            this.mImportJIRA.Text = "Import JIRA";
+            this.mImportJIRA.UseVisualStyleBackColor = true;
+            // 
+            // mJIRAImportContainer
+            // 
+            this.mJIRAImportContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mJIRAImportContainer.Location = new System.Drawing.Point(3, 3);
+            this.mJIRAImportContainer.Name = "mJIRAImportContainer";
+            this.mJIRAImportContainer.Size = new System.Drawing.Size(400, 280);
+            this.mJIRAImportContainer.TabIndex = 0;
             // 
             // CreateDBForm
             // 
@@ -496,6 +518,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.mImportJIRA.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -542,5 +565,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button SettingButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage mImportJIRA;
+        private System.Windows.Forms.Panel mJIRAImportContainer;
     }
 }

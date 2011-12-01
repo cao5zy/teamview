@@ -74,8 +74,7 @@ namespace BugInfoManagement.Test
             importer.Import(@"z:\temp\SearchRequest-27118.xml",
                 "3.1",
                 "客户",
-                "导入中心",
-                1);
+                "导入中心");
         }
     }
 }

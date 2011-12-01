@@ -49,21 +49,21 @@
             // 
             // mDescriptionTextBox
             // 
-            this.mDescriptionTextBox.Location = new System.Drawing.Point(520, 26);
+            this.mDescriptionTextBox.Location = new System.Drawing.Point(446, 26);
             this.mDescriptionTextBox.Name = "mDescriptionTextBox";
-            this.mDescriptionTextBox.Size = new System.Drawing.Size(158, 21);
+            this.mDescriptionTextBox.Size = new System.Drawing.Size(124, 21);
             this.mDescriptionTextBox.TabIndex = 35;
             // 
             // mVersionTextBox
             // 
-            this.mVersionTextBox.Location = new System.Drawing.Point(305, 69);
+            this.mVersionTextBox.Location = new System.Drawing.Point(254, 69);
             this.mVersionTextBox.Name = "mVersionTextBox";
             this.mVersionTextBox.Size = new System.Drawing.Size(100, 21);
             this.mVersionTextBox.TabIndex = 33;
             // 
             // mBugNumTextBox
             // 
-            this.mBugNumTextBox.Location = new System.Drawing.Point(305, 26);
+            this.mBugNumTextBox.Location = new System.Drawing.Point(254, 26);
             this.mBugNumTextBox.Name = "mBugNumTextBox";
             this.mBugNumTextBox.Size = new System.Drawing.Size(100, 21);
             this.mBugNumTextBox.TabIndex = 32;
@@ -71,7 +71,7 @@
             // mVersionNumber
             // 
             this.mVersionNumber.AutoSize = true;
-            this.mVersionNumber.Location = new System.Drawing.Point(243, 72);
+            this.mVersionNumber.Location = new System.Drawing.Point(192, 72);
             this.mVersionNumber.Name = "mVersionNumber";
             this.mVersionNumber.Size = new System.Drawing.Size(53, 12);
             this.mVersionNumber.TabIndex = 31;
@@ -80,7 +80,7 @@
             // mBugNumberLabel
             // 
             this.mBugNumberLabel.AutoSize = true;
-            this.mBugNumberLabel.Location = new System.Drawing.Point(243, 27);
+            this.mBugNumberLabel.Location = new System.Drawing.Point(192, 27);
             this.mBugNumberLabel.Name = "mBugNumberLabel";
             this.mBugNumberLabel.Size = new System.Drawing.Size(53, 12);
             this.mBugNumberLabel.TabIndex = 30;
@@ -101,7 +101,7 @@
             this.mBugStatesComboBox.DisplayMember = "StateInfo";
             this.mBugStatesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mBugStatesComboBox.FormattingEnabled = true;
-            this.mBugStatesComboBox.Location = new System.Drawing.Point(520, 70);
+            this.mBugStatesComboBox.Location = new System.Drawing.Point(446, 70);
             this.mBugStatesComboBox.Name = "mBugStatesComboBox";
             this.mBugStatesComboBox.Size = new System.Drawing.Size(124, 20);
             this.mBugStatesComboBox.TabIndex = 29;
@@ -110,7 +110,7 @@
             // mStateLabel
             // 
             this.mStateLabel.AutoSize = true;
-            this.mStateLabel.Location = new System.Drawing.Point(448, 73);
+            this.mStateLabel.Location = new System.Drawing.Point(374, 73);
             this.mStateLabel.Name = "mStateLabel";
             this.mStateLabel.Size = new System.Drawing.Size(41, 12);
             this.mStateLabel.TabIndex = 28;
@@ -143,7 +143,7 @@
             this.mQueryGroupBox.Controls.Add(this.mQueryButton);
             this.mQueryGroupBox.Location = new System.Drawing.Point(3, 3);
             this.mQueryGroupBox.Name = "mQueryGroupBox";
-            this.mQueryGroupBox.Size = new System.Drawing.Size(829, 117);
+            this.mQueryGroupBox.Size = new System.Drawing.Size(698, 117);
             this.mQueryGroupBox.TabIndex = 31;
             this.mQueryGroupBox.TabStop = false;
             this.mQueryGroupBox.Text = "Query Condition";
@@ -158,7 +158,7 @@
             "2",
             "3",
             "4"});
-            this.mPriorityCombo.Location = new System.Drawing.Point(777, 27);
+            this.mPriorityCombo.Location = new System.Drawing.Point(645, 27);
             this.mPriorityCombo.Name = "mPriorityCombo";
             this.mPriorityCombo.Size = new System.Drawing.Size(42, 20);
             this.mPriorityCombo.TabIndex = 38;
@@ -166,7 +166,7 @@
             // mPriorityLabel
             // 
             this.mPriorityLabel.AutoSize = true;
-            this.mPriorityLabel.Location = new System.Drawing.Point(712, 29);
+            this.mPriorityLabel.Location = new System.Drawing.Point(580, 29);
             this.mPriorityLabel.Name = "mPriorityLabel";
             this.mPriorityLabel.Size = new System.Drawing.Size(59, 12);
             this.mPriorityLabel.TabIndex = 37;
@@ -177,13 +177,13 @@
             this.mProgrammerCheckList.FormattingEnabled = true;
             this.mProgrammerCheckList.Location = new System.Drawing.Point(76, 26);
             this.mProgrammerCheckList.Name = "mProgrammerCheckList";
-            this.mProgrammerCheckList.Size = new System.Drawing.Size(151, 68);
+            this.mProgrammerCheckList.Size = new System.Drawing.Size(103, 68);
             this.mProgrammerCheckList.TabIndex = 36;
             // 
             // mDescriptionLabel
             // 
             this.mDescriptionLabel.AutoSize = true;
-            this.mDescriptionLabel.Location = new System.Drawing.Point(448, 30);
+            this.mDescriptionLabel.Location = new System.Drawing.Point(374, 30);
             this.mDescriptionLabel.Name = "mDescriptionLabel";
             this.mDescriptionLabel.Size = new System.Drawing.Size(77, 12);
             this.mDescriptionLabel.TabIndex = 34;
@@ -191,9 +191,9 @@
             // 
             // mQueryButton
             // 
-            this.mQueryButton.Location = new System.Drawing.Point(744, 73);
+            this.mQueryButton.Location = new System.Drawing.Point(612, 69);
             this.mQueryButton.Name = "mQueryButton";
-            this.mQueryButton.Size = new System.Drawing.Size(75, 29);
+            this.mQueryButton.Size = new System.Drawing.Size(75, 21);
             this.mQueryButton.TabIndex = 19;
             this.mQueryButton.Text = "Query";
             this.mQueryButton.UseVisualStyleBackColor = true;
@@ -217,7 +217,7 @@
             this.Controls.Add(this.mQueryGroupBox);
             this.Controls.Add(this.label5);
             this.Name = "QueryControl";
-            this.Size = new System.Drawing.Size(835, 122);
+            this.Size = new System.Drawing.Size(705, 122);
             this.mQueryGroupBox.ResumeLayout(false);
             this.mQueryGroupBox.PerformLayout();
             this.ResumeLayout(false);

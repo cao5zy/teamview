@@ -8,8 +8,8 @@
     <ProjectGuid>{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CreatLocalDataBase</RootNamespace>
-    <AssemblyName>CreatLocalDataBase</AssemblyName>
+    <RootNamespace>IniTeamView</RootNamespace>
+    <AssemblyName>IniTeamView</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -55,10 +59,20 @@
     <Compile Include="CreateDBForm.Designer.cs">
       <DependentUpon>CreateDBForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IniDbModule.cs" />
+    <Compile Include="UserControls\JIRAImportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\JIRAImportControl.Designer.cs">
+      <DependentUpon>JIRAImportControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateDBForm.resx">
       <DependentUpon>CreateDBForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\JIRAImportControl.resx">
+      <DependentUpon>JIRAImportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,11 +102,15 @@
     <Compile Include="Setting.Designer.cs">
       <DependentUpon>Setting.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\JIRAImportController.cs" />
+    <Compile Include="UserControls\JIRAImportModel.cs" />
+    <Compile Include="UserControls\JIRAImportModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\additem.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\IniTeamView.UserControls.JIRAImportModel.datasource" />
     <None Include="Resources\reduceitem.ico" />
   </ItemGroup>
   <ItemGroup>

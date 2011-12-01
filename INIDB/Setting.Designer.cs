@@ -1,4 +1,4 @@
-﻿namespace CreatLocalDataBase
+﻿namespace IniTeamView
 {
     partial class Setting
     {
@@ -102,7 +102,7 @@
             // AddMemberButton
             // 
             this.AddMemberButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddMemberButton.Image = global::CreatLocalDataBase.Properties.Resources.additem;
+            this.AddMemberButton.Image = global::IniTeamView.Properties.Resources.additem;
             this.AddMemberButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AddMemberButton.Name = "AddMemberButton";
             this.AddMemberButton.Size = new System.Drawing.Size(23, 22);
@@ -112,7 +112,7 @@
             // DeleteMemberButton
             // 
             this.DeleteMemberButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DeleteMemberButton.Image = global::CreatLocalDataBase.Properties.Resources.reduceitem;
+            this.DeleteMemberButton.Image = global::IniTeamView.Properties.Resources.reduceitem;
             this.DeleteMemberButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DeleteMemberButton.Name = "DeleteMemberButton";
             this.DeleteMemberButton.Size = new System.Drawing.Size(23, 22);

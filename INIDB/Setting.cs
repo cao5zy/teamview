@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Resources;
 using System.Collections;
 
-namespace CreatLocalDataBase
+namespace IniTeamView
 {
     public partial class Setting : Form
     {
