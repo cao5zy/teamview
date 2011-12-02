@@ -22,7 +22,6 @@ namespace IniTeamView.UserControls
         public void Import(JIRAImportModel model)
         {
             mItemImporter.Import(model.ImportFile,
-                model.Version,
                 model.Reporter,
                 model.Handler);
         }

@@ -31,8 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.mImportfilePathTextBox = new System.Windows.Forms.TextBox();
-            this.mVersionTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.mBindingModel = new System.Windows.Forms.BindingSource(this.components);
             this.mReporterTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.mHandlerTextBox = new System.Windows.Forms.TextBox();
@@ -40,7 +39,6 @@
             this.mOpenFileButton = new System.Windows.Forms.Button();
             this.mImportButton = new System.Windows.Forms.Button();
             this.mImportedListBox = new System.Windows.Forms.TextBox();
-            this.mBindingModel = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mBindingModel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,27 +59,14 @@
             this.mImportfilePathTextBox.Size = new System.Drawing.Size(205, 21);
             this.mImportfilePathTextBox.TabIndex = 1;
             // 
-            // mVersionTextBox
+            // mBindingModel
             // 
-            this.mVersionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mBindingModel, "Version", true));
-            this.mVersionTextBox.Location = new System.Drawing.Point(88, 48);
-            this.mVersionTextBox.Name = "mVersionTextBox";
-            this.mVersionTextBox.Size = new System.Drawing.Size(100, 21);
-            this.mVersionTextBox.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Version";
+            this.mBindingModel.DataSource = typeof(IniTeamView.UserControls.JIRAImportModel);
             // 
             // mReporterTextBox
             // 
             this.mReporterTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mBindingModel, "Reporter", true));
-            this.mReporterTextBox.Location = new System.Drawing.Point(88, 75);
+            this.mReporterTextBox.Location = new System.Drawing.Point(88, 48);
             this.mReporterTextBox.Name = "mReporterTextBox";
             this.mReporterTextBox.Size = new System.Drawing.Size(100, 21);
             this.mReporterTextBox.TabIndex = 5;
@@ -89,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 78);
+            this.label3.Location = new System.Drawing.Point(21, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 4;
@@ -98,7 +83,7 @@
             // mHandlerTextBox
             // 
             this.mHandlerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mBindingModel, "Handler", true));
-            this.mHandlerTextBox.Location = new System.Drawing.Point(88, 102);
+            this.mHandlerTextBox.Location = new System.Drawing.Point(88, 75);
             this.mHandlerTextBox.Name = "mHandlerTextBox";
             this.mHandlerTextBox.Size = new System.Drawing.Size(100, 21);
             this.mHandlerTextBox.TabIndex = 7;
@@ -106,7 +91,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 105);
+            this.label4.Location = new System.Drawing.Point(27, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 12);
             this.label4.TabIndex = 6;
@@ -134,17 +119,13 @@
             // 
             // mImportedListBox
             // 
-            this.mImportedListBox.Location = new System.Drawing.Point(88, 129);
+            this.mImportedListBox.Location = new System.Drawing.Point(88, 102);
             this.mImportedListBox.Multiline = true;
             this.mImportedListBox.Name = "mImportedListBox";
             this.mImportedListBox.ReadOnly = true;
             this.mImportedListBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mImportedListBox.Size = new System.Drawing.Size(100, 61);
+            this.mImportedListBox.Size = new System.Drawing.Size(100, 88);
             this.mImportedListBox.TabIndex = 12;
-            // 
-            // mBindingModel
-            // 
-            this.mBindingModel.DataSource = typeof(IniTeamView.UserControls.JIRAImportModel);
             // 
             // JIRAImportControl
             // 
@@ -157,8 +138,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.mReporterTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.mVersionTextBox);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.mImportfilePathTextBox);
             this.Controls.Add(this.label1);
             this.Name = "JIRAImportControl";
@@ -174,8 +153,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox mImportfilePathTextBox;
-        private System.Windows.Forms.TextBox mVersionTextBox;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox mReporterTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox mHandlerTextBox;

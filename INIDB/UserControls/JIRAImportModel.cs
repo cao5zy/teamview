@@ -9,8 +9,6 @@ namespace IniTeamView.UserControls
     {
         public string ImportFile { get; set; }
 
-        public string Version { get; set; }
-
         public string Reporter { get; set; }
 
         public string Handler { get; set; }

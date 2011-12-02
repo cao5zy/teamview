@@ -6,6 +6,7 @@ using System.Xml;
 using BugInfoManagement.Entity;
 using BugInfoManagement.Common;
 using BugInfoManagement.Dao;
+using System.Text.RegularExpressions;
 
 namespace BugInfo.Common
 {
@@ -14,11 +15,12 @@ namespace BugInfo.Common
         #region IItemImporter Members
         private IBugInfoManagement mBugInfoManagement;
         private List<string> mImportedList = new List<string>();
+        private static Regex versionRegex = new Regex(@"\((\d(.\d)?)\)");
         public JIRAImporter(IBugInfoManagement bugInfoManagement)
         {
             mBugInfoManagement = bugInfoManagement;
         }
-        public void Import(string xmlFileName, string version, string reporter, string iniDealMan)
+        public void Import(string xmlFileName,string reporter, string iniDealMan)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(xmlFileName);
@@ -39,7 +41,7 @@ namespace BugInfo.Common
                         Size = 0,
                         TimeStamp = DateTime.Now,
                         BugStatus = States.Pending,
-                        Version = version,
+                        Version = GetVersionNumber(GetSubElementInnerText(n, "fixVersion")),
                     }
                     );
             }
@@ -56,6 +58,16 @@ namespace BugInfo.Common
                     { }
                 }
                 );
+        }
+
+
+        private string GetVersionNumber(string versionStr)
+        {
+            var match = versionRegex.Match(versionStr);
+            if (match.Success)
+                return match.Groups[1].Value;
+            else
+                return versionStr;
         }
 
         private static string GetSubElementInnerText(XmlElement element, string subElementName)
