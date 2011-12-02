@@ -15,6 +15,7 @@ using System.Xml;
 using System.Configuration;
 using BugInfo.Common;
 using IniTeamView.UserControls;
+using CreatLocalDataBase;
 
 namespace IniTeamView
 {
@@ -517,8 +518,13 @@ namespace IniTeamView
 
         private void SettingButton_Click(object sender, EventArgs e)
         {
-            DbName = DBNameComboBox.Text;
-            new Setting().Show();
+            if (DBNameComboBox.Text == "")
+                MessageBox.Show("Please choese or enter a Database.");
+            else
+            {
+                StaticClass.DBName = DBNameComboBox.Text;
+                new Setting().Show();
+            }
         }
 
         private void DBNameComboBox_SelectedIndexChanged(object sender, EventArgs e)

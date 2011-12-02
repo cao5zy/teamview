@@ -60,6 +60,7 @@
       <DependentUpon>CreateDBForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IniDbModule.cs" />
+    <Compile Include="StaticClass.cs" />
     <Compile Include="UserControls\JIRAImportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +119,15 @@
       <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
       <Name>BugInfo.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BindingOperation.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

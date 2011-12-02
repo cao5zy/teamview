@@ -17,8 +17,7 @@ namespace IniTeamView
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new CreateDBForm());
-            Application.Run(new Setting());
+            Application.Run(new CreateDBForm());
         }
     }
 }

@@ -67,9 +67,30 @@ namespace IniTeamView.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap BindingOperation {
+            get {
+                object obj = ResourceManager.GetObject("BindingOperation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Quit {
+            get {
+                object obj = ResourceManager.GetObject("Quit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap reduceitem {
             get {
                 object obj = ResourceManager.GetObject("reduceitem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Save {
+            get {
+                object obj = ResourceManager.GetObject("Save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

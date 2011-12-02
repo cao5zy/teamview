@@ -17,6 +17,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugManagementReport", "BugM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INIDB", "INIDB\INIDB.csproj", "{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Report", "Report\", "{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/Report"
+		Debug.AspNetCompiler.PhysicalPath = "Report\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Report\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Report"
+		Release.AspNetCompiler.PhysicalPath = "Report\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Report\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2976"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BugInfoManagement.vsmdi
@@ -46,6 +66,10 @@ Global
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

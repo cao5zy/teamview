@@ -11,63 +11,47 @@ using System.Xml;
 using System.Configuration;
 using System.Resources;
 using System.Collections;
+using CreatLocalDataBase;
 
 namespace IniTeamView
 {
     public partial class Setting : Form
     {
-        private int locationOfFirstMember=0;
-        private string firstMember="";
+        private string DbName = StaticClass.DBName;
+        private int locationOfFirstMember = -1;
+        private string firstMember = "";
+        private bool saved = true;
         public Setting()
         {
             InitializeComponent();
-            this.MemberListBox.Items.Clear();
-            if (File.Exists(Application.StartupPath + @"\" + CreateDBForm.DbName + "MemberRecord.resx"))
+            if (File.Exists(Application.StartupPath + @"\" + DbName + "MemberRecord.resx"))
             {
-                using (ResXResourceReader resr = new ResXResourceReader(CreateDBForm.DbName + @"MemberRecord.resx"))
+                using (ResXResourceReader resr = new ResXResourceReader(DbName + @"MemberRecord.resx"))
                 {
+                    List<string> MemberArray = new List<string>();
                     string MemberString = "";
-                    string[] MemberArray = new string[2];
-                    int i = 0;
                     foreach (DictionaryEntry d in resr)
                     {
-                        MemberArray[i] = d.Value as string;
-                        i++;
+                        MemberArray.Add(d.Value as string);
                     }
                     MemberString = MemberArray[0];
                     firstMember = MemberArray[1];
-                    this.MemberListBox.Items.AddRange(MemberString.Split(','));
-                }
-            }
-            else
-            {
-                this.MemberListBox.Items.Add("");
-            }
-            locationOfFirstMember = this.MemberListBox.Items.IndexOf(firstMember);
-            this.MemberListBox.Items.RemoveAt(locationOfFirstMember);
-            this.MemberListBox.Items.Insert(locationOfFirstMember, firstMember + "*");
-        }
-            
-        private string[] ChangeStringToArray(string s)
-        {
-            return s.Split(',');
-        }
-
-        private string GetMember()
-        {
-            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
-            {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-                foreach (XmlElement element in xmlDoc.DocumentElement)
-                {
-                    if (element.Name == "DealManConfig")
+                    if (!(MemberString == ""))
                     {
-                        return element.GetAttribute("DealMen");
+                        string[] MemberList = MemberString.Split(',');
+                        for (int j = 0; j < MemberList.Length; j++)
+                        {
+                            if (MemberList[j] == firstMember)
+                            {
+                                this.MemberGridView.Rows.Add(MemberList[j] + "*");
+                                locationOfFirstMember = j;
+                            }
+                            else
+                                this.MemberGridView.Rows.Add(MemberList[j]);
+                        }
                     }
                 }
             }
-            return "";
         }
 
         private void SetMember(string Member)
@@ -123,71 +107,126 @@ namespace IniTeamView
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void SaveSetting()
         {
-            MemberListBox.Items.RemoveAt(locationOfFirstMember);
-            MemberListBox.Items.Insert(locationOfFirstMember, firstMember);
-            string MemberString = MemberListBox.Items[0].ToString();
-            for (int i = 1; i < MemberListBox.Items.Count; i++)
+            string MemberString = "";
+            if (MemberGridView.Rows.Count == 1)
             {
-                MemberString += "," + MemberListBox.Items[i].ToString();
+                MemberString = firstMember;
+            }
+            if (MemberGridView.Rows.Count > 1)
+            {
+                MemberString = MemberGridView[0, 0].Value as string;
+                if (locationOfFirstMember == 0)
+                    MemberString = firstMember;
+                for (int i = 1; i < MemberGridView.Rows.Count; i++)
+                {
+                    if (locationOfFirstMember == i)
+                        MemberString += "," + firstMember;
+                    else
+                        MemberString += "," + (MemberGridView[0, i].Value as string);
+                }
             }
             SetFirstMember(firstMember);
             SetMember(MemberString);
-            using (ResXResourceWriter resx = new ResXResourceWriter(CreateDBForm.DbName+@"MemberRecord.resx"))
+            using (ResXResourceWriter resx = new ResXResourceWriter(DbName + @"MemberRecord.resx"))
             {
-                resx.AddResource("MemberString",MemberString);
+                resx.AddResource("MemberString", MemberString);
                 resx.AddResource("firstMember", firstMember);
             }
-            base.OnClosing(e);
+        }
+
+        private bool hasMember(string member)
+        {
+            bool result = false;
+            int RowCount = this.MemberGridView.Rows.Count;
+            for (int i = 0; i < RowCount; i++)
+            {
+                if (this.MemberGridView[0, i].Value as string == member || this.MemberGridView[0, i].Value as string == (member + "*"))
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
         private void AddMemberButton_Click(object sender, EventArgs e)
         {
-            if (MemberListBox.Items.IndexOf(MemberTextBox.Text) < 0 && MemberListBox.Items.IndexOf(MemberTextBox.Text + "*") < 0)
+            if (!(MemberTextBox.Text == ""))
             {
-                MemberListBox.Items.Add(MemberTextBox.Text);
+                if (!hasMember(MemberTextBox.Text))
+                {
+                    if (locationOfFirstMember == -1)
+                    {
+                        locationOfFirstMember++;
+                        firstMember = this.MemberTextBox.Text;
+                        this.MemberGridView.Rows.Add(firstMember + "*");
+                    }
+                    else
+                        this.MemberGridView.Rows.Add(this.MemberTextBox.Text);
+                    saved = false;
+                }
+                else
+                    MessageBox.Show("The member already exists.");
                 MemberTextBox.Text = "";
-                locationOfFirstMember = MemberListBox.Items.IndexOf(firstMember + "*");
             }
-            else
-                MessageBox.Show("The name "+MemberTextBox.Text+" already exists.");
-        }
-
-        private void MemberListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MemberTextBox.Text = MemberListBox.Text;
         }
 
         private void DeleteMemberButton_Click(object sender, EventArgs e)
         {
-            if (MemberListBox.Items.IndexOf(MemberTextBox.Text) > 0)
+            if (this.MemberGridView.Rows.Count > 1)
             {
-                if (MemberTextBox.Text == firstMember + "*")
+                if (MemberGridView.CurrentRow.Index == locationOfFirstMember)
+                    MessageBox.Show("Cann't not delete the first query member.");
+                else
                 {
-                    firstMember = "";
-                    locationOfFirstMember = MemberListBox.Items.IndexOf(firstMember);
-                    MemberListBox.Items.RemoveAt(locationOfFirstMember);
-                    MemberListBox.Items.Insert(locationOfFirstMember, firstMember + "*");
+                    if (this.MemberGridView.CurrentRow.Index < locationOfFirstMember)
+                        locationOfFirstMember--;
+                    this.MemberGridView.Rows.Remove(MemberGridView.CurrentRow);
+                    saved = false;
                 }
-                MemberListBox.Items.Remove(MemberTextBox.Text);
-                locationOfFirstMember = MemberListBox.Items.IndexOf(firstMember + "*");
             }
-            else
-                MessageBox.Show("Please choese one correct member to delete.");
+            else if (this.MemberGridView.Rows.Count == 1)
+            {
+                locationOfFirstMember--;
+                this.MemberGridView.Rows.Remove(MemberGridView.CurrentRow);
+                saved = false;
+            }
+
         }
 
         private void SetFirstMemberButton_Click(object sender, EventArgs e)
         {
-            if (MemberTextBox.Text != "")
+            if (locationOfFirstMember >= 0)
             {
-                MemberListBox.Items.RemoveAt(locationOfFirstMember);
-                MemberListBox.Items.Insert(locationOfFirstMember, firstMember);
-                firstMember = MemberTextBox.Text;
-                locationOfFirstMember = MemberListBox.Items.IndexOf(firstMember);
-                MemberListBox.Items.RemoveAt(locationOfFirstMember);
-                MemberListBox.Items.Insert(locationOfFirstMember, firstMember + "*");
+                saved = false;
+                if (firstMember == "")
+                    firstMember = this.MemberGridView.CurrentCell.Value as string;
+                this.MemberGridView[0, locationOfFirstMember].Value = firstMember;
+                firstMember = this.MemberGridView.CurrentCell.Value as string;
+                this.MemberGridView.CurrentCell.Value = firstMember + "*";
+                locationOfFirstMember = this.MemberGridView.CurrentRow.Index;
             }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            SaveSetting();
+            saved = true;
+        }
+
+        private void QuitButton_Click(object sender, EventArgs e)
+        {
+            if (!saved)
+            {
+                if (MessageBox.Show("The settings has been changed, do you want to save this?", "Confirm Message", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    SaveSetting();
+                    saved = true;
+                }
+            }
+            this.Close();
         }
     }
 }
