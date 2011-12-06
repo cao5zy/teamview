@@ -98,6 +98,7 @@
     <Compile Include="Logs\LogRecord.cs" />
     <Compile Include="Logs\LogsModule.cs" />
     <Compile Include="Logs\PointsLogReader.cs" />
+    <Compile Include="LogTypeEnum.cs" />
     <Compile Include="PointsParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States.cs" />

@@ -11,6 +11,7 @@ using BugInfoManagement.Common;
 using System.Transactions;
 using System.IO.Compression;
 using FxLib.Algorithms;
+using BugInfo.Common;
 
 namespace BugInfoManagement
 {
@@ -54,7 +55,7 @@ namespace BugInfoManagement
 
             if (mOriginalBugInfo != null)
             {
-                if (mOriginalBugInfo.DealMan == mBugInfo.DealMan 
+                if (mOriginalBugInfo.DealMan == mBugInfo.DealMan
                     && mBugInfo.BugStatus != this.BugInfoManagement.QueryByBugNum(mBugInfo.BugNum).BugStatus)
                 {
                     StateSequence stateSequence = new StateSequence(mOriginalBugInfo.BugStatus);
@@ -143,6 +144,13 @@ namespace BugInfoManagement
                         }
                     }
 
+                    if (mBugInfo.DealMan == "提交中心"
+                           && mBugInfo.DealMan != mOriginalBugInfo.DealMan
+                           && mBugInfo.BugStatus == States.Complete)
+                    {
+                        LogSubmit();
+                    }
+
                     AutoChangeStatus(BugInfoManagement);
 
                     if (!Validate(BugInfoManagement))
@@ -159,6 +167,7 @@ namespace BugInfoManagement
                     if (mOriginalBugInfo != null)
                     {
                         SetChangeLog(BugInfoManagement);
+                       
                         if (SaveCore(BugInfoManagement))
                         {
                             transState = true;
@@ -204,6 +213,13 @@ namespace BugInfoManagement
                 }
             }
             return false;
+        }
+
+        private void LogSubmit()
+        {
+            BugInfoManagement.AddLog(mBugInfo.BugNum,
+                mOriginalBugInfo.DealMan,
+                (int)LogTypeEnum.Submit);
         }
 
         private void AutoChangeStatus(IBugInfoManagement bugInfoManagement)

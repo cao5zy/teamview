@@ -11,7 +11,9 @@ namespace BugInfo.Common.Logs
         public IEnumerable<string> GetLogList(string bugNum)
         {
             return new DAL.ChangeLogCollection()
-                .Where("bugnum", bugNum).Load()
+                .Where("bugnum", bugNum)
+                .Where("LogTypeId", (int)LogTypeEnum.None)
+                .Load()
                 .Select(n => string.Format("BugNum:{0};Time:{1};{2}", n.BugNum, n.CreateDate, n.Description))
                 .ToArray();
         }

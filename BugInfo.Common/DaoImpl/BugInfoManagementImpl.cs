@@ -416,5 +416,18 @@ where CreateDate >= @start and CreateDate <= @end");
             };
         }
 
+        public void AddLog(string bugNum, string dealMan, int logType)
+        {
+            DAL.ChangeLog changelog = new DAL.ChangeLog();
+            changelog.BugNum = bugNum;
+            changelog.Description = dealMan;
+            changelog.LogTypeID = logType;
+            changelog.CreateDate = DateTime.Now;
+
+            changelog.Save();
+        }
+
+
+        
     }
 }

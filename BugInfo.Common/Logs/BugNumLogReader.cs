@@ -9,7 +9,10 @@ namespace BugInfo.Common.Logs
     {
         public IEnumerable<string> SearchBugNumByDateRange(DateTime start, DateTime end)
         {
-            DAL.ChangeLogCollection coll = new DAL.ChangeLogCollection();
+            var query = DAL.ChangeLog.CreateQuery();
+            query.Columns.RemoveAll(n => n.ColumnName != "bugnum");
+            query = query.DISTINCT();
+            
             SubSonic.Where w = new SubSonic.Where();
             w.ColumnName = "CreateDate";
             w.Comparison = SubSonic.Comparison.GreaterOrEquals;
@@ -24,13 +27,17 @@ namespace BugInfo.Common.Logs
                 ParameterValue = end
             };
 
+            using (var reader = query.AddWhere(w).AddWhere(w1).ExecuteReader())
+            {
 
-            return coll.Where(w)
-                .Where(w1)
-                .Load()
-                .Select(n => n.BugNum)
-                .Distinct()
-                .ToArray();
+                List<string> bugNumList = new List<string>();
+                while (reader.Read())
+                {
+                    bugNumList.Add(reader[0].ToString());
+                }
+
+                return bugNumList;
+            }
         }
     }
 }

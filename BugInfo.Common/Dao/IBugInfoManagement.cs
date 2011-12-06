@@ -39,6 +39,8 @@ namespace BugInfoManagement.Dao
 
         void AddLog(string bugNum, string Log);
 
+        void AddLog(string bugNum, string dealMan, int logType);
+
         void AssignPoints(string bugNum, string log);
 
         bool TryToUpdate(string bugNum, DateTime timeStamp, out DateTime newtimeStamp);
