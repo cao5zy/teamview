@@ -20,6 +20,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Report", "Report\", "{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
+		ProjectReferences = "{FEAF2643-28D3-4654-AB54-D6E644462DDA}|BugInfoManagement.Test.dll;{132CA63C-85AB-4E7A-89B3-EE60F213EE72}|BugInfo.Common.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Report"
 		Debug.AspNetCompiler.PhysicalPath = "Report\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Report\"

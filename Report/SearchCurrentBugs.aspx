@@ -25,11 +25,22 @@
               <div>
                 <asp:Label ID="StartDateLabel" runat="server" Text="Start Date:"></asp:Label>
                   &nbsp;
-                <asp:TextBox ID="StartDateTextBox" runat="server" Width="144px"></asp:TextBox>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="StartDateTextBox" runat="server" Width="144px" ></asp:TextBox>
+                  <asp:ImageButton ID="CalendarImageButton" runat="server" BorderStyle="None" 
+                      Height="16px" Width="16px" ImageUrl="~/Calendar.jpg" 
+                      onclick="CalendarImageButton_Click" />
+                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <asp:Calendar ID="Calendar1" runat="server" 
+                      onselectionchanged="Calendar1_SelectionChanged">
+                      </asp:Calendar>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:Label ID="EndDateLabel" runat="server" Text="End Date:"></asp:Label>
                   &nbsp;
                 <asp:TextBox ID="EndDateTextBox" runat="server" Width="144px"></asp:TextBox>
+                  <asp:ImageButton ID="CalendarImageButtonOne" runat="server" 
+                      ImageUrl="~/Calendar.jpg" onclick="CalendarImageButtonOne_Click" />
+                  <asp:Calendar ID="Calendar2" runat="server" 
+                      onselectionchanged="Calendar2_SelectionChanged"></asp:Calendar>
               </div>
               
               <div>
@@ -52,7 +63,8 @@
                 <asp:TextBox ID="PriorityTextBox" runat="server" Width="144px"></asp:TextBox>
               </div>
               
-              <asp:Button ID="SearchButton" runat="server" Text="Search" />
+              <asp:Button ID="SearchButton" runat="server" Text="Search" 
+                  onclick="SearchButton_Click" />
           </asp:Panel>
           <br />
           <div style="text-align:left;">
@@ -69,17 +81,16 @@
           </asp:Panel>
           
           <br />
+          
           <div style="text-align:left;">
             <asp:Button ID="DetailButton" runat="server" Text="Detail" 
                   onclick="DetailButton_Click"/>
           </div>
           <asp:Panel ID="Panel2" runat="server" BorderStyle="Groove" 
-                HorizontalAlign="Left">
-            <div>
-              
+                HorizontalAlign="Left" Visible="False">
+            <div>  
                 <asp:TextBox ID="TextBox1" runat="server"
                     TextMode="MultiLine" Width="100%" Height="100px"></asp:TextBox>
-              
             </div>
           </asp:Panel>
           
