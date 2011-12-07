@@ -56,5 +56,7 @@ namespace BugInfoManagement.Entity
         public decimal TotalHours { get; set; }
 
         public string LevelHistroy { get; set; }
+
+        public int TimeConsumptionInMins { get; set; }
     }
 }

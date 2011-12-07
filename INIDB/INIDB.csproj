@@ -115,9 +115,9 @@
     <None Include="Resources\reduceitem.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BugInfo.Common\BugInfo.Common.csproj">
+    <ProjectReference Include="..\BugInfo.Common\TeamView.Common.csproj">
       <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
-      <Name>BugInfo.Common</Name>
+      <Name>TeamView.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

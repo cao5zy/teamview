@@ -14,6 +14,7 @@ using BugInfo.Common.Logs;
 using BugInfoManagement.Common;
 using System.Diagnostics;
 using FxLib.Algorithms;
+using BugInfo.Common;
 
 namespace BugInfoManagement.DaoImpl
 {
@@ -241,16 +242,16 @@ namespace BugInfoManagement.DaoImpl
         }
 
 
-        public List<BugInfoEntity> QueryByParameter(IEnumerable<string> programmers, 
-            string bugNum, 
-            string version, 
-            string description, 
-            int ? priority, 
+        public List<BugInfoEntity> QueryByParameter(IEnumerable<string> programmers,
+            string bugNum,
+            string version,
+            string description,
+            int? priority,
             string bugState)
         {
             SubSonic.Query query = DAL.BugInfo.CreateQuery();
             query.QueryType = SubSonic.QueryType.Select;
-            
+
             if (programmers.SafeCount() != 0)
                 query = query.WHERE(
                     DAL.BugInfo.Columns.DealMan, SubSonic.Comparison.In, programmers
@@ -267,12 +268,12 @@ namespace BugInfoManagement.DaoImpl
                 query = query.WHERE(
                     DAL.BugInfo.Columns.Description,
                      SubSonic.Comparison.Like,
-                     "%"+
-                     description+"%");
+                     "%" +
+                     description + "%");
             if (priority != null)
             {
                 query = query.WHERE(
-                    DAL.BugInfo.Columns.Priority, 
+                    DAL.BugInfo.Columns.Priority,
                     SubSonic.Comparison.LessOrEquals,
                     priority.Value);
             }
@@ -292,7 +293,8 @@ namespace BugInfoManagement.DaoImpl
             while (reader.Read())
             {
                 list.Add(
-                    new BugInfoEntity { 
+                    new BugInfoEntity
+                    {
                         BugNum = reader[DAL.BugInfo.Columns.BugNum].ToString(),
                         BugStatus = reader[DAL.BugInfo.Columns.BugStatus].ToString(),
                         CreatedBy = reader[DAL.BugInfo.Columns.CreatedMan].ToString(),
@@ -306,7 +308,46 @@ namespace BugInfoManagement.DaoImpl
                     );
             }
 
+            if (list.Count > 60)
+            {
+                list.ForEach(
+                    n=>n.TimeConsumptionInMins = CalculateDuration(n.BugNum,n.DealMan)
+                    );
+            }
+
             return list;
+        }
+
+        private int CalculateDuration(string bugNum, string dealMan)
+        {
+            DAL.ChangeLogCollection coll = new DAL.ChangeLogCollection();
+            var cols1 = coll.Where("bugnum", bugNum)
+                .Where("description", dealMan)
+                .Where("logtypeid", (int)LogTypeEnum.MissionStart)
+                .Load();
+
+            var cols2 = coll.Where("bugnum", bugNum)
+                .Where("description", dealMan)
+                .Where("logtypeid", (int)LogTypeEnum.MissionStop)
+                .Load();
+
+            List<DAL.ChangeLog> logList = new List<DAL.ChangeLog>();
+            logList.AddRange(cols1);
+            logList.AddRange(cols2);
+
+            logList.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
+
+            int mins = 0;
+            foreach (var log in logList)
+            { 
+                DateTime t = DateTime.MinValue;
+                if (log.LogTypeID == (int)LogTypeEnum.MissionStart)
+                    t = log.CreateDate;
+                else
+                    mins += (int)log.CreateDate.Subtract(t).TotalMinutes;
+            }
+
+            return mins;
         }
 
         public IEnumerable<string> SearchBugNumByDateRange(DateTime start, DateTime end)
@@ -426,8 +467,5 @@ where CreateDate >= @start and CreateDate <= @end");
 
             changelog.Save();
         }
-
-
-        
     }
 }

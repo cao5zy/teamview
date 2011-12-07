@@ -44,7 +44,5 @@ namespace BugInfoManagement.Dao
         void AssignPoints(string bugNum, string log);
 
         bool TryToUpdate(string bugNum, DateTime timeStamp, out DateTime newtimeStamp);
-
-
     }
 }

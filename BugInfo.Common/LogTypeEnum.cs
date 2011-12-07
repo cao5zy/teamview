@@ -9,6 +9,8 @@ namespace BugInfo.Common
     {
         None = 0,
         Submit = 1,
-        CodeFeedback = 2,
+        MissionStart = 2,
+        MissionStop = 3,
+        TimeConsumption = 4
     }
 }

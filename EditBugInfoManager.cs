@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Transactions;
 using BugInfoManagement.Entity;
 using System.IO.Compression;
+using BugInfo.Common;
 
 namespace BugInfoManagement
 {
@@ -117,6 +118,10 @@ namespace BugInfoManagement
 
                 if (bugStatus == StatesEnum.Start)
                 {
+                    BugInfoManagement.AddLog(mBugInfo.BugNum,
+                        mBugInfo.DealMan,
+                        (int)LogTypeEnum.MissionStart);
+
                     var otherProcessingItem = BugInfoManagement.QueryByProgrammerStatus(
                         mOriginalBugInfo.DealMan
                      , States.Start).SafeFind(n => n.BugNum != mBugInfo.BugNum);
@@ -128,10 +133,21 @@ namespace BugInfoManagement
                             otherProcessingItem.TimeStamp,
                             out newTimeStamp1))
                             return;
+
+                        BugInfoManagement.AddLog(otherProcessingItem.BugNum,
+                            otherProcessingItem.DealMan,
+                            (int)LogTypeEnum.MissionStop);
                         AddStatusChange(BugInfoManagement, otherProcessingItem.BugNum, States.Start, States.Abort);
                         otherProcessingItem.BugStatus = States.Abort;
                         BugInfoManagement.UpdateBugInfoByBugNum(otherProcessingItem);
                     }
+                }
+                else
+                {
+                    BugInfoManagement.AddLog(mBugInfo.BugNum,
+                        mBugInfo.DealMan,
+                        (int)LogTypeEnum.MissionStop);
+
                 }
 
                 AddStatusChange(BugInfoManagement, mBugInfo.BugNum, mBugInfo.BugStatus, StatesConverter.ToStateString(bugStatus));
