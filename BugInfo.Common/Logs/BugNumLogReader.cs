@@ -10,7 +10,7 @@ namespace BugInfo.Common.Logs
         public IEnumerable<string> SearchBugNumByDateRange(DateTime start, DateTime end)
         {
             var query = DAL.ChangeLog.CreateQuery();
-            query.Columns.RemoveAll(n => n.ColumnName != "bugnum");
+            query.SelectList = "bugnum";
             query = query.DISTINCT();
             
             SubSonic.Where w = new SubSonic.Where();
