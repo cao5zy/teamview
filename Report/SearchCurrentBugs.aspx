@@ -3,8 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title>Search Current Bugs</title>
+    <link rel="Stylesheet" href="Css/SearchCurrentBugs.css" type="text/css"/>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -27,7 +28,7 @@
                   &nbsp;
                 <asp:TextBox ID="StartDateTextBox" runat="server" Width="144px" ></asp:TextBox>
                   <asp:ImageButton ID="CalendarImageButton" runat="server" BorderStyle="None" 
-                      Height="16px" Width="16px" ImageUrl="~/Calendar.jpg" 
+                      Height="16px" Width="16px" ImageUrl="~/Picture/Calendar.jpg" 
                       onclick="CalendarImageButton_Click" />
                   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <asp:Calendar ID="Calendar1" runat="server" 
@@ -37,8 +38,8 @@
                 <asp:Label ID="EndDateLabel" runat="server" Text="End Date:"></asp:Label>
                   &nbsp;
                 <asp:TextBox ID="EndDateTextBox" runat="server" Width="144px"></asp:TextBox>
-                  <asp:ImageButton ID="CalendarImageButtonOne" runat="server" 
-                      ImageUrl="~/Calendar.jpg" onclick="CalendarImageButtonOne_Click" />
+                  <asp:ImageButton ID="CalendarImageButtonOne" runat="server" BorderStyle="None" 
+                      Height="16px" Width="16px" ImageUrl="~/Picture/Calendar.jpg" onclick="CalendarImageButtonOne_Click" />
                   <asp:Calendar ID="Calendar2" runat="server" 
                       onselectionchanged="Calendar2_SelectionChanged"></asp:Calendar>
               </div>
@@ -47,20 +48,19 @@
                 <asp:Label ID="VersionLabel" runat="server" Text="Version:"></asp:Label>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="VersionTextBox" runat="server" Width="144px"></asp:TextBox>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:Label ID="BugNumLabel" runat="server" Text="Bug Num:"></asp:Label>
                   &nbsp;
-                <asp:TextBox ID="BugNumTextBox" runat="server" Width="144px"></asp:TextBox>
+                <asp:TextBox ID="BugNumTextBox" runat="server"></asp:TextBox>
               </div>
               
               <div>
                 <asp:Label ID="BugStatusLabel" runat="server" Text="Bug Status:"></asp:Label>
                   &nbsp;
-                <asp:TextBox ID="BugStatusTextBox" runat="server" Width="144px"></asp:TextBox>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Label ID="PriorityLabel" runat="server" Text="Priority:"></asp:Label>
+                <asp:DropDownList ID="BugStatusList" runat="server" Width="146px"></asp:DropDownList>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;<asp:Label ID="PriorityLabel" runat="server" Text="Priority:"></asp:Label>
                   &nbsp;&nbsp; &nbsp;
-                <asp:TextBox ID="PriorityTextBox" runat="server" Width="144px"></asp:TextBox>
+                <asp:DropDownList ID="PriorityList" runat="server" Width="146px"></asp:DropDownList>
               </div>
               
               <asp:Button ID="SearchButton" runat="server" Text="Search" 

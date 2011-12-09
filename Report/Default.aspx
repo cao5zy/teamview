@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>MainPage</title>
+    <link rel="Stylesheet" href="Css/Ordinary.css" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
