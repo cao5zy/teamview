@@ -57,6 +57,7 @@
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).BeginInit();
@@ -109,7 +110,8 @@
             this.dealMan,
             this.description,
             this.Priority,
-            this.Size});
+            this.Size,
+            this.fired});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
             this.mBugInfoListDataGridView.DataMember = "BugInfoTable";
             this.mBugInfoListDataGridView.DataSource = this.mBugInfoSetBindingSource;
@@ -307,6 +309,13 @@
             this.Size.Name = "Size";
             this.Size.ReadOnly = true;
             // 
+            // fired
+            // 
+            this.fired.DataPropertyName = "fired";
+            this.fired.HeaderText = "fired";
+            this.fired.Name = "fired";
+            this.fired.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -361,5 +370,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fired;
     }
 }

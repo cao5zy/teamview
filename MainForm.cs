@@ -19,8 +19,6 @@ namespace BugInfoManagement
 {
     partial class MainForm : Form
     {
-        ListOrder lo = new ListOrder();
-
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
         public IBugInfoManagement BugInfoManagement { get; set; }
@@ -102,11 +100,12 @@ namespace BugInfoManagement
                     row.Version = n.Version;
                     row.size = n.Size;
                     row.Priority = n.Priority;
+                    row.fired = Math.Round((double)n.TimeConsumptionInMins / 60, 2);
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
                 }
                 );
 
-            SetQueryCount(mBugInfoListDataGridView.Rows.Count, results.Sum(b => b.Size));
+            ShowSummary(results.Count, results.Sum(n => n.Size), results.Sum(n => n.TimeConsumptionInMins / 60));
         }
 
 
@@ -157,9 +156,9 @@ namespace BugInfoManagement
             }
         }
 
-        private void SetQueryCount(int count, decimal totalHours)
+        private void ShowSummary(int count, decimal totalHours, decimal totalFired)
         {
-            //mQueryGroupBox.Text = string.Format("{0}:{1}-{2}:{3}", BugInfoManagement_Resource.TotalRecord, count, BugInfoManagement_Resource.TotalTime, totalHours);
+            this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() +"/estimated " + totalHours.ToString()+ " hours" + "/fired " + totalFired.ToString() + " hours";
         }
 
         private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)

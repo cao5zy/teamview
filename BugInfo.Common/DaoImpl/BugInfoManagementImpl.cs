@@ -308,25 +308,23 @@ namespace BugInfoManagement.DaoImpl
                     );
             }
 
-            if (list.Count > 60)
-            {
-                list.ForEach(
-                    n=>n.TimeConsumptionInMins = CalculateDuration(n.BugNum,n.DealMan)
-                    );
-            }
+
+            list.ForEach(
+                n => n.TimeConsumptionInMins = CalculateDuration(n.BugNum, n.DealMan)
+                );
+
 
             return list;
         }
 
         private int CalculateDuration(string bugNum, string dealMan)
         {
-            DAL.ChangeLogCollection coll = new DAL.ChangeLogCollection();
-            var cols1 = coll.Where("bugnum", bugNum)
+            var cols1 = new DAL.ChangeLogCollection().Where("bugnum", bugNum)
                 .Where("description", dealMan)
                 .Where("logtypeid", (int)LogTypeEnum.MissionStart)
                 .Load();
 
-            var cols2 = coll.Where("bugnum", bugNum)
+            var cols2 = new DAL.ChangeLogCollection().Where("bugnum", bugNum)
                 .Where("description", dealMan)
                 .Where("logtypeid", (int)LogTypeEnum.MissionStop)
                 .Load();
@@ -338,9 +336,9 @@ namespace BugInfoManagement.DaoImpl
             logList.Sort((x, y) => x.CreateDate.CompareTo(y.CreateDate));
 
             int mins = 0;
+            DateTime t = DateTime.MinValue;
             foreach (var log in logList)
-            { 
-                DateTime t = DateTime.MinValue;
+            {
                 if (log.LogTypeID == (int)LogTypeEnum.MissionStart)
                     t = log.CreateDate;
                 else

@@ -276,6 +276,8 @@ namespace BugInfoManagement {
             
             private global::System.Data.DataColumn columnsize;
             
+            private global::System.Data.DataColumn columnfired;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public BugInfoTableDataTable() {
                 this.TableName = "BugInfoTable";
@@ -356,6 +358,13 @@ namespace BugInfoManagement {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn firedColumn {
+                get {
+                    return this.columnfired;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -384,7 +393,7 @@ namespace BugInfoManagement {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, int size) {
+            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, int size, double fired) {
                 BugInfoTableRow rowBugInfoTableRow = ((BugInfoTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Version,
@@ -393,7 +402,8 @@ namespace BugInfoManagement {
                         dealMan,
                         description,
                         Priority,
-                        size};
+                        size,
+                        fired};
                 rowBugInfoTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBugInfoTableRow);
                 return rowBugInfoTableRow;
@@ -420,6 +430,7 @@ namespace BugInfoManagement {
                 this.columndescription = base.Columns["description"];
                 this.columnPriority = base.Columns["Priority"];
                 this.columnsize = base.Columns["size"];
+                this.columnfired = base.Columns["fired"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -438,6 +449,9 @@ namespace BugInfoManagement {
                 base.Columns.Add(this.columnPriority);
                 this.columnsize = new global::System.Data.DataColumn("size", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsize);
+                this.columnfired = new global::System.Data.DataColumn("fired", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfired);
+                this.columnsize.Caption = "estimated";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -675,6 +689,21 @@ namespace BugInfoManagement {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double fired {
+                get {
+                    try {
+                        return ((double)(this[this.tableBugInfoTable.firedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fired\' in table \'BugInfoTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBugInfoTable.firedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsVersionNull() {
                 return this.IsNull(this.tableBugInfoTable.VersionColumn);
             }
@@ -742,6 +771,16 @@ namespace BugInfoManagement {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetsizeNull() {
                 this[this.tableBugInfoTable.sizeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsfiredNull() {
+                return this.IsNull(this.tableBugInfoTable.firedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetfiredNull() {
+                this[this.tableBugInfoTable.firedColumn] = global::System.Convert.DBNull;
             }
         }
         
