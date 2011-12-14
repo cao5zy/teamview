@@ -1,0 +1,62 @@
+﻿body
+{
+    background:url(http://www.baidu.com/img/i-1.0.1.png) no-repeat;
+    _background-attachment:fixed;
+}
+#m
+{
+    width:680px;
+    margin:0 auto;
+    margin-top:100px;
+}
+
+#dealmen
+{
+    width:202px;
+    height:22px;
+    font:16px arial;
+    background:url(http://www.baidu.com/img/i-1.0.0.png) no-repeat -304px 0;
+    _background-attachment:fixed;
+    border:1px solid #cdcdcd;
+    border-color:#9a9a9a #cdcdcd #cdcdcd #9a9a9a;
+    vertical-align:top;
+}
+
+#lg
+{
+    text-align:center;
+}
+
+#su
+{
+    width:95px;
+    text-align:center;
+    height:22px;
+    float:right;
+    vertical-align:top;
+}
+
+#input
+{
+    width : 360px;
+    float:right;
+}
+
+#des
+{
+    width: 320px;
+     background: url(Picture/Backgound.jpg) no-reapeat;
+     float:left;
+}
+
+.instruction
+{
+    margin:1px 2px;
+    font:italic arial,sans-serif;
+}
+
+.check
+{
+    margin:5px 2px;
+    
+}

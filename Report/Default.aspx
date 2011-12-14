@@ -14,6 +14,12 @@
          The TeamView Report
       </h1>
     </div>
+    <asp:Panel ID="MenuPanel" runat="server">
+      <ul id = "menu">
+        <li><a href="Home.aspx" />Home</li>
+        <li><a href="Search.aspx" />Search</li>
+      </ul>
+    </asp:Panel>
     <asp:Panel ID="Panel1" runat="server" Height="122px">
         <a href="SearchCurrentBugs.aspx">SearchCurrentBugs Page</a>
     </asp:Panel>
