@@ -119,7 +119,7 @@ namespace BugInfoManagement
                 if (bugStatus == StatesEnum.Start)
                 {
                     BugInfoManagement.AddLog(mBugInfo.BugNum,
-                        mBugInfo.DealMan,
+                        mOriginalBugInfo.DealMan,
                         (int)LogTypeEnum.MissionStart);
 
                     var otherProcessingItem = BugInfoManagement.QueryByProgrammerStatus(
@@ -145,7 +145,7 @@ namespace BugInfoManagement
                 else
                 {
                     BugInfoManagement.AddLog(mBugInfo.BugNum,
-                        mBugInfo.DealMan,
+                        mOriginalBugInfo.DealMan,
                         (int)LogTypeEnum.MissionStop);
 
                 }
