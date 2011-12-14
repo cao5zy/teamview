@@ -7,14 +7,16 @@
     <title>Team View</title>
     <link rel="Stylesheet" href="Css/Home.css" type="text/css"/>
     <script language="JavaScript" type="text/javascript">
-        function SearchBugs() {
+        function SearchBugs(id) {
+            var dealManList = document.getElementById(id);
+            var dealMan = dealManList.options[dealManList.selectedIndex].value;
             var type = document.getElementsByName("bugs");
             for (var i = 0; i < type.length; i++) {
                 if (type[i].checked) {
                     if (type[i].value == 1)
-                        window.open("SearchCurrentBugs.aspx");
-                    else if (type[i] == 2)
-                        window.open("SearchInnerBugs.aspx");
+                        window.open("SearchCurrentBugs.aspx?dealMan=" + dealMan);
+                    else if (type[i].value == 2)
+                        window.open("SearchInnerBugs.aspx?dealMan=" + dealMan);
                     return;
                 }
             }
@@ -30,7 +32,6 @@
           <h3>Description:</h3>
           <p></p>
        </div>
-       
     
       <div id="input">
        <label class="instruction" >DealMan:</label>
@@ -43,7 +44,7 @@
         <input type="radio" name="bugs" value="2" class="check" />
         <label class="instruction">Inner Bugs</label>
         <br />
-        <input type="submit" value="Search" id="search" onclick="SearchBugs()" />
+        <input type="submit" value="Search" id="search" onclick="SearchBugs('dealmen')" />
 
       </div> 
       

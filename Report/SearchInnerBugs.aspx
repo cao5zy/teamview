@@ -10,7 +10,8 @@
 </head>
 <body style="background-color:#227700">
     <form id="form1" runat="server">
-    <div style="text-align:left"><img src="Image/users_search.png" alt="Team View"/></div>
+    <div style="text-align:left">
+      <img  alt="Team View" src="Picture/users_search.png"/></div>
     <div style="text-align:center">
         <h1>Search Inner Bugs</h1>
     </div>
@@ -37,7 +38,7 @@
         <asp:Label ID="StartDateLabel" runat="server" Text="Label">Start Date:</asp:Label>
         &nbsp;&nbsp;<asp:TextBox ID="StartDateTextBox" runat="server" 
              Width="80px"></asp:TextBox>
-&nbsp;<asp:ImageButton ID="StartDateImageButton" runat="server" ImageUrl="~/Image/calendar.png"
+&nbsp;<asp:ImageButton ID="StartDateImageButton" runat="server" ImageUrl="~/Picture/calendar.png"
             onclick="StartDateImageButton_Click" Height="16px" Width="18px" />            
 &nbsp;<asp:Calendar ID="StartDateCalendar" runat="server" BackColor="White" 
             BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
@@ -59,7 +60,7 @@
         <asp:Label ID="EndDateLabel" runat="server" Text="Label">End Date:</asp:Label>
         &nbsp;&nbsp;<asp:TextBox ID="EndDateTextBox" runat="server" 
               Width="80px"></asp:TextBox>
-        &nbsp;<asp:ImageButton ID="EndDateImageButton" runat="server" ImageUrl="~/Image/calendar.png"
+        &nbsp;<asp:ImageButton ID="EndDateImageButton" runat="server" ImageUrl="~/Picture/calendar.png"
             onclick="EndDateImageButton_Click" Height="16px" Width="18px" />
 &nbsp;<asp:Calendar ID="EndDateCalendar" runat="server" BackColor="White" 
             BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
@@ -78,7 +79,7 @@
         </asp:Calendar>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
-        <asp:ImageButton ID="SearchInnerBugsImageButton" runat="server" ImageUrl="~/Image/search.png"
+        <asp:ImageButton ID="SearchInnerBugsImageButton" runat="server" ImageUrl="~/Picture/search.png"
         onclick="SearchButton_Click" ToolTip="Search Inner Bugs" BorderColor="Red" 
                   AlternateText="Search" Height="20px" Width="20px"/>
     </div>
@@ -109,8 +110,7 @@
                     FooterText="Created Man" >
                 <ItemStyle BackColor="#993333" />
                 </asp:BoundField>
-                <asp:ButtonField Text="Detail" CommandName="ShowItemDetail" 
-                    ImageUrl="~/Image/search.png"/>
+                <asp:ButtonField Text="Detail" CommandName="ShowItemDetail" />
             </Columns>
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" 
                 BorderColor="#333300" />

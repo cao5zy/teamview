@@ -20,12 +20,7 @@
         <li><a href="Search.aspx" />Search</li>
       </ul>
     </asp:Panel>
-    <asp:Panel ID="Panel1" runat="server" Height="122px">
-        <a href="SearchCurrentBugs.aspx">SearchCurrentBugs Page</a>
-    </asp:Panel>
     <br />
-    <asp:Panel ID="Panel2" runat="server" Height="291px">
-    </asp:Panel>
     </form>
 </body>
 </html>

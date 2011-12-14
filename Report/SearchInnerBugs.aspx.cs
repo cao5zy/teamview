@@ -8,8 +8,6 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.ComponentModel;
-using System.Windows.Forms;
-
 public partial class SearchInnerBugs : System.Web.UI.Page
 {
     private BindingList<BindingSearchInnerBugItem> BindingSearchInnerBugs
@@ -26,6 +24,7 @@ public partial class SearchInnerBugs : System.Web.UI.Page
     {
         if(!Page.IsPostBack)
             InitializeSearchCriteria();
+        this.CurrentMembersDropDownList.Text = Request["dealMan"];
     }
 
     private void InitializeCurrentMembers()
@@ -98,9 +97,9 @@ public partial class SearchInnerBugs : System.Web.UI.Page
         List<SearchInnerBugItemType> searchInnerBugs = new List<SearchInnerBugItemType>();
 
         bool hasFirstCondition = false;
-
-        string connString = 
-            System.Configuration.ConfigurationManager.ConnectionStrings["OA_States_DBConnectionString"].ConnectionString;
+        //OA_States_DBConnectionString
+        string connString =
+            System.Configuration.ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString;
 
         string sql = "SELECT version,bugNum,bugStatus,dealMan,description,detailDoc,createdMan,size,timeStamp,priority,createdTime FROM bugInfo WHERE";
 
@@ -150,10 +149,10 @@ public partial class SearchInnerBugs : System.Web.UI.Page
         EndDateCalendar.Visible = true;
     }
 
-    private void ShowItemDetail()
-    {
-        MessageBox.Show("dddddddddddddd");
-    }
+    //private void ShowItemDetail()
+    //{
+    //    MessageBox.Show("dddddddddddddd");
+    //}
     private class BindingSearchInnerBugItem
     {
         public string Version { get; set; }

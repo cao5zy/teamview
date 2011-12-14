@@ -18,7 +18,7 @@
       <div style="text-align:center;">
         <asp:Panel ID="Panel1" runat="server" Width="70%">
           <div style="text-align:left;">
-            Search Condition
+            About &nbsp <%=Request["dealMan"]%> Search Condition
           </div>
           <asp:Panel ID="SearchCondition" runat="server" BorderStyle="Groove" 
                 HorizontalAlign="Left">

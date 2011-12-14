@@ -95,6 +95,7 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
             hasFirstCondition = true;
             sql += " priority = '" + PriorityList.Text + "'";
         }
+        sql += " and dealMan = '" + Request["dealMan"] + "'";
         using (SqlConnection conn = new SqlConnection(connString))
         {
             conn.Open();
@@ -138,7 +139,7 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
 
     protected DataTable QuerySoure()
     {
-        string[] programmer = null;
+        string[] programmer = { Request["dealMan"] };
         string bugNum = string.Empty;
         string version = string.Empty;
         string description = string.Empty;
