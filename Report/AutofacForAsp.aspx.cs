@@ -7,9 +7,11 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using BugInfoManagement.Entity;
+using BugInfoManagement.Dao;
 
 public partial class SearchCurrentBugs : System.Web.UI.Page
 {
+    public IBugInfoManagement bugInfoManagement { set; get; }
     private DataTable dt = new GridViewTable().GetDaTaTable();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -56,63 +58,6 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
         this.Panel2.Visible = !this.Panel2.Visible;
     }
 
-    private DataTable GetSource()
-    {
-        bool hasFirstCondition = false;
-        dt.Clear();
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString;
-        string sql = "SELECT version, bugNum, bugStatus, dealMan, description, priority, createdTime FROM bugInfo WHERE";
-        if (!(StartDateTextBox.Text == "") && !(EndDateTextBox.Text == ""))
-        {
-            sql += " DATEDIFF(DAYOFYEAR,'" + StartDateTextBox.Text + "',createdTime) >= 0 and DATEDIFF(DAYOFYEAR,'" + EndDateTextBox.Text + "',createdTime) <= 0";
-            hasFirstCondition = true;
-        }
-        if (!(VersionTextBox.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " version = '" + VersionTextBox.Text + "'";
-        }
-        if (!(BugNumTextBox.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " bugNum = '" + BugNumTextBox.Text + "'";
-        }
-        if (!(BugStatusList.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " bugStatus = '" + BugStatusList.Text + "'";
-        }
-        if (!(PriorityList.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " priority = '" + PriorityList.Text + "'";
-        }
-        sql += " and dealMan = '" + Request["dealMan"] + "'";
-        using (SqlConnection conn = new SqlConnection(connString))
-        {
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            this.TextBox1.Text = sql;
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                dt.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6]);
-            }
-
-        }
-        if (dt.Rows.Count == 0)
-            dt.Rows.Add(dt.NewRow());
-        return dt;
-    }
-
     protected void SearchButton_Click(object sender, EventArgs e)
     {
         this.ResultGridView.DataSource = QuerySource();
@@ -152,10 +97,10 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
         bugState = BugStatusList.Text;
         if (!string.IsNullOrEmpty(PriorityList.Text))
             priority = int.Parse(PriorityList.Text);
-        List<BugInfoEntity> result = new QueryData().query(programmer,bugNum,version,description,priority,bugState);
+        List<BugInfoEntity> result = bugInfoManagement.QueryByParameter(programmer, bugNum, version, description, priority, bugState);
         foreach (BugInfoEntity n in result)
         {
-            dt.Rows.Add(n.Version,n.BugNum,n.BugStatus,n.DealMan,n.Description, n.Priority);
+            dt.Rows.Add(n.Version, n.BugNum, n.BugStatus, n.DealMan, n.Description, n.Priority);
         }
         if (dt.Rows.Count == 0)
             dt.Rows.Add();

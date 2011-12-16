@@ -58,44 +58,24 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
 
     private DataTable GetSource()
     {
-        bool hasFirstCondition = false;
         dt.Clear();
+
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString;
         string sql = "SELECT version, bugNum, bugStatus, dealMan, description, priority, createdTime FROM bugInfo WHERE";
+        sql += " dealMan = '" + Request["dealMan"] + "'";
         if (!(StartDateTextBox.Text == "") && !(EndDateTextBox.Text == ""))
         {
-            sql += " DATEDIFF(DAYOFYEAR,'" + StartDateTextBox.Text + "',createdTime) >= 0 and DATEDIFF(DAYOFYEAR,'" + EndDateTextBox.Text + "',createdTime) <= 0";
-            hasFirstCondition = true;
+            sql += " and DATEDIFF(DAYOFYEAR,'" + StartDateTextBox.Text + "',createdTime) >= 0 and DATEDIFF(DAYOFYEAR,'" + EndDateTextBox.Text + "',createdTime) <= 0";
         }
         if (!(VersionTextBox.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " version = '" + VersionTextBox.Text + "'";
-        }
+            sql += " and version = '" + VersionTextBox.Text + "'";
         if (!(BugNumTextBox.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " bugNum = '" + BugNumTextBox.Text + "'";
-        }
+            sql += " and bugNum = '" + BugNumTextBox.Text + "'";
         if (!(BugStatusList.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " bugStatus = '" + BugStatusList.Text + "'";
-        }
+            sql += " and bugStatus = '" + BugStatusList.Text + "'";
         if (!(PriorityList.Text == ""))
-        {
-            if (hasFirstCondition)
-                sql += " and";
-            hasFirstCondition = true;
-            sql += " priority = '" + PriorityList.Text + "'";
-        }
-        sql += " and dealMan = '" + Request["dealMan"] + "'";
+            sql += " and priority = '" + PriorityList.Text + "'";
+
         using (SqlConnection conn = new SqlConnection(connString))
         {
             conn.Open();
@@ -115,7 +95,7 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
 
     protected void SearchButton_Click(object sender, EventArgs e)
     {
-        this.ResultGridView.DataSource = QuerySource();
+        this.ResultGridView.DataSource = GetSource();
         this.ResultGridView.DataBind();
     }
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -135,30 +115,5 @@ public partial class SearchCurrentBugs : System.Web.UI.Page
     {
         this.EndDateTextBox.Text = this.Calendar2.SelectedDate.ToString();
         this.Calendar2.Visible = false;
-    }
-
-    protected DataTable QuerySource()
-    {
-        string[] programmer = { Request["dealMan"] };
-        string bugNum = string.Empty;
-        string version = string.Empty;
-        string description = string.Empty;
-        int? priority = null;
-        string bugState = string.Empty;
-        dt.Clear();
-
-        version = this.VersionTextBox.Text;
-        bugNum = BugNumTextBox.Text;
-        bugState = BugStatusList.Text;
-        if (!string.IsNullOrEmpty(PriorityList.Text))
-            priority = int.Parse(PriorityList.Text);
-        List<BugInfoEntity> result = new QueryData().query(programmer,bugNum,version,description,priority,bugState);
-        foreach (BugInfoEntity n in result)
-        {
-            dt.Rows.Add(n.Version,n.BugNum,n.BugStatus,n.DealMan,n.Description, n.Priority);
-        }
-        if (dt.Rows.Count == 0)
-            dt.Rows.Add();
-        return dt;
     }
 }

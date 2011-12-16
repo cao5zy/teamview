@@ -16,6 +16,10 @@
                     if (type[i].value == 1)
                         window.open("SearchCurrentBugs.aspx?dealMan=" + dealMan);
                     else if (type[i].value == 2)
+                        window.open("AutofacForAsp.aspx?dealMan=" + dealMan);
+                    else if (type[i].value == 3)
+                        window.open("NoInjection.aspx?dealMan=" + dealMan);
+                    else if (type[i].value == 4)
                         window.open("SearchInnerBugs.aspx?dealMan=" + dealMan);
                     return;
                 }
@@ -42,6 +46,12 @@
         <label class ="instruction">Current Bugs</label>
         <br />
         <input type="radio" name="bugs" value="2" class="check" />
+        <label class="instruction">Current Bugs(using Autofac in Web form)</label>
+        <br />
+        <input type="radio" name="bugs" value="3" class="check" />
+        <label class="instruction">Current Bugs(Querying by sql)</label>
+        <br />
+        <input type="radio" name="bugs" value="4" class="check" />
         <label class="instruction">Inner Bugs</label>
         <br />
         <input type="submit" value="Search" id="search" onclick="SearchBugs('dealmen')" />

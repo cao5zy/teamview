@@ -17,23 +17,10 @@ public class QueryData
     public QueryData()
     {
         var builder = new ContainerBuilder();
-
-
-        //builder.RegisterType<CreateBugInfoManager>().As<BugInfoManager>().PropertiesAutowired().InstancePerDependency();
-        //builder.RegisterType<EditBugInfoManager>().As<BugInfoManager>().PropertiesAutowired().InstancePerDependency();
-        //builder.RegisterType<CreateBugInfoManager>().InstancePerDependency();
-        //builder.RegisterType<EditBugInfoManager>().InstancePerDependency();
-        //builder.RegisterType<BugInfoForm>().InstancePerDependency();
-        //builder.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
-        //builder.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
         builder.RegisterType<BugInfoManagementImpl>().As<IBugInfoManagement>().PropertiesAutowired().InstancePerDependency();
-        //builder.RegisterType<NotificationManagerImpl>().As<INotificationManager>().PropertiesAutowired().InstancePerDependency();
-        //builder.RegisterType<NotificationSettingImpl>().As<INotificationSetting>().PropertiesAutowired().InstancePerDependency();
         builder.RegisterType<JIRAImporter>().As<IItemImporter>();
         builder.RegisterModule<LogsModule>();
-
         builder.RegisterType<DBProvider>().As<IDbProvider>();
-
         mContainer = builder.Build();
     }
 
