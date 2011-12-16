@@ -142,7 +142,7 @@ namespace DAL
 				TableSchema.TableColumn colvarBugNum = new TableSchema.TableColumn(schema);
 				colvarBugNum.ColumnName = "BugNum";
 				colvarBugNum.DataType = DbType.AnsiString;
-				colvarBugNum.MaxLength = 500;
+				colvarBugNum.MaxLength = 20;
 				colvarBugNum.AutoIncrement = false;
 				colvarBugNum.IsNullable = false;
 				colvarBugNum.IsPrimaryKey = false;
@@ -152,6 +152,20 @@ namespace DAL
 				
 					colvarBugNum.ForeignKeyTableName = "bugInfo";
 				schema.Columns.Add(colvarBugNum);
+				
+				TableSchema.TableColumn colvarMoveSequence = new TableSchema.TableColumn(schema);
+				colvarMoveSequence.ColumnName = "moveSequence";
+				colvarMoveSequence.DataType = DbType.Int32;
+				colvarMoveSequence.MaxLength = 0;
+				colvarMoveSequence.AutoIncrement = false;
+				colvarMoveSequence.IsNullable = false;
+				colvarMoveSequence.IsPrimaryKey = false;
+				colvarMoveSequence.IsForeignKey = true;
+				colvarMoveSequence.IsReadOnly = false;
+				colvarMoveSequence.DefaultSetting = @"";
+				
+					colvarMoveSequence.ForeignKeyTableName = "bugInfo";
+				schema.Columns.Add(colvarMoveSequence);
 				
 				TableSchema.TableColumn colvarCreateDate = new TableSchema.TableColumn(schema);
 				colvarCreateDate.ColumnName = "CreateDate";
@@ -220,6 +234,14 @@ namespace DAL
 			set { SetColumnValue(Columns.BugNum, value); }
 		}
 		  
+		[XmlAttribute("MoveSequence")]
+		[Bindable(true)]
+		public int MoveSequence 
+		{
+			get { return GetColumnValue<int>(Columns.MoveSequence); }
+			set { SetColumnValue(Columns.MoveSequence, value); }
+		}
+		  
 		[XmlAttribute("CreateDate")]
 		[Bindable(true)]
 		public DateTime CreateDate 
@@ -276,11 +298,13 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varBugNum,DateTime varCreateDate,string varDescription,int varLogTypeID)
+		public static void Insert(string varBugNum,int varMoveSequence,DateTime varCreateDate,string varDescription,int varLogTypeID)
 		{
 			ChangeLog item = new ChangeLog();
 			
 			item.BugNum = varBugNum;
+			
+			item.MoveSequence = varMoveSequence;
 			
 			item.CreateDate = varCreateDate;
 			
@@ -298,13 +322,15 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(long varLogID,string varBugNum,DateTime varCreateDate,string varDescription,int varLogTypeID)
+		public static void Update(long varLogID,string varBugNum,int varMoveSequence,DateTime varCreateDate,string varDescription,int varLogTypeID)
 		{
 			ChangeLog item = new ChangeLog();
 			
 				item.LogID = varLogID;
 			
 				item.BugNum = varBugNum;
+			
+				item.MoveSequence = varMoveSequence;
 			
 				item.CreateDate = varCreateDate;
 			
@@ -339,23 +365,30 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn CreateDateColumn
+        public static TableSchema.TableColumn MoveSequenceColumn
         {
             get { return Schema.Columns[2]; }
         }
         
         
         
-        public static TableSchema.TableColumn DescriptionColumn
+        public static TableSchema.TableColumn CreateDateColumn
         {
             get { return Schema.Columns[3]; }
         }
         
         
         
-        public static TableSchema.TableColumn LogTypeIDColumn
+        public static TableSchema.TableColumn DescriptionColumn
         {
             get { return Schema.Columns[4]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn LogTypeIDColumn
+        {
+            get { return Schema.Columns[5]; }
         }
         
         
@@ -366,6 +399,7 @@ namespace DAL
 		{
 			 public static string LogID = @"LogID";
 			 public static string BugNum = @"BugNum";
+			 public static string MoveSequence = @"moveSequence";
 			 public static string CreateDate = @"CreateDate";
 			 public static string Description = @"Description";
 			 public static string LogTypeID = @"LogTypeID";

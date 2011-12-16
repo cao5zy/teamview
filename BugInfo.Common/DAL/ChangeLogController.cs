@@ -80,11 +80,13 @@ namespace DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string BugNum,DateTime CreateDate,string Description,int LogTypeID)
+	    public void Insert(string BugNum,int MoveSequence,DateTime CreateDate,string Description,int LogTypeID)
 	    {
 		    ChangeLog item = new ChangeLog();
 		    
             item.BugNum = BugNum;
+            
+            item.MoveSequence = MoveSequence;
             
             item.CreateDate = CreateDate;
             
@@ -100,7 +102,7 @@ namespace DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(long LogID,string BugNum,DateTime CreateDate,string Description,int LogTypeID)
+	    public void Update(long LogID,string BugNum,int MoveSequence,DateTime CreateDate,string Description,int LogTypeID)
 	    {
 		    ChangeLog item = new ChangeLog();
 	        item.MarkOld();
@@ -109,6 +111,8 @@ namespace DAL
 			item.LogID = LogID;
 				
 			item.BugNum = BugNum;
+				
+			item.MoveSequence = MoveSequence;
 				
 			item.CreateDate = CreateDate;
 				

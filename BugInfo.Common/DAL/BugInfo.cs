@@ -142,7 +142,7 @@ namespace DAL
 				TableSchema.TableColumn colvarBugNum = new TableSchema.TableColumn(schema);
 				colvarBugNum.ColumnName = "bugNum";
 				colvarBugNum.DataType = DbType.AnsiString;
-				colvarBugNum.MaxLength = 500;
+				colvarBugNum.MaxLength = 20;
 				colvarBugNum.AutoIncrement = false;
 				colvarBugNum.IsNullable = false;
 				colvarBugNum.IsPrimaryKey = true;
@@ -151,6 +151,20 @@ namespace DAL
 				colvarBugNum.DefaultSetting = @"";
 				colvarBugNum.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarBugNum);
+				
+				TableSchema.TableColumn colvarMoveSequence = new TableSchema.TableColumn(schema);
+				colvarMoveSequence.ColumnName = "moveSequence";
+				colvarMoveSequence.DataType = DbType.Int32;
+				colvarMoveSequence.MaxLength = 0;
+				colvarMoveSequence.AutoIncrement = false;
+				colvarMoveSequence.IsNullable = false;
+				colvarMoveSequence.IsPrimaryKey = true;
+				colvarMoveSequence.IsForeignKey = false;
+				colvarMoveSequence.IsReadOnly = false;
+				
+						colvarMoveSequence.DefaultSetting = @"((0))";
+				colvarMoveSequence.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarMoveSequence);
 				
 				TableSchema.TableColumn colvarBugStatus = new TableSchema.TableColumn(schema);
 				colvarBugStatus.ColumnName = "bugStatus";
@@ -168,7 +182,7 @@ namespace DAL
 				TableSchema.TableColumn colvarDealMan = new TableSchema.TableColumn(schema);
 				colvarDealMan.ColumnName = "dealMan";
 				colvarDealMan.DataType = DbType.AnsiString;
-				colvarDealMan.MaxLength = 50;
+				colvarDealMan.MaxLength = 20;
 				colvarDealMan.AutoIncrement = false;
 				colvarDealMan.IsNullable = true;
 				colvarDealMan.IsPrimaryKey = false;
@@ -181,7 +195,7 @@ namespace DAL
 				TableSchema.TableColumn colvarDescription = new TableSchema.TableColumn(schema);
 				colvarDescription.ColumnName = "description";
 				colvarDescription.DataType = DbType.AnsiString;
-				colvarDescription.MaxLength = 500;
+				colvarDescription.MaxLength = 200;
 				colvarDescription.AutoIncrement = false;
 				colvarDescription.IsNullable = true;
 				colvarDescription.IsPrimaryKey = false;
@@ -231,6 +245,20 @@ namespace DAL
 				colvarSize.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSize);
 				
+				TableSchema.TableColumn colvarFired = new TableSchema.TableColumn(schema);
+				colvarFired.ColumnName = "fired";
+				colvarFired.DataType = DbType.Int32;
+				colvarFired.MaxLength = 0;
+				colvarFired.AutoIncrement = false;
+				colvarFired.IsNullable = false;
+				colvarFired.IsPrimaryKey = false;
+				colvarFired.IsForeignKey = false;
+				colvarFired.IsReadOnly = false;
+				
+						colvarFired.DefaultSetting = @"((0))";
+				colvarFired.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarFired);
+				
 				TableSchema.TableColumn colvarTimeStamp = new TableSchema.TableColumn(schema);
 				colvarTimeStamp.ColumnName = "timeStamp";
 				colvarTimeStamp.DataType = DbType.DateTime;
@@ -259,6 +287,20 @@ namespace DAL
 				colvarPriority.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarPriority);
 				
+				TableSchema.TableColumn colvarHardLevel = new TableSchema.TableColumn(schema);
+				colvarHardLevel.ColumnName = "hardLevel";
+				colvarHardLevel.DataType = DbType.Int16;
+				colvarHardLevel.MaxLength = 0;
+				colvarHardLevel.AutoIncrement = false;
+				colvarHardLevel.IsNullable = false;
+				colvarHardLevel.IsPrimaryKey = false;
+				colvarHardLevel.IsForeignKey = false;
+				colvarHardLevel.IsReadOnly = false;
+				
+						colvarHardLevel.DefaultSetting = @"((0))";
+				colvarHardLevel.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarHardLevel);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -283,6 +325,14 @@ namespace DAL
 		{
 			get { return GetColumnValue<string>(Columns.BugNum); }
 			set { SetColumnValue(Columns.BugNum, value); }
+		}
+		  
+		[XmlAttribute("MoveSequence")]
+		[Bindable(true)]
+		public int MoveSequence 
+		{
+			get { return GetColumnValue<int>(Columns.MoveSequence); }
+			set { SetColumnValue(Columns.MoveSequence, value); }
 		}
 		  
 		[XmlAttribute("BugStatus")]
@@ -333,6 +383,14 @@ namespace DAL
 			set { SetColumnValue(Columns.Size, value); }
 		}
 		  
+		[XmlAttribute("Fired")]
+		[Bindable(true)]
+		public int Fired 
+		{
+			get { return GetColumnValue<int>(Columns.Fired); }
+			set { SetColumnValue(Columns.Fired, value); }
+		}
+		  
 		[XmlAttribute("TimeStamp")]
 		[Bindable(true)]
 		public DateTime TimeStamp 
@@ -347,6 +405,14 @@ namespace DAL
 		{
 			get { return GetColumnValue<short>(Columns.Priority); }
 			set { SetColumnValue(Columns.Priority, value); }
+		}
+		  
+		[XmlAttribute("HardLevel")]
+		[Bindable(true)]
+		public short HardLevel 
+		{
+			get { return GetColumnValue<short>(Columns.HardLevel); }
+			set { SetColumnValue(Columns.HardLevel, value); }
 		}
 		
 		#endregion
@@ -366,6 +432,10 @@ namespace DAL
 		{
 			return new DAL.ChangeLogCollection().Where(ChangeLog.Columns.BugNum, BugNum).Load();
 		}
+		public DAL.ChangeLogCollection ChangeLogRecordsFromBugInfo()
+		{
+			return new DAL.ChangeLogCollection().Where(ChangeLog.Columns.MoveSequence, BugNum).Load();
+		}
 		#endregion
 		
 			
@@ -384,13 +454,15 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime varTimeStamp,short varPriority)
+		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
 			item.Version = varVersion;
 			
 			item.BugNum = varBugNum;
+			
+			item.MoveSequence = varMoveSequence;
 			
 			item.BugStatus = varBugStatus;
 			
@@ -404,9 +476,13 @@ namespace DAL
 			
 			item.Size = varSize;
 			
+			item.Fired = varFired;
+			
 			item.TimeStamp = varTimeStamp;
 			
 			item.Priority = varPriority;
+			
+			item.HardLevel = varHardLevel;
 			
 		
 			if (System.Web.HttpContext.Current != null)
@@ -418,13 +494,15 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime varTimeStamp,short varPriority)
+		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
 				item.Version = varVersion;
 			
 				item.BugNum = varBugNum;
+			
+				item.MoveSequence = varMoveSequence;
 			
 				item.BugStatus = varBugStatus;
 			
@@ -438,9 +516,13 @@ namespace DAL
 			
 				item.Size = varSize;
 			
+				item.Fired = varFired;
+			
 				item.TimeStamp = varTimeStamp;
 			
 				item.Priority = varPriority;
+			
+				item.HardLevel = varHardLevel;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -469,58 +551,79 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn BugStatusColumn
+        public static TableSchema.TableColumn MoveSequenceColumn
         {
             get { return Schema.Columns[2]; }
         }
         
         
         
-        public static TableSchema.TableColumn DealManColumn
+        public static TableSchema.TableColumn BugStatusColumn
         {
             get { return Schema.Columns[3]; }
         }
         
         
         
-        public static TableSchema.TableColumn DescriptionColumn
+        public static TableSchema.TableColumn DealManColumn
         {
             get { return Schema.Columns[4]; }
         }
         
         
         
-        public static TableSchema.TableColumn DetailDocColumn
+        public static TableSchema.TableColumn DescriptionColumn
         {
             get { return Schema.Columns[5]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedManColumn
+        public static TableSchema.TableColumn DetailDocColumn
         {
             get { return Schema.Columns[6]; }
         }
         
         
         
-        public static TableSchema.TableColumn SizeColumn
+        public static TableSchema.TableColumn CreatedManColumn
         {
             get { return Schema.Columns[7]; }
         }
         
         
         
-        public static TableSchema.TableColumn TimeStampColumn
+        public static TableSchema.TableColumn SizeColumn
         {
             get { return Schema.Columns[8]; }
         }
         
         
         
-        public static TableSchema.TableColumn PriorityColumn
+        public static TableSchema.TableColumn FiredColumn
         {
             get { return Schema.Columns[9]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn TimeStampColumn
+        {
+            get { return Schema.Columns[10]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn PriorityColumn
+        {
+            get { return Schema.Columns[11]; }
+        }
+        
+        
+        
+        public static TableSchema.TableColumn HardLevelColumn
+        {
+            get { return Schema.Columns[12]; }
         }
         
         
@@ -531,14 +634,17 @@ namespace DAL
 		{
 			 public static string Version = @"version";
 			 public static string BugNum = @"bugNum";
+			 public static string MoveSequence = @"moveSequence";
 			 public static string BugStatus = @"bugStatus";
 			 public static string DealMan = @"dealMan";
 			 public static string Description = @"description";
 			 public static string DetailDoc = @"detailDoc";
 			 public static string CreatedMan = @"createdMan";
 			 public static string Size = @"size";
+			 public static string Fired = @"fired";
 			 public static string TimeStamp = @"timeStamp";
 			 public static string Priority = @"priority";
+			 public static string HardLevel = @"hardLevel";
 						
 		}
 		#endregion

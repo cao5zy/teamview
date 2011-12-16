@@ -75,18 +75,32 @@ namespace DAL
         }
         
         
+        
+        [DataObjectMethod(DataObjectMethodType.Delete, true)]
+        public bool Delete(string BugNum,int MoveSequence)
+        {
+            Query qry = new Query(BugInfo.Schema);
+            qry.QueryType = QueryType.Delete;
+            qry.AddWhere("BugNum", BugNum).AND("MoveSequence", MoveSequence);
+            qry.Execute();
+            return (true);
+        }        
+       
+    	
     	
 	    /// <summary>
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Version,string BugNum,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,DateTime TimeStamp,short Priority)
+	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 		    
             item.Version = Version;
             
             item.BugNum = BugNum;
+            
+            item.MoveSequence = MoveSequence;
             
             item.BugStatus = BugStatus;
             
@@ -100,9 +114,13 @@ namespace DAL
             
             item.Size = Size;
             
+            item.Fired = Fired;
+            
             item.TimeStamp = TimeStamp;
             
             item.Priority = Priority;
+            
+            item.HardLevel = HardLevel;
             
 	    
 		    item.Save(UserName);
@@ -112,7 +130,7 @@ namespace DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(string Version,string BugNum,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,DateTime TimeStamp,short Priority)
+	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 	        item.MarkOld();
@@ -121,6 +139,8 @@ namespace DAL
 			item.Version = Version;
 				
 			item.BugNum = BugNum;
+				
+			item.MoveSequence = MoveSequence;
 				
 			item.BugStatus = BugStatus;
 				
@@ -134,9 +154,13 @@ namespace DAL
 				
 			item.Size = Size;
 				
+			item.Fired = Fired;
+				
 			item.TimeStamp = TimeStamp;
 				
 			item.Priority = Priority;
+				
+			item.HardLevel = HardLevel;
 				
 	        item.Save(UserName);
 	    }

@@ -74,8 +74,6 @@
     <Compile Include="DAL\BugInfoController.cs" />
     <Compile Include="DAL\ChangeLog.cs" />
     <Compile Include="DAL\ChangeLogController.cs" />
-    <Compile Include="DAL\Pointslog.cs" />
-    <Compile Include="DAL\PointslogController.cs" />
     <Compile Include="DAL\StoredProcedures.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />
