@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompareCode.cs" />
+    <Compile Include="Controllers\BugInfoController.cs" />
     <Compile Include="DAL\AllStructs.cs" />
     <Compile Include="DAL\BugInfo.cs" />
     <Compile Include="DAL\BugInfoController.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Logs\LogsModule.cs" />
     <Compile Include="Logs\PointsLogReader.cs" />
     <Compile Include="LogTypeEnum.cs" />
+    <Compile Include="Models\BugInfoViewModel.cs" />
+    <Compile Include="Models\HardLevelModel.cs" />
+    <Compile Include="Models\StateViewModel.cs" />
     <Compile Include="PointsParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States.cs" />

@@ -92,7 +92,7 @@ namespace DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,DateTime? LastStateTime,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 		    
@@ -114,6 +114,8 @@ namespace DAL
             
             item.Size = Size;
             
+            item.LastStateTime = LastStateTime;
+            
             item.Fired = Fired;
             
             item.TimeStamp = TimeStamp;
@@ -130,7 +132,7 @@ namespace DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,string Description,byte[] DetailDoc,string CreatedMan,int Size,DateTime? LastStateTime,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 	        item.MarkOld();
@@ -153,6 +155,8 @@ namespace DAL
 			item.CreatedMan = CreatedMan;
 				
 			item.Size = Size;
+				
+			item.LastStateTime = LastStateTime;
 				
 			item.Fired = Fired;
 				
