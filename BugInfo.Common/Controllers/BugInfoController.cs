@@ -22,5 +22,12 @@ namespace BugInfo.Common.Controllers
         {
             return null;
         }
+
+        public void ChangeState(BugInfoViewModel model)
+        {
+
+        }
+
+
     }
 }
