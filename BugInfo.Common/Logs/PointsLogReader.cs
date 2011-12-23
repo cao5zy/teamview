@@ -11,15 +11,16 @@ namespace BugInfo.Common.Logs
     {
         public List<ProgrammerPoint> GetPointList(string bugNum)
         {
-            return new DAL.PointslogCollection()
-                .Where("bugnum", bugNum)
-                .Load()
-                .Select(n => {
-                    var p = PointsParser.ToPoint(n.Log);
-                    p.EstimatedTime = n.Createdtime;
-                    return p;
-                })
-                .ToList();
+            return null;
+            //return new DAL.PointslogCollection()
+            //    .Where("bugnum", bugNum)
+            //    .Load()
+            //    .Select(n => {
+            //        var p = PointsParser.ToPoint(n.Log);
+            //        p.EstimatedTime = n.Createdtime;
+            //        return p;
+            //    })
+            //    .ToList();
         }
     }
 }

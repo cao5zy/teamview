@@ -69,13 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompareCode.cs" />
-    <Compile Include="Controllers\BugInfoController.cs" />
     <Compile Include="DAL\AllStructs.cs" />
     <Compile Include="DAL\BugInfo.cs" />
     <Compile Include="DAL\BugInfoController.cs" />
     <Compile Include="DAL\ChangeLog.cs" />
     <Compile Include="DAL\ChangeLogController.cs" />
     <Compile Include="DAL\StoredProcedures.cs" />
+    <Compile Include="Dao\IBugInfoRepository.cs" />
+    <Compile Include="Entity\BugInfoEntity1.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />
     <Compile Include="JIRAImporter.cs" />
@@ -108,11 +109,15 @@
     <Compile Include="StatesEnum.cs" />
     <Compile Include="Logs\TaskRecord.cs" />
     <Compile Include="Logs\TaskRecordParser.cs" />
+    <Compile Include="StateSequence.cs" />
     <Compile Include="TimeHelper.cs" />
     <Compile Include="TimeRange.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

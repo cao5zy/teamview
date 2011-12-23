@@ -7,11 +7,17 @@ using BugInfoManagement.Dao;
 using BugInfo.Common.Dao;
 using BugInfoManagement;
 using BugInfoManagement.Common;
+using System.Diagnostics;
 
 namespace BugInfo.Common.Models
 {
     public class BugInfoViewModel
     {
+        public const string versionErrorMessage = "版本号不能为空";
+        public const string bugNoErrorMessage = "Bug编号不能为空";
+        public const string dealManErrorMessage = "处理人不能为空";
+        public const string statusErrorMessage = "状态不能为空";
+        public const string statusChangeErrorMessage = "状态变化不允许";
         private IBugInfoRepository _repository;
         private bool _state = false;
         public bool State
@@ -40,6 +46,7 @@ namespace BugInfo.Common.Models
         public BugInfoEntity1 New()
         {
             _current = new BugInfoEntity1();
+            _state = true;
             return _current;
         }
 
@@ -53,23 +60,23 @@ namespace BugInfo.Common.Models
             return _current;
         }
 
-        public string CheckState()
+        public string SaveCheck()
         {
             if (string.IsNullOrEmpty(_current.version))
             {
-                return "版本号不能为空!";
+                return versionErrorMessage ;
             }
 
             if (string.IsNullOrEmpty(_current.bugNum))
             {
-                return "Bug编号不能为空!";
+                return bugNoErrorMessage;
             }
 
             if (string.IsNullOrEmpty(_current.dealMan))
-                return "处理人不能为空";
+                return dealManErrorMessage;
 
-            if (string.IsNullOrEmpty(_current.bugStatus))
-                return "状态不能为空";
+            if (_old != null && string.IsNullOrEmpty(_current.bugStatus))
+                return statusErrorMessage;
 
             if (_old != null)
             {
@@ -77,31 +84,59 @@ namespace BugInfo.Common.Models
                 {
                     StateSequence stateSequence = new StateSequence(_old.bugStatus);
                     if (!stateSequence.IsNextStateValid(_current.bugStatus))
-                        return "状态变化不允许";
+                        return statusChangeErrorMessage;
                 }
             }
             return null;
         }
 
-        public bool Save()
+        public string MoveCheck()
         {
-            if (!string.IsNullOrEmpty(CheckState()))
-                return false;
+            Trace.Assert(_old != null);
 
             var oldStatus = StatesConverter.ToStateEnum(_old.bugStatus);
-            var newStatus = StatesConverter.ToStateEnum(_current.bugStatus);
-            if (oldStatus != StatesEnum.Start
-                && newStatus == StatesEnum.Start)
+            var currentStatus = StatesConverter.ToStateEnum(_current.bugStatus);
+
+
+            if (oldStatus == currentStatus)
+                return statusChangeErrorMessage;
+
+            var stateSeq = new StateSequence(_old.bugStatus);
+            if (!stateSeq.IsNextStateValid(_current.bugStatus))
+                return statusChangeErrorMessage;
+
+            return string.Empty;
+        }
+
+        public SaveResult Save()
+        {
+
+            if (!string.IsNullOrEmpty(SaveCheck()))
+                return new SaveResult { State = false};
+
+            if (_old == _current)
+                return new SaveResult { State = true };
+
+            var result = new SaveResult { State = true };
+            if (_old == null)
             {
-                _repository.SaveChangedState(_current.bugNum, newStatus.ToString(), _current.dealMan);
+                _current.bugStatus = States.Pending;
             }
 
-            if (oldStatus == StatesEnum.Start
-                && newStatus != oldStatus)
-            {
-                _repository.SaveChangedState(_current.bugNum, newStatus.ToString(), _current.dealMan);
-            }
-            return true;
+
+            return new SaveResult { State = true,
+                Object = _current
+            };
         }
+
+        public class SaveResult
+        {
+            public bool State { get; set; }
+
+            public BugInfoEntity1 Object { get; set; }
+        }
+
+        public class MoveResult
+        { }
     }
 }

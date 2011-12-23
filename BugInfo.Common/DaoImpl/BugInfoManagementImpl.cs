@@ -86,11 +86,12 @@ namespace BugInfoManagement.DaoImpl
 
         private string GetLevelHistroy(string bugNum)
         {
-            return string.Join("\r\n",
-            new DAL.PointslogCollection().Where("bugnum", bugNum).Load()
-                .Select(n => PointsParser.ToPoint(n.Log))
-                 .Select(n => n.EstimatedLevel + " " + n.EstimatedBy)
-                 .ToArray());
+            return null;
+            //return string.Join("\r\n",
+            //new DAL.PointslogCollection().Where("bugnum", bugNum).Load()
+            //    .Select(n => PointsParser.ToPoint(n.Log))
+            //     .Select(n => n.EstimatedLevel + " " + n.EstimatedBy)
+            //     .ToArray());
         }
 
         private decimal GetTotalHous(string bugNum)
@@ -381,15 +382,15 @@ where CreateDate >= @start and CreateDate <= @end");
             changeLog.Save();
         }
 
-        public void AssignPoints(string bugNum, string log)
-        {
-            DAL.Pointslog pointLog = new DAL.Pointslog();
+        public void AssignPoints(string bugNum, string log){
+        //{
+        //    DAL.Pointslog pointLog = new DAL.Pointslog();
 
-            pointLog.Bugnum = bugNum;
-            pointLog.Log = log;
-            pointLog.Createdtime = DateTime.Now;
+        //    pointLog.Bugnum = bugNum;
+        //    pointLog.Log = log;
+        //    pointLog.Createdtime = DateTime.Now;
 
-            pointLog.Save();
+        //    pointLog.Save();
 
         }
 

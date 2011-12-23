@@ -351,10 +351,11 @@ namespace BugInfoManagement
 
         public bool HasEvalValue()
         {
-            var coll = new DAL.PointslogCollection()
-                .Where("bugnum", BugInfo.BugNum)
-                .Load();
-            return coll.Count > 0;
+            return true;
+            //var coll = new DAL.PointslogCollection()
+            //    .Where("bugnum", BugInfo.BugNum)
+            //    .Load();
+            //return coll.Count > 0;
         }
 
     }
