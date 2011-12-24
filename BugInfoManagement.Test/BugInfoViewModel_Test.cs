@@ -135,11 +135,11 @@ namespace BugInfoManagement.Test
 
             var result = model.Save();
 
-            Assert.IsTrue(result.State);
+            Assert.IsFalse(result.State);
         }
 
         [TestMethod]
-        public void MoveState_Pending_To_Start_Test()
+        public void MoveCheck_Pending_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -168,7 +168,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Pending_To_Abort_Test()
+        public void MoveCheck_Pending_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -197,7 +197,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Pending_To_Complete_Test()
+        public void MoveCheck_Pending_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -226,7 +226,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Pending_To_Pending_Test()
+        public void MoveCheck_Pending_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -255,7 +255,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Start_To_Pending_Test()
+        public void MoveCheck_Start_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -284,7 +284,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Start_To_Abort_Test()
+        public void MoveCheck_Start_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -313,7 +313,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Start_To_Complete_Test()
+        public void MoveCheck_Start_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -342,7 +342,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Complete_To_Start_Test()
+        public void MoveCheck_Complete_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -371,7 +371,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Complete_To_Abort_Test()
+        public void MoveCheck_Complete_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -400,7 +400,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Complete_To_Pending_Test()
+        public void MoveCheck_Complete_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -425,11 +425,11 @@ namespace BugInfoManagement.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveState_Abort_To_Pending_Test()
+        public void MoveCheck_Abort_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -458,7 +458,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Abort_To_Start_Test()
+        public void MoveCheck_Abort_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -487,7 +487,7 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
-        public void MoveState_Abort_To_Complete_Test()
+        public void MoveCheck_Abort_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
@@ -513,6 +513,147 @@ namespace BugInfoManagement.Test
             model.Current.bugStatus = States.Complete;
 
             Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+        }
+
+        [TestMethod]
+        public void Move_Pending_To_Start_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(
+                CreateEntity("1", 0, States.Pending)
+                );
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1");
+
+            model.Current.bugStatus = States.Start;
+
+            var result = model.Move();
+
+            Assert.IsTrue(result.State);
+            Assert.IsFalse(result.UpdateDuration);
+            Assert.AreEqual(StatesEnum.Start, result.NewStatus);
+        }
+
+        private BugInfo.Common.Entity.BugInfoEntity1 CreateEntity(string itemId,
+            int sequence,
+            string status)
+        {
+            return new BugInfo.Common.Entity.BugInfoEntity1
+                {
+                    bugNum = itemId,
+                    bugStatus = status,
+                    dealMan = "a",
+                    description = "hello",
+                    fired = 1,
+                    hardLevel = 1,
+                    moveSequence = sequence,
+                    size = 1,
+                    version = "1.0"
+                };
+        }
+
+        [TestMethod]
+        public void Move_Start_To_Abort_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(
+                CreateEntity("1", 0,  States.Start)
+                );
+
+            repository.Setup(n => n.GetLastestStartTime("1", 0))
+                .Returns(
+                DateTime.Now.AddMinutes(-2)
+                );
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1");
+
+            model.Current.bugStatus = States.Abort;
+
+            var result = model.Move();
+            
+            Assert.IsTrue(result.State);
+            Assert.IsTrue(result.UpdateDuration);
+            Assert.IsTrue(result.NewFired > 1);
+            Assert.AreEqual(StatesEnum.Abort, result.NewStatus);
+        }
+
+        [TestMethod]
+        public void Move_Start_To_Complete_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(
+                CreateEntity("1", 0, States.Start)
+                );
+
+            repository.Setup(n => n.GetLastestStartTime("1", 0))
+                .Returns(
+                DateTime.Now.AddMinutes(-2)
+                );
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1");
+
+            model.Current.bugStatus = States.Complete;
+
+            var result = model.Move();
+
+            Assert.IsTrue(result.State);
+            Assert.IsTrue(result.UpdateDuration);
+            Assert.IsTrue(result.NewFired > 1);
+            Assert.AreEqual(StatesEnum.Complete, result.NewStatus);
+        }
+
+        [TestMethod]
+        public void Move_Complete_To_Start_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(
+                CreateEntity("1", 0, States.Complete)
+                );
+
+            repository.Setup(n => n.GetLastestStartTime("1", 0))
+                .Verifiable();
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1");
+
+            model.Current.bugStatus = States.Start;
+
+            var result = model.Move();
+
+            Assert.IsTrue(result.State);
+            Assert.IsFalse(result.UpdateDuration);
+            Assert.AreEqual(StatesEnum.Start, result.NewStatus);
+        }
+
+        [TestMethod]
+        public void Move_Abort_To_Start_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(
+                CreateEntity("1", 0, States.Abort)
+                );
+
+            repository.Setup(n => n.GetLastestStartTime("1", 0))
+                .Verifiable();
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1");
+
+            model.Current.bugStatus = States.Start;
+
+            var result = model.Move();
+
+            Assert.IsTrue(result.State);
+            Assert.IsFalse(result.UpdateDuration);
+            Assert.AreEqual(StatesEnum.Start, result.NewStatus);
         }
     }
 }

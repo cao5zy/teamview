@@ -19,7 +19,6 @@ namespace BugInfoManagement
             new Sequence{Current =States.Start, Next = States.Abort},
             new Sequence{Current = States.Abort, Next =States.Start},
             new Sequence{Current =States.Start, Next = States.Complete},
-            new Sequence{Current = States.Complete,Next = States.Pending},
             new Sequence{Current = States.Complete, Next =States.Start}
         };
 

@@ -13,5 +13,7 @@ namespace BugInfo.Common.Dao
         void SaveChangedState(string itemId, string bugStatus, string dealMan);
 
         void UpdateItem(BugInfoEntity1 item);
+
+        DateTime GetLastestStartTime(string itemId, int sequence);
     }
 }

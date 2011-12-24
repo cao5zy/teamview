@@ -137,6 +137,53 @@ namespace BugInfo.Common.Models
         }
 
         public class MoveResult
-        { }
+        {
+            public bool State { get; set; }
+
+            public string BugNum { get; set; }
+
+            public int Sequence { get; set; }
+
+            public StatesEnum NewStatus { get; set; }
+
+            public int LogTypeId { get; set; }
+
+            public bool UpdateDuration { get; set; }
+
+            public int NewFired { get; set; }
+
+
+        }
+
+        public MoveResult Move()
+        {
+            MoveResult result = new MoveResult { State = false };
+
+            if(!string.IsNullOrEmpty(MoveCheck()))
+                return result;
+
+            result.BugNum = _current.bugNum;
+            result.NewStatus = StatesConverter.ToStateEnum(_current.bugStatus);
+            result.Sequence = _current.moveSequence;
+            result.State = true;
+            result.LogTypeId = ConvertToLogTypeId(result.NewStatus);
+
+            if (result.LogTypeId == (int)LogTypeEnum.MissionStop)
+            {
+                result.UpdateDuration = true;
+                result.NewFired = _current.fired + (int)DateTime.Now.Subtract(_repository.GetLastestStartTime(_current.bugNum, _current.moveSequence)).TotalMinutes;
+            }
+            return result;
+        }
+
+        private int ConvertToLogTypeId(StatesEnum statesEnum)
+        {
+            if (statesEnum == StatesEnum.Start)
+                return (int)LogTypeEnum.MissionStart;
+            if (statesEnum == StatesEnum.Complete || statesEnum == StatesEnum.Abort)
+                return (int)LogTypeEnum.MissionStop;
+            else
+                return (int)LogTypeEnum.None;
+        }
     }
 }
