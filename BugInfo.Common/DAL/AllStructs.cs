@@ -22,6 +22,8 @@ namespace DAL
         
 		public static readonly string ChangeLog = @"ChangeLog";
         
+		public static readonly string KeyInfo = @"keyInfo";
+        
 	}
 	#endregion
     #region Schemas
@@ -35,6 +37,11 @@ namespace DAL
 		public static TableSchema.Table ChangeLog
 		{
             get { return DataService.GetSchema("ChangeLog", "BugInfoProvider"); }
+		}
+        
+		public static TableSchema.Table KeyInfo
+		{
+            get { return DataService.GetSchema("keyInfo", "BugInfoProvider"); }
 		}
         
 	

@@ -15,5 +15,11 @@ namespace BugInfo.Common.Dao
         void UpdateItem(BugInfoEntity1 item);
 
         DateTime GetLastestStartTime(string itemId, int sequence);
+
+        long ? GetCurrentKeyValue(string keyName);
+
+        void UpdateKeyValue(string keyName, long newVal);
+
+        void InsertKeyValue(string keyName, long val);
     }
 }

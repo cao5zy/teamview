@@ -74,6 +74,8 @@
     <Compile Include="DAL\BugInfoController.cs" />
     <Compile Include="DAL\ChangeLog.cs" />
     <Compile Include="DAL\ChangeLogController.cs" />
+    <Compile Include="DAL\KeyInfo.cs" />
+    <Compile Include="DAL\KeyInfoController.cs" />
     <Compile Include="DAL\StoredProcedures.cs" />
     <Compile Include="Dao\IBugInfoRepository.cs" />
     <Compile Include="Entity\BugInfoEntity1.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="LogTypeEnum.cs" />
     <Compile Include="Models\BugInfoViewModel.cs" />
     <Compile Include="Models\HardLevelModel.cs" />
+    <Compile Include="Models\KeyModel.cs" />
     <Compile Include="Models\StateViewModel.cs" />
     <Compile Include="PointsParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

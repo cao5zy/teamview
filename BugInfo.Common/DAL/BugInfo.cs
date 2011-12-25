@@ -192,6 +192,20 @@ namespace DAL
 				colvarDealMan.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarDealMan);
 				
+				TableSchema.TableColumn colvarCreatedTime = new TableSchema.TableColumn(schema);
+				colvarCreatedTime.ColumnName = "createdTime";
+				colvarCreatedTime.DataType = DbType.DateTime;
+				colvarCreatedTime.MaxLength = 0;
+				colvarCreatedTime.AutoIncrement = false;
+				colvarCreatedTime.IsNullable = false;
+				colvarCreatedTime.IsPrimaryKey = false;
+				colvarCreatedTime.IsForeignKey = false;
+				colvarCreatedTime.IsReadOnly = false;
+				
+						colvarCreatedTime.DefaultSetting = @"(getdate())";
+				colvarCreatedTime.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarCreatedTime);
+				
 				TableSchema.TableColumn colvarDescription = new TableSchema.TableColumn(schema);
 				colvarDescription.ColumnName = "description";
 				colvarDescription.DataType = DbType.AnsiString;
@@ -218,19 +232,6 @@ namespace DAL
 				colvarDetailDoc.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarDetailDoc);
 				
-				TableSchema.TableColumn colvarCreatedMan = new TableSchema.TableColumn(schema);
-				colvarCreatedMan.ColumnName = "createdMan";
-				colvarCreatedMan.DataType = DbType.AnsiString;
-				colvarCreatedMan.MaxLength = 50;
-				colvarCreatedMan.AutoIncrement = false;
-				colvarCreatedMan.IsNullable = true;
-				colvarCreatedMan.IsPrimaryKey = false;
-				colvarCreatedMan.IsForeignKey = false;
-				colvarCreatedMan.IsReadOnly = false;
-				colvarCreatedMan.DefaultSetting = @"";
-				colvarCreatedMan.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarCreatedMan);
-				
 				TableSchema.TableColumn colvarSize = new TableSchema.TableColumn(schema);
 				colvarSize.ColumnName = "size";
 				colvarSize.DataType = DbType.Int32;
@@ -244,19 +245,6 @@ namespace DAL
 						colvarSize.DefaultSetting = @"((0))";
 				colvarSize.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarSize);
-				
-				TableSchema.TableColumn colvarLastStateTime = new TableSchema.TableColumn(schema);
-				colvarLastStateTime.ColumnName = "lastStateTime";
-				colvarLastStateTime.DataType = DbType.DateTime;
-				colvarLastStateTime.MaxLength = 0;
-				colvarLastStateTime.AutoIncrement = false;
-				colvarLastStateTime.IsNullable = true;
-				colvarLastStateTime.IsPrimaryKey = false;
-				colvarLastStateTime.IsForeignKey = false;
-				colvarLastStateTime.IsReadOnly = false;
-				colvarLastStateTime.DefaultSetting = @"";
-				colvarLastStateTime.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarLastStateTime);
 				
 				TableSchema.TableColumn colvarFired = new TableSchema.TableColumn(schema);
 				colvarFired.ColumnName = "fired";
@@ -364,6 +352,14 @@ namespace DAL
 			set { SetColumnValue(Columns.DealMan, value); }
 		}
 		  
+		[XmlAttribute("CreatedTime")]
+		[Bindable(true)]
+		public DateTime CreatedTime 
+		{
+			get { return GetColumnValue<DateTime>(Columns.CreatedTime); }
+			set { SetColumnValue(Columns.CreatedTime, value); }
+		}
+		  
 		[XmlAttribute("Description")]
 		[Bindable(true)]
 		public string Description 
@@ -380,28 +376,12 @@ namespace DAL
 			set { SetColumnValue(Columns.DetailDoc, value); }
 		}
 		  
-		[XmlAttribute("CreatedMan")]
-		[Bindable(true)]
-		public string CreatedMan 
-		{
-			get { return GetColumnValue<string>(Columns.CreatedMan); }
-			set { SetColumnValue(Columns.CreatedMan, value); }
-		}
-		  
 		[XmlAttribute("Size")]
 		[Bindable(true)]
 		public int Size 
 		{
 			get { return GetColumnValue<int>(Columns.Size); }
 			set { SetColumnValue(Columns.Size, value); }
-		}
-		  
-		[XmlAttribute("LastStateTime")]
-		[Bindable(true)]
-		public DateTime? LastStateTime 
-		{
-			get { return GetColumnValue<DateTime?>(Columns.LastStateTime); }
-			set { SetColumnValue(Columns.LastStateTime, value); }
 		}
 		  
 		[XmlAttribute("Fired")]
@@ -475,7 +455,7 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime? varLastStateTime,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,byte[] varDetailDoc,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -489,15 +469,13 @@ namespace DAL
 			
 			item.DealMan = varDealMan;
 			
+			item.CreatedTime = varCreatedTime;
+			
 			item.Description = varDescription;
 			
 			item.DetailDoc = varDetailDoc;
 			
-			item.CreatedMan = varCreatedMan;
-			
 			item.Size = varSize;
-			
-			item.LastStateTime = varLastStateTime;
 			
 			item.Fired = varFired;
 			
@@ -517,7 +495,7 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,string varDescription,byte[] varDetailDoc,string varCreatedMan,int varSize,DateTime? varLastStateTime,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,byte[] varDetailDoc,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -531,15 +509,13 @@ namespace DAL
 			
 				item.DealMan = varDealMan;
 			
+				item.CreatedTime = varCreatedTime;
+			
 				item.Description = varDescription;
 			
 				item.DetailDoc = varDetailDoc;
 			
-				item.CreatedMan = varCreatedMan;
-			
 				item.Size = varSize;
-			
-				item.LastStateTime = varLastStateTime;
 			
 				item.Fired = varFired;
 			
@@ -597,21 +573,21 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn DescriptionColumn
+        public static TableSchema.TableColumn CreatedTimeColumn
         {
             get { return Schema.Columns[5]; }
         }
         
         
         
-        public static TableSchema.TableColumn DetailDocColumn
+        public static TableSchema.TableColumn DescriptionColumn
         {
             get { return Schema.Columns[6]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedManColumn
+        public static TableSchema.TableColumn DetailDocColumn
         {
             get { return Schema.Columns[7]; }
         }
@@ -625,37 +601,30 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn LastStateTimeColumn
+        public static TableSchema.TableColumn FiredColumn
         {
             get { return Schema.Columns[9]; }
         }
         
         
         
-        public static TableSchema.TableColumn FiredColumn
+        public static TableSchema.TableColumn TimeStampColumn
         {
             get { return Schema.Columns[10]; }
         }
         
         
         
-        public static TableSchema.TableColumn TimeStampColumn
+        public static TableSchema.TableColumn PriorityColumn
         {
             get { return Schema.Columns[11]; }
         }
         
         
         
-        public static TableSchema.TableColumn PriorityColumn
-        {
-            get { return Schema.Columns[12]; }
-        }
-        
-        
-        
         public static TableSchema.TableColumn HardLevelColumn
         {
-            get { return Schema.Columns[13]; }
+            get { return Schema.Columns[12]; }
         }
         
         
@@ -669,11 +638,10 @@ namespace DAL
 			 public static string MoveSequence = @"moveSequence";
 			 public static string BugStatus = @"bugStatus";
 			 public static string DealMan = @"dealMan";
+			 public static string CreatedTime = @"createdTime";
 			 public static string Description = @"description";
 			 public static string DetailDoc = @"detailDoc";
-			 public static string CreatedMan = @"createdMan";
 			 public static string Size = @"size";
-			 public static string LastStateTime = @"lastStateTime";
 			 public static string Fired = @"fired";
 			 public static string TimeStamp = @"timeStamp";
 			 public static string Priority = @"priority";

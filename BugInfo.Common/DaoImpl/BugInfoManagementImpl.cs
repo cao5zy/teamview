@@ -70,7 +70,6 @@ namespace BugInfoManagement.DaoImpl
                 bugInfoEntity.Version = bugInfo.Version;
                 bugInfoEntity.DealMan = bugInfo.DealMan;
                 bugInfoEntity.Description = bugInfo.Description;
-                bugInfoEntity.CreatedBy = bugInfo.CreatedMan;
                 bugInfoEntity.Size = bugInfo.Size;
                 bugInfoEntity.Priority = bugInfo.Priority;
                 bugInfoEntity.TimeStamp = bugInfo.TimeStamp;
@@ -138,7 +137,6 @@ namespace BugInfoManagement.DaoImpl
             bugInfo1.BugStatus = bugInfo.BugStatus;
             bugInfo1.DealMan = bugInfo.DealMan;
             bugInfo1.Description = bugInfo.Description;
-            bugInfo1.CreatedMan = bugInfo.CreatedBy;
             bugInfo1.Size = bugInfo.Size;
             bugInfo1.Priority = bugInfo.Priority;
             bugInfo1.TimeStamp = DateTime.Now;
@@ -298,7 +296,6 @@ namespace BugInfoManagement.DaoImpl
                     {
                         BugNum = reader[DAL.BugInfo.Columns.BugNum].ToString(),
                         BugStatus = reader[DAL.BugInfo.Columns.BugStatus].ToString(),
-                        CreatedBy = reader[DAL.BugInfo.Columns.CreatedMan].ToString(),
                         DealMan = reader[DAL.BugInfo.Columns.DealMan].ToString(),
                         Description = reader[DAL.BugInfo.Columns.Description].ToString(),
                         Priority = Convert.ToInt16(reader[DAL.BugInfo.Columns.Priority]),
@@ -446,7 +443,6 @@ where CreateDate >= @start and CreateDate <= @end");
             {
                 BugStatus = n.BugStatus,
                 Description = n.Description,
-                CreatedBy = n.CreatedMan,
                 DealMan = n.DealMan,
                 BugNum = n.BugNum,
                 Version = n.Version,
