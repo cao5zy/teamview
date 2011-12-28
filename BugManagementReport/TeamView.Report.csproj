@@ -90,7 +90,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) f:\toolapp\
-copy $(TargetDir)*.dll f:\toolapp</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

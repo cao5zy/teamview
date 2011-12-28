@@ -82,7 +82,8 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1 { 
+                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                {
                     bugNum = "1",
                     bugStatus = States.Pending,
                     dealMan = "a",
@@ -164,7 +165,7 @@ namespace BugInfoManagement.Test
 
             model.Current.bugStatus = States.Start;
 
-            Assert.AreEqual(model.MoveCheck(),string.Empty);
+            Assert.AreEqual(model.MoveCheck(), string.Empty);
         }
 
         [TestMethod]
@@ -560,7 +561,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1"))
                 .Returns(
-                CreateEntity("1", 0,  States.Start)
+                CreateEntity("1", 0, States.Start)
                 );
 
             repository.Setup(n => n.GetLastestStartTime("1", 0))
@@ -574,7 +575,7 @@ namespace BugInfoManagement.Test
             model.Current.bugStatus = States.Abort;
 
             var result = model.Move();
-            
+
             Assert.IsTrue(result.State);
             Assert.IsTrue(result.UpdateDuration);
             Assert.IsTrue(result.NewFired > 1);
@@ -654,6 +655,41 @@ namespace BugInfoManagement.Test
             Assert.IsTrue(result.State);
             Assert.IsFalse(result.UpdateDuration);
             Assert.AreEqual(StatesEnum.Start, result.NewStatus);
+        }
+
+        [TestMethod]
+        public void SaveDoc_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.SaveDoc("1", 0, Moq.It.IsAny<byte[]>()));
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.New();
+
+            model.Current.bugNum = "1";
+
+            byte[] stream = new byte[] { };
+            model.SaveDoc(stream);
+
+            repository.Verify(n => n.SaveDoc("1", 0, Moq.It.IsAny<byte[]>()), Moq.Times.Once());
+
+        }
+
+        [TestMethod]
+        public void LoadDoc_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            repository.Setup(n => n.LoadDoc("1")).Returns(new byte[] { });
+            repository.Setup(n => n.GetItem("1"))
+                .Returns(CreateEntity("1", 0, States.Pending));
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            model.Load("1");
+
+            byte[] result = model.LoadDoc("1", 0);
+
+            Assert.AreEqual(0, result.Length);
         }
     }
 }

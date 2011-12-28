@@ -21,5 +21,9 @@ namespace BugInfo.Common.Dao
         void UpdateKeyValue(string keyName, long newVal);
 
         void InsertKeyValue(string keyName, long val);
+
+        void SaveDoc(string itemId,int sequence, byte[] stream);
+
+        byte[] LoadDoc(string itemId);
     }
 }

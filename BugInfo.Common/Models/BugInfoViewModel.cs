@@ -8,6 +8,8 @@ using BugInfo.Common.Dao;
 using BugInfoManagement;
 using BugInfoManagement.Common;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
 
 namespace BugInfo.Common.Models
 {
@@ -64,7 +66,7 @@ namespace BugInfo.Common.Models
         {
             if (string.IsNullOrEmpty(_current.version))
             {
-                return versionErrorMessage ;
+                return versionErrorMessage;
             }
 
             if (string.IsNullOrEmpty(_current.bugNum))
@@ -112,7 +114,7 @@ namespace BugInfo.Common.Models
         {
 
             if (!string.IsNullOrEmpty(SaveCheck()))
-                return new SaveResult { State = false};
+                return new SaveResult { State = false };
 
             if (_old == _current)
                 return new SaveResult { State = true };
@@ -124,7 +126,9 @@ namespace BugInfo.Common.Models
             }
 
 
-            return new SaveResult { State = true,
+            return new SaveResult
+            {
+                State = true,
                 Object = _current
             };
         }
@@ -159,7 +163,7 @@ namespace BugInfo.Common.Models
         {
             MoveResult result = new MoveResult { State = false };
 
-            if(!string.IsNullOrEmpty(MoveCheck()))
+            if (!string.IsNullOrEmpty(MoveCheck()))
                 return result;
 
             result.BugNum = _current.bugNum;
@@ -184,6 +188,47 @@ namespace BugInfo.Common.Models
                 return (int)LogTypeEnum.MissionStop;
             else
                 return (int)LogTypeEnum.None;
+        }
+
+        public void SaveDoc(byte[] stream)
+        {
+            MemoryStream zipTargetStream = new MemoryStream();
+
+            using (GZipStream zipStream = new GZipStream(zipTargetStream, CompressionMode.Compress, true))
+            {
+                zipStream.Write(stream, 0, (int)stream.Length);
+            }
+
+            _repository.SaveDoc(_current.bugNum, _current.moveSequence, zipTargetStream.ToArray());
+        }
+
+        public byte[] LoadDoc(string itemId, int sequence)
+        {
+            byte[] stream = _repository.LoadDoc(itemId);
+
+            MemoryStream s = new MemoryStream(stream);
+            using (GZipStream zipStream = new GZipStream(s, CompressionMode.Decompress))
+            {
+                int readLen = 0;
+                int bufferLen = 4096;
+                byte[] buffer = new byte[bufferLen];
+
+                readLen = zipStream.Read(buffer, 0, bufferLen);
+
+                var unZipStream = new MemoryStream();
+
+                while (readLen != 0)
+                {
+                    unZipStream.Write(buffer, 0, readLen);
+
+                    readLen = zipStream.Read(buffer, 0, bufferLen);
+                }
+
+                unZipStream.Flush();
+
+                return unZipStream.ToArray();
+            }
+
         }
     }
 }
