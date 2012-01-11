@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BugInfoManagement.Dao;
-using BugInfoManagement.DaoImpl;
+using TeamView.Dao;
+using TeamView.DaoImpl;
 using System.IO;
-using BugInfoManagement.Common;
+using TeamView.Common;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public class CreateBugInfoManager : BugInfoManager
     {
         public delegate CreateBugInfoManager Factory();
         public CreateBugInfoManager(IBugInfoManagement bugInfomanagement):base(bugInfomanagement)
         {
-            mBugInfo = new BugInfoManagement.Entity.BugInfoEntity { 
+            mBugInfo = new TeamView.Entity.BugInfoEntity { 
                 Description = string.Empty,
                 DisposeResult = string.Empty,
                 DealMan = string.Empty,

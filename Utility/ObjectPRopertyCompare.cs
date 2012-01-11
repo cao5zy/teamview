@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace BugInfoManagement.Utility
+namespace TeamView.Utility
 {
     class ObjectPRopertyCompare<T> : System.Collections.Generic.IComparer<T> 
     {

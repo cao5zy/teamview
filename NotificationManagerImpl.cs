@@ -9,7 +9,7 @@ using System.IO;
 using System.Reflection;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public class NotificationManagerImpl : INotificationManager
     {

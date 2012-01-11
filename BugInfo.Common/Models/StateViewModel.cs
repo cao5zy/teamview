@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BugInfo.Common.Models
+namespace TeamView.Common.Models
 {
     public class StateViewModel
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BugInfo.Common</RootNamespace>
-    <AssemblyName>BugInfo.Common</AssemblyName>
+    <RootNamespace>TeamView.Common</RootNamespace>
+    <AssemblyName>TeamView.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -77,6 +77,7 @@
     <Compile Include="DAL\KeyInfo.cs" />
     <Compile Include="DAL\KeyInfoController.cs" />
     <Compile Include="DAL\StoredProcedures.cs" />
+    <Compile Include="DaoImpl\BugInfoRepository.cs" />
     <Compile Include="Dao\IBugInfoRepository.cs" />
     <Compile Include="Entity\BugInfoEntity1.cs" />
     <Compile Include="ExtendedEnumerable.cs" />

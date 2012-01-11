@@ -6,9 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BugInfoManagement.Common;
+using TeamView.Common;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public partial class StateControl : UserControl
     {

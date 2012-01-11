@@ -9,7 +9,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
 using System.Data;
 
-namespace BugInfo.Common.Logs
+namespace TeamView.Common.Logs
 {
     public class LogsModule : Module
     {

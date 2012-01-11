@@ -5,10 +5,10 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BugManagementReport;
 using System.Diagnostics;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.Common;
+using TeamView.Common.Logs;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     /// <summary>
     /// Summary description for LogReader_Test

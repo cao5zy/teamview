@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     class QueryControlModel
     {

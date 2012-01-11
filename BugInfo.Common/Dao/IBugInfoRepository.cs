@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common.Entity;
+using TeamView.Common.Entity;
 
-namespace BugInfo.Common.Dao
+namespace TeamView.Common.Dao
 {
     public interface IBugInfoRepository
     {

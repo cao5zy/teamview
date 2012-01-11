@@ -13,7 +13,7 @@ using System.Collections;
 using System.IO;
 using System.Xml;
 using System.Configuration;
-using BugInfo.Common;
+using TeamView.Common;
 using IniTeamView.UserControls;
 using CreatLocalDataBase;
 

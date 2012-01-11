@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
-using BugInfo.Common.Logs;
-using BugInfo.Common;
+using TeamView.DaoImpl;
+using TeamView.Dao;
+using TeamView.Common.Logs;
+using TeamView.Common;
 using IniTeamView;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     class Starter
     {

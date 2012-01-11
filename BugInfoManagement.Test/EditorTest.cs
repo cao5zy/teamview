@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Forms;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     /// <summary>
     /// Summary description for EditorTest

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common.Entity;
+using TeamView.Common.Entity;
 using FxLib;
 
 
-namespace BugInfoManagement.Common
+namespace TeamView.Common
 {
     public static class PointsParser
     {

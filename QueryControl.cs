@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     partial class QueryControl : UserControl
     {

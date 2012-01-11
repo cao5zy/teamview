@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common.Entity;
-using BugInfoManagement.Dao;
-using BugInfo.Common.Dao;
-using BugInfoManagement;
-using BugInfoManagement.Common;
+using TeamView.Common.Entity;
+using TeamView.Dao;
+using TeamView.Common.Dao;
+using TeamView;
+using TeamView.Common;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
-namespace BugInfo.Common.Models
+namespace TeamView.Common.Models
 {
     public class BugInfoViewModel
     {
@@ -125,7 +125,17 @@ namespace BugInfo.Common.Models
             {
                 _current.bugStatus = States.Pending;
             }
+            else
+            { 
+                if(_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Complete)
+                    || _current.bugStatus == StatesConverter.ToStateString(StatesEnum.Abort))
+                {
+                    _current.fired += (int)DateTime.Now.Subtract(_old.lastStateTime).TotalMinutes;
+                }
+            }
 
+            if(_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Start))
+                _current.lastStateTime = DateTime.Now;
 
             return new SaveResult
             {
@@ -203,7 +213,7 @@ namespace BugInfo.Common.Models
             _repository.SaveDoc(_current.bugNum, zipTargetStream.ToArray());
         }
 
-        public byte[] LoadDoc(string itemId, int sequence)
+        public byte[] LoadDoc(string itemId)
         {
             byte[] stream = _repository.LoadDoc(itemId);
 

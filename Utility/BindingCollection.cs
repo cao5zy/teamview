@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using BugInfoManagement.Utility;
+using TeamView.Utility;
 
-namespace BugInfoManagement.Utility
+namespace TeamView.Utility
 {
     public class BindingCollection<T> : BindingList<T>
     {

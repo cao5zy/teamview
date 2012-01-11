@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.Common;
+using TeamView.Common.Logs;
 
 namespace BugManagementReport
 {

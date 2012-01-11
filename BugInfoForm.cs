@@ -6,12 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
-using BugInfoManagement.Entity;
-using BugInfoManagement.Common;
+using TeamView.DaoImpl;
+using TeamView.Dao;
+using TeamView.Entity;
+using TeamView.Common;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public partial class BugInfoForm : Form
     {

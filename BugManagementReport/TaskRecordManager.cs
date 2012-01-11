@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using FxLib.Algorithms;
 using System.Diagnostics;
-using BugInfoManagement.Dao;
-using BugInfoManagement.Common;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.Dao;
+using TeamView.Common;
+using TeamView.Common;
+using TeamView.Common.Logs;
 
 namespace BugManagementReport
 {

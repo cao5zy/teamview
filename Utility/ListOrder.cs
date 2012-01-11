@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 
-namespace BugInfoManagement.Utility
+namespace TeamView.Utility
 {
     class ListOrder
     {

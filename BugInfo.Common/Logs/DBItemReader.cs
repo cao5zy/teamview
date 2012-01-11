@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BugInfo.Common.Logs
+namespace TeamView.Common.Logs
 {
     class DBItemReader
     {

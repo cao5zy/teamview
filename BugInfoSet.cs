@@ -1,10 +1,10 @@
-﻿namespace BugInfoManagement {
+﻿namespace TeamView {
     
     
     public partial class BugInfoSet {
     }
 }
-namespace BugInfoManagement.BugInfoSetTableAdapters
+namespace TeamView.BugInfoSetTableAdapters
 {
     
     

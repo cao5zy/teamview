@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using BugInfoManagement.Dao;
-using BugInfoManagement.Entity;
+using TeamView.Dao;
+using TeamView.Entity;
 using System.Collections;
 using System.Data.SqlClient;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.IO;
-using BugInfo.Common.Logs;
-using BugInfoManagement.Common;
+using TeamView.Common.Logs;
+using TeamView.Common;
 using System.Diagnostics;
 using FxLib.Algorithms;
-using BugInfo.Common;
+using TeamView.Common;
 
-namespace BugInfoManagement.DaoImpl
+namespace TeamView.DaoImpl
 {
     public class BugInfoManagementImpl : IBugInfoManagement
     {

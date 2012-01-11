@@ -6,10 +6,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BugInfoManagement.Entity;
-using BugInfo.Common.Entity;
+using TeamView.Entity;
+using TeamView.Common.Entity;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public partial class AssignPointsControl : UserControl
     {

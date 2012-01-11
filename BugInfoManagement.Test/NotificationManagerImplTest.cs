@@ -1,7 +1,7 @@
-﻿using BugInfoManagement;
+﻿using TeamView;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     
     

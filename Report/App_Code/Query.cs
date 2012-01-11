@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-using BugInfoManagement;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
-using BugInfoManagement.Entity;
+using TeamView;
+using TeamView.DaoImpl;
+using TeamView.Dao;
+using TeamView.Common;
+using TeamView.Common.Logs;
+using TeamView.Entity;
 using Autofac;
 
 public class QueryData

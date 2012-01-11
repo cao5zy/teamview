@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 using System.Windows.Forms;
-using BugInfoManagement.Dao;
-using BugInfoManagement.DaoImpl;
+using TeamView.Dao;
+using TeamView.DaoImpl;
 using System.IO;
-using BugInfoManagement.Common;
+using TeamView.Common;
 using System.Transactions;
 using System.IO.Compression;
 using FxLib.Algorithms;
-using BugInfo.Common;
+using TeamView.Common;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public abstract class BugInfoManager
     {

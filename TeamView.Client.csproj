@@ -8,8 +8,8 @@
     <ProjectGuid>{033A9DB1-71C5-4691-8A21-9E1459962524}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BugInfoManagement</RootNamespace>
-    <AssemblyName>BugInfoManagement</AssemblyName>
+    <RootNamespace>TeamView</RootNamespace>
+    <AssemblyName>TeamView</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -139,6 +139,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="BugInfoSet.xsc">

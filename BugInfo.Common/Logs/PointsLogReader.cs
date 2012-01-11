@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common.Entity;
-using BugInfoManagement.Common;
+using TeamView.Common.Entity;
+using TeamView.Common;
 
-namespace BugInfo.Common.Logs
+namespace TeamView.Common.Logs
 {
     public class PointsLogReader
     {

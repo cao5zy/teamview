@@ -3,11 +3,11 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BugInfo.Common.Dao;
-using BugInfo.Common.Models;
-using BugInfoManagement.Common;
+using TeamView.Common.Dao;
+using TeamView.Common.Models;
+using TeamView.Common;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     /// <summary>
     /// Summary description for BugInfoViewModel_Test
@@ -66,7 +66,7 @@ namespace BugInfoManagement.Test
         public void CheckState_CheckNew_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-            repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0)).Returns(new BugInfo.Common.Entity.BugInfoEntity1 { });
+            repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1 { });
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
             model.New();
@@ -82,7 +82,7 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Pending,
@@ -140,12 +140,76 @@ namespace BugInfoManagement.Test
         }
 
         [TestMethod]
+        public void Save_Calculate_Fired_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime t1 = DateTime.Now.AddHours(-1);
+            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1 { 
+                bugNum = "1",
+                moveSequence = 0,
+                lastStateTime = t1,
+                bugStatus = StatesConverter.ToStateString(StatesEnum.Start),
+                fired = 0,
+                version = "1",
+                dealMan = "a",
+               
+            });
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            model.Load("1", 0);
+
+            model.Current.bugStatus = StatesConverter.ToStateString(StatesEnum.Complete);
+
+            var result = model.Save();
+
+            Assert.IsTrue(result.State);
+
+            Assert.AreEqual(60, result.Object.fired);
+            Assert.AreEqual(t1, result.Object.lastStateTime);
+        }
+
+        [TestMethod]
+        public void Save_Calculate_NotChanged_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime t1 = DateTime.Now.AddHours(-1);
+            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1
+            {
+                bugNum = "1",
+                moveSequence = 0,
+                lastStateTime = t1,
+                bugStatus = StatesConverter.ToStateString(StatesEnum.Complete),
+                fired = 1,
+                version = "1",
+                dealMan = "a",
+
+            });
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            model.Load("1", 0);
+
+            model.Current.bugStatus = StatesConverter.ToStateString(StatesEnum.Start);
+
+            var result = model.Save();
+
+            Assert.IsTrue(result.State);
+
+            Assert.AreEqual(1, result.Object.fired);
+            Assert.AreNotEqual(t1, result.Object.lastStateTime);
+
+        }
+
+        [TestMethod]
         public void MoveCheck_Pending_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Pending,
@@ -174,7 +238,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Pending,
@@ -203,7 +267,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Pending,
@@ -232,7 +296,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Pending,
@@ -261,7 +325,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Start,
@@ -290,7 +354,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Start,
@@ -319,7 +383,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Start,
@@ -348,7 +412,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Complete,
@@ -377,7 +441,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Complete,
@@ -406,7 +470,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Complete,
@@ -435,7 +499,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Abort,
@@ -464,7 +528,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Abort,
@@ -493,7 +557,7 @@ namespace BugInfoManagement.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(
-                new BugInfo.Common.Entity.BugInfoEntity1
+                new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     bugStatus = States.Abort,
@@ -537,11 +601,11 @@ namespace BugInfoManagement.Test
             Assert.AreEqual(StatesEnum.Start, result.NewStatus);
         }
 
-        private BugInfo.Common.Entity.BugInfoEntity1 CreateEntity(string itemId,
+        private TeamView.Common.Entity.BugInfoEntity1 CreateEntity(string itemId,
             int sequence,
             string status)
         {
-            return new BugInfo.Common.Entity.BugInfoEntity1
+            return new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = itemId,
                     bugStatus = status,
@@ -687,7 +751,7 @@ namespace BugInfoManagement.Test
 
             model.Load("1", 0);
 
-            byte[] result = model.LoadDoc("1", 0);
+            byte[] result = model.LoadDoc("1");
 
             Assert.AreEqual(0, result.Length);
         }
@@ -697,7 +761,7 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
@@ -719,7 +783,7 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
@@ -741,7 +805,7 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
@@ -763,7 +827,7 @@ namespace BugInfoManagement.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
-                .Returns(new BugInfo.Common.Entity.BugInfoEntity1
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,

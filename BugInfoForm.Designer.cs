@@ -1,5 +1,5 @@
-﻿using BugInfoManagement.Common;
-namespace BugInfoManagement
+﻿using TeamView.Common;
+namespace TeamView
 {
     partial class BugInfoForm
     {
@@ -50,7 +50,7 @@ namespace BugInfoManagement
             this.BIAssessment = new System.Windows.Forms.Label();
             this.mAssignPointsControlContainer = new System.Windows.Forms.Panel();
             this.mBugStatusTextBox = new System.Windows.Forms.TextBox();
-            this.mStateControl = new BugInfoManagement.StateControl();
+            this.mStateControl = new TeamView.StateControl();
             this.mPriorityCombo = new System.Windows.Forms.ComboBox();
             this.BIPriority = new System.Windows.Forms.Label();
             this.mSizeTextBox = new System.Windows.Forms.TextBox();
@@ -82,7 +82,7 @@ namespace BugInfoManagement
             // 
             // mDataSource
             // 
-            this.mDataSource.DataSource = typeof(BugInfoManagement.Entity.BugInfoEntity);
+            this.mDataSource.DataSource = typeof(TeamView.Entity.BugInfoEntity);
             // 
             // mBugNumTextBox
             // 
@@ -285,12 +285,12 @@ namespace BugInfoManagement
             // 
             // mStateControl
             // 
-            this.mStateControl.CurrentState = BugInfoManagement.Common.StatesEnum.Start;
+            this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
             this.mStateControl.Location = new System.Drawing.Point(736, 74);
             this.mStateControl.Name = "mStateControl";
             this.mStateControl.Size = new System.Drawing.Size(79, 77);
             this.mStateControl.TabIndex = 18;
-            this.mStateControl.StateChanged += new System.EventHandler<BugInfoManagement.StateControl.StateChangedArgs>(this.mStateControl_StateChanged);
+            this.mStateControl.StateChanged += new System.EventHandler<TeamView.StateControl.StateChangedArgs>(this.mStateControl_StateChanged);
             // 
             // mPriorityCombo
             // 

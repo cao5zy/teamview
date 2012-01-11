@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfo.Common.Dao;
+using TeamView.Common.Dao;
 using System.Transactions;
 
-namespace BugInfo.Common.Models
+namespace TeamView.Common.Models
 {
     public class KeyModel
     {

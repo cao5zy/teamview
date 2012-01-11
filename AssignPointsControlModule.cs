@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Autofac;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     class AssignPointsControlModule : Module
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
+using TeamView.DaoImpl;
+using TeamView.Dao;
 using System.Data.SqlClient;
 using System.Configuration;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.Common;
+using TeamView.Common.Logs;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
 

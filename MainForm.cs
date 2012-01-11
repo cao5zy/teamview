@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using BugInfoManagement.Dao;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Entity;
-using BugInfoManagement.Utility;
+using TeamView.Dao;
+using TeamView.DaoImpl;
+using TeamView.Entity;
+using TeamView.Utility;
 using System.Configuration;
-using BugInfoManagement.Common;
+using TeamView.Common;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     partial class MainForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace BugInfoManagement
+﻿namespace TeamView
 {
     partial class AssignPointsControl
     {

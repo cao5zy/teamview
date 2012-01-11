@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public partial class SimpleEditor : UserControl
     {

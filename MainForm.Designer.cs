@@ -1,4 +1,4 @@
-﻿namespace BugInfoManagement
+﻿namespace TeamView
 {
     partial class MainForm
     {
@@ -39,7 +39,7 @@
             this.abortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mBugInfoSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.mBugInfoSet = new BugInfoManagement.BugInfoSet();
+            this.mBugInfoSet = new TeamView.BugInfoSet();
             this.mEditButton = new System.Windows.Forms.Button();
             this.mTipLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -263,49 +263,49 @@
             // version
             // 
             this.version.DataPropertyName = "Version";
-            this.version.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dVersion;
+            this.version.HeaderText = global::TeamView.BugInfoManagement_Resource.dVersion;
             this.version.Name = "version";
             this.version.ReadOnly = true;
             // 
             // bugNum
             // 
             this.bugNum.DataPropertyName = "bugNum";
-            this.bugNum.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dBugNum;
+            this.bugNum.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugNum;
             this.bugNum.Name = "bugNum";
             this.bugNum.ReadOnly = true;
             // 
             // bugStatus
             // 
             this.bugStatus.DataPropertyName = "bugStatus";
-            this.bugStatus.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dState;
+            this.bugStatus.HeaderText = global::TeamView.BugInfoManagement_Resource.dState;
             this.bugStatus.Name = "bugStatus";
             this.bugStatus.ReadOnly = true;
             // 
             // dealMan
             // 
             this.dealMan.DataPropertyName = "dealMan";
-            this.dealMan.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dBugDealer;
+            this.dealMan.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugDealer;
             this.dealMan.Name = "dealMan";
             this.dealMan.ReadOnly = true;
             // 
             // description
             // 
             this.description.DataPropertyName = "description";
-            this.description.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dDescription;
+            this.description.HeaderText = global::TeamView.BugInfoManagement_Resource.dDescription;
             this.description.Name = "description";
             this.description.ReadOnly = true;
             // 
             // Priority
             // 
             this.Priority.DataPropertyName = "Priority";
-            this.Priority.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dPriority;
+            this.Priority.HeaderText = global::TeamView.BugInfoManagement_Resource.dPriority;
             this.Priority.Name = "Priority";
             this.Priority.ReadOnly = true;
             // 
             // Size
             // 
             this.Size.DataPropertyName = "size";
-            this.Size.HeaderText = global::BugInfoManagement.BugInfoManagement_Resource.dSize;
+            this.Size.HeaderText = global::TeamView.BugInfoManagement_Resource.dSize;
             this.Size.Name = "Size";
             this.Size.ReadOnly = true;
             // 

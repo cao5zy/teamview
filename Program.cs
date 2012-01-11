@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Autofac;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
+using TeamView.DaoImpl;
+using TeamView.Dao;
 using System.Configuration;
 using System.Xml;
 using System.Resources;
 using System.Collections;
 using System.IO;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     static class Program
     {

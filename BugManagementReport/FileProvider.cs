@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using FxLib.Algorithms;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.Common;
+using TeamView.Common.Logs;
 
 namespace BugManagementReport
 {

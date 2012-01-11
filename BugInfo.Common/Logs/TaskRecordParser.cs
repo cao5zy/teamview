@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
-using BugInfoManagement.Common;
+using TeamView.Common;
 
-namespace BugInfo.Common.Logs
+namespace TeamView.Common.Logs
 {
     public class TaskRecordParser
     {

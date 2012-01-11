@@ -7,7 +7,7 @@
     <ProjectGuid>{FEAF2643-28D3-4654-AB54-D6E644462DDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BugInfoManagement.Test</RootNamespace>
+    <RootNamespace>TeamView.Test</RootNamespace>
     <AssemblyName>BugInfoManagement.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

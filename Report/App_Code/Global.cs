@@ -6,10 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Autofac;
 using Autofac.Integration.Web;
-using BugInfoManagement.DaoImpl;
-using BugInfoManagement.Dao;
-using BugInfo.Common;
-using BugInfo.Common.Logs;
+using TeamView.DaoImpl;
+using TeamView.Dao;
+using TeamView.Common;
+using TeamView.Common.Logs;
 
 namespace TeamView.ReportSite
 {

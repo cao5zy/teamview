@@ -3,13 +3,13 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BugInfo.Common;
-using BugInfoManagement.Dao;
-using BugInfoManagement.Entity;
+using TeamView.Common;
+using TeamView.Dao;
+using TeamView.Entity;
 using Autofac;
 using Moq;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     /// <summary>
     /// Summary description for JIRAImporterTest

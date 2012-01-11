@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Common;
+using TeamView.Common;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     class StateSequence
     {

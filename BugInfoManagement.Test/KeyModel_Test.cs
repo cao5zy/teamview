@@ -3,10 +3,10 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BugInfo.Common.Dao;
-using BugInfo.Common.Models;
+using TeamView.Common.Dao;
+using TeamView.Common.Models;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     /// <summary>
     /// Summary description for KeyModel_Test

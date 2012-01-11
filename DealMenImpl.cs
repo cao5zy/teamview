@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 using System.Configuration;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public class DealMenImpl : IDealMen
     {
@@ -34,7 +34,7 @@ namespace BugInfoManagement
         }
         #region IDealMen Members
 
-        public List<BugInfoManagement.Entity.ProgrammerBaseInfo> DealMen
+        public List<TeamView.Entity.ProgrammerBaseInfo> DealMen
         {
             get { return DEALMEN; }
         }

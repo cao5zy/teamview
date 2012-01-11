@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FxLib.Algorithms;
-using BugInfo.Common.Logs;
+using TeamView.Common.Logs;
 using System.IO;
 
 namespace BugManagementReport

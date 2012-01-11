@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BugInfoManagement.Dao
+namespace TeamView.Dao
 {
     public class BugInfoParameterAttribute : Attribute
     {

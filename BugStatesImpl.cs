@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 using System.Configuration;
 using FxLib.Algorithms;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public class BugStatesImpl : IBugStates
     {
@@ -26,7 +26,7 @@ namespace BugInfoManagement
         }
         #region IBugStates Members
 
-        public List<BugInfoManagement.Entity.BugStateBaseInfo> States
+        public List<TeamView.Entity.BugStateBaseInfo> States
         {
             get { return STATES; }
         }

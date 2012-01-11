@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
-using BugInfo.Common.Entity;
+using TeamView.Common.Entity;
 using System.Data;
 using System.Configuration;
 using System.Transactions;
 
-namespace BugInfo.Common.Logs
+namespace TeamView.Common.Logs
 {
     public class DBProvider : IDbProvider
     {

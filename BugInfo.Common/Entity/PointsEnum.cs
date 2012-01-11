@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BugInfoManagement.Entity
+namespace TeamView.Entity
 {
     public enum PointsEnum
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using BugInfoManagement.Entity;
-using BugInfoManagement.Common;
-using BugInfoManagement.Dao;
+using TeamView.Entity;
+using TeamView.Common;
+using TeamView.Dao;
 using System.Text.RegularExpressions;
 
-namespace BugInfo.Common
+namespace TeamView.Common
 {
     public class JIRAImporter : IItemImporter
     {

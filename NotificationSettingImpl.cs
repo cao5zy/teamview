@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace BugInfoManagement
+namespace TeamView
 {
     public class NotificationSettingImpl : INotificationSetting
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 using System.Collections;
 using System.IO;
 
-namespace BugInfoManagement.Dao
+namespace TeamView.Dao
 {
     public interface IBugInfoManagement
     {

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugInfoManagement.Entity;
+using TeamView.Entity;
 
-namespace BugInfoManagement.Test
+namespace TeamView.Test
 {
     class DealMenTestImpl : IDealMen
     {
         #region IDealMen Members
 
-        public virtual List<BugInfoManagement.Entity.ProgrammerBaseInfo> DealMen
+        public virtual List<TeamView.Entity.ProgrammerBaseInfo> DealMen
         {
             get {
-                return new List<BugInfoManagement.Entity.ProgrammerBaseInfo> { 
+                return new List<TeamView.Entity.ProgrammerBaseInfo> { 
                     new ProgrammerBaseInfo{
                         ID = 0,
                         Name = string.Empty
