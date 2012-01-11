@@ -8,9 +8,9 @@ namespace BugInfo.Common.Dao
 {
     public interface IBugInfoRepository
     {
-        BugInfoEntity1 GetItem(string itemId);
+        BugInfoEntity1 GetItem(string itemId, int moveSequence);
 
-        void SaveChangedState(string itemId, string bugStatus, string dealMan);
+        void SaveChangedState(string itemId, int moveSequence, string bugStatus, string dealMan);
 
         void UpdateItem(BugInfoEntity1 item);
 
@@ -22,7 +22,7 @@ namespace BugInfo.Common.Dao
 
         void InsertKeyValue(string keyName, long val);
 
-        void SaveDoc(string itemId,int sequence, byte[] stream);
+        void SaveDoc(string itemId,byte[] stream);
 
         byte[] LoadDoc(string itemId);
     }

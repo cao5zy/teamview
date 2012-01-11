@@ -20,6 +20,7 @@ namespace BugInfo.Common.Models
         public const string dealManErrorMessage = "处理人不能为空";
         public const string statusErrorMessage = "状态不能为空";
         public const string statusChangeErrorMessage = "状态变化不允许";
+        public const string dealManDuplicated = "流程处理人相同";
         private IBugInfoRepository _repository;
         private bool _state = false;
         public bool State
@@ -52,9 +53,9 @@ namespace BugInfo.Common.Models
             return _current;
         }
 
-        public BugInfoEntity1 Load(string bugNum)
+        public BugInfoEntity1 Load(string bugNum, int moveSequence)
         {
-            var item = _repository.GetItem(bugNum);
+            var item = _repository.GetItem(bugNum, moveSequence);
             _state = item != null;
             _old = item;
             _current = item.Clone();
@@ -199,7 +200,7 @@ namespace BugInfo.Common.Models
                 zipStream.Write(stream, 0, (int)stream.Length);
             }
 
-            _repository.SaveDoc(_current.bugNum, _current.moveSequence, zipTargetStream.ToArray());
+            _repository.SaveDoc(_current.bugNum, zipTargetStream.ToArray());
         }
 
         public byte[] LoadDoc(string itemId, int sequence)
@@ -229,6 +230,33 @@ namespace BugInfo.Common.Models
                 return unZipStream.ToArray();
             }
 
+        }
+
+        public class MoveDealManResult
+        {
+            public MoveDealManResult(bool state)
+            {
+                State = state;
+            }
+            public bool State { get; private set; }
+
+
+        }
+        public string CheckMoveDealMan(string dealMan)
+        {
+            var status = StatesConverter.ToStateEnum(_current.bugStatus);
+            if (status == StatesEnum.Abort
+                || status == StatesEnum.Start)
+                return statusChangeErrorMessage;
+
+            if (_current.dealMan == dealMan)
+                return dealManDuplicated;
+
+            return string.Empty;
+        }
+        public MoveDealManResult MoveDealMan(string dealMan)
+        {
+            throw new NotImplementedException();
         }
     }
 }
