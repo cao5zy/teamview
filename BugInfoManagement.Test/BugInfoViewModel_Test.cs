@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TeamView.Common;
 using TeamView.Common.Dao;
 using TeamView.Common.Models;
-using TeamView.Common;
 
 namespace TeamView.Test
 {
@@ -145,7 +142,8 @@ namespace TeamView.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
 
             DateTime t1 = DateTime.Now.AddHours(-1);
-            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1 { 
+            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1
+            {
                 bugNum = "1",
                 moveSequence = 0,
                 lastStateTime = t1,
@@ -153,7 +151,7 @@ namespace TeamView.Test
                 fired = 0,
                 version = "1",
                 dealMan = "a",
-               
+
             });
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
@@ -204,7 +202,7 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void MoveCheck_Pending_To_Start_Test()
+        public void ChangeStatusCheck_Pending_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -229,11 +227,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
-        public void MoveCheck_Pending_To_Abort_Test()
+        public void ChangeStatusCheck_Pending_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -258,11 +256,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Abort;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Pending_To_Complete_Test()
+        public void ChangeStatusCheck_Pending_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -287,11 +285,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Complete;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Pending_To_Pending_Test()
+        public void ChangeStatusCheck_Pending_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -316,11 +314,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Start_To_Pending_Test()
+        public void ChangeStatusCheck_Start_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -345,11 +343,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Start_To_Abort_Test()
+        public void ChangeStatusCheck_Start_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -374,11 +372,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Abort;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
-        public void MoveCheck_Start_To_Complete_Test()
+        public void ChangeStatusCheck_Start_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -403,11 +401,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Complete;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
-        public void MoveCheck_Complete_To_Start_Test()
+        public void ChangeStatusCheck_Complete_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -432,11 +430,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
-        public void MoveCheck_Complete_To_Abort_Test()
+        public void ChangeStatusCheck_Complete_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -461,11 +459,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Abort;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Complete_To_Pending_Test()
+        public void ChangeStatusCheck_Complete_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -490,11 +488,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Abort_To_Pending_Test()
+        public void ChangeStatusCheck_Abort_To_Pending_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -519,11 +517,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void MoveCheck_Abort_To_Start_Test()
+        public void ChangeStatusCheck_Abort_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -548,11 +546,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            Assert.AreEqual(model.MoveCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
-        public void MoveCheck_Abort_To_Complete_Test()
+        public void ChangeStatusCheck_Abort_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
@@ -577,11 +575,11 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Complete;
 
-            Assert.AreEqual(model.MoveCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
-        public void Move_Pending_To_Start_Test()
+        public void CommitStatus_Pending_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
@@ -594,7 +592,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            var result = model.Move();
+            var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
             Assert.IsFalse(result.UpdateDuration);
@@ -620,7 +618,7 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void Move_Start_To_Abort_Test()
+        public void CommitStatus_Start_To_Abort_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
@@ -638,7 +636,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Abort;
 
-            var result = model.Move();
+            var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
             Assert.IsTrue(result.UpdateDuration);
@@ -647,7 +645,7 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void Move_Start_To_Complete_Test()
+        public void CommitStatus_Start_To_Complete_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
@@ -665,7 +663,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Complete;
 
-            var result = model.Move();
+            var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
             Assert.IsTrue(result.UpdateDuration);
@@ -674,7 +672,7 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void Move_Complete_To_Start_Test()
+        public void CommitStatus_Complete_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
@@ -690,7 +688,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            var result = model.Move();
+            var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
             Assert.IsFalse(result.UpdateDuration);
@@ -698,7 +696,7 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void Move_Abort_To_Start_Test()
+        public void CommitStatus_Abort_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
@@ -714,7 +712,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            var result = model.Move();
+            var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
             Assert.IsFalse(result.UpdateDuration);
@@ -842,6 +840,102 @@ namespace TeamView.Test
             var checkResult = model.CheckMoveDealMan("b");
 
             Assert.AreEqual(BugInfoViewModel.statusChangeErrorMessage, checkResult);
+        }
+
+        [TestMethod]
+        public void MoveDealMan_OnlyMove_Test()
+        {
+            DateTime t1 = DateTime.Now.AddHours(-1);
+            DateTime t2 = DateTime.Now.AddHours(-2);
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            var oldItem = new Common.Entity.BugInfoEntity1
+            {
+                bugNum = "1",
+                bugStatus = States.Complete,
+                moveSequence = 0,
+                createdTime = t1,
+                dealMan = "a",
+                description = "description",
+                fired = 20,
+                hardLevel = 1,
+                lastStateTime = t2,
+                priority = 1,
+                size = 3,
+                timeStamp = DateTime.Now,
+                version = "4"
+            };
+            repository.Setup(n => n.GetItem("1", 0))
+                .Returns(oldItem);
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            string newDealMan = "b";
+            var moveResult = model.MoveDealMan(newDealMan);
+
+            Assert.IsTrue(moveResult.State);
+            var newItem = moveResult.NewItem;
+
+            Assert.AreEqual(oldItem.bugNum, newItem.bugNum);
+            Assert.AreEqual(States.Pending, newItem.bugStatus);
+            Assert.AreEqual(1, newItem.moveSequence);
+            Assert.AreNotEqual(t1, newItem.createdTime);
+            Assert.AreEqual("b", newItem.dealMan);
+            Assert.AreEqual("description", newItem.description);
+            Assert.AreEqual(0, newItem.fired);
+            Assert.AreEqual(oldItem.hardLevel, newItem.hardLevel);
+            Assert.AreEqual(DateTime.MinValue, newItem.lastStateTime);
+            Assert.AreEqual(oldItem.priority, newItem.priority);
+            Assert.AreEqual(oldItem.size, newItem.size);
+            Assert.AreEqual(DateTime.MinValue, newItem.timeStamp);
+            Assert.AreEqual(oldItem.version, newItem.version);
+        }
+
+        [TestMethod]
+        public void MoveDealMan_Move_Priority_Size_Test()
+        {
+            DateTime t1 = DateTime.Now.AddHours(-1);
+            DateTime t2 = DateTime.Now.AddHours(-2);
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            var oldItem = new Common.Entity.BugInfoEntity1
+            {
+                bugNum = "1",
+                bugStatus = States.Complete,
+                moveSequence = 0,
+                createdTime = t1,
+                dealMan = "b",
+                description = "description",
+                fired = 20,
+                hardLevel = 1,
+                lastStateTime = t2,
+                priority = 1,
+                size = 3,
+                timeStamp = DateTime.Now,
+                version = "4"
+            };
+            repository.Setup(n => n.GetItem("1", 0))
+                .Returns(oldItem);
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            string newDealMan = "b";
+            int newSize = 5;
+            int newPriority = 4;
+            var moveResult = model.MoveDealMan(newDealMan, newSize, newPriority);
+
+            Assert.IsTrue(moveResult.State);
+            var newItem = moveResult.NewItem;
+
+            Assert.AreEqual(oldItem.bugNum, newItem.bugNum);
+            Assert.AreEqual(States.Pending, newItem.bugStatus);
+            Assert.AreEqual(1, newItem.moveSequence);
+            Assert.AreNotEqual(t1, newItem.createdTime);
+            Assert.AreEqual(newDealMan, newItem.dealMan);
+            Assert.AreEqual("description", newItem.description);
+            Assert.AreEqual(0, newItem.fired);
+            Assert.AreEqual(oldItem.hardLevel, newItem.hardLevel);
+            Assert.AreEqual(DateTime.MinValue, newItem.lastStateTime);
+            Assert.AreEqual(newPriority, newItem.priority);
+            Assert.AreEqual(newSize, newItem.size);
+            Assert.AreEqual(DateTime.MinValue, newItem.timeStamp);
+            Assert.AreEqual(oldItem.version, newItem.version);
         }
     }
 }

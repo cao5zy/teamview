@@ -38,7 +38,7 @@ namespace TeamView.Common.DaoImpl
             
         }
 
-        public void SaveChangedState(string itemId, int moveSequence, string bugStatus, string dealMan)
+        public DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus)
         {
             throw new NotImplementedException();
         }

@@ -93,7 +93,7 @@ namespace TeamView.Common.Models
             return null;
         }
 
-        public string MoveCheck()
+        public string ChangeStatusCheck()
         {
             Trace.Assert(_old != null);
 
@@ -126,15 +126,15 @@ namespace TeamView.Common.Models
                 _current.bugStatus = States.Pending;
             }
             else
-            { 
-                if(_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Complete)
+            {
+                if (_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Complete)
                     || _current.bugStatus == StatesConverter.ToStateString(StatesEnum.Abort))
                 {
                     _current.fired += (int)DateTime.Now.Subtract(_old.lastStateTime).TotalMinutes;
                 }
             }
 
-            if(_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Start))
+            if (_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Start))
                 _current.lastStateTime = DateTime.Now;
 
             return new SaveResult
@@ -151,7 +151,7 @@ namespace TeamView.Common.Models
             public BugInfoEntity1 Object { get; set; }
         }
 
-        public class MoveResult
+        public class CommitStatusResult
         {
             public bool State { get; set; }
 
@@ -170,11 +170,11 @@ namespace TeamView.Common.Models
 
         }
 
-        public MoveResult Move()
+        public CommitStatusResult CommitStatus()
         {
-            MoveResult result = new MoveResult { State = false };
+            CommitStatusResult result = new CommitStatusResult { State = false };
 
-            if (!string.IsNullOrEmpty(MoveCheck()))
+            if (!string.IsNullOrEmpty(ChangeStatusCheck()))
                 return result;
 
             result.BugNum = _current.bugNum;
@@ -250,7 +250,7 @@ namespace TeamView.Common.Models
             }
             public bool State { get; private set; }
 
-
+            public BugInfoEntity1 NewItem { get; set; }
         }
         public string CheckMoveDealMan(string dealMan)
         {
@@ -264,7 +264,15 @@ namespace TeamView.Common.Models
 
             return string.Empty;
         }
+
         public MoveDealManResult MoveDealMan(string dealMan)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        public MoveDealManResult MoveDealMan(string newDealMan, int newSize, int newPriority)
         {
             throw new NotImplementedException();
         }

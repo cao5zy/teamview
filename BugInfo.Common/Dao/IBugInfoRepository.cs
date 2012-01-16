@@ -10,7 +10,7 @@ namespace TeamView.Common.Dao
     {
         BugInfoEntity1 GetItem(string itemId, int moveSequence);
 
-        void SaveChangedState(string itemId, int moveSequence, string bugStatus, string dealMan);
+        DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus);
 
         void UpdateItem(BugInfoEntity1 item);
 
