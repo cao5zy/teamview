@@ -38,7 +38,7 @@ namespace TeamView.Common.DaoImpl
             
         }
 
-        public DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus)
+        public DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus, DateTime timeStamp)
         {
             throw new NotImplementedException();
         }
@@ -79,5 +79,9 @@ namespace TeamView.Common.DaoImpl
         }
 
         #endregion
+        public bool IsLargestOrder(string itemId, int moveSequence)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

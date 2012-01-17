@@ -767,6 +767,8 @@ namespace TeamView.Test
                     bugStatus = States.Complete
                 }
                 );
+
+            repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             model.Load("1", 0);
@@ -843,6 +845,32 @@ namespace TeamView.Test
         }
 
         [TestMethod]
+        public void CheckMoveDealMan_Fail_Due_to_MoveSequence_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("1", 0))
+                .Returns(new TeamView.Common.Entity.BugInfoEntity1
+                {
+                    bugNum = "1",
+                    moveSequence = 2,
+                    dealMan = "a",
+                    bugStatus = States.Complete
+                }
+                );
+
+            repository.Setup(n => n.IsLargestOrder("1", 2))
+                .Returns(false);
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            model.Load("1", 0);
+
+            var checkResult = model.CheckMoveDealMan("b");
+
+            Assert.AreEqual(BugInfoViewModel.notLargestOrder, checkResult);
+        }
+
+        [TestMethod]
         public void MoveDealMan_OnlyMove_Test()
         {
             DateTime t1 = DateTime.Now.AddHours(-1);
@@ -866,9 +894,12 @@ namespace TeamView.Test
             };
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(oldItem);
+
+            repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             string newDealMan = "b";
+            model.Load("1", 0);
             var moveResult = model.MoveDealMan(newDealMan);
 
             Assert.IsTrue(moveResult.State);
@@ -876,7 +907,7 @@ namespace TeamView.Test
 
             Assert.AreEqual(oldItem.bugNum, newItem.bugNum);
             Assert.AreEqual(States.Pending, newItem.bugStatus);
-            Assert.AreEqual(1, newItem.moveSequence);
+            Assert.AreEqual(oldItem.moveSequence + 1, newItem.moveSequence);
             Assert.AreNotEqual(t1, newItem.createdTime);
             Assert.AreEqual("b", newItem.dealMan);
             Assert.AreEqual("description", newItem.description);
@@ -901,7 +932,7 @@ namespace TeamView.Test
                 bugStatus = States.Complete,
                 moveSequence = 0,
                 createdTime = t1,
-                dealMan = "b",
+                dealMan = "a",
                 description = "description",
                 fired = 20,
                 hardLevel = 1,
@@ -913,8 +944,11 @@ namespace TeamView.Test
             };
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(oldItem);
-            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
+            repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
+
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+            model.Load("1", 0);
             string newDealMan = "b";
             int newSize = 5;
             int newPriority = 4;

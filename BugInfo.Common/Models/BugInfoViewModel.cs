@@ -21,6 +21,7 @@ namespace TeamView.Common.Models
         public const string statusErrorMessage = "状态不能为空";
         public const string statusChangeErrorMessage = "状态变化不允许";
         public const string dealManDuplicated = "流程处理人相同";
+        public const string notLargestOrder = "只能在最大序号上对任务做转移处理";
         private IBugInfoRepository _repository;
         private bool _state = false;
         public bool State
@@ -262,19 +263,39 @@ namespace TeamView.Common.Models
             if (_current.dealMan == dealMan)
                 return dealManDuplicated;
 
+            if (!_repository.IsLargestOrder(_current.bugNum, _current.moveSequence))
+                return notLargestOrder;
+
             return string.Empty;
         }
 
         public MoveDealManResult MoveDealMan(string dealMan)
         {
-            throw new NotImplementedException();
+            return MoveDealMan(dealMan, _current.size, _current.priority);
         }
-
-
 
         public MoveDealManResult MoveDealMan(string newDealMan, int newSize, int newPriority)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(CheckMoveDealMan(newDealMan)))
+                return new MoveDealManResult(false);
+
+            var newObj = new BugInfoEntity1
+            {
+                bugNum = _current.bugNum,
+                bugStatus = States.Pending,
+                createdTime = DateTime.Now,
+                dealMan = newDealMan,
+                description = _current.description,
+                fired = 0,
+                hardLevel = _current.hardLevel,
+                lastStateTime = DateTime.MinValue,
+                moveSequence = _current.moveSequence + 1,
+                priority = newPriority,
+                size = newSize,
+                version = _current.version,
+            };
+
+            return new MoveDealManResult(true) { NewItem = newObj };
         }
     }
 }
