@@ -219,19 +219,6 @@ namespace DAL
 				colvarDescription.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarDescription);
 				
-				TableSchema.TableColumn colvarDetailDoc = new TableSchema.TableColumn(schema);
-				colvarDetailDoc.ColumnName = "detailDoc";
-				colvarDetailDoc.DataType = DbType.Binary;
-				colvarDetailDoc.MaxLength = 2147483647;
-				colvarDetailDoc.AutoIncrement = false;
-				colvarDetailDoc.IsNullable = true;
-				colvarDetailDoc.IsPrimaryKey = false;
-				colvarDetailDoc.IsForeignKey = false;
-				colvarDetailDoc.IsReadOnly = false;
-				colvarDetailDoc.DefaultSetting = @"";
-				colvarDetailDoc.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarDetailDoc);
-				
 				TableSchema.TableColumn colvarSize = new TableSchema.TableColumn(schema);
 				colvarSize.ColumnName = "size";
 				colvarSize.DataType = DbType.Int32;
@@ -368,14 +355,6 @@ namespace DAL
 			set { SetColumnValue(Columns.Description, value); }
 		}
 		  
-		[XmlAttribute("DetailDoc")]
-		[Bindable(true)]
-		public byte[] DetailDoc 
-		{
-			get { return GetColumnValue<byte[]>(Columns.DetailDoc); }
-			set { SetColumnValue(Columns.DetailDoc, value); }
-		}
-		  
 		[XmlAttribute("Size")]
 		[Bindable(true)]
 		public int Size 
@@ -455,7 +434,7 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,byte[] varDetailDoc,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -472,8 +451,6 @@ namespace DAL
 			item.CreatedTime = varCreatedTime;
 			
 			item.Description = varDescription;
-			
-			item.DetailDoc = varDetailDoc;
 			
 			item.Size = varSize;
 			
@@ -495,7 +472,7 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,byte[] varDetailDoc,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -512,8 +489,6 @@ namespace DAL
 				item.CreatedTime = varCreatedTime;
 			
 				item.Description = varDescription;
-			
-				item.DetailDoc = varDetailDoc;
 			
 				item.Size = varSize;
 			
@@ -587,44 +562,37 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn DetailDocColumn
+        public static TableSchema.TableColumn SizeColumn
         {
             get { return Schema.Columns[7]; }
         }
         
         
         
-        public static TableSchema.TableColumn SizeColumn
+        public static TableSchema.TableColumn FiredColumn
         {
             get { return Schema.Columns[8]; }
         }
         
         
         
-        public static TableSchema.TableColumn FiredColumn
+        public static TableSchema.TableColumn TimeStampColumn
         {
             get { return Schema.Columns[9]; }
         }
         
         
         
-        public static TableSchema.TableColumn TimeStampColumn
+        public static TableSchema.TableColumn PriorityColumn
         {
             get { return Schema.Columns[10]; }
         }
         
         
         
-        public static TableSchema.TableColumn PriorityColumn
-        {
-            get { return Schema.Columns[11]; }
-        }
-        
-        
-        
         public static TableSchema.TableColumn HardLevelColumn
         {
-            get { return Schema.Columns[12]; }
+            get { return Schema.Columns[11]; }
         }
         
         
@@ -640,7 +608,6 @@ namespace DAL
 			 public static string DealMan = @"dealMan";
 			 public static string CreatedTime = @"createdTime";
 			 public static string Description = @"description";
-			 public static string DetailDoc = @"detailDoc";
 			 public static string Size = @"size";
 			 public static string Fired = @"fired";
 			 public static string TimeStamp = @"timeStamp";

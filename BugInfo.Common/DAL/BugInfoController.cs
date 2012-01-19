@@ -92,7 +92,7 @@ namespace DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,byte[] DetailDoc,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 		    
@@ -109,8 +109,6 @@ namespace DAL
             item.CreatedTime = CreatedTime;
             
             item.Description = Description;
-            
-            item.DetailDoc = DetailDoc;
             
             item.Size = Size;
             
@@ -130,7 +128,7 @@ namespace DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,byte[] DetailDoc,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
 	    {
 		    BugInfo item = new BugInfo();
 	        item.MarkOld();
@@ -149,8 +147,6 @@ namespace DAL
 			item.CreatedTime = CreatedTime;
 				
 			item.Description = Description;
-				
-			item.DetailDoc = DetailDoc;
 				
 			item.Size = Size;
 				

@@ -10,6 +10,8 @@ using TeamView.DaoImpl;
 using TeamView.Dao;
 using TeamView.Entity;
 using TeamView.Common;
+using TeamView.Common.Models;
+using TeamView.Common.Dao;
 
 namespace TeamView
 {
@@ -21,7 +23,6 @@ namespace TeamView
         private IBugStates BugStates { get; set; }
 
         private SimpleEditor mSimpleEditor;
-        public BugInfoManager BugInfoManager { get; set; }
         public BugInfoForm()
         {
             InitializeComponent();
@@ -47,14 +48,12 @@ namespace TeamView
             mEditorPanel.Controls.Add(mSimpleEditor);
             BIVersionNum.Text = BugInfoManagement_Resource.BIVersionNum;
             BIBugNum.Text = BugInfoManagement_Resource.BIBugNum;
-            BICreater.Text = BugInfoManagement_Resource.BICreater;
             BIBugDealMan.Text = BugInfoManagement_Resource.BIBugDealMan;
             BIBugState.Text = BugInfoManagement_Resource.BIBugState;
             BIPreTakeTime.Text = BugInfoManagement_Resource.BIPreTakeTime;
             BITakeTime.Text = BugInfoManagement_Resource.BITakeTime;
             BIPriority.Text = BugInfoManagement_Resource.BIPriority;
             BIBugDescription.Text = BugInfoManagement_Resource.BIBugDescription;
-            BIDealRecord.Text = BugInfoManagement_Resource.BIDealRecord;
             BIAssessment.Text = BugInfoManagement_Resource.BIAssessment;
             mDoAddButton.Text = BugInfoManagement_Resource.mDoAddButton;
             mQuitButton.Text = BugInfoManagement_Resource.mQuitButton;
@@ -62,9 +61,14 @@ namespace TeamView
         }
 
         private AssignPointsControl mAssignPointsControl;
+
+        BugInfoViewModel _model;
+        IBugInfoRepository _repository;
         public BugInfoForm(AssignPointsControl assignPointsControl,
             IDealMen dealMen,
-            IBugStates bugStates)
+            IBugStates bugStates,
+            BugInfoViewModel bugInfoMoel,
+            IBugInfoRepository repository)
             : this()
         {
             mAssignPointsControl = assignPointsControl;
@@ -72,6 +76,13 @@ namespace TeamView
             assignPointsControl.Dock = DockStyle.Fill;
             DealMen = dealMen;
             BugStates = bugStates;
+            _model = bugInfoMoel;
+            _repository = repository;
+        }
+
+        public void Init(string itemId, int moveSequence)
+        {
+            _model.Load(itemId, moveSequence);
         }
 
         private void mQuitButton_Click(object sender, EventArgs e)
@@ -81,23 +92,14 @@ namespace TeamView
 
         private bool ValidateData()
         {
-            if (!BugInfoManager.HasEvalValue())
+            string saveMessage = _model.SaveCheck();
+            if (!string.IsNullOrEmpty(saveMessage))
             {
-                if (!mAssignPointsControl.IsChanged)
-                {
-                    MessageBox.Show("Please set the estimated value");
-                    return false;
-                }
+                MessageBox.Show(saveMessage);
+                return false;
             }
 
-            bool result = !mAssignPointsControl.IsChanged || mAssignPointsControl.CanAssign;
-            if (!result)
-            {
-                MessageBox.Show("Please set the estimatedValue completely");
-            }
-
-
-            return result;
+            return true;
         }
         private void mDoAddButton_Click(object sender, EventArgs e)
         {
@@ -106,20 +108,20 @@ namespace TeamView
 
             var programmerPoint = mAssignPointsControl.GetProgrammerPoint();
 
-            programmerPoint.Assignee = BugInfoManager.BugInfo.DealMan;
+            //programmerPoint.Assignee = BugInfoManager.BugInfo.DealMan;
 
-            BugInfoManager.BugInfo.EstimatedValue = PointsParser.ToParseString(programmerPoint);
+            //BugInfoManager.BugInfo.EstimatedValue = PointsParser.ToParseString(programmerPoint);
 
-            if (BugInfoManager.Save())
-            {
-                BugInfoManager.SaveDetail(mSimpleEditor);
-                this.DialogResult = DialogResult.OK;
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Concurrency issue occurs");
-            }
+            //if (BugInfoManager.Save())
+            //{
+            //    BugInfoManager.SaveDetail(mSimpleEditor);
+            //    this.DialogResult = DialogResult.OK;
+            //    Close();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Concurrency issue occurs");
+            //}
         }
 
         private void AddForm_Load(object sender, EventArgs e)
@@ -127,39 +129,42 @@ namespace TeamView
             mDealMenBindingSource.DataSource = this.DealMen.DealMen;
             mCreatedManBindingSource.DataSource = this.DealMen.DealMen;
 
-            mDataSource.Add(BugInfoManager.BugInfo);
+            mDataSource.Add(_model.Current);
 
-            if (BugInfoManager is CreateBugInfoManager)
-            {
-                mDealManComboBox.SelectedIndex = 0;
-                mStateControl.Visible = false;
-                //do nothing here
-            }
-            else if (BugInfoManager is EditBugInfoManager)
-            {
-                mBugNumTextBox.Enabled = false;
-                mCreatedComboBox.Enabled = false;
+            mSimpleEditor
+            _model.LoadDoc(_model.Current.bugNum);
 
-                if (BugInfoManager.BugInfo.BugStatus == States.Pending
-                    || BugInfoManager.BugInfo.BugStatus == States.Abort)
-                {
-                    if (MessageBox.Show("Click Yes，start task right now!", "Start the tast?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        var oldBugStatus = BugInfoManager.BugInfo.BugStatus;
-                        ((EditBugInfoManager)BugInfoManager).MoveState(StatesEnum.Start);
+            //if (BugInfoManager is CreateBugInfoManager)
+            //{
+            //    mDealManComboBox.SelectedIndex = 0;
+            //    mStateControl.Visible = false;
+            //    //do nothing here
+            //}
+            //else if (BugInfoManager is EditBugInfoManager)
+            //{
+            //    mBugNumTextBox.Enabled = false;
+            //    mCreatedComboBox.Enabled = false;
 
-                        ((CurrencyManager)BindingContext[mDataSource]).Refresh();
-                    }
-                }
+            //    if (BugInfoManager.BugInfo.BugStatus == States.Pending
+            //        || BugInfoManager.BugInfo.BugStatus == States.Abort)
+            //    {
+            //        if (MessageBox.Show("Click Yes，start task right now!", "Start the tast?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            //        {
+            //            var oldBugStatus = BugInfoManager.BugInfo.BugStatus;
+            //            ((EditBugInfoManager)BugInfoManager).MoveState(StatesEnum.Start);
 
-                mStateControl.CurrentState = StatesConverter.ToStateEnum(BugInfoManager.BugInfo.BugStatus);
-            }
-            else
-            {
-                throw new ApplicationException("invalid type");
-            }
+            //            ((CurrencyManager)BindingContext[mDataSource]).Refresh();
+            //        }
+            //    }
 
-            BugInfoManager.LoadDetail(mSimpleEditor);
+            //    mStateControl.CurrentState = StatesConverter.ToStateEnum(BugInfoManager.BugInfo.BugStatus);
+            //}
+            //else
+            //{
+            //    throw new ApplicationException("invalid type");
+            //}
+
+            //BugInfoManager.LoadDetail(mSimpleEditor);
 
         }
 
@@ -171,12 +176,12 @@ namespace TeamView
 
         private void mStateControl_StateChanged(object sender, StateControl.StateChangedArgs e)
         {
-            var bugEditManager = BugInfoManager as EditBugInfoManager;
-            if (bugEditManager == null)
-                throw new Exception("Invalid eidt type");
+            //var bugEditManager = BugInfoManager as EditBugInfoManager;
+            //if (bugEditManager == null)
+            //    throw new Exception("Invalid eidt type");
 
-            bugEditManager.MoveState(e.NewState);
-            ((CurrencyManager)BindingContext[mDataSource]).Refresh();
+            //bugEditManager.MoveState(e.NewState);
+            //((CurrencyManager)BindingContext[mDataSource]).Refresh();
         }
 
         private void BugInfoForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -22,22 +22,23 @@ namespace TeamView
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
         public IBugInfoManagement BugInfoManagement { get; set; }
-        public INotificationSetting NotificationSetting { get; set; }
-        public INotificationManager NotificationManager { get; set; }
         private EditBugInfoManager.Factiory EditBugInfoManagerFactory { get; set; }
         private CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
         private QueryControl mQueryControl;
+        private AddNewForm.Factory _addFormFactory;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
             EditBugInfoManager.Factiory createEditBugInfoManager,
             CreateBugInfoManager.Factory createCreateBugInfoManager, 
-            QueryControl queryControl)
+            QueryControl queryControl,
+            AddNewForm.Factory addFormFactory)
         {
             InitializeComponent();
             CreateBugInfoForm = createBugInfoForm;
             EditBugInfoManagerFactory = createEditBugInfoManager;
             CreateBugInfoManagerFactory = createCreateBugInfoManager;
+            _addFormFactory = addFormFactory;
            
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
@@ -112,12 +113,10 @@ namespace TeamView
         //新增按钮事件处理
         private void mAddButton_Click(object sender, EventArgs e)
         {
-            BugInfoForm f = CreateBugInfoForm();
-            f.Text = BugInfoManagement_Resource.AddBugInfoFormName;
-            f.BugInfoManager = CreateBugInfoManagerFactory();
-            f.Show();
-            //f.Dispose();
-            //GC.Collect();
+            using (var form = _addFormFactory())
+            {
+                form.ShowDialog();
+            }
         }
 
         //修改按钮事件处理
@@ -126,9 +125,8 @@ namespace TeamView
             if (this.mBugInfoListDataGridView.CurrentRow != null)
             {
                 BugInfoForm f = CreateBugInfoForm();
-                f.BugInfoManager = EditBugInfoManagerFactory();
                 var bugNum = CurrentSelectedItem.bugNum;
-                ((EditBugInfoManager)f.BugInfoManager).Initialize(bugNum);
+                f.Init(bugNum, 0);
                 f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+bugNum;
                 f.Show();
             }

@@ -45,7 +45,42 @@ namespace TeamView.Common.DaoImpl
 
         public void UpdateItem(TeamView.Common.Entity.BugInfoEntity1 item)
         {
-            throw new NotImplementedException();
+            DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
+            var dbItem = coll.Where(DAL.BugInfo.Columns.BugNum, item.bugNum)
+                .Where(DAL.BugInfo.Columns.MoveSequence, item.moveSequence)
+                .Load()
+                .FirstOrDefault();
+            if (dbItem == null)
+            {
+                DAL.BugInfo bugInfo = new DAL.BugInfo();
+                bugInfo.BugNum = item.bugNum;
+                bugInfo.BugStatus = item.bugStatus;
+                bugInfo.CreatedTime = item.createdTime;
+                bugInfo.DealMan = item.dealMan;
+                bugInfo.Description = item.description;
+                bugInfo.Fired = item.fired;
+                bugInfo.HardLevel = (short)item.hardLevel;
+                bugInfo.MoveSequence = item.moveSequence;
+                bugInfo.Priority = (short)item.priority;
+                bugInfo.Size = item.size;
+                bugInfo.Version = item.version;
+
+                bugInfo.Save();
+            }
+            else
+            {
+                dbItem.BugStatus = item.bugStatus;
+                dbItem.CreatedTime = item.createdTime;
+                dbItem.DealMan = item.dealMan;
+                dbItem.Description = item.description;
+                dbItem.Fired = item.fired;
+                dbItem.HardLevel = (short)item.hardLevel;
+                dbItem.Priority = (short)item.priority;
+                dbItem.Size = item.size;
+                dbItem.Version = item.version;
+
+                dbItem.Save();
+            }
         }
 
         public DateTime GetLastestStartTime(string itemId, int sequence)
@@ -55,22 +90,51 @@ namespace TeamView.Common.DaoImpl
 
         public long? GetCurrentKeyValue(string keyName)
         {
-            throw new NotImplementedException();
+            DAL.KeyInfo keyInfo = new DAL.KeyInfo();
+            keyInfo.LoadByKey(keyName);
+            if (!keyInfo.IsLoaded)
+                return null;
+            else
+                return keyInfo.Num;
         }
 
         public void UpdateKeyValue(string keyName, long newVal)
         {
-            throw new NotImplementedException();
+            DAL.KeyInfo keyInfo = new DAL.KeyInfo();
+
+            keyInfo.LoadByKey(keyName);
+
+            if (!keyInfo.IsLoaded)
+                throw new ArgumentException(string.Format("{0} is not existing in the db", keyName));
+
+            keyInfo.Num = newVal;
+
+            keyInfo.Save();
+
         }
 
         public void InsertKeyValue(string keyName, long val)
         {
-            throw new NotImplementedException();
+            DAL.KeyInfo keyInfo = new DAL.KeyInfo();
+            keyInfo.KeyName = keyName;
+            keyInfo.Num = val;
+
+            keyInfo.Save();
         }
 
         public void SaveDoc(string itemId, byte[] stream)
         {
-            throw new NotImplementedException();
+            DAL.BugDoc doc = new DAL.BugDoc();
+            doc.LoadByKey(itemId);
+            if (!doc.IsLoaded)
+            {
+                doc.BugNum = itemId;
+                doc.Save();
+            }
+
+            doc.Doc = stream;
+
+            doc.Save();
         }
 
         public byte[] LoadDoc(string itemId)

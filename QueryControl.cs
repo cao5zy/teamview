@@ -47,7 +47,7 @@ namespace TeamView
                 );
 
 
-            mProgrammerCheckList.SetItemChecked(new List<string>(mModel.AllProgrammers).IndexOf(mModel.SelectedProgrammers.First()), true);
+            //mProgrammerCheckList.SetItemChecked(new List<string>(mModel.AllProgrammers).IndexOf(mModel.SelectedProgrammers.First()), true);
 
             mModel.BugStates.SafeForEach(n =>
                 mBugStatesComboBox.Items.Add(n));

@@ -12,12 +12,10 @@ namespace TeamView
         private IDealMen mDealMen;
         private List<string> mSelectedProgrammers = new List<string>();
 
-        public QueryControlModel(INotificationSetting notificationSetting,
+        public QueryControlModel(
             IBugStates bugStates,
             IDealMen dealMen)
         {
-            mSelectedProgrammers.Add(notificationSetting.ProgrammerName);
-
             mBugStates = bugStates;
             mDealMen = dealMen;
         }

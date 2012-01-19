@@ -114,18 +114,20 @@
     <Compile Include="Configs\DealManConfig.cs" />
     <Compile Include="DealMenImpl.cs" />
     <Compile Include="EditBugInfoManager.cs" />
+    <Compile Include="AddNewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewForm.Designer.cs">
+      <DependentUpon>AddNewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IBugStates.cs" />
     <Compile Include="IDealMen.cs" />
-    <Compile Include="INotificationManager.cs" />
-    <Compile Include="INotificationSetting.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NotificationManagerImpl.cs" />
-    <Compile Include="NotificationSettingImpl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AssignPointsControl.resx">
@@ -138,6 +140,9 @@
     <EmbeddedResource Include="BugInfoManagement.Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>BugInfoManagement.Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewForm.resx">
+      <DependentUpon>AddNewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -162,7 +167,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="BugInfoSet.xsc">
       <DependentUpon>BugInfoSet.xsd</DependentUpon>
     </None>
@@ -178,6 +185,7 @@
     <None Include="Properties\DataSources\BugInfoManagement.Entity.BugInfo.datasource" />
     <None Include="Properties\DataSources\BugInfoManagement.Entity.BugStateBaseInfo.datasource" />
     <None Include="Properties\DataSources\BugInfoManagement.Entity.ProgrammerBaseInfo.datasource" />
+    <None Include="Properties\DataSources\TeamView.Common.Entity.BugInfoEntity1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

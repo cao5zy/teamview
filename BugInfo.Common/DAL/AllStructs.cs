@@ -18,6 +18,8 @@ namespace DAL
 	public partial struct Tables
 	{
 		
+		public static readonly string BugDoc = @"bugDoc";
+        
 		public static readonly string BugInfo = @"bugInfo";
         
 		public static readonly string ChangeLog = @"ChangeLog";
@@ -29,6 +31,11 @@ namespace DAL
     #region Schemas
     public partial class Schemas {
 		
+		public static TableSchema.Table BugDoc
+		{
+            get { return DataService.GetSchema("bugDoc", "BugInfoProvider"); }
+		}
+        
 		public static TableSchema.Table BugInfo
 		{
             get { return DataService.GetSchema("bugInfo", "BugInfoProvider"); }

@@ -26,11 +26,13 @@ namespace TeamView.Common.Models
                 {
                     long val = value.Value;
                     _repository.UpdateKeyValue(keyName, ++val);
+                    trans.Complete();
                     return keyName + "-" + val.ToString();
                 }
                 else
                 {
                     _repository.InsertKeyValue(keyName, 1);
+                    trans.Complete();
                     return keyName + "-1";
                 }
             }

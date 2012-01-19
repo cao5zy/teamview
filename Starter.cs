@@ -29,13 +29,13 @@ namespace TeamView
             builder.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
             builder.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
             builder.RegisterType<BugInfoManagementImpl>().As<IBugInfoManagement>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterType<NotificationManagerImpl>().As<INotificationManager>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterType<NotificationSettingImpl>().As<INotificationSetting>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterModule<AssignPointsControlModule>();
             builder.RegisterType<JIRAImporter>().As<IItemImporter>();
             builder.RegisterModule<IniDbModule>();
             builder.RegisterModule<LogsModule>();
+            builder.RegisterModule<CommonModule>();
+            builder.RegisterType<AddNewForm>();
 
             mContainer = builder.Build();
         }
