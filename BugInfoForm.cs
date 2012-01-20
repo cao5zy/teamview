@@ -106,7 +106,14 @@ namespace TeamView
             if (!ValidateData())
                 return;
 
-            var programmerPoint = mAssignPointsControl.GetProgrammerPoint();
+            var saveResult = _model.Save();
+
+            _repository.UpdateItem(saveResult.Object);
+
+            if (mSimpleEditor.IsUpdated)
+            {
+                _model.SaveDoc(mSimpleEditor.Save());
+            }
 
             //programmerPoint.Assignee = BugInfoManager.BugInfo.DealMan;
 
@@ -131,8 +138,7 @@ namespace TeamView
 
             mDataSource.Add(_model.Current);
 
-            mSimpleEditor
-            _model.LoadDoc(_model.Current.bugNum);
+            mSimpleEditor.Load(_model.LoadDoc(_model.Current.bugNum));
 
             //if (BugInfoManager is CreateBugInfoManager)
             //{

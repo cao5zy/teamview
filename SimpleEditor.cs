@@ -103,9 +103,31 @@ namespace TeamView
             mTextBox.LoadFile(stream, streamType);
         }
 
+        public void Load(byte[] docDetails)
+        {
+            var tempFileName = Path.GetTempFileName();
+            using (var fs = new FileStream(tempFileName, FileMode.Create))
+            {
+                TeamView.Common.Utility.WriteBytes(docDetails, fs);
+            }
+
+            mTextBox.LoadFile(tempFileName, RichTextBoxStreamType.RichText);
+        }
+
         public void SaveFile(Stream stream, RichTextBoxStreamType streamType)
         {
             mTextBox.SaveFile(stream, streamType);
+        }
+
+        public byte[] Save()
+        {
+            var tempFileName = Path.GetTempFileName();
+            mTextBox.SaveFile(tempFileName);
+            using (var fs = new FileStream(tempFileName, FileMode.Open))
+            {
+                byte[] docDetail = TeamView.Common.Utility.ReadBytes(fs);
+                return docDetail;
+            }
         }
 
         public void Clear()

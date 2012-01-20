@@ -130,6 +130,7 @@ namespace TeamView.Common.DaoImpl
             {
                 doc.BugNum = itemId;
                 doc.Save();
+                doc.LoadByKey(itemId);
             }
 
             doc.Doc = stream;
@@ -139,7 +140,12 @@ namespace TeamView.Common.DaoImpl
 
         public byte[] LoadDoc(string itemId)
         {
-            throw new NotImplementedException();
+            DAL.BugDoc doc = new DAL.BugDoc();
+            doc.LoadByKey(itemId);
+            if (!doc.IsLoaded)
+                return new byte[] { };
+            else
+                return doc.Doc;
         }
 
         #endregion
