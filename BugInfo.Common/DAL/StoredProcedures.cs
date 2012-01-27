@@ -15,6 +15,24 @@ using SubSonic.Utilities;
 namespace DAL{
     public partial class SPs{
         
+        /// <summary>
+        /// Creates an object wrapper for the sp_returnTasks Procedure
+        /// </summary>
+        public static StoredProcedure SpReturnTasks(string itemId, string versionNum, string status, string dealMan)
+        {
+            SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("sp_returnTasks", DataService.GetInstance("BugInfoProvider"), "dbo");
+        	
+            sp.Command.AddParameter("@itemId", itemId, DbType.AnsiString, null, null);
+        	
+            sp.Command.AddParameter("@versionNum", versionNum, DbType.AnsiString, null, null);
+        	
+            sp.Command.AddParameter("@status", status, DbType.AnsiString, null, null);
+        	
+            sp.Command.AddParameter("@dealMan", dealMan, DbType.AnsiString, null, null);
+        	
+            return sp;
+        }
+        
     }
     
 }

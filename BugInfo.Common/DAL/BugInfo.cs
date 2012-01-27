@@ -289,6 +289,19 @@ namespace DAL
 				colvarHardLevel.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarHardLevel);
 				
+				TableSchema.TableColumn colvarLatestStartTime = new TableSchema.TableColumn(schema);
+				colvarLatestStartTime.ColumnName = "latestStartTime";
+				colvarLatestStartTime.DataType = DbType.DateTime;
+				colvarLatestStartTime.MaxLength = 0;
+				colvarLatestStartTime.AutoIncrement = false;
+				colvarLatestStartTime.IsNullable = true;
+				colvarLatestStartTime.IsPrimaryKey = false;
+				colvarLatestStartTime.IsForeignKey = false;
+				colvarLatestStartTime.IsReadOnly = false;
+				colvarLatestStartTime.DefaultSetting = @"";
+				colvarLatestStartTime.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarLatestStartTime);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -394,6 +407,14 @@ namespace DAL
 			get { return GetColumnValue<short>(Columns.HardLevel); }
 			set { SetColumnValue(Columns.HardLevel, value); }
 		}
+		  
+		[XmlAttribute("LatestStartTime")]
+		[Bindable(true)]
+		public DateTime? LatestStartTime 
+		{
+			get { return GetColumnValue<DateTime?>(Columns.LatestStartTime); }
+			set { SetColumnValue(Columns.LatestStartTime, value); }
+		}
 		
 		#endregion
 		
@@ -434,7 +455,7 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -462,6 +483,8 @@ namespace DAL
 			
 			item.HardLevel = varHardLevel;
 			
+			item.LatestStartTime = varLatestStartTime;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -472,7 +495,7 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel)
+		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime)
 		{
 			BugInfo item = new BugInfo();
 			
@@ -499,6 +522,8 @@ namespace DAL
 				item.Priority = varPriority;
 			
 				item.HardLevel = varHardLevel;
+			
+				item.LatestStartTime = varLatestStartTime;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -597,6 +622,13 @@ namespace DAL
         
         
         
+        public static TableSchema.TableColumn LatestStartTimeColumn
+        {
+            get { return Schema.Columns[12]; }
+        }
+        
+        
+        
         #endregion
 		#region Columns Struct
 		public struct Columns
@@ -613,6 +645,7 @@ namespace DAL
 			 public static string TimeStamp = @"timeStamp";
 			 public static string Priority = @"priority";
 			 public static string HardLevel = @"hardLevel";
+			 public static string LatestStartTime = @"latestStartTime";
 						
 		}
 		#endregion

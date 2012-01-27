@@ -37,7 +37,6 @@ namespace TeamView
             this.mDiscriptionTextBox = new System.Windows.Forms.TextBox();
             this.BIVersionNum = new System.Windows.Forms.Label();
             this.BIBugNum = new System.Windows.Forms.Label();
-            this.BIBugState = new System.Windows.Forms.Label();
             this.BIBugDealMan = new System.Windows.Forms.Label();
             this.BIBugDescription = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,7 +48,6 @@ namespace TeamView
             this.mHardLevelTextBox = new System.Windows.Forms.TextBox();
             this.BIAssessment = new System.Windows.Forms.Label();
             this.mAssignPointsControlContainer = new System.Windows.Forms.Panel();
-            this.mBugStatusTextBox = new System.Windows.Forms.TextBox();
             this.mStateControl = new TeamView.StateControl();
             this.mPriorityCombo = new System.Windows.Forms.ComboBox();
             this.BIPriority = new System.Windows.Forms.Label();
@@ -75,7 +73,6 @@ namespace TeamView
             this.mVersionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "version", true));
             this.mVersionTextBox.Location = new System.Drawing.Point(86, 14);
             this.mVersionTextBox.Name = "mVersionTextBox";
-            this.mVersionTextBox.ReadOnly = true;
             this.mVersionTextBox.Size = new System.Drawing.Size(84, 21);
             this.mVersionTextBox.TabIndex = 1;
             // 
@@ -129,15 +126,6 @@ namespace TeamView
             this.BIBugNum.Size = new System.Drawing.Size(53, 12);
             this.BIBugNum.TabIndex = 2;
             this.BIBugNum.Text = "Bug Num:";
-            // 
-            // BIBugState
-            // 
-            this.BIBugState.AutoSize = true;
-            this.BIBugState.Location = new System.Drawing.Point(6, 49);
-            this.BIBugState.Name = "BIBugState";
-            this.BIBugState.Size = new System.Drawing.Size(41, 12);
-            this.BIBugState.TabIndex = 8;
-            this.BIBugState.Text = "State:";
             // 
             // BIBugDealMan
             // 
@@ -206,7 +194,6 @@ namespace TeamView
             this.mBaseInfoGroupBox.Controls.Add(this.mHardLevelTextBox);
             this.mBaseInfoGroupBox.Controls.Add(this.BIAssessment);
             this.mBaseInfoGroupBox.Controls.Add(this.mAssignPointsControlContainer);
-            this.mBaseInfoGroupBox.Controls.Add(this.mBugStatusTextBox);
             this.mBaseInfoGroupBox.Controls.Add(this.mStateControl);
             this.mBaseInfoGroupBox.Controls.Add(this.mPriorityCombo);
             this.mBaseInfoGroupBox.Controls.Add(this.BIPriority);
@@ -224,7 +211,6 @@ namespace TeamView
             this.mBaseInfoGroupBox.Controls.Add(this.label4);
             this.mBaseInfoGroupBox.Controls.Add(this.BIBugNum);
             this.mBaseInfoGroupBox.Controls.Add(this.label2);
-            this.mBaseInfoGroupBox.Controls.Add(this.BIBugState);
             this.mBaseInfoGroupBox.Controls.Add(this.BIBugDealMan);
             this.mBaseInfoGroupBox.Controls.Add(this.BIBugDescription);
             this.mBaseInfoGroupBox.Location = new System.Drawing.Point(3, 3);
@@ -269,16 +255,6 @@ namespace TeamView
             this.mAssignPointsControlContainer.Size = new System.Drawing.Size(181, 131);
             this.mAssignPointsControlContainer.TabIndex = 23;
             // 
-            // mBugStatusTextBox
-            // 
-            this.mBugStatusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "BugStatus", true));
-            this.mBugStatusTextBox.Enabled = false;
-            this.mBugStatusTextBox.Location = new System.Drawing.Point(86, 45);
-            this.mBugStatusTextBox.Name = "mBugStatusTextBox";
-            this.mBugStatusTextBox.ReadOnly = true;
-            this.mBugStatusTextBox.Size = new System.Drawing.Size(84, 21);
-            this.mBugStatusTextBox.TabIndex = 9;
-            // 
             // mStateControl
             // 
             this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
@@ -319,7 +295,7 @@ namespace TeamView
             // mSizeTextBox
             // 
             this.mSizeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "Size", true));
-            this.mSizeTextBox.Location = new System.Drawing.Point(301, 45);
+            this.mSizeTextBox.Location = new System.Drawing.Point(124, 45);
             this.mSizeTextBox.Name = "mSizeTextBox";
             this.mSizeTextBox.ReadOnly = true;
             this.mSizeTextBox.Size = new System.Drawing.Size(100, 21);
@@ -328,7 +304,7 @@ namespace TeamView
             // BIPreTakeTime
             // 
             this.BIPreTakeTime.AutoSize = true;
-            this.BIPreTakeTime.Location = new System.Drawing.Point(185, 49);
+            this.BIPreTakeTime.Location = new System.Drawing.Point(8, 49);
             this.BIPreTakeTime.Name = "BIPreTakeTime";
             this.BIPreTakeTime.Size = new System.Drawing.Size(119, 12);
             this.BIPreTakeTime.TabIndex = 10;
@@ -337,7 +313,7 @@ namespace TeamView
             // mFiredTextBox
             // 
             this.mFiredTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "fired", true));
-            this.mFiredTextBox.Location = new System.Drawing.Point(530, 44);
+            this.mFiredTextBox.Location = new System.Drawing.Point(353, 44);
             this.mFiredTextBox.Name = "mFiredTextBox";
             this.mFiredTextBox.ReadOnly = true;
             this.mFiredTextBox.Size = new System.Drawing.Size(95, 21);
@@ -346,7 +322,7 @@ namespace TeamView
             // BITakeTime
             // 
             this.BITakeTime.AutoSize = true;
-            this.BITakeTime.Location = new System.Drawing.Point(414, 49);
+            this.BITakeTime.Location = new System.Drawing.Point(237, 49);
             this.BITakeTime.Name = "BITakeTime";
             this.BITakeTime.Size = new System.Drawing.Size(113, 12);
             this.BITakeTime.TabIndex = 12;
@@ -408,7 +384,6 @@ namespace TeamView
         private System.Windows.Forms.TextBox mDiscriptionTextBox;
         private System.Windows.Forms.Label BIVersionNum;
         private System.Windows.Forms.Label BIBugNum;
-        private System.Windows.Forms.Label BIBugState;
         private System.Windows.Forms.Label BIBugDealMan;
         private System.Windows.Forms.Label BIBugDescription;
         private System.Windows.Forms.Label label2;
@@ -429,7 +404,6 @@ namespace TeamView
         private System.Windows.Forms.Label BIPriority;
         private System.Windows.Forms.ComboBox mPriorityCombo;
         private StateControl mStateControl;
-        private System.Windows.Forms.TextBox mBugStatusTextBox;
         private System.Windows.Forms.Panel mAssignPointsControlContainer;
         private System.Windows.Forms.TextBox mHardLevelTextBox;
         private System.Windows.Forms.Label BIAssessment;

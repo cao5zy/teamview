@@ -21,7 +21,8 @@ namespace TeamView.Common.DaoImpl
             if (obj == null)
                 return null;
             else
-                return new TeamView.Common.Entity.BugInfoEntity1 { 
+                return new TeamView.Common.Entity.BugInfoEntity1
+                {
                     bugNum = obj.BugNum,
                     bugStatus = obj.BugStatus,
                     createdTime = obj.CreatedTime,
@@ -29,18 +30,14 @@ namespace TeamView.Common.DaoImpl
                     description = obj.Description,
                     fired = obj.Fired,
                     hardLevel = obj.HardLevel,
-                    moveSequence =obj.MoveSequence,
+                    moveSequence = obj.MoveSequence,
                     priority = obj.Priority,
                     size = obj.Size,
                     timeStamp = obj.TimeStamp,
-                    version = obj.Version
+                    version = obj.Version,
+                    lastStateTime = obj.LatestStartTime.HasValue ? obj.LatestStartTime.Value : DateTime.MinValue
                 };
-            
-        }
 
-        public DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus, DateTime timeStamp)
-        {
-            throw new NotImplementedException();
         }
 
         public void UpdateItem(TeamView.Common.Entity.BugInfoEntity1 item)
@@ -64,7 +61,10 @@ namespace TeamView.Common.DaoImpl
                 bugInfo.Priority = (short)item.priority;
                 bugInfo.Size = item.size;
                 bugInfo.Version = item.version;
-
+                if (item.lastStateTime == DateTime.MinValue)
+                    bugInfo.LatestStartTime = null;
+                else
+                    bugInfo.LatestStartTime = item.lastStateTime;
                 bugInfo.Save();
             }
             else
@@ -81,11 +81,14 @@ namespace TeamView.Common.DaoImpl
 
                 dbItem.Save();
             }
-        }
 
-        public DateTime GetLastestStartTime(string itemId, int sequence)
-        {
-            throw new NotImplementedException();
+            var updatedItem = coll.Where(DAL.BugInfo.Columns.BugNum, item.bugNum)
+                .Where(DAL.BugInfo.Columns.MoveSequence, item.moveSequence)
+                .Load()
+                .FirstOrDefault();
+
+            item.timeStamp = updatedItem.TimeStamp;
+
         }
 
         public long? GetCurrentKeyValue(string keyName)
@@ -152,6 +155,26 @@ namespace TeamView.Common.DaoImpl
         public bool IsLargestOrder(string itemId, int moveSequence)
         {
             throw new NotImplementedException();
+        }
+
+
+        public bool CheckDealManStatus(string dealMan, string bugStatus)
+        {
+            DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
+            return coll.Where(DAL.BugInfo.Columns.DealMan, dealMan)
+                .Where(DAL.BugInfo.Columns.BugStatus, bugStatus).Load().Count != 0;
+        }
+
+
+        public void AddLog(string bugNum, int moveSequence, string desc, int logTypeId)
+        {
+            DAL.ChangeLog changeLog = new DAL.ChangeLog();
+            changeLog.BugNum = bugNum;
+            changeLog.MoveSequence = moveSequence;
+            changeLog.Description = desc;
+            changeLog.LogTypeID = logTypeId;
+
+            changeLog.Save();
         }
     }
 }

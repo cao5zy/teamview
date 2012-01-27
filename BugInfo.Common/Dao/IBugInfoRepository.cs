@@ -10,11 +10,7 @@ namespace TeamView.Common.Dao
     {
         BugInfoEntity1 GetItem(string itemId, int moveSequence);
 
-        DateTime SaveChangedState(string itemId, int moveSequence, string bugStatus, DateTime timeStamp);
-
         void UpdateItem(BugInfoEntity1 item);
-
-        DateTime GetLastestStartTime(string itemId, int sequence);
 
         long ? GetCurrentKeyValue(string keyName);
 
@@ -27,5 +23,9 @@ namespace TeamView.Common.Dao
         byte[] LoadDoc(string itemId);
 
         bool IsLargestOrder(string itemId, int moveSequence);
+
+        bool CheckDealManStatus(string dealMan, string bugStatus);
+
+        void AddLog(string bugNum, int moveSequence, string desc, int logTypeId);
     }
 }

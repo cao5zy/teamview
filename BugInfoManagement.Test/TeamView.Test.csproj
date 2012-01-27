@@ -90,7 +90,6 @@
     <Compile Include="JIRAImporterTest.cs" />
     <Compile Include="KeyModel_Test.cs" />
     <Compile Include="LogReader_Test.cs" />
-    <Compile Include="NotificationManagerImplTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

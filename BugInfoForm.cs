@@ -12,6 +12,7 @@ using TeamView.Entity;
 using TeamView.Common;
 using TeamView.Common.Models;
 using TeamView.Common.Dao;
+using System.Transactions;
 
 namespace TeamView
 {
@@ -49,7 +50,6 @@ namespace TeamView
             BIVersionNum.Text = BugInfoManagement_Resource.BIVersionNum;
             BIBugNum.Text = BugInfoManagement_Resource.BIBugNum;
             BIBugDealMan.Text = BugInfoManagement_Resource.BIBugDealMan;
-            BIBugState.Text = BugInfoManagement_Resource.BIBugState;
             BIPreTakeTime.Text = BugInfoManagement_Resource.BIPreTakeTime;
             BITakeTime.Text = BugInfoManagement_Resource.BITakeTime;
             BIPriority.Text = BugInfoManagement_Resource.BIPriority;
@@ -114,21 +114,6 @@ namespace TeamView
             {
                 _model.SaveDoc(mSimpleEditor.Save());
             }
-
-            //programmerPoint.Assignee = BugInfoManager.BugInfo.DealMan;
-
-            //BugInfoManager.BugInfo.EstimatedValue = PointsParser.ToParseString(programmerPoint);
-
-            //if (BugInfoManager.Save())
-            //{
-            //    BugInfoManager.SaveDetail(mSimpleEditor);
-            //    this.DialogResult = DialogResult.OK;
-            //    Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Concurrency issue occurs");
-            //}
         }
 
         private void AddForm_Load(object sender, EventArgs e)
@@ -139,6 +124,9 @@ namespace TeamView
             mDataSource.Add(_model.Current);
 
             mSimpleEditor.Load(_model.LoadDoc(_model.Current.bugNum));
+
+            mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
+
 
             //if (BugInfoManager is CreateBugInfoManager)
             //{
@@ -163,7 +151,6 @@ namespace TeamView
             //        }
             //    }
 
-            //    mStateControl.CurrentState = StatesConverter.ToStateEnum(BugInfoManager.BugInfo.BugStatus);
             //}
             //else
             //{
@@ -182,12 +169,29 @@ namespace TeamView
 
         private void mStateControl_StateChanged(object sender, StateControl.StateChangedArgs e)
         {
-            //var bugEditManager = BugInfoManager as EditBugInfoManager;
-            //if (bugEditManager == null)
-            //    throw new Exception("Invalid eidt type");
+            string oldStatus = _model.Current.bugStatus;
+            _model.Current.bugStatus = StatesConverter.ToStateString(e.NewState);
+            var checkResult = _model.ChangeStatusCheck();
+            if (!string.IsNullOrEmpty(checkResult))
+            {
+                e.Canceled = true;
+                MessageBox.Show(checkResult);
+                _model.Current.bugStatus = oldStatus;
+                mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
+                return;
+            }
 
-            //bugEditManager.MoveState(e.NewState);
-            //((CurrencyManager)BindingContext[mDataSource]).Refresh();
+            var changeResult = _model.CommitStatus();
+                using (TransactionScope trans = new TransactionScope())
+                {
+                    _repository.UpdateItem(_model.Current);
+                    _repository.AddLog(_model.Current.bugNum, _model.Current.moveSequence, string.Empty, changeResult.LogTypeId);
+                    trans.Complete();
+
+                    mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
+                }
+
+
         }
 
         private void BugInfoForm_FormClosing(object sender, FormClosingEventArgs e)

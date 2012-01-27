@@ -14,6 +14,9 @@ using TeamView.Utility;
 using System.Configuration;
 using TeamView.Common;
 using FxLib.Algorithms;
+using TeamView.Common.Models;
+using TeamView.Common.Dao;
+using System.Transactions;
 
 namespace TeamView
 {
@@ -21,25 +24,33 @@ namespace TeamView
     {
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
-        public IBugInfoManagement BugInfoManagement { get; set; }
         private EditBugInfoManager.Factiory EditBugInfoManagerFactory { get; set; }
         private CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
         private QueryControl mQueryControl;
         private AddNewForm.Factory _addFormFactory;
+        private BugInfoViewModel _bugInfoModel;
+        private IBugInfoRepository _repository;
+        private IQuery _query;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
             EditBugInfoManager.Factiory createEditBugInfoManager,
             CreateBugInfoManager.Factory createCreateBugInfoManager, 
             QueryControl queryControl,
-            AddNewForm.Factory addFormFactory)
+            AddNewForm.Factory addFormFactory,
+            BugInfoViewModel bugInfoModel,
+            IBugInfoRepository repository,
+            IQuery bugQuery)
         {
             InitializeComponent();
             CreateBugInfoForm = createBugInfoForm;
             EditBugInfoManagerFactory = createEditBugInfoManager;
             CreateBugInfoManagerFactory = createCreateBugInfoManager;
             _addFormFactory = addFormFactory;
-           
+            _bugInfoModel = bugInfoModel;
+            _repository = repository;
+            _query = bugQuery;
+
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
 
@@ -81,7 +92,7 @@ namespace TeamView
         private void LoadBugInfos()
         {
             var model = mQueryControl.Model;
-            var results = BugInfoManagement.QueryByParameter(
+            var results = _query.QueryByParameters(
                 model.SelectedProgrammers,
                 model.BugNum,
                 model.Version,
@@ -91,22 +102,30 @@ namespace TeamView
                 );
 
             mBugInfoSet.BugInfoTable.Clear();
+            int itemCount = 0;
+            decimal totalSize = 0;
+            decimal totalHours = 0;
             results.SafeForEach(
                 n => {
                     var row = mBugInfoSet.BugInfoTable.NewBugInfoTableRow();
-                    row.bugNum = n.BugNum;
-                    row.bugStatus = n.BugStatus;
-                    row.dealMan = n.DealMan;
-                    row.description = n.Description;
-                    row.Version = n.Version;
-                    row.size = n.Size;
-                    row.Priority = n.Priority;
-                    row.fired = Math.Round((double)n.TimeConsumptionInMins / 60, 2);
+                    row.bugNum = n.bugNum;
+                    row.bugStatus = n.bugStatus;
+                    row.dealMan = n.dealMan;
+                    row.description = n.description;
+                    row.Version = n.version;
+                    row.size = n.size;
+                    row.Priority = n.priority;
+                    row.fired = Math.Round((double)n.fired / 60, 2);
+                    row.order = n.moveSequence;
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
+                    itemCount++;
+                    totalHours += (decimal)row.fired;
+                    totalSize += (decimal)row.size;
                 }
                 );
 
-            ShowSummary(results.Count, results.Sum(n => n.Size), results.Sum(n => n.TimeConsumptionInMins / 60));
+            //ShowSummary(results.Count, (decimal)results.Sum(n => n.size), results.Sum(n => n.fired / 60));
+            ShowSummary(itemCount, totalSize, totalHours);
         }
 
 
@@ -133,24 +152,6 @@ namespace TeamView
             else
             {
                 MessageBox.Show(BugInfoManagement_Resource.Message4);
-            }
-        }
-
-        //删除按钮事件处理
-        private void mDeleteButton_Click(object sender, EventArgs e)
-        {
-            if (this.mBugInfoListDataGridView.CurrentRow != null)
-            {
-                if (MessageBox.Show(BugInfoManagement_Resource.Message5, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    BugInfoManagement.DeleteByBugNum(mBugInfoListDataGridView.CurrentRow.Cells[1].Value.ToString());
-                    LoadBugInfos();
-                    MessageBox.Show(BugInfoManagement_Resource.Message6, BugInfoManagement_Resource.Message7, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show(BugInfoManagement_Resource.Message8);
             }
         }
 
@@ -215,10 +216,35 @@ namespace TeamView
 
         private void mFlowMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var editBugInfoManager = EditBugInfoManagerFactory();
-            editBugInfoManager.Initialize(CurrentSelectedItem.bugNum);
-            editBugInfoManager.MoveState((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
-            LoadBugInfos();
+            var currentSelected = CurrentSelectedItem;
+            var item = this._bugInfoModel.Load(currentSelected.bugNum, currentSelected.order);
+            if (item == null)
+                return;
+
+            item.bugStatus = StatesConverter.ToStateString((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
+
+            var checkResult = _bugInfoModel.ChangeStatusCheck();
+            if(!string.IsNullOrEmpty(checkResult))
+            {
+                MessageBox.Show(checkResult);
+                return;
+            }
+
+            var result = _bugInfoModel.CommitStatus();
+
+            var commitStatusResult = _bugInfoModel.CommitStatus();
+
+            using (TransactionScope trans = new TransactionScope())
+            {
+                _repository.UpdateItem(item);
+                _repository.AddLog(item.bugNum, item.moveSequence, string.Empty, result.LogTypeId);
+                trans.Complete();
+            }
+
+            currentSelected.fired = item.fired;
+            currentSelected.bugStatus = item.bugStatus;
+
+            mBugInfoListDataGridView.RefreshEdit();
         }
 
     }

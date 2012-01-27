@@ -109,7 +109,7 @@
     </Compile>
     <Compile Include="BugStatesImpl.cs" />
     <Compile Include="Configs\BugStatesConfig.cs" />
-    <Compile Include="Configs\NotificationSection.cs" />
+    <Compile Include="Configs\HardLevelConfig.cs" />
     <Compile Include="CreateBugInfoManager.cs" />
     <Compile Include="Configs\DealManConfig.cs" />
     <Compile Include="DealMenImpl.cs" />
@@ -120,8 +120,10 @@
     <Compile Include="AddNewForm.Designer.cs">
       <DependentUpon>AddNewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HardLevelImpl.cs" />
     <Compile Include="IBugStates.cs" />
     <Compile Include="IDealMen.cs" />
+    <Compile Include="IHardLevel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

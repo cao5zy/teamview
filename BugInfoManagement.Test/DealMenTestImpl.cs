@@ -27,5 +27,11 @@ namespace TeamView.Test
         }
 
         #endregion
+
+
+        public string CurrentLogin
+        {
+            get { return "曹宗颖"; }
+        }
     }
 }

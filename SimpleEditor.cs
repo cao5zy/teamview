@@ -119,6 +119,14 @@ namespace TeamView
             mTextBox.SaveFile(stream, streamType);
         }
 
+        public RichTextBox RichText
+        {
+            get
+            {
+                return mTextBox;
+            }
+        }
+
         public byte[] Save()
         {
             var tempFileName = Path.GetTempFileName();

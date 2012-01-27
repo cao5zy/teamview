@@ -20,23 +20,32 @@ namespace TeamView
         public AddNewForm()
         {
             InitializeComponent();
+            _editor = new SimpleEditor();
+            this.mEditBoxContainer.Controls.Add(_editor);
+            _editor.Dock = DockStyle.Fill;
         }
 
         private BugInfoViewModel _model;
         private KeyModel _keyModel;
         private IBugInfoRepository _repository;
         public delegate AddNewForm Factory();
-
+        private SimpleEditor _editor;
+        private IDealMen _dealMen;
+        private IHardLevel _hardLevel;
         
         public AddNewForm(BugInfoViewModel model,
             KeyModel keyModel,
-            IBugInfoRepository repository
+            IBugInfoRepository repository,
+            IDealMen dealMen,
+            IHardLevel hardLevel
             )
             : this()
         {
             _model = model;
             _keyModel = keyModel;
             _repository = repository;
+            _dealMen = dealMen;
+            _hardLevel = hardLevel;
         }
 
         public const string InCorrectFormatNumber = "不正确的任务编号，任务编号的格式应该为[Category]-*";
@@ -56,10 +65,10 @@ namespace TeamView
                 : _keyModel.GenerateKey(headerCategory.Match(formatNum.ItemNumber).Value);
             _model.Current.bugStatus = States.Pending;
             _model.Current.createdTime = DateTime.Now;
-            _model.Current.dealMan = GetCurrentLogin();
+            _model.Current.dealMan = _dealMen.CurrentLogin;
             _model.Current.description = formatNum.Description;
             _model.Current.fired = 0;
-            _model.Current.hardLevel = GetDefaulHardLevel();
+            _model.Current.hardLevel = _hardLevel.DefaultHardLevel;
             _model.Current.lastStateTime = DateTime.MinValue;
             _model.Current.moveSequence = 0;
             _model.Current.priority = formatNum.Priority;
@@ -96,16 +105,16 @@ namespace TeamView
             int pos = 0;
             for (int i = 0; i < 5; i++)
             {
-                pos = mContentRichTextBox.Find(new char[] { '\r' }, ++pos);
+                pos = _editor.RichText.Find(new char[] { '\r' }, ++pos);
             }
 
-            mContentRichTextBox.Select(0, pos);
-            mContentRichTextBox.SelectionStart = 0;
-            mContentRichTextBox.SelectionLength = pos;
-            mContentRichTextBox.SelectedRtf = string.Empty;
+            _editor.RichText.Select(0, pos);
+            _editor.RichText.SelectionStart = 0;
+            _editor.RichText.SelectionLength = pos;
+            _editor.RichText.SelectedRtf = string.Empty;
 
             string filePath = Path.GetTempFileName();
-            mContentRichTextBox.SaveFile(filePath, RichTextBoxStreamType.RichText);
+            _editor.RichText.SaveFile(filePath, RichTextBoxStreamType.RichText);
 
             byte[] fsBytes;
             using (FileStream fs = new FileStream(filePath, FileMode.Open))
@@ -114,16 +123,6 @@ namespace TeamView
             }
 
             return fsBytes;
-        }
-
-        private int GetDefaulHardLevel()
-        {
-            return 2;
-        }
-
-        private string GetCurrentLogin()
-        {
-            return "曹宗颖";
         }
 
         class HeadInfo
@@ -152,7 +151,7 @@ namespace TeamView
              * version number;fourth line
              * item number;fifth line
              */
-            var lines = mContentRichTextBox.Lines;
+            var lines = _editor.RichText.Lines;
             if(lines == null || lines.Length < 5)
             {
                 return new HeadInfo{
@@ -208,14 +207,14 @@ namespace TeamView
             int pos = 0;
             for (int i = 0; i < 5; i++)
             {
-                pos = mContentRichTextBox.Find(new char[]{'\r'}, ++pos);
+                pos = _editor.RichText.Find(new char[] { '\r' }, ++pos);
             }
 
-            mContentRichTextBox.Select(0, pos);
-            mContentRichTextBox.SelectionStart = 0;
-            mContentRichTextBox.SelectionLength = pos;
-            mContentRichTextBox.SelectionBackColor = Color.Black;
-            mContentRichTextBox.SelectionColor = Color.White;
+            _editor.RichText.Select(0, pos);
+            _editor.RichText.SelectionStart = 0;
+            _editor.RichText.SelectionLength = pos;
+            _editor.RichText.SelectionBackColor = Color.Black;
+            _editor.RichText.SelectionColor = Color.White;
         }
 
         private void mHintButton_Click(object sender, EventArgs e)
@@ -227,9 +226,9 @@ version
 item number:a/a-*/a-1
 ";
 
-            mContentRichTextBox.SelectionStart = 0;
-            mContentRichTextBox.SelectionLength = 0;
-            mContentRichTextBox.SelectedText = headerHints;
+            _editor.RichText.SelectionStart = 0;
+            _editor.RichText.SelectionLength = 0;
+            _editor.RichText.SelectedText = headerHints;
         }
     }
 }

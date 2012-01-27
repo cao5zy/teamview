@@ -101,8 +101,10 @@
     <Compile Include="DAL\KeyInfo.cs" />
     <Compile Include="DAL\KeyInfoController.cs" />
     <Compile Include="DAL\StoredProcedures.cs" />
+    <Compile Include="DaoImpl\BugInfoQuery.cs" />
     <Compile Include="DaoImpl\BugInfoRepository.cs" />
     <Compile Include="Dao\IBugInfoRepository.cs" />
+    <Compile Include="Dao\IQuery.cs" />
     <Compile Include="Entity\BugInfoEntity1.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />

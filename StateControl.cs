@@ -43,10 +43,19 @@ namespace TeamView
 
         public event EventHandler<StateChangedArgs> StateChanged;
 
-        private void OnStateChanged(StatesEnum oldState, StatesEnum newState)
+        private bool OnStateChanged(StatesEnum oldState, StatesEnum newState)
         {
             if (StateChanged != null)
-                StateChanged(this, new StateChangedArgs(oldState, newState));
+            {
+                var arg = new StateChangedArgs(oldState, newState);
+                StateChanged(this, arg);
+
+                if (arg.Canceled)
+                    return false;
+            }
+            return true;
+
+            
         }
 
         public class StateChangedArgs : EventArgs
@@ -74,24 +83,30 @@ namespace TeamView
                     return mOldState;
                 }
             }
+
+            public bool Canceled
+            {
+                get;
+                set;
+            }
         }
 
         private void mStartButton_Click(object sender, EventArgs e)
         {
-            OnStateChanged(CurrentState, StatesEnum.Start);
-            CurrentState = StatesEnum.Start;
+            if(OnStateChanged(CurrentState, StatesEnum.Start))
+                CurrentState = StatesEnum.Start;
         }
 
         private void mAbortButton_Click(object sender, EventArgs e)
         {
-            OnStateChanged(CurrentState, StatesEnum.Abort);
-            CurrentState = StatesEnum.Abort;
+            if(OnStateChanged(CurrentState, StatesEnum.Abort))
+                CurrentState = StatesEnum.Abort;
         }
 
         private void mCompleteButton_Click(object sender, EventArgs e)
         {
-            OnStateChanged(CurrentState, StatesEnum.Complete);
-            CurrentState = StatesEnum.Complete;
+            if(OnStateChanged(CurrentState, StatesEnum.Complete))
+                CurrentState = StatesEnum.Complete;
         }
 
 

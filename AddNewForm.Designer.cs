@@ -30,10 +30,10 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mHintButton = new System.Windows.Forms.Button();
             this.mCheckButton = new System.Windows.Forms.Button();
             this.mAddButton = new System.Windows.Forms.Button();
-            this.mContentRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.mHintButton = new System.Windows.Forms.Button();
+            this.mEditBoxContainer = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -43,7 +43,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.mContentRichTextBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.mEditBoxContainer, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -63,6 +63,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(450, 31);
             this.panel1.TabIndex = 0;
+            // 
+            // mHintButton
+            // 
+            this.mHintButton.Location = new System.Drawing.Point(210, 3);
+            this.mHintButton.Name = "mHintButton";
+            this.mHintButton.Size = new System.Drawing.Size(75, 23);
+            this.mHintButton.TabIndex = 2;
+            this.mHintButton.Text = "Hint";
+            this.mHintButton.UseVisualStyleBackColor = true;
+            this.mHintButton.Click += new System.EventHandler(this.mHintButton_Click);
             // 
             // mCheckButton
             // 
@@ -84,24 +94,13 @@
             this.mAddButton.UseVisualStyleBackColor = true;
             this.mAddButton.Click += new System.EventHandler(this.mAddButton_Click);
             // 
-            // mContentRichTextBox
+            // mEditBoxContainer
             // 
-            this.mContentRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mContentRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.mContentRichTextBox.Name = "mContentRichTextBox";
-            this.mContentRichTextBox.Size = new System.Drawing.Size(450, 295);
-            this.mContentRichTextBox.TabIndex = 1;
-            this.mContentRichTextBox.Text = "";
-            // 
-            // mHintButton
-            // 
-            this.mHintButton.Location = new System.Drawing.Point(210, 3);
-            this.mHintButton.Name = "mHintButton";
-            this.mHintButton.Size = new System.Drawing.Size(75, 23);
-            this.mHintButton.TabIndex = 2;
-            this.mHintButton.Text = "Hint";
-            this.mHintButton.UseVisualStyleBackColor = true;
-            this.mHintButton.Click += new System.EventHandler(this.mHintButton_Click);
+            this.mEditBoxContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mEditBoxContainer.Location = new System.Drawing.Point(3, 3);
+            this.mEditBoxContainer.Name = "mEditBoxContainer";
+            this.mEditBoxContainer.Size = new System.Drawing.Size(450, 295);
+            this.mEditBoxContainer.TabIndex = 1;
             // 
             // AddNewForm
             // 
@@ -122,8 +121,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button mAddButton;
-        private System.Windows.Forms.RichTextBox mContentRichTextBox;
         private System.Windows.Forms.Button mCheckButton;
         private System.Windows.Forms.Button mHintButton;
+        private System.Windows.Forms.Panel mEditBoxContainer;
     }
 }

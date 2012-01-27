@@ -14,5 +14,15 @@ namespace TeamView.Configs
         {
             get { return (string)this["DealMen"]; }
         }
+
+        [ConfigurationProperty("CurrentLogin", DefaultValue = "")]
+        public string CurrentLogin
+        {
+            get
+            {
+                return (string)this["CurrentLogin"];
+            }
+        }
+
     }
 }

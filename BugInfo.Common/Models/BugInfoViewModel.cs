@@ -22,6 +22,7 @@ namespace TeamView.Common.Models
         public const string statusChangeErrorMessage = "状态变化不允许";
         public const string dealManDuplicated = "流程处理人相同";
         public const string notLargestOrder = "只能在最大序号上对任务做转移处理";
+        public const string hasStartedTask = "存在了已经开始的任务";
         private IBugInfoRepository _repository;
         private bool _state = false;
         public bool State
@@ -109,6 +110,9 @@ namespace TeamView.Common.Models
             if (!stateSeq.IsNextStateValid(_current.bugStatus))
                 return statusChangeErrorMessage;
 
+            if (_current.bugStatus == States.Start && _repository.CheckDealManStatus(_current.dealMan, _current.bugStatus))
+                return hasStartedTask;
+
             return string.Empty;
         }
 
@@ -126,17 +130,7 @@ namespace TeamView.Common.Models
             {
                 _current.bugStatus = States.Pending;
             }
-            else
-            {
-                if (_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Complete)
-                    || _current.bugStatus == StatesConverter.ToStateString(StatesEnum.Abort))
-                {
-                    _current.fired += (int)DateTime.Now.Subtract(_old.lastStateTime).TotalMinutes;
-                }
-            }
-
-            if (_current.bugStatus == StatesConverter.ToStateString(StatesEnum.Start))
-                _current.lastStateTime = DateTime.Now;
+            
 
             return new SaveResult
             {
@@ -156,19 +150,7 @@ namespace TeamView.Common.Models
         {
             public bool State { get; set; }
 
-            public string BugNum { get; set; }
-
-            public int Sequence { get; set; }
-
-            public StatesEnum NewStatus { get; set; }
-
             public int LogTypeId { get; set; }
-
-            public bool UpdateDuration { get; set; }
-
-            public int NewFired { get; set; }
-
-
         }
 
         public CommitStatusResult CommitStatus()
@@ -178,17 +160,16 @@ namespace TeamView.Common.Models
             if (!string.IsNullOrEmpty(ChangeStatusCheck()))
                 return result;
 
-            result.BugNum = _current.bugNum;
-            result.NewStatus = StatesConverter.ToStateEnum(_current.bugStatus);
-            result.Sequence = _current.moveSequence;
-            result.State = true;
-            result.LogTypeId = ConvertToLogTypeId(result.NewStatus);
 
-            if (result.LogTypeId == (int)LogTypeEnum.MissionStop)
+            result.LogTypeId = ConvertToLogTypeId(StatesConverter.ToStateEnum(_current.bugStatus));
+
+            if (_current.bugStatus ==States.Complete || _current.bugStatus == States.Abort)
             {
-                result.UpdateDuration = true;
-                result.NewFired = _current.fired + (int)DateTime.Now.Subtract(_repository.GetLastestStartTime(_current.bugNum, _current.moveSequence)).TotalMinutes;
+                _current.fired = _current.fired + (int)DateTime.Now.Subtract(_current.lastStateTime).TotalMinutes;
+                _current.lastStateTime= DateTime.MinValue;
             }
+            if (_current.bugStatus == States.Start)
+                _current.lastStateTime = DateTime.Now;
             return result;
         }
 

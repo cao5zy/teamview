@@ -2,6 +2,9 @@
     
     
     public partial class BugInfoSet {
+        partial class BugInfoTableDataTable
+        {
+        }
     }
 }
 namespace TeamView.BugInfoSetTableAdapters

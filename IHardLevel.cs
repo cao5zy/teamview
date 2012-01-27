@@ -5,10 +5,9 @@ using System.Text;
 
 namespace TeamView
 {
-    public interface IDealMen
+    public interface IHardLevel
     {
-        List<Entity.ProgrammerBaseInfo> DealMen { get; }
-
-        string CurrentLogin { get; }
+        List<int> HardLevels { get; }
+        int DefaultHardLevel { get; }
     }
 }

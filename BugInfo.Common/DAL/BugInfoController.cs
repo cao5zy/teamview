@@ -92,7 +92,7 @@ namespace DAL
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Insert(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel,DateTime? LatestStartTime)
 	    {
 		    BugInfo item = new BugInfo();
 		    
@@ -120,6 +120,8 @@ namespace DAL
             
             item.HardLevel = HardLevel;
             
+            item.LatestStartTime = LatestStartTime;
+            
 	    
 		    item.Save(UserName);
 	    }
@@ -128,7 +130,7 @@ namespace DAL
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel)
+	    public void Update(string Version,string BugNum,int MoveSequence,string BugStatus,string DealMan,DateTime CreatedTime,string Description,int Size,int Fired,DateTime TimeStamp,short Priority,short HardLevel,DateTime? LatestStartTime)
 	    {
 		    BugInfo item = new BugInfo();
 	        item.MarkOld();
@@ -157,6 +159,8 @@ namespace DAL
 			item.Priority = Priority;
 				
 			item.HardLevel = HardLevel;
+				
+			item.LatestStartTime = LatestStartTime;
 				
 	        item.Save(UserName);
 	    }
