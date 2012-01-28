@@ -232,8 +232,6 @@ namespace TeamView
 
             var result = _bugInfoModel.CommitStatus();
 
-            var commitStatusResult = _bugInfoModel.CommitStatus();
-
             using (TransactionScope trans = new TransactionScope())
             {
                 _repository.UpdateItem(item);
@@ -241,7 +239,7 @@ namespace TeamView
                 trans.Complete();
             }
 
-            currentSelected.fired = item.fired;
+            currentSelected.fired = Math.Round((double)item.fired / 60, 2);
             currentSelected.bugStatus = item.bugStatus;
 
             mBugInfoListDataGridView.RefreshEdit();

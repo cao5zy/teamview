@@ -47,6 +47,8 @@ namespace TeamView.Common.DaoImpl
                 .Where(DAL.BugInfo.Columns.MoveSequence, item.moveSequence)
                 .Load()
                 .FirstOrDefault();
+            DateTime timeStamp = DateTime.Now;
+
             if (dbItem == null)
             {
                 DAL.BugInfo bugInfo = new DAL.BugInfo();
@@ -65,6 +67,7 @@ namespace TeamView.Common.DaoImpl
                     bugInfo.LatestStartTime = null;
                 else
                     bugInfo.LatestStartTime = item.lastStateTime;
+                bugInfo.TimeStamp = timeStamp;
                 bugInfo.Save();
             }
             else
@@ -78,16 +81,16 @@ namespace TeamView.Common.DaoImpl
                 dbItem.Priority = (short)item.priority;
                 dbItem.Size = item.size;
                 dbItem.Version = item.version;
-
+                if (item.lastStateTime == DateTime.MinValue)
+                    dbItem.LatestStartTime = null;
+                else
+                    dbItem.LatestStartTime = item.lastStateTime;
+                dbItem.TimeStamp = timeStamp;
                 dbItem.Save();
             }
 
-            var updatedItem = coll.Where(DAL.BugInfo.Columns.BugNum, item.bugNum)
-                .Where(DAL.BugInfo.Columns.MoveSequence, item.moveSequence)
-                .Load()
-                .FirstOrDefault();
-
-            item.timeStamp = updatedItem.TimeStamp;
+           
+            item.timeStamp = timeStamp;
 
         }
 

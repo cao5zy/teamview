@@ -61,6 +61,7 @@ namespace TeamView.Common.DaoImpl
                             version = reader[DAL.BugInfo.Columns.Version].ToString(),
                             moveSequence = Convert.ToInt32(reader[DAL.BugInfo.Columns.MoveSequence]),
                             lastStateTime = Convert.IsDBNull(reader[DAL.BugInfo.Columns.LatestStartTime]) ? DateTime.MinValue : Convert.ToDateTime(reader[DAL.BugInfo.Columns.LatestStartTime]),
+                            fired = Convert.ToInt32(reader[DAL.BugInfo.Columns.Fired]),
                         };
                 }
             }

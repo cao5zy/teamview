@@ -137,71 +137,6 @@ namespace TeamView.Test
         }
 
         [TestMethod]
-        public void Save_Calculate_Fired_Test()
-        {
-            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-
-            DateTime t1 = DateTime.Now.AddHours(-1);
-            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1
-            {
-                bugNum = "1",
-                moveSequence = 0,
-                lastStateTime = t1,
-                bugStatus = StatesConverter.ToStateString(StatesEnum.Start),
-                fired = 0,
-                version = "1",
-                dealMan = "a",
-
-            });
-
-            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-
-            model.Load("1", 0);
-
-            model.Current.bugStatus = StatesConverter.ToStateString(StatesEnum.Complete);
-
-            var result = model.Save();
-
-            Assert.IsTrue(result.State);
-
-            Assert.AreEqual(60, result.Object.fired);
-            Assert.AreEqual(t1, result.Object.lastStateTime);
-        }
-
-        [TestMethod]
-        public void Save_Calculate_NotChanged_Test()
-        {
-            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-
-            DateTime t1 = DateTime.Now.AddHours(-1);
-            repository.Setup(n => n.GetItem("1", 0)).Returns(new TeamView.Common.Entity.BugInfoEntity1
-            {
-                bugNum = "1",
-                moveSequence = 0,
-                lastStateTime = t1,
-                bugStatus = StatesConverter.ToStateString(StatesEnum.Complete),
-                fired = 1,
-                version = "1",
-                dealMan = "a",
-
-            });
-
-            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-
-            model.Load("1", 0);
-
-            model.Current.bugStatus = StatesConverter.ToStateString(StatesEnum.Start);
-
-            var result = model.Save();
-
-            Assert.IsTrue(result.State);
-
-            Assert.AreEqual(1, result.Object.fired);
-            Assert.AreNotEqual(t1, result.Object.lastStateTime);
-
-        }
-
-        [TestMethod]
         public void ChangeStatusCheck_Pending_To_Start_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
@@ -490,7 +425,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Pending;
 
-            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
+            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
         }
 
         [TestMethod]
@@ -624,7 +559,19 @@ namespace TeamView.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(
-                CreateEntity("1", 0, States.Start)
+                new TeamView.Common.Entity.BugInfoEntity1
+                {
+                    bugNum = "1",
+                    bugStatus = States.Start,
+                    dealMan = "a",
+                    description = "hello",
+                    fired = 1,
+                    hardLevel = 1,
+                    moveSequence = 0,
+                    size = 1,
+                    version = "1.0",
+                    lastStateTime = DateTime.Now.AddHours(-1)
+                }
                 );
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
@@ -638,6 +585,7 @@ namespace TeamView.Test
             Assert.IsTrue(model.Current.fired > 1);
             Assert.AreEqual(States.Abort, model.Current.bugStatus);
             Assert.IsTrue(model.Current.lastStateTime == DateTime.MinValue);
+            Assert.AreEqual(61, model.Current.fired);
         }
 
         [TestMethod]
@@ -691,7 +639,18 @@ namespace TeamView.Test
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(
-                CreateEntity("1", 0, States.Abort)
+                new TeamView.Common.Entity.BugInfoEntity1
+                {
+                    bugNum = "1",
+                    bugStatus = States.Abort,
+                    dealMan = "a",
+                    description = "hello",
+                    fired = 1,
+                    hardLevel = 1,
+                    moveSequence = 0,
+                    size = 1,
+                    version = "1.0"
+                }
                 );
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);

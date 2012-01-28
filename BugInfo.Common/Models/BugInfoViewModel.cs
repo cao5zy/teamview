@@ -170,6 +170,9 @@ namespace TeamView.Common.Models
             }
             if (_current.bugStatus == States.Start)
                 _current.lastStateTime = DateTime.Now;
+
+            result.State = true;
+
             return result;
         }
 
