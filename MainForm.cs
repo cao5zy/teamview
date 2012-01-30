@@ -197,15 +197,16 @@ namespace TeamView
                 mFlowMenu.Items[0].Enabled = false;
                 mFlowMenu.Items[1].Enabled = false;
                 mFlowMenu.Items[2].Enabled = false;
+                mFlowMenu.Items[3].Enabled = false;
                 return;
             }
 
             var currentSelectedItem = CurrentSelectedItem;
             mFlowMenu.Items[0].Enabled = currentSelectedItem.bugStatus == States.Abort
-                || currentSelectedItem.bugStatus == States.Complete
                 || currentSelectedItem.bugStatus == States.Pending;
             mFlowMenu.Items[1].Enabled = currentSelectedItem.bugStatus == States.Start;
             mFlowMenu.Items[2].Enabled = currentSelectedItem.bugStatus == States.Start;
+            mFlowMenu.Items[3].Enabled = currentSelectedItem.bugStatus == States.Complete;
         }
 
         private void mBugInfoListDataGridView_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)

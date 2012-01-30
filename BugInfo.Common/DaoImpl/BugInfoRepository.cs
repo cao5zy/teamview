@@ -176,6 +176,7 @@ namespace TeamView.Common.DaoImpl
             changeLog.MoveSequence = moveSequence;
             changeLog.Description = desc;
             changeLog.LogTypeID = logTypeId;
+            changeLog.CreateDate = DateTime.Now;
 
             changeLog.Save();
         }

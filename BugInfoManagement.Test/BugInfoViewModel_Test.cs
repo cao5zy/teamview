@@ -367,7 +367,7 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
-            Assert.AreEqual(model.ChangeStatusCheck(), string.Empty);
+            Assert.AreEqual(model.ChangeStatusCheck(), BugInfoViewModel.statusChangeErrorMessage);
         }
 
         [TestMethod]
@@ -529,10 +529,14 @@ namespace TeamView.Test
 
             model.Current.bugStatus = States.Start;
 
+            var checkTime = DateTime.Now;
+
             var result = model.CommitStatus();
 
             Assert.IsTrue(result.State);
+            Assert.IsTrue(result.State);
             Assert.AreEqual(States.Start, model.Current.bugStatus);
+            Assert.IsTrue(model.Current.lastStateTime >= checkTime && model.Current.lastStateTime <= DateTime.Now);
         }
 
         private TeamView.Common.Entity.BugInfoEntity1 CreateEntity(string itemId,
@@ -610,28 +614,6 @@ namespace TeamView.Test
             Assert.IsTrue(model.Current.lastStateTime == DateTime.MinValue);
         }
 
-        [TestMethod]
-        public void CommitStatus_Complete_To_Start_Test()
-        {
-            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-            repository.Setup(n => n.GetItem("1", 0))
-                .Returns(
-                CreateEntity("1", 0, States.Complete)
-                );
-
-            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1", 0);
-
-            DateTime checkTime = DateTime.Now;
-
-            model.Current.bugStatus = States.Start;
-
-            var result = model.CommitStatus();
-
-            Assert.IsTrue(result.State);
-            Assert.AreEqual(States.Start, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime >= checkTime && model.Current.lastStateTime <= DateTime.Now);
-        }
 
         [TestMethod]
         public void CommitStatus_Abort_To_Start_Test()
