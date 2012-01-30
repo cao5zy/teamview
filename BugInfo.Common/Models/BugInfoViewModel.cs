@@ -23,6 +23,7 @@ namespace TeamView.Common.Models
         public const string dealManDuplicated = "流程处理人相同";
         public const string notLargestOrder = "只能在最大序号上对任务做转移处理";
         public const string hasStartedTask = "存在了已经开始的任务";
+        public const string concurrencyIssue = "数据已经被更新";
         private IBugInfoRepository _repository;
         private bool _state = false;
         public bool State
@@ -67,6 +68,9 @@ namespace TeamView.Common.Models
 
         public string SaveCheck()
         {
+            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+                return concurrencyIssue;
+
             if (string.IsNullOrEmpty(_current.version))
             {
                 return versionErrorMessage;
@@ -99,6 +103,9 @@ namespace TeamView.Common.Models
         {
             Trace.Assert(_old != null);
 
+            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+                return concurrencyIssue;
+
             var oldStatus = StatesConverter.ToStateEnum(_old.bugStatus);
             var currentStatus = StatesConverter.ToStateEnum(_current.bugStatus);
 
@@ -112,6 +119,8 @@ namespace TeamView.Common.Models
 
             if (_current.bugStatus == States.Start && _repository.CheckDealManStatus(_current.dealMan, _current.bugStatus))
                 return hasStartedTask;
+
+            
 
             return string.Empty;
         }
@@ -239,6 +248,9 @@ namespace TeamView.Common.Models
         }
         public string CheckMoveDealMan(string dealMan)
         {
+            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+                return concurrencyIssue;
+
             var status = StatesConverter.ToStateEnum(_current.bugStatus);
             if (status == StatesEnum.Abort
                 || status == StatesEnum.Start)

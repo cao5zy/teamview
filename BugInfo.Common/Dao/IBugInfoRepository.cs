@@ -27,5 +27,7 @@ namespace TeamView.Common.Dao
         bool CheckDealManStatus(string dealMan, string bugStatus);
 
         void AddLog(string bugNum, int moveSequence, string desc, int logTypeId);
+
+        bool CheckTimeStamp(string itemId, int moveSequence, DateTime timeStamp);
     }
 }

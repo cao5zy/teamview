@@ -180,5 +180,16 @@ namespace TeamView.Common.DaoImpl
 
             changeLog.Save();
         }
+
+
+        public bool CheckTimeStamp(string itemId, int moveSequence, DateTime timeStamp)
+        {
+            DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
+            return coll.Where(DAL.BugInfo.Columns.BugNum, itemId)
+                .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence)
+                .Where(DAL.BugInfo.Columns.TimeStamp, timeStamp)
+                .Load()
+                .First() != null;
+        }
     }
 }
