@@ -12,11 +12,11 @@ namespace TeamView
         private static HardLevelConfig config;
         static HardLevelImpl()
         {
-            config = (HardLevelConfig)ConfigurationManager.GetSection("HardLevel");
+            config = (HardLevelConfig)ConfigurationManager.GetSection("HardLevelConfig");
         }
         public List<int> HardLevels
         {
-            get { return new List<int>(config.HardLevels); }
+            get { return new List<int>(config.HardLevelList); }
         }
 
         public int DefaultHardLevel

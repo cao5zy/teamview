@@ -36,6 +36,8 @@ namespace TeamView
             builder.RegisterModule<LogsModule>();
             builder.RegisterModule<CommonModule>();
             builder.RegisterType<AddNewForm>();
+            builder.RegisterType<HardLevelImpl>().As<IHardLevel>();
+
 
             mContainer = builder.Build();
         }

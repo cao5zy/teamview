@@ -9,11 +9,19 @@ namespace TeamView.Configs
     class HardLevelConfig : ConfigurationSection
     {
         [ConfigurationProperty("HardLevels", DefaultValue = "0")]
-        public IEnumerable<int> HardLevels
+        private string HardLevels
         {
             get
             {
-                return this["HardLevels"].ToString().Split(',').Select(n => Convert.ToInt32(n));
+                return this["HardLevels"].ToString();
+            }
+        }
+
+        public IEnumerable<int> HardLevelList
+        {
+            get
+            {
+                return HardLevels.Split(new char[] { ',' }).Select(n => Convert.ToInt32(n));
             }
         }
 

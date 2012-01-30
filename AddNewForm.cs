@@ -65,7 +65,7 @@ namespace TeamView
                 : _keyModel.GenerateKey(headerCategory.Match(formatNum.ItemNumber).Value);
             _model.Current.bugStatus = States.Pending;
             _model.Current.createdTime = DateTime.Now;
-            _model.Current.dealMan = _dealMen.CurrentLogin;
+            _model.Current.dealMan = string.IsNullOrEmpty(formatNum.DealMan.Trim()) ? _dealMen.CurrentLogin : formatNum.DealMan;
             _model.Current.description = formatNum.Description;
             _model.Current.fired = 0;
             _model.Current.hardLevel = _hardLevel.DefaultHardLevel;
@@ -134,6 +134,7 @@ namespace TeamView
             public int Size { get; set; }
             public bool State { get; set; }
             public string ErrorInfo { get; set; }
+            public string DealMan { get; set; }
         }
 
         private const string NotInclideHeadLines = "未包含任务头信息";
@@ -150,9 +151,10 @@ namespace TeamView
              * estimated size;third line
              * version number;fourth line
              * item number;fifth line
+             * deal man:sixth line
              */
             var lines = _editor.RichText.Lines;
-            if(lines == null || lines.Length < 5)
+            if(lines == null || lines.Length < 6)
             {
                 return new HeadInfo{
                     State = false,
@@ -182,7 +184,7 @@ namespace TeamView
                 };
             }
 
-            var headLines = lines.Take(5);
+            var headLines = lines.Take(6);
 
             return new HeadInfo { 
                 Description = headLines.ElementAt(0),
@@ -190,6 +192,7 @@ namespace TeamView
                 Size = Convert.ToInt32(headLines.ElementAt(2)),
                 Version = headLines.ElementAt(3),
                 ItemNumber = headLines.ElementAt(4),
+                DealMan = headLines.ElementAt(5),
                 State = true
             };
         }
@@ -205,7 +208,7 @@ namespace TeamView
             }
 
             int pos = 0;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 pos = _editor.RichText.Find(new char[] { '\r' }, ++pos);
             }
@@ -224,6 +227,7 @@ priority:int
 size:int
 version
 item number:a/a-*/a-1
+dealman or keep empty to apply current login
 ";
 
             _editor.RichText.SelectionStart = 0;
