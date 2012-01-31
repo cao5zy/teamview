@@ -115,8 +115,9 @@ namespace TeamView
                     row.Version = n.version;
                     row.size = n.size;
                     row.Priority = n.priority;
-                    row.fired = Math.Round((double)n.fired / 60, 2);
+                    row.fired = n.bugStatus == States.Start ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) : Math.Round((double)n.fired / 60, 2);
                     row.order = n.moveSequence;
+                    row.timeStamp = n.timeStamp;
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
                     itemCount++;
                     totalHours += (decimal)row.fired;
@@ -221,6 +222,8 @@ namespace TeamView
             var item = this._bugInfoModel.Load(currentSelected.bugNum, currentSelected.order);
             if (item == null)
                 return;
+
+            item.timeStamp = currentSelected.timeStamp;
 
             item.bugStatus = StatesConverter.ToStateString((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
 

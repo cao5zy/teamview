@@ -68,7 +68,7 @@ namespace TeamView.Common.Models
 
         public string SaveCheck()
         {
-            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+            if (_old != null && !_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
                 return concurrencyIssue;
 
             if (string.IsNullOrEmpty(_current.version))

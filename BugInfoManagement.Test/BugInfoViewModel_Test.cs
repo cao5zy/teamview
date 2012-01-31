@@ -78,6 +78,9 @@ namespace TeamView.Test
         public void CheckState_ChangeStatus_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>(), 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
@@ -89,8 +92,11 @@ namespace TeamView.Test
                     hardLevel = 1,
                     moveSequence = 0,
                     size = 1,
-                    version = "1.0"
+                    version = "1.0",
+                    timeStamp = dtStamp,
                 });
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -814,16 +820,21 @@ namespace TeamView.Test
         public void CheckMoveDealMan_Success_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
                     dealMan = "a",
-                    bugStatus = States.Complete
+                    bugStatus = States.Complete,
+                    timeStamp = dtStamp,
                 }
                 );
 
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
             repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -838,15 +849,21 @@ namespace TeamView.Test
         public void CheckMoveDealMan_Fail_Due_to_SameDealMan_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
                     dealMan = "a",
-                    bugStatus = States.Complete
+                    bugStatus = States.Complete,
+                    timeStamp = dtStamp,
                 }
                 );
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             model.Load("1", 0);
@@ -860,15 +877,22 @@ namespace TeamView.Test
         public void CheckMoveDealMan_Fail_Due_to_AbortStatus_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
                     dealMan = "a",
-                    bugStatus = States.Abort
+                    bugStatus = States.Abort,
+                    timeStamp = dtStamp,
                 }
                 );
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
+
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             model.Load("1", 0);
@@ -882,15 +906,22 @@ namespace TeamView.Test
         public void CheckMoveDealMan_Fail_Due_to_StartStatus_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
                     moveSequence = 0,
                     dealMan = "a",
-                    bugStatus = States.Start
+                    bugStatus = States.Start,
+                    timeStamp = dtStamp,
                 }
                 );
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
+
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             model.Load("1", 0);
@@ -904,15 +935,21 @@ namespace TeamView.Test
         public void CheckMoveDealMan_Fail_Due_to_MoveSequence_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "1",
-                    moveSequence = 2,
+                    moveSequence = 0,
                     dealMan = "a",
-                    bugStatus = States.Complete
+                    bugStatus = States.Complete,
+                    timeStamp = dtStamp,
                 }
                 );
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
 
             repository.Setup(n => n.IsLargestOrder("1", 2))
                 .Returns(false);
@@ -932,6 +969,9 @@ namespace TeamView.Test
             DateTime t1 = DateTime.Now.AddHours(-1);
             DateTime t2 = DateTime.Now.AddHours(-2);
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             var oldItem = new Common.Entity.BugInfoEntity1
             {
                 bugNum = "1",
@@ -945,11 +985,14 @@ namespace TeamView.Test
                 lastStateTime = t2,
                 priority = 1,
                 size = 3,
-                timeStamp = DateTime.Now,
+                timeStamp = dtStamp,
                 version = "4"
             };
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(oldItem);
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
+
 
             repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
@@ -982,6 +1025,9 @@ namespace TeamView.Test
             DateTime t1 = DateTime.Now.AddHours(-1);
             DateTime t2 = DateTime.Now.AddHours(-2);
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+
+            DateTime dtStamp = DateTime.Now;
+
             var oldItem = new Common.Entity.BugInfoEntity1
             {
                 bugNum = "1",
@@ -995,11 +1041,13 @@ namespace TeamView.Test
                 lastStateTime = t2,
                 priority = 1,
                 size = 3,
-                timeStamp = DateTime.Now,
+                timeStamp = dtStamp,
                 version = "4"
             };
             repository.Setup(n => n.GetItem("1", 0))
                 .Returns(oldItem);
+
+            repository.Setup(n => n.CheckTimeStamp("1", 0, dtStamp)).Returns(true);
 
             repository.Setup(n => n.IsLargestOrder("1", 0)).Returns(true);
 

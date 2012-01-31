@@ -297,6 +297,8 @@ namespace TeamView {
             
             private global::System.Data.DataColumn columnorder;
             
+            private global::System.Data.DataColumn columntimeStamp;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BugInfoTableDataTable() {
@@ -404,6 +406,14 @@ namespace TeamView {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn timeStampColumn {
+                get {
+                    return this.columntimeStamp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +449,7 @@ namespace TeamView {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, int size, double fired, int order) {
+            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, int size, double fired, int order, System.DateTime timeStamp) {
                 BugInfoTableRow rowBugInfoTableRow = ((BugInfoTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Version,
@@ -450,7 +460,8 @@ namespace TeamView {
                         Priority,
                         size,
                         fired,
-                        order};
+                        order,
+                        timeStamp};
                 rowBugInfoTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBugInfoTableRow);
                 return rowBugInfoTableRow;
@@ -482,6 +493,7 @@ namespace TeamView {
                 this.columnsize = base.Columns["size"];
                 this.columnfired = base.Columns["fired"];
                 this.columnorder = base.Columns["order"];
+                this.columntimeStamp = base.Columns["timeStamp"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +517,8 @@ namespace TeamView {
                 base.Columns.Add(this.columnfired);
                 this.columnorder = new global::System.Data.DataColumn("order", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnorder);
+                this.columntimeStamp = new global::System.Data.DataColumn("timeStamp", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntimeStamp);
                 this.columnsize.Caption = "estimated";
             }
             
@@ -792,6 +806,22 @@ namespace TeamView {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime timeStamp {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBugInfoTable.timeStampColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'timeStamp\' in table \'BugInfoTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBugInfoTable.timeStampColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVersionNull() {
                 return this.IsNull(this.tableBugInfoTable.VersionColumn);
             }
@@ -896,6 +926,18 @@ namespace TeamView {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetorderNull() {
                 this[this.tableBugInfoTable.orderColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstimeStampNull() {
+                return this.IsNull(this.tableBugInfoTable.timeStampColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettimeStampNull() {
+                this[this.tableBugInfoTable.timeStampColumn] = global::System.Convert.DBNull;
             }
         }
         
