@@ -18,6 +18,7 @@ namespace TeamView
         {
             mBugStates = bugStates;
             mDealMen = dealMen;
+            mSelectedProgrammers.Add(mDealMen.CurrentLogin);
         }
         public IEnumerable<string> AllProgrammers
         {

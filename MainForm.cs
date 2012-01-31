@@ -32,6 +32,7 @@ namespace TeamView
         private BugInfoViewModel _bugInfoModel;
         private IBugInfoRepository _repository;
         private IQuery _query;
+        private IDealMen _dealMen;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
             EditBugInfoManager.Factiory createEditBugInfoManager,
@@ -40,7 +41,8 @@ namespace TeamView
             AddNewForm.Factory addFormFactory,
             BugInfoViewModel bugInfoModel,
             IBugInfoRepository repository,
-            IQuery bugQuery)
+            IQuery bugQuery,
+            IDealMen dealMen)
         {
             InitializeComponent();
             CreateBugInfoForm = createBugInfoForm;
@@ -50,6 +52,7 @@ namespace TeamView
             _bugInfoModel = bugInfoModel;
             _repository = repository;
             _query = bugQuery;
+            _dealMen = dealMen;
 
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
@@ -87,6 +90,48 @@ namespace TeamView
 
             LoadBugInfos();
 
+            LoadDealManMenu();
+        }
+
+        private void LoadDealManMenu()
+        {
+            ToolStripMenuItem issueHandlerMenu = new ToolStripMenuItem("Issue Handlers");
+
+            issueHandlerMenu.DropDownItemClicked += new ToolStripItemClickedEventHandler(issueHandlers_DropDownItemClicked);
+            _dealMen.DealMen.Where(n => n.Name != _dealMen.CurrentLogin && !string.IsNullOrEmpty(n.Name))
+                .Select(n => n.Name)
+                .SafeForEach(n => {
+                    ToolStripMenuItem item = new ToolStripMenuItem();
+                    item.Text = n;
+                    issueHandlerMenu.DropDownItems.Add(item);
+                });
+
+            mFlowMenu.Items.Add(issueHandlerMenu);
+        }
+
+        private void issueHandlers_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var item = _bugInfoModel.Load(CurrentSelectedItem.bugNum, CurrentSelectedItem.order);
+            item.timeStamp = CurrentSelectedItem.timeStamp;
+
+            string newIssueHandler = e.ClickedItem.Text;
+
+            using (TransactionScope trans = new TransactionScope())
+            {
+                var checkMoveState = _bugInfoModel.CheckMoveDealMan(newIssueHandler);
+                if (!string.IsNullOrEmpty(checkMoveState))
+                {
+                    MessageBox.Show(checkMoveState);
+                    return;
+                }
+
+                var result = _bugInfoModel.MoveDealMan(newIssueHandler);
+
+                _repository.UpdateItem(result.NewItem);
+
+                trans.Complete();
+            }
+            
         }
 
         private void LoadBugInfos()
@@ -218,6 +263,9 @@ namespace TeamView
 
         private void mFlowMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            if (e.ClickedItem.Text == "Issue Handlers")
+                return;
+
             var currentSelected = CurrentSelectedItem;
             var item = this._bugInfoModel.Load(currentSelected.bugNum, currentSelected.order);
             if (item == null)

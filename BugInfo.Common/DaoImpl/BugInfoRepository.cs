@@ -157,7 +157,11 @@ namespace TeamView.Common.DaoImpl
         #endregion
         public bool IsLargestOrder(string itemId, int moveSequence)
         {
-            throw new NotImplementedException();
+            return new DAL.BugInfoCollection()
+            .Where(DAL.BugInfo.Columns.BugNum, itemId)
+            .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence + 1)
+            .Load()
+            .Count == 0;
         }
 
 
