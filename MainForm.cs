@@ -238,6 +238,8 @@ namespace TeamView
 
         private void mBugInfoListDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            mBugInfoListDataGridView.RefreshEdit();
+
             if (CurrentSelectedItem == null)
             {
                 mFlowMenu.Items[0].Enabled = false;
@@ -293,8 +295,8 @@ namespace TeamView
 
             currentSelected.fired = Math.Round((double)item.fired / 60, 2);
             currentSelected.bugStatus = item.bugStatus;
+            currentSelected.timeStamp = item.timeStamp;
 
-            mBugInfoListDataGridView.RefreshEdit();
         }
 
     }

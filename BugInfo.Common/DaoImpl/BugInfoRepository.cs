@@ -193,7 +193,7 @@ namespace TeamView.Common.DaoImpl
                 .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence)
                 .Where(DAL.BugInfo.Columns.TimeStamp, timeStamp)
                 .Load()
-                .First() != null;
+                .FirstOrDefault() != null;
         }
     }
 }
