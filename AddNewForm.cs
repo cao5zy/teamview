@@ -12,6 +12,7 @@ using TeamView.Common;
 using System.Text.RegularExpressions;
 using System.IO;
 using TeamView.Common.Dao;
+using TeamView.Abstracts;
 
 namespace TeamView
 {

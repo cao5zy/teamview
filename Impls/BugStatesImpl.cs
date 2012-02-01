@@ -5,8 +5,9 @@ using System.Text;
 using TeamView.Entity;
 using System.Configuration;
 using FxLib.Algorithms;
+using TeamView.Abstracts;
 
-namespace TeamView
+namespace TeamView.Impls
 {
     public class BugStatesImpl : IBugStates
     {

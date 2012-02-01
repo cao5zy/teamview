@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
+using TeamView.Impls;
+using TeamView.Abstracts;
 
 namespace TeamView
 {

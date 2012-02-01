@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using TeamView.Entity;
 using TeamView.Common.Entity;
+using TeamView.Abstracts;
 
 namespace TeamView
 {

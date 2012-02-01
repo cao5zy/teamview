@@ -107,23 +107,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BugInfoSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="BugStatesImpl.cs" />
+    <Compile Include="Impls\BugStatesImpl.cs" />
     <Compile Include="Configs\BugStatesConfig.cs" />
     <Compile Include="Configs\HardLevelConfig.cs" />
-    <Compile Include="CreateBugInfoManager.cs" />
     <Compile Include="Configs\DealManConfig.cs" />
-    <Compile Include="DealMenImpl.cs" />
-    <Compile Include="EditBugInfoManager.cs" />
+    <Compile Include="Impls\DealMenImpl.cs" />
     <Compile Include="AddNewForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddNewForm.Designer.cs">
       <DependentUpon>AddNewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HardLevelImpl.cs" />
-    <Compile Include="IBugStates.cs" />
-    <Compile Include="IDealMen.cs" />
-    <Compile Include="IHardLevel.cs" />
+    <Compile Include="Impls\HardLevelImpl.cs" />
+    <Compile Include="Abstracts\IBugStates.cs" />
+    <Compile Include="Abstracts\IDealMen.cs" />
+    <Compile Include="Abstracts\IHardLevel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +248,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

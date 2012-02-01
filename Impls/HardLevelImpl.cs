@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using TeamView.Configs;
 using System.Configuration;
+using TeamView.Abstracts;
 
-namespace TeamView
+namespace TeamView.Impls
 {
     class HardLevelImpl : IHardLevel
     {

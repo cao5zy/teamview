@@ -17,6 +17,7 @@ using FxLib.Algorithms;
 using TeamView.Common.Models;
 using TeamView.Common.Dao;
 using System.Transactions;
+using TeamView.Abstracts;
 
 namespace TeamView
 {
@@ -24,8 +25,6 @@ namespace TeamView
     {
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
-        private EditBugInfoManager.Factiory EditBugInfoManagerFactory { get; set; }
-        private CreateBugInfoManager.Factory CreateBugInfoManagerFactory { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
         private QueryControl mQueryControl;
         private AddNewForm.Factory _addFormFactory;
@@ -35,8 +34,6 @@ namespace TeamView
         private IDealMen _dealMen;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
-            EditBugInfoManager.Factiory createEditBugInfoManager,
-            CreateBugInfoManager.Factory createCreateBugInfoManager, 
             QueryControl queryControl,
             AddNewForm.Factory addFormFactory,
             BugInfoViewModel bugInfoModel,
@@ -46,8 +43,6 @@ namespace TeamView
         {
             InitializeComponent();
             CreateBugInfoForm = createBugInfoForm;
-            EditBugInfoManagerFactory = createEditBugInfoManager;
-            CreateBugInfoManagerFactory = createCreateBugInfoManager;
             _addFormFactory = addFormFactory;
             _bugInfoModel = bugInfoModel;
             _repository = repository;

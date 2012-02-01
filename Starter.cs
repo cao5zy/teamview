@@ -8,6 +8,8 @@ using TeamView.Dao;
 using TeamView.Common.Logs;
 using TeamView.Common;
 using IniTeamView;
+using TeamView.Impls;
+using TeamView.Abstracts;
 
 namespace TeamView
 {
@@ -19,10 +21,6 @@ namespace TeamView
             var builder = new ContainerBuilder();
 
 
-            builder.RegisterType<CreateBugInfoManager>().As<BugInfoManager>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterType<EditBugInfoManager>().As<BugInfoManager>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterType<CreateBugInfoManager>().InstancePerDependency();
-            builder.RegisterType<EditBugInfoManager>().InstancePerDependency();
             builder.RegisterType<BugInfoForm>().InstancePerDependency();
             builder.RegisterType<QueryControl>();
             builder.RegisterType<QueryControlModel>();
