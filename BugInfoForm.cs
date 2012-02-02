@@ -61,20 +61,15 @@ namespace TeamView
 
         }
 
-        private AssignPointsControl mAssignPointsControl;
-
         BugInfoViewModel _model;
         IBugInfoRepository _repository;
-        public BugInfoForm(AssignPointsControl assignPointsControl,
+        public BugInfoForm(
             IDealMen dealMen,
             IBugStates bugStates,
             BugInfoViewModel bugInfoMoel,
             IBugInfoRepository repository)
             : this()
         {
-            mAssignPointsControl = assignPointsControl;
-            mAssignPointsControlContainer.Controls.Add(assignPointsControl);
-            assignPointsControl.Dock = DockStyle.Fill;
             DealMen = dealMen;
             BugStates = bugStates;
             _model = bugInfoMoel;

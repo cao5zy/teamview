@@ -79,13 +79,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssignPointsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AssignPointsControl.Designer.cs">
-      <DependentUpon>AssignPointsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AssignPointsControlModule.cs" />
     <Compile Include="BugInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,9 +123,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AssignPointsControl.resx">
-      <DependentUpon>AssignPointsControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BugInfoForm.resx">
       <DependentUpon>BugInfoForm.cs</DependentUpon>
       <SubType>Designer</SubType>
