@@ -115,6 +115,9 @@ namespace TeamView
             {
                 _model.SaveDoc(mSimpleEditor.Save());
             }
+            mSimpleEditor.Reset();
+
+            this.Close();
         }
 
         private void AddForm_Load(object sender, EventArgs e)

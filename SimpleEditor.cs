@@ -101,6 +101,8 @@ namespace TeamView
         public void LoadFile(Stream stream, RichTextBoxStreamType streamType)
         {
             mTextBox.LoadFile(stream, streamType);
+
+            Reset();
         }
 
         public void Load(byte[] docDetails)
@@ -112,6 +114,8 @@ namespace TeamView
             }
 
             mTextBox.LoadFile(tempFileName, RichTextBoxStreamType.RichText);
+
+            Reset();
         }
 
         public void SaveFile(Stream stream, RichTextBoxStreamType streamType)
