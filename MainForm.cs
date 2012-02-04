@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using TeamView.Dao;
-using TeamView.DaoImpl;
 using TeamView.Entity;
 using TeamView.Utility;
 using System.Configuration;

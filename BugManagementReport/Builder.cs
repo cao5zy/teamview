@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
-using TeamView.DaoImpl;
 using TeamView.Dao;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -20,8 +19,6 @@ namespace BugManagementReport
         public Builder()
         {
             ContainerBuilder builder = new ContainerBuilder();
-
-            builder.RegisterType<BugInfoManagementImpl>().As<IBugInfoManagement>();
 
             builder.RegisterInstance(new SqlConnection(ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString));
             builder.RegisterType<FileProvider>().As<IFileProvider>();

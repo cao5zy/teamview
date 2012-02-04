@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
-using TeamView.DaoImpl;
 using TeamView.Dao;
 using TeamView.Common.Logs;
 using TeamView.Common;
@@ -26,7 +25,6 @@ namespace TeamView
             builder.RegisterType<QueryControlModel>();
             builder.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
             builder.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
-            builder.RegisterType<BugInfoManagementImpl>().As<IBugInfoManagement>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterType<JIRAImporter>().As<IItemImporter>();
             builder.RegisterModule<IniDbModule>();

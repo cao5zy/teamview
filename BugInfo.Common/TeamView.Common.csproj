@@ -112,9 +112,7 @@
     <Compile Include="KeyGenerator.cs" />
     <Compile Include="Logs\BugLogReader.cs" />
     <Compile Include="Logs\BugNumLogReader.cs" />
-    <Compile Include="DaoImpl\BugInfoManagementImpl.cs" />
     <Compile Include="Dao\BugInfoParameterAttribute.cs" />
-    <Compile Include="Dao\IBugInfoManagement.cs" />
     <Compile Include="Logs\DbItem.cs" />
     <Compile Include="Logs\DBItemReader.cs" />
     <Compile Include="Logs\DBProvider.cs" />
@@ -124,6 +122,7 @@
     <Compile Include="Entity\ProgrammerBaseInfo.cs" />
     <Compile Include="Entity\ProgrammerPoint.cs" />
     <Compile Include="Logs\IDbProvider.cs" />
+    <Compile Include="Logs\LogEntity.cs" />
     <Compile Include="Logs\LogRecord.cs" />
     <Compile Include="Logs\LogsModule.cs" />
     <Compile Include="Logs\PointsLogReader.cs" />

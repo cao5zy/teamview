@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Autofac;
-using TeamView.DaoImpl;
 using TeamView.Dao;
 using System.Configuration;
 using System.Xml;

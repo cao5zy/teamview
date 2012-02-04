@@ -7,18 +7,23 @@ using TeamView.Entity;
 using TeamView.Common;
 using TeamView.Dao;
 using System.Text.RegularExpressions;
+using TeamView.Common.Models;
+using TeamView.Common.Dao;
 
 namespace TeamView.Common
 {
     public class JIRAImporter : IItemImporter
     {
         #region IItemImporter Members
-        private IBugInfoManagement mBugInfoManagement;
         private List<string> mImportedList = new List<string>();
         private static Regex versionRegex = new Regex(@"\((\d(.\d)?)\)");
-        public JIRAImporter(IBugInfoManagement bugInfoManagement)
+        private BugInfoViewModel _bugInfoModel;
+        private IBugInfoRepository _repository;
+        public JIRAImporter(BugInfoViewModel bugInfoModel,
+            IBugInfoRepository repository)
         {
-            mBugInfoManagement = bugInfoManagement;
+            _bugInfoModel = bugInfoModel;
+            _repository = repository;
         }
         public void Import(string xmlFileName,string reporter, string iniDealMan)
         {
@@ -30,34 +35,28 @@ namespace TeamView.Common
             {
                 XmlElement n = node as XmlElement;
                 if (n == null) continue;
-                items.Add(
-                    new BugInfoEntity
-                    {
-                        BugNum = GetSubElementInnerText(n, "key"),
-                        Description = GetSubElementInnerText(n, "summary"),
-                        DealMan = iniDealMan,
-                        CreatedBy = reporter,
-                        Priority = short.Parse(GetSubElementInnerText(n,"priority").Substring(0,1)),
-                        Size = 0,
-                        TimeStamp = DateTime.Now,
-                        BugStatus = States.Pending,
-                        Version = GetVersionNumber(GetSubElementInnerText(n, "fixVersion")),
-                    }
-                    );
-            }
+                var item = _bugInfoModel.New();
 
-            items.ForEach(
-                n =>
+                item.bugNum = GetSubElementInnerText(n, "key");
+                item.description= GetSubElementInnerText(n, "summary");
+                item.dealMan = reporter;
+                item.priority = short.Parse(GetSubElementInnerText(n,"priority").Substring(0,1));
+                item.size = 0;
+                item.bugStatus = States.Pending;
+                item.version = GetVersionNumber(GetSubElementInnerText(n, "fixVersion"));
+
+                var saveResult = _bugInfoModel.Save();
+
+                if(saveResult.State)
                 {
-                    try
-                    {
-                        mBugInfoManagement.AddBugInfo(n);
-                        mImportedList.Add(n.BugNum);
-                    }
-                    catch (Exception ex)
-                    { }
+                    _repository.UpdateItem(saveResult.Object);
+                    mImportedList.Add(item.bugNum);
                 }
-                );
+                else
+                {
+                    mImportedList.Add(item.bugNum + " save failed");
+                }
+            }
         }
 
 

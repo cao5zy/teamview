@@ -8,6 +8,8 @@ using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
 using System.Data;
+using TeamView.Common.DaoImpl;
+using TeamView.Common.Dao;
 
 namespace TeamView.Common.Logs
 {
@@ -17,8 +19,7 @@ namespace TeamView.Common.Logs
         {
             builder.RegisterType<DBProvider>().As<IDbProvider>();
             builder.RegisterType<TaskRecordParser>();
-            //UpdateConnectionStringsConfig("bug_Db", "server=(local);Integrated Security=true;database=wangde", "System.Data.SqlClient");
-            builder.RegisterInstance(new SqlConnection(ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString));
+            builder.RegisterType<BugInfoRepository>().As<IBugInfoRepository>();
         }
 
         ///更新连接字符串  

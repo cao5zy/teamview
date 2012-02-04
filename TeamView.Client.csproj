@@ -90,7 +90,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BugInfoManagement.Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="BugInfoManager.cs" />
     <Compile Include="BugInfoSet.cs">
       <DependentUpon>BugInfoSet.xsd</DependentUpon>
       <SubType>Component</SubType>

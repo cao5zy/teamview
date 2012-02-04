@@ -29,9 +29,26 @@ namespace TeamView.Common.Logs
             return new BugNumLogReader().SearchBugNumByDateRange(start, end);
         }
 
-        public IEnumerable<string> ReadBugLog(string bugNum)
+        public IEnumerable<LogEntity> ReadBugLog(string bugNum)
         {
-            return new BugLogReader().GetLogList(bugNum);
+            var query = DAL.ChangeLog.CreateQuery()
+                .AddWhere(DAL.ChangeLog.Columns.BugNum, bugNum);
+            query.OrderBy = SubSonic.OrderBy.Asc(DAL.ChangeLog.Columns.CreateDate);
+
+            using (var reader = query.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    yield return new LogEntity { 
+                        ItemId = reader[DAL.ChangeLog.Columns.BugNum].ToString(),
+                        CreatedDate = Convert.ToDateTime(reader[DAL.ChangeLog.Columns.CreateDate]),
+                        Description = reader[DAL.ChangeLog.Columns.Description].ToString(),
+                        MoveSequence = Convert.ToInt32(reader[DAL.ChangeLog.Columns.MoveSequence]),
+                        LogTypeId = Convert.ToInt32(reader[DAL.ChangeLog.Columns.LogID]),
+
+                    };
+                }
+            }
         }
 
         #endregion

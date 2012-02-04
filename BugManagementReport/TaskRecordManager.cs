@@ -6,21 +6,20 @@ using FxLib.Algorithms;
 using System.Diagnostics;
 using TeamView.Dao;
 using TeamView.Common;
-using TeamView.Common;
 using TeamView.Common.Logs;
 
 namespace BugManagementReport
 {
     class TaskRecordManager
     {
-        private IBugInfoManagement BugInfoManagement { get; set; }
+        private TaskRecordParser _recordParser;
 
-        public TaskRecordManager(IBugInfoManagement bugInfoManagement,
+        public TaskRecordManager(
             IDbProvider dbProvider,
-            IFileProvider fileProvider)
+            IFileProvider fileProvider,
+            TaskRecordParser recordParser)
         {
-            BugInfoManagement = bugInfoManagement;
-
+            _recordParser = recordParser;
             DBProvider = dbProvider;
             FileProvider = fileProvider;
         }
@@ -38,17 +37,12 @@ namespace BugManagementReport
         {
             var bugNumList = DBProvider.ReadBugNums(start, end);
 
-            TaskRecordParser recordParser = new TaskRecordParser();
-
             List<TaskRecord> list = new List<TaskRecord>();
 
             foreach (var bugNum in bugNumList)
             {
-                var logList = DBProvider.ReadBugLog(bugNum);
-
-                list.AddRange(recordParser.Read(logList));
+                list.AddRange(_recordParser.Read(bugNum));
             }
-
 
             if (!includePast)
             {
@@ -58,32 +52,9 @@ namespace BugManagementReport
             if (programmers.SafeCount() != 0)
                 list = list.FindAll(n => programmers.SafeExists(m => m == n.Programmer));
 
-            if (!onlyTask)
+            if (onlyTask)
             {
-                list.Sort((x, y) => x.StartTime.CompareTo(y.StartTime));
-                var uniqueIndexes = list
-                    .SafeToEnumerable()
-                    .Select(n=>n.TaskIndex)
-                    .Distinct()
-                    .ToList();
-
-
-                List<TaskRecord> taskRecords = new List<TaskRecord>();
-                foreach (var index in uniqueIndexes)
-                {
-                    var obj = list.Find(n => n.TaskIndex == index && list.SafeCount(m => m.TaskIndex == index) > 1);
-                    if (obj != null)
-                        taskRecords.Add(obj);
-                }
-
-                var groupItems = uniqueIndexes.FindAll(n => list.SafeCount(m => m.TaskIndex == n) > 1);
-
-                list.FindAll(n => !taskRecords.Contains(n) && groupItems.Contains(n.TaskIndex))
-                    .ForEach(n => n.Size = 0);
-            }
-            else
-            {
-                list = list.SafeUniqueItems(n =>  n.Add(m => m.BugNum).Add(m => m.Programmer)).ToList();
+                list = list.SafeUniqueItems(n =>  n.Add(m => m.BugNum).Add(m => m.Order)).ToList();
             }
 
             if (sortByBugNum)
@@ -95,29 +66,6 @@ namespace BugManagementReport
             {
                 list = new List<TaskRecord>(list.SafeSort(n=>n.Add(m=>m.StartTime).Add(m=>m.BugNum)));
                 Console.WriteLine("by Time");
-            }
-
-            list.ForEach(n =>
-                {
-                    try
-                    {
-                        n.Description = BugInfoManagement.QueryByBugNum(n.BugNum).Description;
-                    }
-                    catch (Exception ex)
-                    {
-                        n.Description = ex.Message;
-                    }
-                });
-
-            foreach (var p in programmers)
-            {
-                list.SafeFindAll(n => n.Programmer == p)
-                    .ForEach(
-                    l =>
-                    {
-                        l.EstimatePoints = GetPoint(l.BugNum, p);
-                    }
-                    );
             }
 
             FileProvider.WriteLogs(outputFile, list);

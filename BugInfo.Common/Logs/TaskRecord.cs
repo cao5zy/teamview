@@ -17,6 +17,7 @@ namespace TeamView.Common.Logs
 
         public DateTime EndTime { get; set; }
 
+        public int Order { get; set; }
         public decimal Duration
         {
             get
@@ -36,10 +37,8 @@ namespace TeamView.Common.Logs
             }
         }
 
-        public long TaskIndex { get; set; }
-
         public string Description { get; set; }
 
-        public string EstimatePoints { get; set; }
+        public int EstimatePoints { get; set; }
     }
 }

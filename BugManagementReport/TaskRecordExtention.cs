@@ -20,7 +20,7 @@ namespace BugManagementReport
                 record.Size,
                 record.Duration,
                 record.Description.RemoveNewLine(),
-                record.EstimatePoints.RemoveNewLine()
+                record.EstimatePoints
                 });
         }
     }

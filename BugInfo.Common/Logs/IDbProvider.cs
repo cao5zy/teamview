@@ -12,7 +12,7 @@ namespace TeamView.Common.Logs
 
         IEnumerable<string> ReadBugNums(DateTime start, DateTime end);
 
-        IEnumerable<string> ReadBugLog(string bugNum);
+        IEnumerable<LogEntity> ReadBugLog(string bugNum);
 
         IEnumerable<ProgrammerPoint> ReadPoints(string bugNum);
     }
