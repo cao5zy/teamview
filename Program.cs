@@ -24,11 +24,11 @@ namespace TeamView
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(starter.StartCreateDbForm());
-            if (!GetConnString().Equals(""))
-            {
-                EditConfig(GetConnString());
-            }
+            //Application.Run(starter.StartCreateDbForm());
+            //if (!GetConnString().Equals(""))
+            //{
+            //    EditConfig(GetConnString());
+            //}
             Application.Run(starter.StartMainForm());
         }
 

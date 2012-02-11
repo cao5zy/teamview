@@ -14,14 +14,14 @@ namespace TeamView.Common.Logs
             query = query.DISTINCT();
             
             SubSonic.Where w = new SubSonic.Where();
-            w.ColumnName = "createdTime";
+            w.ColumnName = "createDate";
             w.Comparison = SubSonic.Comparison.GreaterOrEquals;
             w.ParameterName = "CreateDate1";
             w.ParameterValue = start;
             w.Condition = SubSonic.Where.WhereCondition.AND;
             
             SubSonic.Where w1 = new SubSonic.Where{
-                ColumnName = "createdTime",
+                ColumnName = "createDate",
                 Comparison = SubSonic.Comparison.LessOrEquals,
                 ParameterName = "CreateDate2",
                 ParameterValue = end

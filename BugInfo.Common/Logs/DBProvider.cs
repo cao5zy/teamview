@@ -44,7 +44,7 @@ namespace TeamView.Common.Logs
                         CreatedDate = Convert.ToDateTime(reader[DAL.ChangeLog.Columns.CreateDate]),
                         Description = reader[DAL.ChangeLog.Columns.Description].ToString(),
                         MoveSequence = Convert.ToInt32(reader[DAL.ChangeLog.Columns.MoveSequence]),
-                        LogTypeId = Convert.ToInt32(reader[DAL.ChangeLog.Columns.LogID]),
+                        LogTypeId = Convert.ToInt32(reader[DAL.ChangeLog.Columns.LogTypeID]),
 
                     };
                 }
