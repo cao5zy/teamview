@@ -23,8 +23,8 @@ namespace BugManagementReport
             builder.RegisterInstance(new SqlConnection(ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString));
             builder.RegisterType<FileProvider>().As<IFileProvider>();
             builder.RegisterType<TaskRecordManager>();
-            builder.RegisterType<Snapshot>().PropertiesAutowired();
             builder.RegisterModule<LogsModule>();
+            builder.RegisterModule<CommonModule>();
 
             container = builder.Build();
         }

@@ -60,5 +60,33 @@ namespace BugManagementReport
         }
 
         #endregion
+
+
+        public void WriteCompleteTaskLogs(string fileName, IEnumerable<CompleteTaskLogEntity> items)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                {
+                    items.SafeForEach(n => sw.WriteLine(FromCompleteTaskLockEntity(n)));
+
+                    sw.Flush();
+                }
+            }
+        }
+
+        private string FromCompleteTaskLockEntity(CompleteTaskLogEntity record)
+        {
+            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}",
+                new object[]{
+                record.ItemId,
+                record.Order,
+                record.Dealman,
+                record.Description.RemoveNewLine(),
+                record.CompleteTime,
+                record.Estimate,
+                record.Burned,
+                });
+        }
     }
 }

@@ -106,6 +106,7 @@
     <Compile Include="Dao\IBugInfoRepository.cs" />
     <Compile Include="Dao\IQuery.cs" />
     <Compile Include="Entity\BugInfoEntity1.cs" />
+    <Compile Include="ExtendDataConversion.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />
     <Compile Include="JIRAImporter.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Logs\BugLogReader.cs" />
     <Compile Include="Logs\BugNumLogReader.cs" />
     <Compile Include="Dao\BugInfoParameterAttribute.cs" />
+    <Compile Include="Logs\CompleteTaskLogEntity.cs" />
     <Compile Include="Logs\DbItem.cs" />
     <Compile Include="Logs\DBItemReader.cs" />
     <Compile Include="Logs\DBProvider.cs" />

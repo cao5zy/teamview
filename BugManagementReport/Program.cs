@@ -17,7 +17,6 @@ namespace BugManagementReport
         {
             Builder builder = new Builder();
 
-            bool snap = false;
             Regex regFileName = new Regex(@"^[\w][\w\s:.\\]+", RegexOptions.IgnoreCase);
             Regex option = new Regex(@"^\\(\w+)(:[^\s]+)?", RegexOptions.IgnoreCase);
 
@@ -28,7 +27,9 @@ namespace BugManagementReport
             bool sortByBugNum = false;
             bool includePast = true;
             bool onlyTask = false;
-            bool snapbugnum = false;
+            bool taskHistory = false;
+            bool commitHistory = false;
+
             string versionnumber = string.Empty;
 
             foreach (var arg in args)
@@ -38,19 +39,19 @@ namespace BugManagementReport
                 else if (option.IsMatch(arg))
                 {
                     var match = option.Match(arg);
-                    if (match.Groups[1].Value == "snap")
-                    {
-                        snap = true;
-                        continue;
-                    }
-                    else if (match.Groups[1].Value == "snapbugnum")
-                    {
-                        snapbugnum = true;
-                        continue;
-                    }
-                    else if (match.Groups[1].Value == "version")
+                    if (match.Groups[1].Value == "version")
                     {
                         versionnumber = match.Groups[2].Value.Substring(1);
+                        continue;
+                    }
+                    else if (match.Groups[1].Value.ToLower() == "taskhistory")
+                    {
+                        taskHistory = true;
+                        continue;
+                    }
+                    else if (match.Groups[1].Value.ToLower() == "commithistory")
+                    {
+                        commitHistory = true;
                         continue;
                     }
                     else if (match.Groups[1].Value == "onlyTask")
@@ -106,23 +107,7 @@ namespace BugManagementReport
             //Thread.Sleep(20000);
 #endif
 
-            if (snap)
-            {
-                Console.WriteLine("taking snapshot");
-                var s = builder.Resolve<Snapshot>();
-                outFileName += DateTime.Now.ToString().Replace(':', '_') + ".csv";
-                s.Take(userNames.UnSafeItem("user names should be set").Split(new char[]{','}), outFileName);
-                Console.WriteLine("taking snapshot completed");
-            }
-            else if (snapbugnum)
-            {
-                Console.WriteLine("taking snapshot bugnum");
-                outFileName += DateTime.Now.ToString().Replace(':', '_') + ".csv";
-                Snapshot.TakeBugNumList(userNames.UnSafeItem("user names should be set").Split(new char[] { ',' }), versionnumber, 
-                    userNames.Replace(",","_") + ".txt");
-                Console.WriteLine("taking snapshot bugnum completed");
-            }
-            else
+            if(taskHistory)
             {
                 Console.WriteLine("parsing");
                 var s = builder.Resolve<TaskRecordManager>();
@@ -138,6 +123,13 @@ namespace BugManagementReport
                     includePast,
                     onlyTask);
                 Console.WriteLine("parsing completed");
+            }
+            else if (commitHistory)
+            { 
+                 outFileName += ".csv";
+                if (File.Exists(outFileName))
+                    File.Delete(outFileName);
+                builder.Resolve<TaskRecordManager>().ParseCompleteTasksHistory(outFileName, userNames, start, end);
             }
         }
 

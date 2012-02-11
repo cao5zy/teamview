@@ -18,7 +18,7 @@ namespace DAL{
         /// <summary>
         /// Creates an object wrapper for the sp_returnTasks Procedure
         /// </summary>
-        public static StoredProcedure SpReturnTasks(string itemId, string versionNum, string status, string dealMan)
+        public static StoredProcedure SpReturnTasks(string itemId, string versionNum, string status, string description, int? priority, string dealMans)
         {
             SubSonic.StoredProcedure sp = new SubSonic.StoredProcedure("sp_returnTasks", DataService.GetInstance("BugInfoProvider"), "dbo");
         	
@@ -28,7 +28,11 @@ namespace DAL{
         	
             sp.Command.AddParameter("@status", status, DbType.AnsiString, null, null);
         	
-            sp.Command.AddParameter("@dealMan", dealMan, DbType.AnsiString, null, null);
+            sp.Command.AddParameter("@description", description, DbType.AnsiString, null, null);
+        	
+            sp.Command.AddParameter("@priority", priority, DbType.Int32, 0, 10);
+        	
+            sp.Command.AddParameter("@dealMans", dealMans, DbType.AnsiString, null, null);
         	
             return sp;
         }

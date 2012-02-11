@@ -11,5 +11,6 @@ namespace BugManagementReport
     {
         void WriteSnapShot(string fileName, IEnumerable<DbItem> items);
         void WriteLogs(string filename, IEnumerable<TaskRecord> items);
+        void WriteCompleteTaskLogs(string fileName, IEnumerable<CompleteTaskLogEntity> items);
     }
 }

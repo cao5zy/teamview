@@ -7,21 +7,24 @@ using System.Diagnostics;
 using TeamView.Dao;
 using TeamView.Common;
 using TeamView.Common.Logs;
+using TeamView.Common.Dao;
 
 namespace BugManagementReport
 {
     class TaskRecordManager
     {
         private TaskRecordParser _recordParser;
-
+        private IQuery _bugInfoQuery;
         public TaskRecordManager(
             IDbProvider dbProvider,
             IFileProvider fileProvider,
-            TaskRecordParser recordParser)
+            TaskRecordParser recordParser,
+            IQuery query)
         {
             _recordParser = recordParser;
             DBProvider = dbProvider;
             FileProvider = fileProvider;
+            _bugInfoQuery = query;
         }
         private IDbProvider DBProvider { get; set; }
 
@@ -83,6 +86,11 @@ namespace BugManagementReport
                 return string.Join(",", items.SafeConvertAll(n =>
                     string.Format("{1}:{0};", n.EstimatedLevel, n.EstimatedBy))
                     .SafeToArray());
+        }
+
+        public void ParseCompleteTasksHistory(string fileName, string dealMan, DateTime start, DateTime end)
+        {
+            FileProvider.WriteCompleteTaskLogs(fileName, _bugInfoQuery.QueryCompleteTasks(dealMan, start, end, (int)LogTypeEnum.Submit));
         }
     }
 }

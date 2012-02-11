@@ -66,5 +66,38 @@ namespace TeamView.Common.DaoImpl
                 }
             }
         }
+
+
+        public IEnumerable<Logs.CompleteTaskLogEntity> QueryCompleteTasks(string dealMan, DateTime startDate, DateTime endDate, int completeTaskFlag)
+        {
+         
+            using (var reader = new SubSonic.Select(DAL.ChangeLog.BugNumColumn,
+                DAL.ChangeLog.MoveSequenceColumn,
+                DAL.ChangeLog.CreateDateColumn,
+                DAL.BugInfo.DescriptionColumn,
+                DAL.BugInfo.SizeColumn,
+                DAL.BugInfo.FiredColumn,
+                DAL.BugInfo.DealManColumn).From<DAL.ChangeLog>()
+                .InnerJoin<DAL.BugInfo>()
+                .Where(DAL.BugInfo.DealManColumn).IsEqualTo(dealMan)
+                .And(DAL.ChangeLog.CreateDateColumn).IsGreaterThanOrEqualTo(startDate)
+                .And(DAL.ChangeLog.CreateDateColumn).IsLessThanOrEqualTo(endDate)
+                .ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    yield return new Logs.CompleteTaskLogEntity { 
+                        Burned = reader[DAL.BugInfo.Columns.Fired].ToInt32(),
+                        CompleteTime = reader[DAL.ChangeLog.Columns.CreateDate].ToDateTime(),
+                        Dealman = reader[DAL.BugInfo.Columns.DealMan].ToString(),
+                        Description = reader[DAL.BugInfo.Columns.Description].ToString(),
+                        Estimate = reader[DAL.BugInfo.Columns.Size].ToInt32(),
+                        ItemId = reader[DAL.BugInfo.Columns.BugNum].ToString(),
+                        Order = reader[DAL.BugInfo.Columns.MoveSequence].ToInt32()
+                    };
+                }
+            }
+
+        }
     }
 }
