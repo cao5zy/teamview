@@ -54,11 +54,10 @@ namespace TeamView.Common.Logs
                 }
                 if (log.LogTypeId == (int)LogTypeEnum.MissionStop)
                 {
-                    var entity = _repository.GetItem(log.ItemId, log.MoveSequence);
+                    var entity = _repository.GetItem(log.ItemId);
 
                     recordObj.EndTime = log.CreatedDate;
                     recordObj.BugNum = log.ItemId;
-                    recordObj.Order = log.MoveSequence;
                     recordObj.Programmer = entity.dealMan;
                     recordObj.Size = entity.size;
                     recordObj.Description = entity.description;

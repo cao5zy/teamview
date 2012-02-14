@@ -59,7 +59,6 @@ namespace TeamView.Common.DaoImpl
                             size = Convert.ToInt32(reader[DAL.BugInfo.Columns.Size]),
                             timeStamp = Convert.ToDateTime(reader[DAL.BugInfo.Columns.TimeStamp]),
                             version = reader[DAL.BugInfo.Columns.Version].ToString(),
-                            moveSequence = Convert.ToInt32(reader[DAL.BugInfo.Columns.MoveSequence]),
                             lastStateTime = Convert.IsDBNull(reader[DAL.BugInfo.Columns.LatestStartTime]) ? DateTime.MinValue : Convert.ToDateTime(reader[DAL.BugInfo.Columns.LatestStartTime]),
                             fired = Convert.ToInt32(reader[DAL.BugInfo.Columns.Fired]),
                         };
@@ -72,7 +71,6 @@ namespace TeamView.Common.DaoImpl
         {
          
             using (var reader = new SubSonic.Select(DAL.ChangeLog.BugNumColumn,
-                DAL.ChangeLog.MoveSequenceColumn,
                 DAL.ChangeLog.CreateDateColumn,
                 DAL.BugInfo.DescriptionColumn,
                 DAL.BugInfo.SizeColumn,
@@ -93,7 +91,6 @@ namespace TeamView.Common.DaoImpl
                         Description = reader[DAL.BugInfo.Columns.Description].ToString(),
                         Estimate = reader[DAL.BugInfo.Columns.Size].ToInt32(),
                         ItemId = reader[DAL.BugInfo.Columns.BugNum].ToString(),
-                        Order = reader[DAL.BugInfo.Columns.MoveSequence].ToInt32()
                     };
                 }
             }

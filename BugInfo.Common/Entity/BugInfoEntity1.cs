@@ -9,7 +9,6 @@ namespace TeamView.Common.Entity
     {
         public string version { get; set; }
         public string bugNum { get; set; }
-        public int moveSequence { get; set; }
         public string bugStatus { get; set; }
         public string dealMan { get; set; }
         public DateTime createdTime { get; set; }
@@ -27,7 +26,6 @@ namespace TeamView.Common.Entity
             {
                 version = this.version,
                 bugNum = this.bugNum,
-                moveSequence = this.moveSequence,
                 bugStatus = this.bugStatus,
                 dealMan = this.dealMan,
                 createdTime = this.createdTime,
@@ -50,7 +48,6 @@ namespace TeamView.Common.Entity
 
             return         this.version == other.version && 
         this.bugNum == other.bugNum && 
-        this.moveSequence == other.moveSequence && 
         this.bugStatus == other.bugStatus && 
         this.dealMan == other.dealMan && 
         this.createdTime == other.createdTime && 

@@ -8,7 +8,7 @@ namespace TeamView.Common.Dao
 {
     public interface IBugInfoRepository
     {
-        BugInfoEntity1 GetItem(string itemId, int moveSequence);
+        BugInfoEntity1 GetItem(string itemId);
 
         void UpdateItem(BugInfoEntity1 item);
 
@@ -22,12 +22,12 @@ namespace TeamView.Common.Dao
 
         byte[] LoadDoc(string itemId);
 
-        bool IsLargestOrder(string itemId, int moveSequence);
+        bool IsLargestOrder(string itemId);
 
         bool CheckDealManStatus(string dealMan, string bugStatus);
 
-        void AddLog(string bugNum, int moveSequence, string desc, int logTypeId);
+        void AddLog(string bugNum, string desc, int logTypeId);
 
-        bool CheckTimeStamp(string itemId, int moveSequence, DateTime timeStamp);
+        bool CheckTimeStamp(string itemId, DateTime timeStamp);
     }
 }

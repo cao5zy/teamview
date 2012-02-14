@@ -152,20 +152,6 @@ namespace DAL
 				colvarBugNum.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarBugNum);
 				
-				TableSchema.TableColumn colvarMoveSequence = new TableSchema.TableColumn(schema);
-				colvarMoveSequence.ColumnName = "moveSequence";
-				colvarMoveSequence.DataType = DbType.Int32;
-				colvarMoveSequence.MaxLength = 0;
-				colvarMoveSequence.AutoIncrement = false;
-				colvarMoveSequence.IsNullable = false;
-				colvarMoveSequence.IsPrimaryKey = true;
-				colvarMoveSequence.IsForeignKey = false;
-				colvarMoveSequence.IsReadOnly = false;
-				
-						colvarMoveSequence.DefaultSetting = @"((0))";
-				colvarMoveSequence.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarMoveSequence);
-				
 				TableSchema.TableColumn colvarBugStatus = new TableSchema.TableColumn(schema);
 				colvarBugStatus.ColumnName = "bugStatus";
 				colvarBugStatus.DataType = DbType.AnsiString;
@@ -302,6 +288,19 @@ namespace DAL
 				colvarLatestStartTime.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarLatestStartTime);
 				
+				TableSchema.TableColumn colvarDoc = new TableSchema.TableColumn(schema);
+				colvarDoc.ColumnName = "Doc";
+				colvarDoc.DataType = DbType.Binary;
+				colvarDoc.MaxLength = 2147483647;
+				colvarDoc.AutoIncrement = false;
+				colvarDoc.IsNullable = true;
+				colvarDoc.IsPrimaryKey = false;
+				colvarDoc.IsForeignKey = false;
+				colvarDoc.IsReadOnly = false;
+				colvarDoc.DefaultSetting = @"";
+				colvarDoc.ForeignKeyTableName = "";
+				schema.Columns.Add(colvarDoc);
+				
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
@@ -326,14 +325,6 @@ namespace DAL
 		{
 			get { return GetColumnValue<string>(Columns.BugNum); }
 			set { SetColumnValue(Columns.BugNum, value); }
-		}
-		  
-		[XmlAttribute("MoveSequence")]
-		[Bindable(true)]
-		public int MoveSequence 
-		{
-			get { return GetColumnValue<int>(Columns.MoveSequence); }
-			set { SetColumnValue(Columns.MoveSequence, value); }
 		}
 		  
 		[XmlAttribute("BugStatus")]
@@ -415,6 +406,14 @@ namespace DAL
 			get { return GetColumnValue<DateTime?>(Columns.LatestStartTime); }
 			set { SetColumnValue(Columns.LatestStartTime, value); }
 		}
+		  
+		[XmlAttribute("Doc")]
+		[Bindable(true)]
+		public byte[] Doc 
+		{
+			get { return GetColumnValue<byte[]>(Columns.Doc); }
+			set { SetColumnValue(Columns.Doc, value); }
+		}
 		
 		#endregion
 		
@@ -432,10 +431,6 @@ namespace DAL
 		public DAL.ChangeLogCollection ChangeLogRecords()
 		{
 			return new DAL.ChangeLogCollection().Where(ChangeLog.Columns.BugNum, BugNum).Load();
-		}
-		public DAL.ChangeLogCollection ChangeLogRecordsFromBugInfo()
-		{
-			return new DAL.ChangeLogCollection().Where(ChangeLog.Columns.MoveSequence, BugNum).Load();
 		}
 		#endregion
 		
@@ -455,15 +450,13 @@ namespace DAL
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime)
+		public static void Insert(string varVersion,string varBugNum,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime,byte[] varDoc)
 		{
 			BugInfo item = new BugInfo();
 			
 			item.Version = varVersion;
 			
 			item.BugNum = varBugNum;
-			
-			item.MoveSequence = varMoveSequence;
 			
 			item.BugStatus = varBugStatus;
 			
@@ -485,6 +478,8 @@ namespace DAL
 			
 			item.LatestStartTime = varLatestStartTime;
 			
+			item.Doc = varDoc;
+			
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -495,15 +490,13 @@ namespace DAL
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(string varVersion,string varBugNum,int varMoveSequence,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime)
+		public static void Update(string varVersion,string varBugNum,string varBugStatus,string varDealMan,DateTime varCreatedTime,string varDescription,int varSize,int varFired,DateTime varTimeStamp,short varPriority,short varHardLevel,DateTime? varLatestStartTime,byte[] varDoc)
 		{
 			BugInfo item = new BugInfo();
 			
 				item.Version = varVersion;
 			
 				item.BugNum = varBugNum;
-			
-				item.MoveSequence = varMoveSequence;
 			
 				item.BugStatus = varBugStatus;
 			
@@ -524,6 +517,8 @@ namespace DAL
 				item.HardLevel = varHardLevel;
 			
 				item.LatestStartTime = varLatestStartTime;
+			
+				item.Doc = varDoc;
 			
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -552,77 +547,77 @@ namespace DAL
         
         
         
-        public static TableSchema.TableColumn MoveSequenceColumn
+        public static TableSchema.TableColumn BugStatusColumn
         {
             get { return Schema.Columns[2]; }
         }
         
         
         
-        public static TableSchema.TableColumn BugStatusColumn
+        public static TableSchema.TableColumn DealManColumn
         {
             get { return Schema.Columns[3]; }
         }
         
         
         
-        public static TableSchema.TableColumn DealManColumn
+        public static TableSchema.TableColumn CreatedTimeColumn
         {
             get { return Schema.Columns[4]; }
         }
         
         
         
-        public static TableSchema.TableColumn CreatedTimeColumn
+        public static TableSchema.TableColumn DescriptionColumn
         {
             get { return Schema.Columns[5]; }
         }
         
         
         
-        public static TableSchema.TableColumn DescriptionColumn
+        public static TableSchema.TableColumn SizeColumn
         {
             get { return Schema.Columns[6]; }
         }
         
         
         
-        public static TableSchema.TableColumn SizeColumn
+        public static TableSchema.TableColumn FiredColumn
         {
             get { return Schema.Columns[7]; }
         }
         
         
         
-        public static TableSchema.TableColumn FiredColumn
+        public static TableSchema.TableColumn TimeStampColumn
         {
             get { return Schema.Columns[8]; }
         }
         
         
         
-        public static TableSchema.TableColumn TimeStampColumn
+        public static TableSchema.TableColumn PriorityColumn
         {
             get { return Schema.Columns[9]; }
         }
         
         
         
-        public static TableSchema.TableColumn PriorityColumn
+        public static TableSchema.TableColumn HardLevelColumn
         {
             get { return Schema.Columns[10]; }
         }
         
         
         
-        public static TableSchema.TableColumn HardLevelColumn
+        public static TableSchema.TableColumn LatestStartTimeColumn
         {
             get { return Schema.Columns[11]; }
         }
         
         
         
-        public static TableSchema.TableColumn LatestStartTimeColumn
+        public static TableSchema.TableColumn DocColumn
         {
             get { return Schema.Columns[12]; }
         }
@@ -635,7 +630,6 @@ namespace DAL
 		{
 			 public static string Version = @"version";
 			 public static string BugNum = @"bugNum";
-			 public static string MoveSequence = @"moveSequence";
 			 public static string BugStatus = @"bugStatus";
 			 public static string DealMan = @"dealMan";
 			 public static string CreatedTime = @"createdTime";
@@ -646,6 +640,7 @@ namespace DAL
 			 public static string Priority = @"priority";
 			 public static string HardLevel = @"hardLevel";
 			 public static string LatestStartTime = @"latestStartTime";
+			 public static string Doc = @"Doc";
 						
 		}
 		#endregion

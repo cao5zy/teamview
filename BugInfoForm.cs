@@ -75,9 +75,9 @@ namespace TeamView
             _repository = repository;
         }
 
-        public void Init(string itemId, int moveSequence)
+        public void Init(string itemId)
         {
-            _model.Load(itemId, moveSequence);
+            _model.Load(itemId);
         }
 
         private void mQuitButton_Click(object sender, EventArgs e)
@@ -183,7 +183,7 @@ namespace TeamView
                 using (TransactionScope trans = new TransactionScope())
                 {
                     _repository.UpdateItem(_model.Current);
-                    _repository.AddLog(_model.Current.bugNum, _model.Current.moveSequence, string.Empty, changeResult.LogTypeId);
+                    _repository.AddLog(_model.Current.bugNum, string.Empty, changeResult.LogTypeId);
                     trans.Complete();
 
                     mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);

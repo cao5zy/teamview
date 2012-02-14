@@ -105,7 +105,7 @@ namespace TeamView
 
         private void issueHandlers_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var item = _bugInfoModel.Load(CurrentSelectedItem.bugNum, CurrentSelectedItem.order);
+            var item = _bugInfoModel.Load(CurrentSelectedItem.bugNum);
             item.timeStamp = CurrentSelectedItem.timeStamp;
 
             string newIssueHandler = e.ClickedItem.Text;
@@ -155,7 +155,6 @@ namespace TeamView
                     row.size = n.size;
                     row.Priority = n.priority;
                     row.fired = n.bugStatus == States.Start ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) : Math.Round((double)n.fired / 60, 2);
-                    row.order = n.moveSequence;
                     row.timeStamp = n.timeStamp;
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
                     itemCount++;
@@ -185,7 +184,7 @@ namespace TeamView
             {
                 BugInfoForm f = CreateBugInfoForm();
                 var bugNum = CurrentSelectedItem.bugNum;
-                f.Init(bugNum, 0);
+                f.Init(bugNum);
                 f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+bugNum;
                 f.Show();
             }
@@ -263,7 +262,7 @@ namespace TeamView
                 return;
 
             var currentSelected = CurrentSelectedItem;
-            var item = this._bugInfoModel.Load(currentSelected.bugNum, currentSelected.order);
+            var item = this._bugInfoModel.Load(currentSelected.bugNum);
             if (item == null)
                 return;
 
@@ -283,7 +282,7 @@ namespace TeamView
             using (TransactionScope trans = new TransactionScope())
             {
                 _repository.UpdateItem(item);
-                _repository.AddLog(item.bugNum, item.moveSequence, string.Empty, result.LogTypeId);
+                _repository.AddLog(item.bugNum, string.Empty, result.LogTypeId);
                 trans.Complete();
             }
 

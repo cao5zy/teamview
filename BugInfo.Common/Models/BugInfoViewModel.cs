@@ -56,9 +56,9 @@ namespace TeamView.Common.Models
             return _current;
         }
 
-        public BugInfoEntity1 Load(string bugNum, int moveSequence)
+        public BugInfoEntity1 Load(string bugNum)
         {
-            var item = _repository.GetItem(bugNum, moveSequence);
+            var item = _repository.GetItem(bugNum);
             _state = item != null;
             _old = item;
             _current = item.Clone();
@@ -68,7 +68,7 @@ namespace TeamView.Common.Models
 
         public string SaveCheck()
         {
-            if (_old != null && !_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+            if (_old != null && !_repository.CheckTimeStamp(_current.bugNum, _current.timeStamp))
                 return concurrencyIssue;
 
             if (string.IsNullOrEmpty(_current.version))
@@ -103,7 +103,7 @@ namespace TeamView.Common.Models
         {
             Trace.Assert(_old != null);
 
-            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+            if (!_repository.CheckTimeStamp(_current.bugNum,_current.timeStamp))
                 return concurrencyIssue;
 
             var oldStatus = StatesConverter.ToStateEnum(_old.bugStatus);
@@ -248,7 +248,7 @@ namespace TeamView.Common.Models
         }
         public string CheckMoveDealMan(string dealMan)
         {
-            if (!_repository.CheckTimeStamp(_current.bugNum, _current.moveSequence, _current.timeStamp))
+            if (!_repository.CheckTimeStamp(_current.bugNum, _current.timeStamp))
                 return concurrencyIssue;
 
             var status = StatesConverter.ToStateEnum(_current.bugStatus);
@@ -259,7 +259,7 @@ namespace TeamView.Common.Models
             if (_current.dealMan == dealMan)
                 return dealManDuplicated;
 
-            if (!_repository.IsLargestOrder(_current.bugNum, _current.moveSequence))
+            if (!_repository.IsLargestOrder(_current.bugNum))
                 return notLargestOrder;
 
             return string.Empty;
@@ -285,7 +285,6 @@ namespace TeamView.Common.Models
                 fired = 0,
                 hardLevel = _current.hardLevel,
                 lastStateTime = DateTime.MinValue,
-                moveSequence = _current.moveSequence + 1,
                 priority = newPriority,
                 size = newSize,
                 version = _current.version,

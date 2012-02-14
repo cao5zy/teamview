@@ -10,11 +10,10 @@ namespace TeamView.Common.DaoImpl
     {
         #region IBugInfoRepository Members
 
-        public TeamView.Common.Entity.BugInfoEntity1 GetItem(string itemId, int moveSequence)
+        public TeamView.Common.Entity.BugInfoEntity1 GetItem(string itemId)
         {
             DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
             var obj = coll.Where(DAL.BugInfo.Columns.BugNum, itemId)
-                .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence)
                 .Load()
                 .FirstOrDefault();
 
@@ -30,7 +29,6 @@ namespace TeamView.Common.DaoImpl
                     description = obj.Description,
                     fired = obj.Fired,
                     hardLevel = obj.HardLevel,
-                    moveSequence = obj.MoveSequence,
                     priority = obj.Priority,
                     size = obj.Size,
                     timeStamp = obj.TimeStamp,
@@ -44,7 +42,6 @@ namespace TeamView.Common.DaoImpl
         {
             DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
             var dbItem = coll.Where(DAL.BugInfo.Columns.BugNum, item.bugNum)
-                .Where(DAL.BugInfo.Columns.MoveSequence, item.moveSequence)
                 .Load()
                 .FirstOrDefault();
             DateTime timeStamp = DateTime.Now;
@@ -59,7 +56,6 @@ namespace TeamView.Common.DaoImpl
                 bugInfo.Description = item.description;
                 bugInfo.Fired = item.fired;
                 bugInfo.HardLevel = (short)item.hardLevel;
-                bugInfo.MoveSequence = item.moveSequence;
                 bugInfo.Priority = (short)item.priority;
                 bugInfo.Size = item.size;
                 bugInfo.Version = item.version;
@@ -155,11 +151,10 @@ namespace TeamView.Common.DaoImpl
         }
 
         #endregion
-        public bool IsLargestOrder(string itemId, int moveSequence)
+        public bool IsLargestOrder(string itemId)
         {
             return new DAL.BugInfoCollection()
             .Where(DAL.BugInfo.Columns.BugNum, itemId)
-            .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence + 1)
             .Load()
             .Count == 0;
         }
@@ -173,11 +168,10 @@ namespace TeamView.Common.DaoImpl
         }
 
 
-        public void AddLog(string bugNum, int moveSequence, string desc, int logTypeId)
+        public void AddLog(string bugNum, string desc, int logTypeId)
         {
             DAL.ChangeLog changeLog = new DAL.ChangeLog();
             changeLog.BugNum = bugNum;
-            changeLog.MoveSequence = moveSequence;
             changeLog.Description = desc;
             changeLog.LogTypeID = logTypeId;
             changeLog.CreateDate = DateTime.Now;
@@ -186,11 +180,10 @@ namespace TeamView.Common.DaoImpl
         }
 
 
-        public bool CheckTimeStamp(string itemId, int moveSequence, DateTime timeStamp)
+        public bool CheckTimeStamp(string itemId, DateTime timeStamp)
         {
             DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
             return coll.Where(DAL.BugInfo.Columns.BugNum, itemId)
-                .Where(DAL.BugInfo.Columns.MoveSequence, moveSequence)
                 .Where(DAL.BugInfo.Columns.TimeStamp, timeStamp)
                 .Load()
                 .FirstOrDefault() != null;
