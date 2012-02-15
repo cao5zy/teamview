@@ -61,9 +61,9 @@ namespace TeamView
 
             _model.New();
 
-            _model.Current.bugNum = IsValidCompleteNumber(formatNum.ItemNumber)
+            _model.Current.bugNum = KeyModel.IsCompleteKey(formatNum.ItemNumber)
                 ? formatNum.ItemNumber
-                : _keyModel.GenerateKey(headerCategory.Match(formatNum.ItemNumber).Value);
+                : _keyModel.GenerateKey(formatNum.ItemNumber);
             _model.Current.bugStatus = States.Pending;
             _model.Current.createdTime = DateTime.Now;
             _model.Current.dealMan = string.IsNullOrEmpty(formatNum.DealMan.Trim()) ? _dealMen.CurrentLogin : formatNum.DealMan;
@@ -90,15 +90,6 @@ namespace TeamView
 
             Close();
         }
-
-        private readonly Regex completeNumberFormat = new Regex(@"\w+-\d+");
-        private bool IsValidCompleteNumber(string itemNumber)
-        {
-            return completeNumberFormat.IsMatch(itemNumber);
-        }
-
-        private readonly Regex validNumberFormat = new Regex(@"(\w+)(-\d+)?");
-        private readonly Regex headerCategory = new Regex(@"\w+");
 
         private byte[] GetDoc()
         {
@@ -177,7 +168,7 @@ namespace TeamView
                 };
             }
 
-            if (!validNumberFormat.IsMatch(lines.ElementAt(4)))
+            if (!KeyModel.IsKeyFormat(lines.ElementAt(4)))
             {
                 return new HeadInfo {
                     ErrorInfo = ItemNumberErrorInfo

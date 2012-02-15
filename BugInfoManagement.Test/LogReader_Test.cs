@@ -82,8 +82,8 @@ namespace TeamView.Test
 
 };
 
-            TaskRecordParser manager = new TaskRecordParser();
-            new List<TaskRecord>(manager.Read(list))
+            TaskRecordParser manager = new TaskRecordParser(null);
+            new List<TaskRecord>(manager.Read(string.Empty))
             .ForEach(n => Debug.WriteLine(n.ToRecordString()));
         }
     }

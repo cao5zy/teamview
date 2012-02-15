@@ -67,13 +67,13 @@ namespace TeamView.Test
         [TestMethod]
         public void TestImport()
         {
-            Moq.Mock<IBugInfoManagement> bugInfoManagement = new Moq.Mock<IBugInfoManagement>();
-            bugInfoManagement.Setup(n => n.AddBugInfo(Moq.It.IsAny<BugInfoEntity>()));
+            //Moq.Mock<IBugInfoManagement> bugInfoManagement = new Moq.Mock<IBugInfoManagement>();
+            //bugInfoManagement.Setup(n => n.AddBugInfo(Moq.It.IsAny<BugInfoEntity>()));
 
-            JIRAImporter importer = new JIRAImporter(bugInfoManagement.Object);
-            importer.Import(@"z:\temp\SearchRequest-27118.xml",
-                "客户",
-                "导入中心");
+            //JIRAImporter importer = new JIRAImporter(bugInfoManagement.Object);
+            //importer.Import(@"z:\temp\SearchRequest-27118.xml",
+            //    "客户",
+            //    "导入中心");
         }
     }
 }

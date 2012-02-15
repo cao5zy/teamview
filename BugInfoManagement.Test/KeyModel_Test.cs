@@ -71,7 +71,7 @@ namespace TeamView.Test
 
             KeyModel model = new KeyModel(repository.Object);
 
-            var key = model.GenerateKey("a");
+            var key = model.GenerateKey("a-*");
 
             Assert.AreEqual("A-1", key);
         }
@@ -86,7 +86,7 @@ namespace TeamView.Test
 
             KeyModel model = new KeyModel(repository.Object);
 
-            var key = model.GenerateKey("a");
+            var key = model.GenerateKey("a-*");
 
             Assert.AreEqual("A-2", key);
         }

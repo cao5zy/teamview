@@ -67,7 +67,7 @@ namespace TeamView.Test
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
             model.New();
-            model.Current.bugNum = "1";
+            model.Current.bugNum = "a-1";
             model.Current.version = "1.0";
 
 
@@ -84,7 +84,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem(Moq.It.IsAny<string>()))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Pending,
                     dealMan = "a",
                     description = "hello",
@@ -115,7 +115,7 @@ namespace TeamView.Test
 
             model.New();
 
-            model.Current.bugNum = "1";
+            model.Current.bugNum = "a-1";
             model.Current.dealMan = "a";
             model.Current.version = "1.1";
             model.Current.size = 1;
@@ -152,7 +152,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Pending,
                     dealMan = "a",
                     description = "hello",
@@ -187,7 +187,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Pending,
                     dealMan = "a",
                     description = "hello",
@@ -219,7 +219,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Pending,
                     dealMan = "a",
                     description = "hello",
@@ -253,7 +253,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Pending,
                     dealMan = "a",
                     description = "hello",
@@ -288,7 +288,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Start,
                     dealMan = "a",
                     description = "hello",
@@ -322,7 +322,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Start,
                     dealMan = "a",
                     description = "hello",
@@ -357,7 +357,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Start,
                     dealMan = "a",
                     description = "hello",
@@ -391,7 +391,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Complete,
                     dealMan = "a",
                     description = "hello",
@@ -424,7 +424,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Complete,
                     dealMan = "a",
                     description = "hello",
@@ -458,7 +458,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Complete,
                     dealMan = "a",
                     description = "hello",
@@ -493,7 +493,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Abort,
                     dealMan = "a",
                     description = "hello",
@@ -526,7 +526,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Abort,
                     dealMan = "a",
                     description = "hello",
@@ -558,7 +558,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Abort,
                     dealMan = "a",
                     description = "hello",
@@ -641,7 +641,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Start,
                     dealMan = "a",
                     description = "hello",
@@ -720,7 +720,7 @@ namespace TeamView.Test
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     bugStatus = States.Abort,
                     dealMan = "a",
                     description = "hello",
@@ -786,7 +786,7 @@ namespace TeamView.Test
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
             model.New();
 
-            model.Current.bugNum = "1";
+            model.Current.bugNum = "a-1";
 
             byte[] stream = new byte[] { };
             model.SaveDoc(stream);
@@ -822,7 +822,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem("1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     
                     dealMan = "a",
                     bugStatus = States.Complete,
@@ -851,7 +851,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem("1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     
                     dealMan = "a",
                     bugStatus = States.Complete,
@@ -879,7 +879,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem("1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     
                     dealMan = "a",
                     bugStatus = States.Abort,
@@ -908,7 +908,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem("1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     
                     dealMan = "a",
                     bugStatus = States.Start,
@@ -937,7 +937,7 @@ namespace TeamView.Test
             repository.Setup(n => n.GetItem("1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "1",
+                    bugNum = "a-1",
                     
                     dealMan = "a",
                     bugStatus = States.Complete,
@@ -970,7 +970,7 @@ namespace TeamView.Test
 
             var oldItem = new Common.Entity.BugInfoEntity1
             {
-                bugNum = "1",
+                bugNum = "a-1",
                 bugStatus = States.Complete,
                 
                 createdTime = t1,
@@ -1025,7 +1025,7 @@ namespace TeamView.Test
 
             var oldItem = new Common.Entity.BugInfoEntity1
             {
-                bugNum = "1",
+                bugNum = "a-1",
                 bugStatus = States.Complete,
                 
                 createdTime = t1,
@@ -1039,15 +1039,15 @@ namespace TeamView.Test
                 timeStamp = dtStamp,
                 version = "4"
             };
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(oldItem);
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
-            repository.Setup(n => n.IsLargestOrder("1")).Returns(true);
+            repository.Setup(n => n.IsLargestOrder("a-1:1")).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1");
+            model.Load("a-1");
             string newDealMan = "b";
             int newSize = 5;
             int newPriority = 4;

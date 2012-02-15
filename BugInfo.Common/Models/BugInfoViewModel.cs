@@ -259,7 +259,8 @@ namespace TeamView.Common.Models
             if (_current.dealMan == dealMan)
                 return dealManDuplicated;
 
-            if (!_repository.IsLargestOrder(_current.bugNum))
+            var newKey = KeyModel.ComposeKey(KeyModel.GetKey(_current.bugNum), KeyModel.GetKeyOrder(_current.bugNum) + 1);
+            if (!_repository.IsLargestOrder(newKey))
                 return notLargestOrder;
 
             return string.Empty;
@@ -277,7 +278,7 @@ namespace TeamView.Common.Models
 
             var newObj = new BugInfoEntity1
             {
-                bugNum = _current.bugNum,
+                bugNum = KeyModel.ComposeKey(KeyModel.GetKey(_current.bugNum), KeyModel.GetKeyOrder(_current.bugNum) + 1),
                 bugStatus = States.Pending,
                 createdTime = DateTime.Now,
                 dealMan = newDealMan,
