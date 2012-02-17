@@ -95,7 +95,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 });
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -164,8 +164,8 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckDealManStatus("1", States.Start)).Returns(false);
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckDealManStatus("a-1", States.Start)).Returns(false);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -198,7 +198,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -232,7 +232,7 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             model.Load(string.Empty);
@@ -266,7 +266,7 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -300,7 +300,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -335,7 +335,7 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -369,7 +369,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -403,7 +403,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -436,7 +436,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -471,7 +471,7 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -505,7 +505,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -538,7 +538,7 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -571,7 +571,7 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
@@ -589,15 +589,15 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(
-                CreateEntity("1", 0, States.Pending, dtStamp)
+                CreateEntity("a-1", 0, States.Pending, dtStamp)
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1");
+            model.Load("a-1");
 
             model.Current.bugStatus = States.Start;
 
@@ -637,7 +637,7 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
@@ -654,10 +654,10 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1");
+            model.Load("a-1");
 
             model.Current.bugStatus = States.Abort;
 
@@ -677,11 +677,11 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = "a",
+                    bugNum = "a-1",
                     bugStatus = States.Start,
                     dealMan = "a",
                     description = "hello",
@@ -693,10 +693,10 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("a", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1");
+            model.Load("a-1");
 
             model.Current.bugStatus = States.Complete;
 
@@ -716,7 +716,7 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(
                 new TeamView.Common.Entity.BugInfoEntity1
                 {
@@ -732,10 +732,10 @@ namespace TeamView.Test
                     timeStamp = dtStamp,
                 }
                 );
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
-            model.Load("1");
+            model.Load("a-1");
 
             model.Current.bugStatus = States.Start;
 
@@ -756,16 +756,16 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(
-                CreateEntity("1", 0, States.Complete, dtStamp)
+                CreateEntity("a-1", 0, States.Complete, dtStamp)
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             model.Current.bugStatus = States.Pending;
 
@@ -781,7 +781,7 @@ namespace TeamView.Test
         public void SaveDoc_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-            repository.Setup(n => n.SaveDoc("1", Moq.It.IsAny<byte[]>()));
+            repository.Setup(n => n.SaveDoc("a-1", Moq.It.IsAny<byte[]>()));
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
             model.New();
@@ -791,7 +791,7 @@ namespace TeamView.Test
             byte[] stream = new byte[] { };
             model.SaveDoc(stream);
 
-            repository.Verify(n => n.SaveDoc("1", Moq.It.IsAny<byte[]>()), Moq.Times.Once());
+            repository.Verify(n => n.SaveDoc("a-1", Moq.It.IsAny<byte[]>()), Moq.Times.Once());
 
         }
 
@@ -800,14 +800,14 @@ namespace TeamView.Test
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
 
-            repository.Setup(n => n.LoadDoc("1")).Returns(new byte[] { });
-            repository.Setup(n => n.GetItem("1"))
-                .Returns(CreateEntity("1", 0, States.Pending, DateTime.Now));
+            repository.Setup(n => n.LoadDoc("a-1")).Returns(new byte[] { });
+            repository.Setup(n => n.GetItem("a-1"))
+                .Returns(CreateEntity("a-1", 0, States.Pending, DateTime.Now));
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
-            byte[] result = model.LoadDoc("1");
+            byte[] result = model.LoadDoc("a-1");
 
             Assert.AreEqual(0, result.Length);
         }
@@ -819,22 +819,21 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "a-1",
-                    
                     dealMan = "a",
                     bugStatus = States.Complete,
                     timeStamp = dtStamp,
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
-            repository.Setup(n => n.IsLargestOrder("1")).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
+            repository.Setup(n => n.IsLargestOrder("a-1:1")).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             var checkResult = model.CheckMoveDealMan("b");
 
@@ -848,21 +847,20 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "a-1",
-                    
                     dealMan = "a",
                     bugStatus = States.Complete,
                     timeStamp = dtStamp,
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             var checkResult = model.CheckMoveDealMan("a");
 
@@ -876,7 +874,7 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "a-1",
@@ -887,11 +885,11 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             var checkResult = model.CheckMoveDealMan("b");
 
@@ -905,7 +903,7 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "a-1",
@@ -916,11 +914,11 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             var checkResult = model.CheckMoveDealMan("b");
 
@@ -934,7 +932,7 @@ namespace TeamView.Test
 
             DateTime dtStamp = DateTime.Now;
 
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(new TeamView.Common.Entity.BugInfoEntity1
                 {
                     bugNum = "a-1",
@@ -945,14 +943,14 @@ namespace TeamView.Test
                 }
                 );
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
-            repository.Setup(n => n.IsLargestOrder("1"))
+            repository.Setup(n => n.IsLargestOrder("a-1"))
                 .Returns(false);
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
-            model.Load("1");
+            model.Load("a-1");
 
             var checkResult = model.CheckMoveDealMan("b");
 
@@ -972,7 +970,6 @@ namespace TeamView.Test
             {
                 bugNum = "a-1",
                 bugStatus = States.Complete,
-                
                 createdTime = t1,
                 dealMan = "a",
                 description = "description",
@@ -984,23 +981,23 @@ namespace TeamView.Test
                 timeStamp = dtStamp,
                 version = "4"
             };
-            repository.Setup(n => n.GetItem("1"))
+            repository.Setup(n => n.GetItem("a-1"))
                 .Returns(oldItem);
 
-            repository.Setup(n => n.CheckTimeStamp("1", dtStamp)).Returns(true);
+            repository.Setup(n => n.CheckTimeStamp("a-1", dtStamp)).Returns(true);
 
 
-            repository.Setup(n => n.IsLargestOrder("1")).Returns(true);
+            repository.Setup(n => n.IsLargestOrder("a-1:1")).Returns(true);
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
 
             string newDealMan = "b";
-            model.Load("1");
+            model.Load("a-1");
             var moveResult = model.MoveDealMan(newDealMan);
 
             Assert.IsTrue(moveResult.State);
             var newItem = moveResult.NewItem;
 
-            Assert.AreEqual(oldItem.bugNum, newItem.bugNum);
+            Assert.AreEqual("a-1:1", newItem.bugNum);
             Assert.AreEqual(States.Pending, newItem.bugStatus);
             Assert.AreNotEqual(t1, newItem.createdTime);
             Assert.AreEqual("b", newItem.dealMan);
@@ -1056,7 +1053,7 @@ namespace TeamView.Test
             Assert.IsTrue(moveResult.State);
             var newItem = moveResult.NewItem;
 
-            Assert.AreEqual(oldItem.bugNum, newItem.bugNum);
+            Assert.AreEqual("a-1:1", newItem.bugNum);
             Assert.AreEqual(States.Pending, newItem.bugStatus);
             Assert.AreNotEqual(t1, newItem.createdTime);
             Assert.AreEqual(newDealMan, newItem.dealMan);
