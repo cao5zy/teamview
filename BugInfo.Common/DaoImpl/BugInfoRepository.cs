@@ -126,28 +126,24 @@ namespace TeamView.Common.DaoImpl
 
         public void SaveDoc(string itemId, byte[] stream)
         {
-            DAL.BugDoc doc = new DAL.BugDoc();
-            doc.LoadByKey(itemId);
-            if (!doc.IsLoaded)
+            DAL.BugInfo bugInfo = new DAL.BugInfo();
+            bugInfo.LoadByKey(itemId);
+            if (bugInfo.IsLoaded)
             {
-                doc.BugNum = itemId;
-                doc.Save();
-                doc.LoadByKey(itemId);
+                bugInfo.Doc = stream;
             }
 
-            doc.Doc = stream;
-
-            doc.Save();
+            bugInfo.Save();
         }
 
         public byte[] LoadDoc(string itemId)
         {
-            DAL.BugDoc doc = new DAL.BugDoc();
-            doc.LoadByKey(itemId);
-            if (!doc.IsLoaded)
+            DAL.BugInfo bugInfo = new DAL.BugInfo();
+            bugInfo.LoadByKey(itemId);
+            if (!bugInfo.IsLoaded || bugInfo.Doc == null)
                 return new byte[] { };
             else
-                return doc.Doc;
+                return bugInfo.Doc;
         }
 
         #endregion

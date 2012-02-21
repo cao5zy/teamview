@@ -92,8 +92,6 @@
     <Compile Include="CommonModule.cs" />
     <Compile Include="CompareCode.cs" />
     <Compile Include="DAL\AllStructs.cs" />
-    <Compile Include="DAL\BugDoc.cs" />
-    <Compile Include="DAL\BugDocController.cs" />
     <Compile Include="DAL\BugInfo.cs" />
     <Compile Include="DAL\BugInfoController.cs" />
     <Compile Include="DAL\ChangeLog.cs" />
