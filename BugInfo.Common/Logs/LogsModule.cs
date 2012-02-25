@@ -5,7 +5,6 @@ using System.Text;
 using Autofac;
 using System.Data.SqlClient;
 using System.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
 using System.Data;
 using TeamView.Common.DaoImpl;
