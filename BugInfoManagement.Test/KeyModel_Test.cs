@@ -90,5 +90,27 @@ namespace TeamView.Test
 
             Assert.AreEqual("A-2", key);
         }
+
+        [TestMethod]
+        public void IsKeyFormat_Test()
+        {
+            string key = "a-1";
+
+            Assert.IsTrue(KeyModel.IsKeyFormat(key));
+
+            key = "a-1_1";
+
+            Assert.IsTrue(KeyModel.IsKeyFormat(key));
+
+            key = "a-1_1:1";
+
+            Assert.IsTrue(KeyModel.IsKeyFormat(key));
+
+            key = "a-1-1";
+
+            Assert.IsFalse(KeyModel.IsKeyFormat(key));
+
+
+        }
     }
 }

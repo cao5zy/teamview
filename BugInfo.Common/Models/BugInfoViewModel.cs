@@ -24,8 +24,10 @@ namespace TeamView.Common.Models
         public const string notLargestOrder = "只能在最大序号上对任务做转移处理";
         public const string hasStartedTask = "存在了已经开始的任务";
         public const string concurrencyIssue = "数据已经被更新";
+        public const string theNewItemIdExisting = "Bug编号已经存在，请另外设置一个Bug编号";
         private IBugInfoRepository _repository;
         private bool _state = false;
+        private bool _isNew = false;
         public bool State
         {
             get
@@ -53,6 +55,7 @@ namespace TeamView.Common.Models
         {
             _current = new BugInfoEntity1();
             _state = true;
+            _isNew = true;
             return _current;
         }
 
@@ -60,6 +63,7 @@ namespace TeamView.Common.Models
         {
             var item = _repository.GetItem(bugNum);
             _state = item != null;
+            _isNew = item == null;
             _old = item;
             _current = item.Clone();
 
@@ -79,6 +83,11 @@ namespace TeamView.Common.Models
             if (string.IsNullOrEmpty(_current.bugNum))
             {
                 return bugNoErrorMessage;
+            }
+
+            if (_isNew && _repository.GetItem(_current.bugNum) != null)
+            {
+                return theNewItemIdExisting;                
             }
 
             if (string.IsNullOrEmpty(_current.dealMan))
@@ -189,8 +198,10 @@ namespace TeamView.Common.Models
         {
             if (statesEnum == StatesEnum.Start)
                 return (int)LogTypeEnum.MissionStart;
-            if (statesEnum == StatesEnum.Complete || statesEnum == StatesEnum.Abort)
+            else if (statesEnum == StatesEnum.Abort)
                 return (int)LogTypeEnum.MissionStop;
+            else if (statesEnum == StatesEnum.Complete)
+                return (int)LogTypeEnum.Submit;
             else
                 return (int)LogTypeEnum.None;
         }

@@ -11,7 +11,7 @@ namespace TeamView.Common.Models
     public class KeyModel
     {
         private IBugInfoRepository _repository;
-        private static Regex mItemIdReg = new Regex(@"^(\w+)\-([1-9]\d*|\*)(\:\d+)?$");
+        private static Regex mItemIdReg = new Regex(@"^(\w+)\-([1-9]\d*|\*|[1-9]\d*_[1-9]\d*)(\:\d+)?$");
         public KeyModel(IBugInfoRepository repository)
         {
             _repository = repository;
@@ -85,7 +85,7 @@ namespace TeamView.Common.Models
             if (!match.Groups[3].Success)
                 return defaultVal;
             else
-                return Convert.ToInt32(keyValue.Substring(match.Groups[3].Index, match.Groups[3].Length - 1));
+                return Convert.ToInt32(keyValue.Substring(match.Groups[3].Index + 1, match.Groups[3].Length - 1));
         }
     }
 }

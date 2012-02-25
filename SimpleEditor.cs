@@ -107,6 +107,9 @@ namespace TeamView
 
         public void Load(byte[] docDetails)
         {
+            if (docDetails == null || docDetails.Length == 0)
+                return;
+
             var tempFileName = Path.GetTempFileName();
             using (var fs = new FileStream(tempFileName, FileMode.Create))
             {

@@ -94,11 +94,12 @@ namespace TeamView
         private byte[] GetDoc()
         {
             int pos = 0;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 pos = _editor.RichText.Find(new char[] { '\r' }, ++pos);
             }
 
+            pos++;
             _editor.RichText.Select(0, pos);
             _editor.RichText.SelectionStart = 0;
             _editor.RichText.SelectionLength = pos;

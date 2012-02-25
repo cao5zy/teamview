@@ -63,7 +63,7 @@ namespace TeamView.Test
         public void CheckState_CheckNew_Test()
         {
             Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
-            repository.Setup(n => n.GetItem(Moq.It.IsAny<string>())).Returns(new TeamView.Common.Entity.BugInfoEntity1 { });
+            repository.Setup(n => n.GetItem("a-2")).Returns(new TeamView.Common.Entity.BugInfoEntity1 { });
 
             BugInfoViewModel model = new BugInfoViewModel(repository.Object);
             model.New();
@@ -125,6 +125,28 @@ namespace TeamView.Test
 
             Assert.IsTrue(result.State);
             Assert.AreEqual(States.Pending, result.Object.bugStatus);
+        }
+
+        [TestMethod]
+        public void Save_New_Check_ItemId_Test()
+        {
+            Moq.Mock<IBugInfoRepository> repository = new Moq.Mock<IBugInfoRepository>();
+            repository.Setup(n => n.GetItem("a-1")).Returns(new Common.Entity.BugInfoEntity1 { 
+                bugNum = "a-1",
+            });
+            BugInfoViewModel model = new BugInfoViewModel(repository.Object);
+
+            model.New();
+
+            model.Current.bugNum = "a-1";
+            model.Current.dealMan = "a";
+            model.Current.version = "1.1";
+            model.Current.size = 1;
+            model.Current.priority = 0;
+
+            var result = model.SaveCheck();
+
+            Assert.AreEqual(BugInfoViewModel.theNewItemIdExisting, result);
         }
 
         [TestMethod]
