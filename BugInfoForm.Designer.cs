@@ -42,25 +42,21 @@ namespace TeamView
             this.label2 = new System.Windows.Forms.Label();
             this.mQuitButton = new System.Windows.Forms.Button();
             this.mBaseInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.hardLevelCombo = new System.Windows.Forms.ComboBox();
             this.mDealManTextBox = new System.Windows.Forms.TextBox();
-            this.mHardLevelTextBox = new System.Windows.Forms.TextBox();
             this.BIAssessment = new System.Windows.Forms.Label();
+            this.mStateControl = new TeamView.StateControl();
             this.mPriorityCombo = new System.Windows.Forms.ComboBox();
             this.BIPriority = new System.Windows.Forms.Label();
             this.mSizeTextBox = new System.Windows.Forms.TextBox();
             this.BIPreTakeTime = new System.Windows.Forms.Label();
             this.mFiredTextBox = new System.Windows.Forms.TextBox();
             this.BITakeTime = new System.Windows.Forms.Label();
-            this.mCreatedManBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.mDealMenBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mEditorPanel = new System.Windows.Forms.Panel();
             this.bugInfoSet = new TeamView.BugInfoSet();
-            this.mStateControl = new TeamView.StateControl();
             ((System.ComponentModel.ISupportInitialize)(this.mDataSource)).BeginInit();
             this.mBaseInfoGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mCreatedManBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mDealMenBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bugInfoSet)).BeginInit();
             this.SuspendLayout();
@@ -165,8 +161,8 @@ namespace TeamView
             // 
             // mBaseInfoGroupBox
             // 
+            this.mBaseInfoGroupBox.Controls.Add(this.hardLevelCombo);
             this.mBaseInfoGroupBox.Controls.Add(this.mDealManTextBox);
-            this.mBaseInfoGroupBox.Controls.Add(this.mHardLevelTextBox);
             this.mBaseInfoGroupBox.Controls.Add(this.BIAssessment);
             this.mBaseInfoGroupBox.Controls.Add(this.mStateControl);
             this.mBaseInfoGroupBox.Controls.Add(this.mPriorityCombo);
@@ -192,6 +188,17 @@ namespace TeamView
             this.mBaseInfoGroupBox.TabStop = false;
             this.mBaseInfoGroupBox.Text = "Base Information";
             // 
+            // hardLevelCombo
+            // 
+            this.hardLevelCombo.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.mDataSource, "hardLevel", true));
+            this.hardLevelCombo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "hardLevel", true));
+            this.hardLevelCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hardLevelCombo.FormattingEnabled = true;
+            this.hardLevelCombo.Location = new System.Drawing.Point(335, 74);
+            this.hardLevelCombo.Name = "hardLevelCombo";
+            this.hardLevelCombo.Size = new System.Drawing.Size(59, 20);
+            this.hardLevelCombo.TabIndex = 27;
+            // 
             // mDealManTextBox
             // 
             this.mDealManTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "dealMan", true));
@@ -201,16 +208,6 @@ namespace TeamView
             this.mDealManTextBox.Size = new System.Drawing.Size(59, 21);
             this.mDealManTextBox.TabIndex = 26;
             // 
-            // mHardLevelTextBox
-            // 
-            this.mHardLevelTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "hardLevel", true));
-            this.mHardLevelTextBox.Location = new System.Drawing.Point(335, 74);
-            this.mHardLevelTextBox.Name = "mHardLevelTextBox";
-            this.mHardLevelTextBox.ReadOnly = true;
-            this.mHardLevelTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mHardLevelTextBox.Size = new System.Drawing.Size(59, 21);
-            this.mHardLevelTextBox.TabIndex = 25;
-            // 
             // BIAssessment
             // 
             this.BIAssessment.AutoSize = true;
@@ -219,6 +216,15 @@ namespace TeamView
             this.BIAssessment.Size = new System.Drawing.Size(131, 12);
             this.BIAssessment.TabIndex = 24;
             this.BIAssessment.Text = "Difficult Assessment:";
+            // 
+            // mStateControl
+            // 
+            this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
+            this.mStateControl.Location = new System.Drawing.Point(537, 41);
+            this.mStateControl.Name = "mStateControl";
+            this.mStateControl.Size = new System.Drawing.Size(79, 77);
+            this.mStateControl.TabIndex = 7;
+            this.mStateControl.StateChanged += new System.EventHandler<TeamView.StateControl.StateChangedArgs>(this.mStateControl_StateChanged);
             // 
             // mPriorityCombo
             // 
@@ -312,15 +318,6 @@ namespace TeamView
             this.bugInfoSet.DataSetName = "BugInfoSet";
             this.bugInfoSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // mStateControl
-            // 
-            this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
-            this.mStateControl.Location = new System.Drawing.Point(537, 41);
-            this.mStateControl.Name = "mStateControl";
-            this.mStateControl.Size = new System.Drawing.Size(79, 77);
-            this.mStateControl.TabIndex = 7;
-            this.mStateControl.StateChanged += new System.EventHandler<TeamView.StateControl.StateChangedArgs>(this.mStateControl_StateChanged);
-            // 
             // BugInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -334,8 +331,6 @@ namespace TeamView
             ((System.ComponentModel.ISupportInitialize)(this.mDataSource)).EndInit();
             this.mBaseInfoGroupBox.ResumeLayout(false);
             this.mBaseInfoGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mCreatedManBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mDealMenBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bugInfoSet)).EndInit();
             this.ResumeLayout(false);
@@ -357,19 +352,17 @@ namespace TeamView
         private System.Windows.Forms.BindingSource mDataSource;
         private System.Windows.Forms.GroupBox mBaseInfoGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.BindingSource mDealMenBindingSource;
         private System.Windows.Forms.TextBox mFiredTextBox;
         private System.Windows.Forms.Label BITakeTime;
-        private System.Windows.Forms.BindingSource mCreatedManBindingSource;
         private System.Windows.Forms.TextBox mSizeTextBox;
         private System.Windows.Forms.Label BIPreTakeTime;
         private System.Windows.Forms.Panel mEditorPanel;
         private System.Windows.Forms.Label BIPriority;
         private System.Windows.Forms.ComboBox mPriorityCombo;
         private StateControl mStateControl;
-        private System.Windows.Forms.TextBox mHardLevelTextBox;
         private System.Windows.Forms.Label BIAssessment;
         private BugInfoSet bugInfoSet;
         private System.Windows.Forms.TextBox mDealManTextBox;
+        private System.Windows.Forms.ComboBox hardLevelCombo;
     }
 }

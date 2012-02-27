@@ -62,17 +62,20 @@ namespace TeamView
 
         BugInfoViewModel _model;
         IBugInfoRepository _repository;
+        IHardLevel _hardLevel;
         public BugInfoForm(
             IDealMen dealMen,
             IBugStates bugStates,
             BugInfoViewModel bugInfoMoel,
-            IBugInfoRepository repository)
+            IBugInfoRepository repository,
+            IHardLevel hardLevel)
             : this()
         {
             DealMen = dealMen;
             BugStates = bugStates;
             _model = bugInfoMoel;
             _repository = repository;
+            _hardLevel = hardLevel;
         }
 
         public void Init(string itemId)
@@ -116,8 +119,10 @@ namespace TeamView
 
         private void AddForm_Load(object sender, EventArgs e)
         {
-            mDealMenBindingSource.DataSource = this.DealMen.DealMen;
-            mCreatedManBindingSource.DataSource = this.DealMen.DealMen;
+            hardLevelCombo.DataSource = _hardLevel.HardLevels;
+
+            //conver to hours
+            _model.Current.fired = _model.Current.fired / 60;
 
             mDataSource.Add(_model.Current);
 
