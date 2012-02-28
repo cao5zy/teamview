@@ -15,16 +15,16 @@ namespace TeamView.Common.Models
 {
     public class BugInfoViewModel
     {
-        public const string versionErrorMessage = "版本号不能为空";
-        public const string bugNoErrorMessage = "Bug编号不能为空";
-        public const string dealManErrorMessage = "处理人不能为空";
-        public const string statusErrorMessage = "状态不能为空";
-        public const string statusChangeErrorMessage = "状态变化不允许";
-        public const string dealManDuplicated = "流程处理人相同";
-        public const string notLargestOrder = "只能在最大序号上对任务做转移处理";
-        public const string hasStartedTask = "存在了已经开始的任务";
-        public const string concurrencyIssue = "数据已经被更新";
-        public const string theNewItemIdExisting = "Bug编号已经存在，请另外设置一个Bug编号";
+        public const string versionErrorMessage = "Version number is required";
+        public const string bugNoErrorMessage = "Issue number is required";
+        public const string dealManErrorMessage = "Dealman is required";
+        public const string statusErrorMessage = "Status is required";
+        public const string statusChangeErrorMessage = "The changed status is not allowed";
+        public const string dealManDuplicated = "The dealman can't be assigned";
+        public const string notLargestOrder = "Only the max order is allowed to transmit";
+        public const string hasStartedTask = "There has been issue in processing";
+        public const string concurrencyIssue = "Concurrency issue occurs";
+        public const string theNewItemIdExisting = "Issue number is duplicated";
         private IBugInfoRepository _repository;
         private bool _state = false;
         private bool _isNew = false;

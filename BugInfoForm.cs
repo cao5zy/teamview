@@ -129,45 +129,6 @@ namespace TeamView
             mSimpleEditor.Load(_model.LoadDoc(_model.Current.bugNum));
 
             mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
-
-
-            //if (BugInfoManager is CreateBugInfoManager)
-            //{
-            //    mDealManComboBox.SelectedIndex = 0;
-            //    mStateControl.Visible = false;
-            //    //do nothing here
-            //}
-            //else if (BugInfoManager is EditBugInfoManager)
-            //{
-            //    mBugNumTextBox.Enabled = false;
-            //    mCreatedComboBox.Enabled = false;
-
-            //    if (BugInfoManager.BugInfo.BugStatus == States.Pending
-            //        || BugInfoManager.BugInfo.BugStatus == States.Abort)
-            //    {
-            //        if (MessageBox.Show("Click Yes，start task right now!", "Start the tast?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            //        {
-            //            var oldBugStatus = BugInfoManager.BugInfo.BugStatus;
-            //            ((EditBugInfoManager)BugInfoManager).MoveState(StatesEnum.Start);
-
-            //            ((CurrencyManager)BindingContext[mDataSource]).Refresh();
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-            //    throw new ApplicationException("invalid type");
-            //}
-
-            //BugInfoManager.LoadDetail(mSimpleEditor);
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void mStateControl_StateChanged(object sender, StateControl.StateChangedArgs e)
