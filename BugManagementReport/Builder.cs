@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Configuration;
 using TeamView.Common;
 using TeamView.Common.Logs;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data;
 
 namespace BugManagementReport
