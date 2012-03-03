@@ -28,7 +28,7 @@ namespace TeamView.Common.Models
                 if (value.HasValue)
                 {
                     long val = value.Value;
-                    _repository.UpdateKeyValue(keyName, ++val);
+                    _repository.UpdateKeyValue(key, ++val);
                     trans.Complete();
                     return key + "-" + val.ToString();
                 }

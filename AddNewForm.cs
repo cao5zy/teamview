@@ -162,7 +162,8 @@ namespace TeamView
                 };
             }
 
-            if(!int.TryParse(lines.ElementAt(2), out n))
+            decimal hours;
+            if (!decimal.TryParse(lines.ElementAt(2), out hours))
             {
                 return new HeadInfo{
                     ErrorInfo = SizeNumberErrorInfo
@@ -181,7 +182,7 @@ namespace TeamView
             return new HeadInfo { 
                 Description = headLines.ElementAt(0),
                 Priority = Convert.ToInt32(headLines.ElementAt(1)),
-                Size = Convert.ToInt32(headLines.ElementAt(2)),
+                Size = (int)(Convert.ToDecimal(headLines.ElementAt(2)) * 60),
                 Version = headLines.ElementAt(3),
                 ItemNumber = headLines.ElementAt(4),
                 DealMan = headLines.ElementAt(5),

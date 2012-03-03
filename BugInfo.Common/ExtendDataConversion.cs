@@ -22,5 +22,13 @@ namespace TeamView.Common
             else
                 return Convert.ToDateTime(value);
         }
+
+        public static decimal ToDecimal(this object value)
+        {
+            if (value == null || Convert.IsDBNull(value))
+                return 0;
+            else
+                return Convert.ToDecimal(value);
+        }
     }
 }

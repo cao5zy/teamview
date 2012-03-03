@@ -84,8 +84,8 @@ namespace BugManagementReport
                 record.Dealman,
                 record.Description.RemoveNewLine(),
                 record.CompleteTime,
-                record.Estimate,
-                record.Burned,
+                Math.Round((double)record.Estimate/60, 2),
+                Math.Round((double)record.Burned/60, 2),
                 });
         }
     }

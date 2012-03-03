@@ -50,8 +50,6 @@ namespace TeamView
             this.BIPriority = new System.Windows.Forms.Label();
             this.mSizeTextBox = new System.Windows.Forms.TextBox();
             this.BIPreTakeTime = new System.Windows.Forms.Label();
-            this.mFiredTextBox = new System.Windows.Forms.TextBox();
-            this.BITakeTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mEditorPanel = new System.Windows.Forms.Panel();
             this.bugInfoSet = new TeamView.BugInfoSet();
@@ -84,7 +82,7 @@ namespace TeamView
             // 
             // mDoAddButton
             // 
-            this.mDoAddButton.Location = new System.Drawing.Point(741, 140);
+            this.mDoAddButton.Location = new System.Drawing.Point(745, 123);
             this.mDoAddButton.Name = "mDoAddButton";
             this.mDoAddButton.Size = new System.Drawing.Size(75, 23);
             this.mDoAddButton.TabIndex = 8;
@@ -95,11 +93,11 @@ namespace TeamView
             // mDiscriptionTextBox
             // 
             this.mDiscriptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "Description", true));
-            this.mDiscriptionTextBox.Location = new System.Drawing.Point(86, 124);
+            this.mDiscriptionTextBox.Location = new System.Drawing.Point(86, 71);
             this.mDiscriptionTextBox.Multiline = true;
             this.mDiscriptionTextBox.Name = "mDiscriptionTextBox";
             this.mDiscriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mDiscriptionTextBox.Size = new System.Drawing.Size(649, 39);
+            this.mDiscriptionTextBox.Size = new System.Drawing.Size(649, 75);
             this.mDiscriptionTextBox.TabIndex = 6;
             // 
             // BIVersionNum
@@ -132,7 +130,7 @@ namespace TeamView
             // BIBugDescription
             // 
             this.BIBugDescription.AutoSize = true;
-            this.BIBugDescription.Location = new System.Drawing.Point(7, 124);
+            this.BIBugDescription.Location = new System.Drawing.Point(7, 71);
             this.BIBugDescription.Name = "BIBugDescription";
             this.BIBugDescription.Size = new System.Drawing.Size(77, 12);
             this.BIBugDescription.TabIndex = 16;
@@ -151,7 +149,7 @@ namespace TeamView
             // 
             // mQuitButton
             // 
-            this.mQuitButton.Location = new System.Drawing.Point(836, 140);
+            this.mQuitButton.Location = new System.Drawing.Point(840, 123);
             this.mQuitButton.Name = "mQuitButton";
             this.mQuitButton.Size = new System.Drawing.Size(75, 23);
             this.mQuitButton.TabIndex = 9;
@@ -169,8 +167,6 @@ namespace TeamView
             this.mBaseInfoGroupBox.Controls.Add(this.BIPriority);
             this.mBaseInfoGroupBox.Controls.Add(this.mSizeTextBox);
             this.mBaseInfoGroupBox.Controls.Add(this.BIPreTakeTime);
-            this.mBaseInfoGroupBox.Controls.Add(this.mFiredTextBox);
-            this.mBaseInfoGroupBox.Controls.Add(this.BITakeTime);
             this.mBaseInfoGroupBox.Controls.Add(this.BIVersionNum);
             this.mBaseInfoGroupBox.Controls.Add(this.mQuitButton);
             this.mBaseInfoGroupBox.Controls.Add(this.mVersionTextBox);
@@ -183,7 +179,7 @@ namespace TeamView
             this.mBaseInfoGroupBox.Controls.Add(this.BIBugDescription);
             this.mBaseInfoGroupBox.Location = new System.Drawing.Point(3, 3);
             this.mBaseInfoGroupBox.Name = "mBaseInfoGroupBox";
-            this.mBaseInfoGroupBox.Size = new System.Drawing.Size(921, 172);
+            this.mBaseInfoGroupBox.Size = new System.Drawing.Size(921, 154);
             this.mBaseInfoGroupBox.TabIndex = 0;
             this.mBaseInfoGroupBox.TabStop = false;
             this.mBaseInfoGroupBox.Text = "Base Information";
@@ -194,7 +190,7 @@ namespace TeamView
             this.hardLevelCombo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "hardLevel", true));
             this.hardLevelCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hardLevelCombo.FormattingEnabled = true;
-            this.hardLevelCombo.Location = new System.Drawing.Point(335, 74);
+            this.hardLevelCombo.Location = new System.Drawing.Point(551, 44);
             this.hardLevelCombo.Name = "hardLevelCombo";
             this.hardLevelCombo.Size = new System.Drawing.Size(59, 20);
             this.hardLevelCombo.TabIndex = 27;
@@ -211,7 +207,7 @@ namespace TeamView
             // BIAssessment
             // 
             this.BIAssessment.AutoSize = true;
-            this.BIAssessment.Location = new System.Drawing.Point(192, 77);
+            this.BIAssessment.Location = new System.Drawing.Point(408, 47);
             this.BIAssessment.Name = "BIAssessment";
             this.BIAssessment.Size = new System.Drawing.Size(131, 12);
             this.BIAssessment.TabIndex = 24;
@@ -220,7 +216,7 @@ namespace TeamView
             // mStateControl
             // 
             this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
-            this.mStateControl.Location = new System.Drawing.Point(537, 41);
+            this.mStateControl.Location = new System.Drawing.Point(741, 17);
             this.mStateControl.Name = "mStateControl";
             this.mStateControl.Size = new System.Drawing.Size(79, 77);
             this.mStateControl.TabIndex = 7;
@@ -239,7 +235,7 @@ namespace TeamView
             "2",
             "3",
             "4"});
-            this.mPriorityCombo.Location = new System.Drawing.Point(86, 74);
+            this.mPriorityCombo.Location = new System.Drawing.Point(551, 14);
             this.mPriorityCombo.Name = "mPriorityCombo";
             this.mPriorityCombo.Size = new System.Drawing.Size(84, 20);
             this.mPriorityCombo.TabIndex = 5;
@@ -248,7 +244,7 @@ namespace TeamView
             // BIPriority
             // 
             this.BIPriority.AutoSize = true;
-            this.BIPriority.Location = new System.Drawing.Point(6, 77);
+            this.BIPriority.Location = new System.Drawing.Point(480, 17);
             this.BIPriority.Name = "BIPriority";
             this.BIPriority.Size = new System.Drawing.Size(59, 12);
             this.BIPriority.TabIndex = 4;
@@ -272,24 +268,6 @@ namespace TeamView
             this.BIPreTakeTime.TabIndex = 10;
             this.BIPreTakeTime.Text = "Time Assessment(H):";
             // 
-            // mFiredTextBox
-            // 
-            this.mFiredTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "fired", true));
-            this.mFiredTextBox.Location = new System.Drawing.Point(537, 14);
-            this.mFiredTextBox.Name = "mFiredTextBox";
-            this.mFiredTextBox.ReadOnly = true;
-            this.mFiredTextBox.Size = new System.Drawing.Size(95, 21);
-            this.mFiredTextBox.TabIndex = 13;
-            // 
-            // BITakeTime
-            // 
-            this.BITakeTime.AutoSize = true;
-            this.BITakeTime.Location = new System.Drawing.Point(421, 19);
-            this.BITakeTime.Name = "BITakeTime";
-            this.BITakeTime.Size = new System.Drawing.Size(113, 12);
-            this.BITakeTime.TabIndex = 12;
-            this.BITakeTime.Text = "Time consuming(H):";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -300,7 +278,7 @@ namespace TeamView
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(927, 633);
             this.tableLayoutPanel1.TabIndex = 32;
@@ -308,9 +286,9 @@ namespace TeamView
             // mEditorPanel
             // 
             this.mEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mEditorPanel.Location = new System.Drawing.Point(3, 181);
+            this.mEditorPanel.Location = new System.Drawing.Point(3, 163);
             this.mEditorPanel.Name = "mEditorPanel";
-            this.mEditorPanel.Size = new System.Drawing.Size(921, 449);
+            this.mEditorPanel.Size = new System.Drawing.Size(921, 467);
             this.mEditorPanel.TabIndex = 0;
             // 
             // bugInfoSet
@@ -352,8 +330,6 @@ namespace TeamView
         private System.Windows.Forms.BindingSource mDataSource;
         private System.Windows.Forms.GroupBox mBaseInfoGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox mFiredTextBox;
-        private System.Windows.Forms.Label BITakeTime;
         private System.Windows.Forms.TextBox mSizeTextBox;
         private System.Windows.Forms.Label BIPreTakeTime;
         private System.Windows.Forms.Panel mEditorPanel;

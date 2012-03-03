@@ -56,11 +56,11 @@ namespace TeamView.Common.DaoImpl
                             dealMan = reader[DAL.BugInfo.Columns.DealMan].ToString(),
                             description = reader[DAL.BugInfo.Columns.Description].ToString(),
                             priority = Convert.ToInt16(reader[DAL.BugInfo.Columns.Priority]),
-                            size = Convert.ToInt32(reader[DAL.BugInfo.Columns.Size]),
+                            size = reader[DAL.BugInfo.Columns.Size].ToInt32(),
                             timeStamp = Convert.ToDateTime(reader[DAL.BugInfo.Columns.TimeStamp]),
                             version = reader[DAL.BugInfo.Columns.Version].ToString(),
                             lastStateTime = Convert.IsDBNull(reader[DAL.BugInfo.Columns.LatestStartTime]) ? DateTime.MinValue : Convert.ToDateTime(reader[DAL.BugInfo.Columns.LatestStartTime]),
-                            fired = Convert.ToInt32(reader[DAL.BugInfo.Columns.Fired]),
+                            fired = reader[DAL.BugInfo.Columns.Fired].ToInt32(),
                         };
                 }
             }
@@ -80,6 +80,7 @@ namespace TeamView.Common.DaoImpl
                 .Where(DAL.BugInfo.DealManColumn).IsEqualTo(dealMan)
                 .And(DAL.ChangeLog.CreateDateColumn).IsGreaterThanOrEqualTo(startDate)
                 .And(DAL.ChangeLog.CreateDateColumn).IsLessThanOrEqualTo(endDate)
+                .And(DAL.ChangeLog.LogTypeIDColumn).IsEqualTo((int)LogTypeEnum.Submit)
                 .ExecuteReader())
             {
                 while (reader.Read())

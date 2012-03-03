@@ -51,7 +51,6 @@ namespace TeamView
             BIBugNum.Text = BugInfoManagement_Resource.BIBugNum;
             BIBugDealMan.Text = BugInfoManagement_Resource.BIBugDealMan;
             BIPreTakeTime.Text = BugInfoManagement_Resource.BIPreTakeTime;
-            BITakeTime.Text = BugInfoManagement_Resource.BITakeTime;
             BIPriority.Text = BugInfoManagement_Resource.BIPriority;
             BIBugDescription.Text = BugInfoManagement_Resource.BIBugDescription;
             BIAssessment.Text = BugInfoManagement_Resource.BIAssessment;

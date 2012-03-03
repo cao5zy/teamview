@@ -13,6 +13,10 @@ namespace BugManagementReport
 {
     class Program
     {
+        /*
+         *report committed:\week:thisweek \u:czy thisWeekCommitted \commithistory
+         * 
+         */
         static void Main(string[] args)
         {
             Builder builder = new Builder();

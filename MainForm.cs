@@ -54,7 +54,8 @@ namespace TeamView
             mQueryControl = queryControl;
             mQueryControlContainer.Controls.Add(queryControl);
             queryControl.Dock = DockStyle.Fill;
-            queryControl.Query += (s, e) => {
+            queryControl.Query += (s, e) =>
+            {
                 LoadBugInfos();
             };
         }
@@ -78,7 +79,7 @@ namespace TeamView
             mBugInfoListDataGridView.AutoGenerateColumns = false;
 
             var model = mQueryControl.Model;
-           
+
 
             mQueryControl.Init();
 
@@ -94,7 +95,8 @@ namespace TeamView
             issueHandlerMenu.DropDownItemClicked += new ToolStripItemClickedEventHandler(issueHandlers_DropDownItemClicked);
             _dealMen.DealMen.Where(n => n.Name != _dealMen.CurrentLogin && !string.IsNullOrEmpty(n.Name))
                 .Select(n => n.Name)
-                .SafeForEach(n => {
+                .SafeForEach(n =>
+                {
                     ToolStripMenuItem item = new ToolStripMenuItem();
                     item.Text = n;
                     issueHandlerMenu.DropDownItems.Add(item);
@@ -125,7 +127,7 @@ namespace TeamView
 
                 trans.Complete();
             }
-            
+
         }
 
         private void LoadBugInfos()
@@ -145,14 +147,15 @@ namespace TeamView
             decimal totalSize = 0;
             decimal totalHours = 0;
             results.SafeForEach(
-                n => {
+                n =>
+                {
                     var row = mBugInfoSet.BugInfoTable.NewBugInfoTableRow();
                     row.bugNum = n.bugNum;
                     row.bugStatus = n.bugStatus;
                     row.dealMan = n.dealMan;
                     row.description = n.description;
                     row.Version = n.version;
-                    row.size = n.size;
+                    row.size = Math.Round((double)n.size / 60, 2);
                     row.Priority = n.priority;
                     row.fired = n.bugStatus == States.Start ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) : Math.Round((double)n.fired / 60, 2);
                     row.timeStamp = n.timeStamp;
@@ -185,7 +188,7 @@ namespace TeamView
                 BugInfoForm f = CreateBugInfoForm();
                 var bugNum = CurrentSelectedItem.bugNum;
                 f.Init(bugNum);
-                f.Text = BugInfoManagement_Resource.EditBugInfoFormName +" "+bugNum;
+                f.Text = BugInfoManagement_Resource.EditBugInfoFormName + " " + bugNum;
                 f.Show();
             }
             else
@@ -196,7 +199,7 @@ namespace TeamView
 
         private void ShowSummary(int count, decimal totalHours, decimal totalFired)
         {
-            this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() +"/estimated " + totalHours.ToString()+ " hours" + "/fired " + totalFired.ToString() + " hours";
+            this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() + "/estimated " + totalHours.ToString() + " hours" + "/fired " + totalFired.ToString() + " hours";
         }
 
         private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -271,7 +274,7 @@ namespace TeamView
             item.bugStatus = StatesConverter.ToStateString((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
 
             var checkResult = _bugInfoModel.ChangeStatusCheck();
-            if(!string.IsNullOrEmpty(checkResult))
+            if (!string.IsNullOrEmpty(checkResult))
             {
                 MessageBox.Show(checkResult);
                 return;

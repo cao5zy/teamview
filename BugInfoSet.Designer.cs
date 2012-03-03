@@ -439,7 +439,7 @@ namespace TeamView {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, int size, double fired, System.DateTime timeStamp) {
+            public BugInfoTableRow AddBugInfoTableRow(string Version, string bugNum, string bugStatus, string dealMan, string description, int Priority, double size, double fired, System.DateTime timeStamp) {
                 BugInfoTableRow rowBugInfoTableRow = ((BugInfoTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Version,
@@ -499,7 +499,7 @@ namespace TeamView {
                 base.Columns.Add(this.columndescription);
                 this.columnPriority = new global::System.Data.DataColumn("Priority", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPriority);
-                this.columnsize = new global::System.Data.DataColumn("size", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnsize = new global::System.Data.DataColumn("size", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsize);
                 this.columnfired = new global::System.Data.DataColumn("fired", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfired);
@@ -744,10 +744,10 @@ namespace TeamView {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int size {
+            public double size {
                 get {
                     try {
-                        return ((int)(this[this.tableBugInfoTable.sizeColumn]));
+                        return ((double)(this[this.tableBugInfoTable.sizeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'size\' in table \'BugInfoTable\' is DBNull.", e);
