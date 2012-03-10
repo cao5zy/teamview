@@ -14,16 +14,23 @@ namespace TeamView.Impls
         public static List<BugStateBaseInfo> STATES;
         static BugStatesImpl()
         {
-            var config = (Configs.BugStatesConfig)ConfigurationManager.GetSection("BugStatesConfig");
-            if (string.IsNullOrEmpty(config.BugStates))
-                STATES = new List<BugStateBaseInfo>();
-            else
-                STATES = config.BugStates.Split(new char[]{','}).SafeConvertAll(
-                n => new BugStateBaseInfo { 
+            STATES = new List<BugStateBaseInfo> { 
+                 new BugStateBaseInfo{
                     ID = 0,
-                    StateInfo = n,
-                }
-                );
+                    StateInfo = string.Empty,},
+                new BugStateBaseInfo{
+                    ID = 0,
+                    StateInfo = TeamView.Common.States.Pending,},
+                    new BugStateBaseInfo{
+                    ID = 0,
+                    StateInfo = TeamView.Common.States.Start,},
+                    new BugStateBaseInfo{
+                    ID = 0,
+                    StateInfo = TeamView.Common.States.Abort,},
+                    new BugStateBaseInfo{
+                    ID = 0,
+                    StateInfo = TeamView.Common.States.Complete,},
+            };
         }
         #region IBugStates Members
 

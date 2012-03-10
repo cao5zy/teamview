@@ -7,9 +7,9 @@ namespace TeamView.Common
 {
     public class States
     {
-        public const string Start = "正在处理";
-        public const string Abort = "搁置";
-        public const string Complete = "完成";
-        public const string Pending = "待处理";
+        public const string Start = "Processing";
+        public const string Abort = "Suspended";
+        public const string Complete = "Completed";
+        public const string Pending = "Pending";
     }
 }

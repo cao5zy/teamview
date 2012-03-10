@@ -49,7 +49,7 @@ namespace TeamView
             _hardLevel = hardLevel;
         }
 
-        public const string InCorrectFormatNumber = "不正确的任务编号，任务编号的格式应该为[Category]-*";
+        public const string InCorrectFormatNumber = "Incorrect item id. The correct format is [Category]-*";
         private void mAddButton_Click(object sender, EventArgs e)
         {
             var formatNum = GetHeadInfo();
@@ -129,10 +129,10 @@ namespace TeamView
             public string DealMan { get; set; }
         }
 
-        private const string NotInclideHeadLines = "未包含任务头信息";
-        private const string PriorityNumberErrorInfo = "第二行应该为优先级，数字";
-        private const string SizeNumberErrorInfo = "第三行应该为估计小时数，数字";
-        private const string ItemNumberErrorInfo = "Item Number的格式不正确，其格式应该类似于a-1或a";
+        private const string NotInclideHeadLines = "The task information is not included";
+        private const string PriorityNumberErrorInfo = "The second line is priority, number";
+        private const string SizeNumberErrorInfo = "The third line is estimated hours, number";
+        private const string ItemNumberErrorInfo = "The format of item id would be similar to a-* or a-1";
 
         private HeadInfo GetHeadInfo()
         {
@@ -219,7 +219,7 @@ namespace TeamView
 priority:int
 size:int
 version
-item number:a/a-*/a-1
+item number:a-*/a-1
 dealman or keep empty to apply current login
 ";
 

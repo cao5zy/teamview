@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\IBugStates.cs" />
     <Compile Include="BugInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,10 +100,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BugInfoSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Impls\BugStatesImpl.cs" />
     <Compile Include="Configs\BugStatesConfig.cs" />
     <Compile Include="Configs\HardLevelConfig.cs" />
     <Compile Include="Configs\DealManConfig.cs" />
+    <Compile Include="Impls\BugStatesImpl.cs" />
     <Compile Include="Impls\DealMenImpl.cs" />
     <Compile Include="AddNewForm.cs">
       <SubType>Form</SubType>
@@ -111,7 +112,6 @@
       <DependentUpon>AddNewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Impls\HardLevelImpl.cs" />
-    <Compile Include="Abstracts\IBugStates.cs" />
     <Compile Include="Abstracts\IDealMen.cs" />
     <Compile Include="Abstracts\IHardLevel.cs" />
     <Compile Include="MainForm.cs">
