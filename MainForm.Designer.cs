@@ -34,14 +34,6 @@
             this.mAddButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.mBugInfoListDataGridView = new System.Windows.Forms.DataGridView();
-            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bugStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bugNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dealMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mFlowMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,15 +51,14 @@
             this.mShowMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mExitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mImageList = new System.Windows.Forms.ImageList(this.components);
-            this.versionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bugStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dealManDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priorityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timeStampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bugStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bugNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dealMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).BeginInit();
@@ -121,16 +112,7 @@
             this.description,
             this.Priority,
             this.Size,
-            this.fired,
-            this.versionDataGridViewTextBoxColumn,
-            this.bugNumDataGridViewTextBoxColumn,
-            this.bugStatusDataGridViewTextBoxColumn,
-            this.dealManDataGridViewTextBoxColumn,
-            this.descriptionDataGridViewTextBoxColumn,
-            this.priorityDataGridViewTextBoxColumn,
-            this.sizeDataGridViewTextBoxColumn,
-            this.firedDataGridViewTextBoxColumn,
-            this.timeStampDataGridViewTextBoxColumn});
+            this.fired});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
             this.mBugInfoListDataGridView.DataMember = "BugInfoTable";
             this.mBugInfoListDataGridView.DataSource = this.mBugInfoSetBindingSource;
@@ -143,62 +125,6 @@
             this.mBugInfoListDataGridView.TabIndex = 15;
             this.mBugInfoListDataGridView.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.mBugInfoListDataGridView_CellContextMenuStripNeeded);
             this.mBugInfoListDataGridView.SelectionChanged += new System.EventHandler(this.mBugInfoListDataGridView_SelectionChanged);
-            // 
-            // version
-            // 
-            this.version.DataPropertyName = "Version";
-            this.version.HeaderText = global::TeamView.BugInfoManagement_Resource.dVersion;
-            this.version.Name = "version";
-            this.version.ReadOnly = true;
-            // 
-            // bugStatus
-            // 
-            this.bugStatus.DataPropertyName = "bugStatus";
-            this.bugStatus.HeaderText = "Status";
-            this.bugStatus.Name = "bugStatus";
-            this.bugStatus.ReadOnly = true;
-            // 
-            // bugNum
-            // 
-            this.bugNum.DataPropertyName = "bugNum";
-            this.bugNum.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugNum;
-            this.bugNum.Name = "bugNum";
-            this.bugNum.ReadOnly = true;
-            // 
-            // dealMan
-            // 
-            this.dealMan.DataPropertyName = "dealMan";
-            this.dealMan.HeaderText = "Handler";
-            this.dealMan.Name = "dealMan";
-            this.dealMan.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.DataPropertyName = "description";
-            this.description.HeaderText = global::TeamView.BugInfoManagement_Resource.dDescription;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // Priority
-            // 
-            this.Priority.DataPropertyName = "Priority";
-            this.Priority.HeaderText = global::TeamView.BugInfoManagement_Resource.dPriority;
-            this.Priority.Name = "Priority";
-            this.Priority.ReadOnly = true;
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "size";
-            this.Size.HeaderText = global::TeamView.BugInfoManagement_Resource.dSize;
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
-            // 
-            // fired
-            // 
-            this.fired.DataPropertyName = "fired";
-            this.fired.HeaderText = "fired";
-            this.fired.Name = "fired";
-            this.fired.ReadOnly = true;
             // 
             // mFlowMenu
             // 
@@ -342,68 +268,61 @@
             this.mImageList.Images.SetKeyName(1, "state-pickup.ico");
             this.mImageList.Images.SetKeyName(2, "state-reach.ico");
             // 
-            // versionDataGridViewTextBoxColumn
+            // version
             // 
-            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
-            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
-            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
-            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.version.DataPropertyName = "Version";
+            this.version.HeaderText = global::TeamView.BugInfoManagement_Resource.dVersion;
+            this.version.Name = "version";
+            this.version.ReadOnly = true;
             // 
-            // bugNumDataGridViewTextBoxColumn
+            // bugStatus
             // 
-            this.bugNumDataGridViewTextBoxColumn.DataPropertyName = "bugNum";
-            this.bugNumDataGridViewTextBoxColumn.HeaderText = "bugNum";
-            this.bugNumDataGridViewTextBoxColumn.Name = "bugNumDataGridViewTextBoxColumn";
-            this.bugNumDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bugStatus.DataPropertyName = "bugStatus";
+            this.bugStatus.HeaderText = "Status";
+            this.bugStatus.Name = "bugStatus";
+            this.bugStatus.ReadOnly = true;
             // 
-            // bugStatusDataGridViewTextBoxColumn
+            // bugNum
             // 
-            this.bugStatusDataGridViewTextBoxColumn.DataPropertyName = "bugStatus";
-            this.bugStatusDataGridViewTextBoxColumn.HeaderText = "bugStatus";
-            this.bugStatusDataGridViewTextBoxColumn.Name = "bugStatusDataGridViewTextBoxColumn";
-            this.bugStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bugNum.DataPropertyName = "bugNum";
+            this.bugNum.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugNum;
+            this.bugNum.Name = "bugNum";
+            this.bugNum.ReadOnly = true;
             // 
-            // dealManDataGridViewTextBoxColumn
+            // dealMan
             // 
-            this.dealManDataGridViewTextBoxColumn.DataPropertyName = "dealMan";
-            this.dealManDataGridViewTextBoxColumn.HeaderText = "dealMan";
-            this.dealManDataGridViewTextBoxColumn.Name = "dealManDataGridViewTextBoxColumn";
-            this.dealManDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dealMan.DataPropertyName = "dealMan";
+            this.dealMan.HeaderText = "Handler";
+            this.dealMan.Name = "dealMan";
+            this.dealMan.ReadOnly = true;
             // 
-            // descriptionDataGridViewTextBoxColumn
+            // description
             // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = global::TeamView.BugInfoManagement_Resource.dDescription;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
-            // priorityDataGridViewTextBoxColumn
+            // Priority
             // 
-            this.priorityDataGridViewTextBoxColumn.DataPropertyName = "Priority";
-            this.priorityDataGridViewTextBoxColumn.HeaderText = "Priority";
-            this.priorityDataGridViewTextBoxColumn.Name = "priorityDataGridViewTextBoxColumn";
-            this.priorityDataGridViewTextBoxColumn.ReadOnly = true;
+            this.Priority.DataPropertyName = "Priority";
+            this.Priority.HeaderText = global::TeamView.BugInfoManagement_Resource.dPriority;
+            this.Priority.Name = "Priority";
+            this.Priority.ReadOnly = true;
             // 
-            // sizeDataGridViewTextBoxColumn
+            // Size
             // 
-            this.sizeDataGridViewTextBoxColumn.DataPropertyName = "size";
-            this.sizeDataGridViewTextBoxColumn.HeaderText = "size";
-            this.sizeDataGridViewTextBoxColumn.Name = "sizeDataGridViewTextBoxColumn";
-            this.sizeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.Size.DataPropertyName = "size";
+            this.Size.HeaderText = global::TeamView.BugInfoManagement_Resource.dSize;
+            this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
             // 
-            // firedDataGridViewTextBoxColumn
+            // fired
             // 
-            this.firedDataGridViewTextBoxColumn.DataPropertyName = "fired";
-            this.firedDataGridViewTextBoxColumn.HeaderText = "fired";
-            this.firedDataGridViewTextBoxColumn.Name = "firedDataGridViewTextBoxColumn";
-            this.firedDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // timeStampDataGridViewTextBoxColumn
-            // 
-            this.timeStampDataGridViewTextBoxColumn.DataPropertyName = "timeStamp";
-            this.timeStampDataGridViewTextBoxColumn.HeaderText = "timeStamp";
-            this.timeStampDataGridViewTextBoxColumn.Name = "timeStampDataGridViewTextBoxColumn";
-            this.timeStampDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fired.DataPropertyName = "fired";
+            this.fired.HeaderText = "fired";
+            this.fired.Name = "fired";
+            this.fired.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -453,23 +372,14 @@
         private System.Windows.Forms.BindingSource mBugInfoSetBindingSource;
         private System.Windows.Forms.DataGridView mBugInfoListDataGridView;
         private System.Windows.Forms.ToolStripMenuItem pendingToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn version;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dealMan;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn versionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bugNumDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bugStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dealManDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priorityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn timeStampDataGridViewTextBoxColumn;
     }
 }
