@@ -247,7 +247,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)*.dll" "$(SolutionDir)Packages\"
+copy "$(TargetDir)*.exe" "$(SolutionDir)Packages\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

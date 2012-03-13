@@ -5,34 +5,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Client", "TeamView.Client.csproj", "{033A9DB1-71C5-4691-8A21-9E1459962524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Test", "BugInfoManagement.Test\TeamView.Test.csproj", "{FEAF2643-28D3-4654-AB54-D6E644462DDA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Common", "BugInfo.Common\TeamView.Common.csproj", "{132CA63C-85AB-4E7A-89B3-EE60F213EE72}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report", "BugManagementReport\TeamView.Report.csproj", "{34F6F173-7447-486C-9685-445B76C4FB15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INIDB", "INIDB\INIDB.csproj", "{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Report", "Report\", "{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{FEAF2643-28D3-4654-AB54-D6E644462DDA}|BugInfoManagement.Test.dll;{132CA63C-85AB-4E7A-89B3-EE60F213EE72}|BugInfo.Common.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/Report"
-		Debug.AspNetCompiler.PhysicalPath = "Report\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Report\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/Report"
-		Release.AspNetCompiler.PhysicalPath = "Report\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Report\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "2976"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report", "TeamView.Report\TeamView.Report.csproj", "{34F6F173-7447-486C-9685-445B76C4FB15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Test", "TeamView.Test\TeamView.Test.csproj", "{FEAF2643-28D3-4654-AB54-D6E644462DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,26 +23,22 @@ Global
 		{033A9DB1-71C5-4691-8A21-9E1459962524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{033A9DB1-71C5-4691-8A21-9E1459962524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{033A9DB1-71C5-4691-8A21-9E1459962524}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{132CA63C-85AB-4E7A-89B3-EE60F213EE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{132CA63C-85AB-4E7A-89B3-EE60F213EE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{132CA63C-85AB-4E7A-89B3-EE60F213EE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{132CA63C-85AB-4E7A-89B3-EE60F213EE72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34F6F173-7447-486C-9685-445B76C4FB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34F6F173-7447-486C-9685-445B76C4FB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34F6F173-7447-486C-9685-445B76C4FB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34F6F173-7447-486C-9685-445B76C4FB15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD7B321A-24D5-463F-8E22-0BA9DE7CE9E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{957D1466-06D4-4C1C-A9B2-FB326BB4B1DD}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{34F6F173-7447-486C-9685-445B76C4FB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34F6F173-7447-486C-9685-445B76C4FB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34F6F173-7447-486C-9685-445B76C4FB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34F6F173-7447-486C-9685-445B76C4FB15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEAF2643-28D3-4654-AB54-D6E644462DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
