@@ -14,7 +14,7 @@ namespace TeamView.Common
                 case States.Complete:
                     return StatesEnum.Complete;
                 case States.Abort:
-                    return StatesEnum.Abort;
+                    return StatesEnum.Suspend;
                 case States.Pending:
                     return StatesEnum.Pending;
                 case States.Start:
@@ -28,7 +28,7 @@ namespace TeamView.Common
         {
             switch (status)
             {
-                case StatesEnum.Abort:
+                case StatesEnum.Suspend:
                     return States.Abort;
                 case StatesEnum.Complete:
                     return States.Complete;

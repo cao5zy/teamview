@@ -9,7 +9,7 @@ namespace TeamView.Common
     {
         Pending,
         Start,
-        Abort,
+        Suspend,
         Complete,
     }
 }

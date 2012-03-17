@@ -36,7 +36,7 @@ namespace TeamView
 
         private void SetState(StatesEnum state)
         {
-            mStartButton.Enabled = state == StatesEnum.Abort || state == StatesEnum.Complete || state == StatesEnum.Pending;
+            mStartButton.Enabled = state == StatesEnum.Suspend || state == StatesEnum.Complete || state == StatesEnum.Pending;
             mAbortButton.Enabled = state == StatesEnum.Start;
             mCompleteButton.Enabled = state == StatesEnum.Start;
         }
@@ -99,8 +99,8 @@ namespace TeamView
 
         private void mAbortButton_Click(object sender, EventArgs e)
         {
-            if(OnStateChanged(CurrentState, StatesEnum.Abort))
-                CurrentState = StatesEnum.Abort;
+            if(OnStateChanged(CurrentState, StatesEnum.Suspend))
+                CurrentState = StatesEnum.Suspend;
         }
 
         private void mCompleteButton_Click(object sender, EventArgs e)

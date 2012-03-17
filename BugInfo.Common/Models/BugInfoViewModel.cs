@@ -198,7 +198,7 @@ namespace TeamView.Common.Models
         {
             if (statesEnum == StatesEnum.Start)
                 return (int)LogTypeEnum.MissionStart;
-            else if (statesEnum == StatesEnum.Abort)
+            else if (statesEnum == StatesEnum.Suspend)
                 return (int)LogTypeEnum.MissionStop;
             else if (statesEnum == StatesEnum.Complete)
                 return (int)LogTypeEnum.Submit;
@@ -263,7 +263,7 @@ namespace TeamView.Common.Models
                 return concurrencyIssue;
 
             var status = StatesConverter.ToStateEnum(_current.bugStatus);
-            if (status == StatesEnum.Abort
+            if (status == StatesEnum.Suspend
                 || status == StatesEnum.Start)
                 return statusChangeErrorMessage;
 
