@@ -47,7 +47,7 @@ namespace TeamView.Report
                 list.AddRange(_recordParser.Read(bugNum));
             }
 
-            if (!includePast)
+            if (includePast)
             {
                 list = list.SafeFindAll(n => n.StartTime >= start);
             }

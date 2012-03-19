@@ -52,7 +52,7 @@ namespace TeamView.Common.Logs
                 {
                     recordObj.StartTime = log.CreatedDate;
                 }
-                if (log.LogTypeId == (int)LogTypeEnum.MissionStop)
+                if (log.LogTypeId == (int)LogTypeEnum.MissionStop || log.LogTypeId == (int)LogTypeEnum.Submit)
                 {
                     var entity = _repository.GetItem(log.ItemId);
 
