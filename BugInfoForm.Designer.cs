@@ -207,11 +207,11 @@ namespace TeamView
             // BIAssessment
             // 
             this.BIAssessment.AutoSize = true;
-            this.BIAssessment.Location = new System.Drawing.Point(408, 47);
+            this.BIAssessment.Location = new System.Drawing.Point(468, 47);
             this.BIAssessment.Name = "BIAssessment";
-            this.BIAssessment.Size = new System.Drawing.Size(131, 12);
+            this.BIAssessment.Size = new System.Drawing.Size(71, 12);
             this.BIAssessment.TabIndex = 24;
-            this.BIAssessment.Text = "Difficult Assessment:";
+            this.BIAssessment.Text = "Evaluation:";
             // 
             // mStateControl
             // 
