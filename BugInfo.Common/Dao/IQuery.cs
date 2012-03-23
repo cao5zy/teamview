@@ -9,7 +9,13 @@ namespace TeamView.Common.Dao
 {
     public interface IQuery
     {
-        IEnumerable<BugInfoEntity1> QueryByParameters(IEnumerable<string> programmers, string bugNum, string version, string description, int ? priority, string bugState);
+        IEnumerable<BugInfoEntity1> QueryByParameters(
+            IEnumerable<string> programmers,
+            string bugNum,
+            string version,
+            string description,
+            IEnumerable<int> selectedPriorities,
+            IEnumerable<string> selectedStates);
         IEnumerable<CompleteTaskLogEntity> QueryCompleteTasks(string dealMan, DateTime startDate, DateTime endDate, int completeTaskFlag);
     }
 }

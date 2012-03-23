@@ -29,6 +29,14 @@ namespace TeamView
             }
         }
 
+        public IEnumerable<int> PriorityNumbers
+        {
+            get
+            {
+                return new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            }
+        }
+
         public IEnumerable<string> SelectedProgrammers
         {
             get
@@ -51,8 +59,9 @@ namespace TeamView
             }
         }
 
-        private int ? mPrioirty = 1;
-        public string SelectedState { get; set; }
+        public IEnumerable<string> SelectedStates { get; set; }
+
+        public IEnumerable<int> SelectedPriorities { get; set; }
 
         public string BugNum { get; set; }
 
@@ -60,15 +69,6 @@ namespace TeamView
 
         public string Version { get; set; }
 
-        public int? Priority
-        {
-            get
-            { return mPrioirty; }
-            set
-            {
-                mPrioirty = value;
-            }
-        }
 
     }
 }

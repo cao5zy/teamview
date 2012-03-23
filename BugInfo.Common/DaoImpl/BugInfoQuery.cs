@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TeamView.Common.Dao;
-using FxLib.Algorithms;
+using Dev3Lib.Algorithms;
 
 namespace TeamView.Common.DaoImpl
 {
     class BugInfoQuery : IQuery
     {
-        public IEnumerable<Entity.BugInfoEntity1> QueryByParameters(IEnumerable<string> programmers, string bugNum, string version, string description, int? priority, string bugState)
+        public IEnumerable<Entity.BugInfoEntity1> QueryByParameters(
+            IEnumerable<string> programmers,
+            string bugNum,
+            string version,
+            string description,
+            IEnumerable<int> selectedPriorities,
+            IEnumerable<string> selectedStates
+            )
         {
             SubSonic.Query query = DAL.BugInfo.CreateQuery();
             query.QueryType = SubSonic.QueryType.Select;
@@ -32,17 +39,18 @@ namespace TeamView.Common.DaoImpl
                      SubSonic.Comparison.Like,
                      "%" +
                      description + "%");
-            if (priority != null)
+
+            if(!selectedPriorities.IsNullOrEmpty())
             {
                 query = query.WHERE(
                     DAL.BugInfo.Columns.Priority,
-                    SubSonic.Comparison.LessOrEquals,
-                    priority.Value);
+                    SubSonic.Comparison.In,
+                    selectedPriorities);
             }
 
-            if (!string.IsNullOrEmpty(bugState))
+            if (!selectedStates.IsNullOrEmpty())
             {
-                query = query.WHERE(DAL.BugInfo.Columns.BugStatus, bugState);
+                query = query.WHERE(DAL.BugInfo.Columns.BugStatus,  SubSonic.Comparison.In, selectedStates);
             }
 
             using (var reader = query.ExecuteReader())

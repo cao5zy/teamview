@@ -138,8 +138,8 @@ namespace TeamView
                 model.BugNum,
                 model.Version,
                 model.Description,
-                model.Priority,
-                model.SelectedState
+                model.SelectedPriorities,
+                model.SelectedStates
                 );
 
             mBugInfoSet.BugInfoTable.Clear();

@@ -47,31 +47,36 @@ namespace TeamView
                 );
 
 
-            mProgrammerCheckList.SetItemChecked(new List<string>(mModel.AllProgrammers).IndexOf(mModel.SelectedProgrammers.First()), true);
+            mProgrammerCheckList.SetItemChecked(
+                new List<string>(mModel.AllProgrammers)
+                .IndexOf(mModel.SelectedProgrammers.First()), true);
 
-            mModel.BugStates.SafeForEach(n =>
-                mBugStatesComboBox.Items.Add(n));
+            mModel.BugStates.SafeForEach(n => 
+                mSatesCheckList.Items.Add(n));
 
-            mPriorityCombo.Text = Model.Priority.HasValue ? Model.Priority.Value.ToString() : string.Empty;
+            mModel.PriorityNumbers.SafeForEach(n =>
+                mPrioirtyCheckList.Items.Add(n.ToString()));
+
+            mPrioirtyCheckList.SetItemChecked(
+                0, true);
         }
         private void mQueryButton_Click(object sender, EventArgs e)
         {
             List<string> selectedProgrammers = new List<string>();
-            foreach (var n in mProgrammerCheckList.CheckedItems)
-            {
-                selectedProgrammers.Add(n.ToString());
-            }
 
-            mModel.SelectedProgrammers = selectedProgrammers;
+            mModel.SelectedProgrammers = (from string n in mProgrammerCheckList.CheckedItems
+                                          select n).ToArray();
 
-            if (!string.IsNullOrEmpty(mPriorityCombo.Text))
-                mModel.Priority = int.Parse(mPriorityCombo.Text);
-            else
-                mModel.Priority = null;
+            mModel.SelectedPriorities = (from string n in mPrioirtyCheckList.CheckedItems
+                                         select n)
+                                         .ToList()
+                                         .ConvertAll(n => Convert.ToInt32(n));
 
             mModel.Description = mDescriptionTextBox.Text;
 
-            mModel.SelectedState = mBugStatesComboBox.Text;
+            mModel.SelectedStates = (from string n in mSatesCheckList.CheckedItems
+                                     select n).ToArray();
+                                       
 
             mModel.BugNum = mBugNumTextBox.Text;
 
@@ -81,6 +86,11 @@ namespace TeamView
                 mModel.Version = string.Empty;
 
             OnQuery();
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

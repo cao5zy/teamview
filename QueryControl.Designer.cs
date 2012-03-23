@@ -34,56 +34,55 @@
             this.mVersionNumber = new System.Windows.Forms.Label();
             this.mBugNumberLabel = new System.Windows.Forms.Label();
             this.mTipLabel = new System.Windows.Forms.Label();
-            this.mBugStatesComboBox = new System.Windows.Forms.ComboBox();
             this.mStateLabel = new System.Windows.Forms.Label();
             this.mDealManlabel = new System.Windows.Forms.Label();
             this.mQueryGroupBox = new System.Windows.Forms.GroupBox();
-            this.mPriorityCombo = new System.Windows.Forms.ComboBox();
             this.mPriorityLabel = new System.Windows.Forms.Label();
             this.mProgrammerCheckList = new System.Windows.Forms.CheckedListBox();
             this.mDescriptionLabel = new System.Windows.Forms.Label();
             this.mQueryButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.mSatesCheckList = new System.Windows.Forms.CheckedListBox();
+            this.mPrioirtyCheckList = new System.Windows.Forms.CheckedListBox();
             this.mQueryGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // mDescriptionTextBox
             // 
-            this.mDescriptionTextBox.Location = new System.Drawing.Point(446, 26);
+            this.mDescriptionTextBox.Location = new System.Drawing.Point(445, 75);
             this.mDescriptionTextBox.Name = "mDescriptionTextBox";
             this.mDescriptionTextBox.Size = new System.Drawing.Size(124, 21);
-            this.mDescriptionTextBox.TabIndex = 35;
+            this.mDescriptionTextBox.TabIndex = 11;
             // 
             // mVersionTextBox
             // 
-            this.mVersionTextBox.Location = new System.Drawing.Point(254, 69);
+            this.mVersionTextBox.Location = new System.Drawing.Point(445, 47);
             this.mVersionTextBox.Name = "mVersionTextBox";
             this.mVersionTextBox.Size = new System.Drawing.Size(100, 21);
-            this.mVersionTextBox.TabIndex = 33;
+            this.mVersionTextBox.TabIndex = 9;
             // 
             // mBugNumTextBox
             // 
-            this.mBugNumTextBox.Location = new System.Drawing.Point(254, 26);
+            this.mBugNumTextBox.Location = new System.Drawing.Point(445, 20);
             this.mBugNumTextBox.Name = "mBugNumTextBox";
             this.mBugNumTextBox.Size = new System.Drawing.Size(100, 21);
-            this.mBugNumTextBox.TabIndex = 32;
+            this.mBugNumTextBox.TabIndex = 7;
             // 
             // mVersionNumber
             // 
             this.mVersionNumber.AutoSize = true;
-            this.mVersionNumber.Location = new System.Drawing.Point(192, 72);
+            this.mVersionNumber.Location = new System.Drawing.Point(383, 50);
             this.mVersionNumber.Name = "mVersionNumber";
             this.mVersionNumber.Size = new System.Drawing.Size(53, 12);
-            this.mVersionNumber.TabIndex = 31;
+            this.mVersionNumber.TabIndex = 8;
             this.mVersionNumber.Text = "Version:";
             // 
             // mBugNumberLabel
             // 
             this.mBugNumberLabel.AutoSize = true;
-            this.mBugNumberLabel.Location = new System.Drawing.Point(192, 27);
+            this.mBugNumberLabel.Location = new System.Drawing.Point(383, 21);
             this.mBugNumberLabel.Name = "mBugNumberLabel";
             this.mBugNumberLabel.Size = new System.Drawing.Size(53, 12);
-            this.mBugNumberLabel.TabIndex = 30;
+            this.mBugNumberLabel.TabIndex = 6;
             this.mBugNumberLabel.Text = "Bug Num:";
             // 
             // mTipLabel
@@ -94,41 +93,31 @@
             this.mTipLabel.Location = new System.Drawing.Point(421, 105);
             this.mTipLabel.Name = "mTipLabel";
             this.mTipLabel.Size = new System.Drawing.Size(0, 15);
-            this.mTipLabel.TabIndex = 30;
-            // 
-            // mBugStatesComboBox
-            // 
-            this.mBugStatesComboBox.DisplayMember = "StateInfo";
-            this.mBugStatesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mBugStatesComboBox.FormattingEnabled = true;
-            this.mBugStatesComboBox.Location = new System.Drawing.Point(446, 70);
-            this.mBugStatesComboBox.Name = "mBugStatesComboBox";
-            this.mBugStatesComboBox.Size = new System.Drawing.Size(124, 20);
-            this.mBugStatesComboBox.TabIndex = 29;
-            this.mBugStatesComboBox.ValueMember = "StateInfo";
+            this.mTipLabel.TabIndex = 1;
             // 
             // mStateLabel
             // 
             this.mStateLabel.AutoSize = true;
-            this.mStateLabel.Location = new System.Drawing.Point(374, 73);
+            this.mStateLabel.Location = new System.Drawing.Point(126, 17);
             this.mStateLabel.Name = "mStateLabel";
             this.mStateLabel.Size = new System.Drawing.Size(41, 12);
-            this.mStateLabel.TabIndex = 28;
+            this.mStateLabel.TabIndex = 2;
             this.mStateLabel.Text = "State:";
             // 
             // mDealManlabel
             // 
             this.mDealManlabel.AutoSize = true;
             this.mDealManlabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.mDealManlabel.Location = new System.Drawing.Point(5, 26);
+            this.mDealManlabel.Location = new System.Drawing.Point(6, 17);
             this.mDealManlabel.Name = "mDealManlabel";
             this.mDealManlabel.Size = new System.Drawing.Size(65, 12);
-            this.mDealManlabel.TabIndex = 16;
+            this.mDealManlabel.TabIndex = 0;
             this.mDealManlabel.Text = "Programer:";
             // 
             // mQueryGroupBox
             // 
-            this.mQueryGroupBox.Controls.Add(this.mPriorityCombo);
+            this.mQueryGroupBox.Controls.Add(this.mPrioirtyCheckList);
+            this.mQueryGroupBox.Controls.Add(this.mSatesCheckList);
             this.mQueryGroupBox.Controls.Add(this.mPriorityLabel);
             this.mQueryGroupBox.Controls.Add(this.mProgrammerCheckList);
             this.mQueryGroupBox.Controls.Add(this.mDescriptionTextBox);
@@ -137,77 +126,68 @@
             this.mQueryGroupBox.Controls.Add(this.mBugNumTextBox);
             this.mQueryGroupBox.Controls.Add(this.mVersionNumber);
             this.mQueryGroupBox.Controls.Add(this.mBugNumberLabel);
-            this.mQueryGroupBox.Controls.Add(this.mBugStatesComboBox);
             this.mQueryGroupBox.Controls.Add(this.mStateLabel);
             this.mQueryGroupBox.Controls.Add(this.mDealManlabel);
             this.mQueryGroupBox.Controls.Add(this.mQueryButton);
             this.mQueryGroupBox.Location = new System.Drawing.Point(3, 3);
             this.mQueryGroupBox.Name = "mQueryGroupBox";
-            this.mQueryGroupBox.Size = new System.Drawing.Size(698, 117);
-            this.mQueryGroupBox.TabIndex = 31;
+            this.mQueryGroupBox.Size = new System.Drawing.Size(659, 119);
+            this.mQueryGroupBox.TabIndex = 2;
             this.mQueryGroupBox.TabStop = false;
             this.mQueryGroupBox.Text = "Query Condition";
-            // 
-            // mPriorityCombo
-            // 
-            this.mPriorityCombo.FormattingEnabled = true;
-            this.mPriorityCombo.Items.AddRange(new object[] {
-            "",
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.mPriorityCombo.Location = new System.Drawing.Point(645, 27);
-            this.mPriorityCombo.Name = "mPriorityCombo";
-            this.mPriorityCombo.Size = new System.Drawing.Size(42, 20);
-            this.mPriorityCombo.TabIndex = 38;
             // 
             // mPriorityLabel
             // 
             this.mPriorityLabel.AutoSize = true;
-            this.mPriorityLabel.Location = new System.Drawing.Point(580, 29);
+            this.mPriorityLabel.Location = new System.Drawing.Point(244, 17);
             this.mPriorityLabel.Name = "mPriorityLabel";
             this.mPriorityLabel.Size = new System.Drawing.Size(59, 12);
-            this.mPriorityLabel.TabIndex = 37;
+            this.mPriorityLabel.TabIndex = 4;
             this.mPriorityLabel.Text = "Priority:";
             // 
             // mProgrammerCheckList
             // 
             this.mProgrammerCheckList.FormattingEnabled = true;
-            this.mProgrammerCheckList.Location = new System.Drawing.Point(76, 26);
+            this.mProgrammerCheckList.Location = new System.Drawing.Point(8, 35);
             this.mProgrammerCheckList.Name = "mProgrammerCheckList";
             this.mProgrammerCheckList.Size = new System.Drawing.Size(103, 68);
-            this.mProgrammerCheckList.TabIndex = 36;
+            this.mProgrammerCheckList.TabIndex = 1;
             // 
             // mDescriptionLabel
             // 
             this.mDescriptionLabel.AutoSize = true;
-            this.mDescriptionLabel.Location = new System.Drawing.Point(374, 30);
+            this.mDescriptionLabel.Location = new System.Drawing.Point(359, 78);
             this.mDescriptionLabel.Name = "mDescriptionLabel";
             this.mDescriptionLabel.Size = new System.Drawing.Size(77, 12);
-            this.mDescriptionLabel.TabIndex = 34;
+            this.mDescriptionLabel.TabIndex = 10;
             this.mDescriptionLabel.Text = "Description:";
             // 
             // mQueryButton
             // 
-            this.mQueryButton.Location = new System.Drawing.Point(612, 69);
+            this.mQueryButton.Location = new System.Drawing.Point(575, 82);
             this.mQueryButton.Name = "mQueryButton";
             this.mQueryButton.Size = new System.Drawing.Size(75, 21);
-            this.mQueryButton.TabIndex = 19;
+            this.mQueryButton.TabIndex = 12;
             this.mQueryButton.Text = "Query";
             this.mQueryButton.UseVisualStyleBackColor = true;
             this.mQueryButton.Click += new System.EventHandler(this.mQueryButton_Click);
             // 
-            // label5
+            // mSatesCheckList
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(421, 101);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 16);
-            this.label5.TabIndex = 29;
+            this.mSatesCheckList.FormattingEnabled = true;
+            this.mSatesCheckList.Location = new System.Drawing.Point(128, 35);
+            this.mSatesCheckList.Name = "mSatesCheckList";
+            this.mSatesCheckList.Size = new System.Drawing.Size(103, 68);
+            this.mSatesCheckList.TabIndex = 3;
+            this.mSatesCheckList.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            // 
+            // mPrioirtyCheckList
+            // 
+            this.mPrioirtyCheckList.FormattingEnabled = true;
+            this.mPrioirtyCheckList.Location = new System.Drawing.Point(246, 35);
+            this.mPrioirtyCheckList.Name = "mPrioirtyCheckList";
+            this.mPrioirtyCheckList.Size = new System.Drawing.Size(103, 68);
+            this.mPrioirtyCheckList.TabIndex = 5;
             // 
             // QueryControl
             // 
@@ -215,9 +195,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.mTipLabel);
             this.Controls.Add(this.mQueryGroupBox);
-            this.Controls.Add(this.label5);
             this.Name = "QueryControl";
-            this.Size = new System.Drawing.Size(705, 122);
+            this.Size = new System.Drawing.Size(670, 122);
             this.mQueryGroupBox.ResumeLayout(false);
             this.mQueryGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -233,15 +212,14 @@
         private System.Windows.Forms.Label mVersionNumber;
         private System.Windows.Forms.Label mBugNumberLabel;
         private System.Windows.Forms.Label mTipLabel;
-        private System.Windows.Forms.ComboBox mBugStatesComboBox;
         private System.Windows.Forms.Label mStateLabel;
         private System.Windows.Forms.Label mDealManlabel;
         private System.Windows.Forms.GroupBox mQueryGroupBox;
         private System.Windows.Forms.Label mDescriptionLabel;
         private System.Windows.Forms.Button mQueryButton;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckedListBox mProgrammerCheckList;
         private System.Windows.Forms.Label mPriorityLabel;
-        private System.Windows.Forms.ComboBox mPriorityCombo;
+        private System.Windows.Forms.CheckedListBox mSatesCheckList;
+        private System.Windows.Forms.CheckedListBox mPrioirtyCheckList;
     }
 }

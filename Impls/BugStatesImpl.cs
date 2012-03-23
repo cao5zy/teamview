@@ -15,9 +15,6 @@ namespace TeamView.Impls
         static BugStatesImpl()
         {
             STATES = new List<BugStateBaseInfo> { 
-                 new BugStateBaseInfo{
-                    ID = 0,
-                    StateInfo = string.Empty,},
                 new BugStateBaseInfo{
                     ID = 0,
                     StateInfo = TeamView.Common.States.Pending,},
