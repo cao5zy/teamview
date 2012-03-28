@@ -51,14 +51,21 @@ namespace TeamView
                 new List<string>(mModel.AllProgrammers)
                 .IndexOf(mModel.SelectedProgrammers.First()), true);
 
-            mModel.BugStates.SafeForEach(n => 
+            mModel.BugStates.SafeForEach(n =>
                 mSatesCheckList.Items.Add(n));
 
             mModel.PriorityNumbers.SafeForEach(n =>
                 mPrioirtyCheckList.Items.Add(n.ToString()));
 
             mPrioirtyCheckList.SetItemChecked(
-                0, true);
+                (
+                    (from string n in mPrioirtyCheckList.Items
+                     select n)
+                    .Select(n => Convert.ToInt32(n))
+                    .ToList()
+                    .IndexOf(mModel.SelectedPriorities.FirstOrDefault())
+                    ),
+                    true);
         }
         private void mQueryButton_Click(object sender, EventArgs e)
         {
@@ -76,7 +83,7 @@ namespace TeamView
 
             mModel.SelectedStates = (from string n in mSatesCheckList.CheckedItems
                                      select n).ToArray();
-                                       
+
 
             mModel.BugNum = mBugNumTextBox.Text;
 

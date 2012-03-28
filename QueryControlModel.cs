@@ -20,6 +20,9 @@ namespace TeamView
             mBugStates = bugStates;
             mDealMen = dealMen;
             mSelectedProgrammers.Add(mDealMen.CurrentLogin);
+            SelectedPriorities = new List<int> { 
+                0
+            };
         }
         public IEnumerable<string> AllProgrammers
         {

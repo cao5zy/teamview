@@ -18,41 +18,56 @@ namespace TeamView.Common.DaoImpl
             IEnumerable<string> selectedStates
             )
         {
-            SubSonic.Query query = DAL.BugInfo.CreateQuery();
-            query.QueryType = SubSonic.QueryType.Select;
+            SubSonic.SqlQuery query = DAL.DB.Select().From<DAL.BugInfo>();
 
             if (programmers.SafeCount() != 0)
-                query = query.WHERE(
-                    DAL.BugInfo.Columns.DealMan, SubSonic.Comparison.In, programmers
-                    );
+            {
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.DealMan).In(programmers);
+                else
+                    query.And(DAL.BugInfo.Columns.DealMan).In(programmers);
+            }
 
             if (!string.IsNullOrEmpty(bugNum))
-                query = query.WHERE(DAL.BugInfo.Columns.BugNum, SubSonic.Comparison.Like, bugNum + "%");
+            {
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.BugNum).Like(bugNum + "%");
+                else
+                    query.And(DAL.BugInfo.Columns.BugNum).Like(bugNum + "%");
+            }
+
 
             if (!string.IsNullOrEmpty(version))
-                query = query.WHERE(
-                    DAL.BugInfo.Columns.Version, version);
+            {
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.Version).IsEqualTo(version);
+                else
+                    query.And(DAL.BugInfo.Columns.Version).IsEqualTo(version);
+            }
 
             if (!string.IsNullOrEmpty(description))
-                query = query.WHERE(
-                    DAL.BugInfo.Columns.Description,
-                     SubSonic.Comparison.Like,
-                     "%" +
-                     description + "%");
-
-            if(!selectedPriorities.IsNullOrEmpty())
             {
-                query = query.WHERE(
-                    DAL.BugInfo.Columns.Priority,
-                    SubSonic.Comparison.In,
-                    selectedPriorities);
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.Description).Like("%" + description + "%");
+                else
+                    query.And(DAL.BugInfo.Columns.Description).Like("%" + description + "%");
+            }
+
+            if (!selectedPriorities.IsNullOrEmpty())
+            {
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.Priority).In(selectedPriorities);
+                else
+                    query.And(DAL.BugInfo.Columns.Priority).In(selectedPriorities);
             }
 
             if (!selectedStates.IsNullOrEmpty())
             {
-                query = query.WHERE(DAL.BugInfo.Columns.BugStatus,  SubSonic.Comparison.In, selectedStates);
+                if (!query.HasWhere)
+                    query.Where(DAL.BugInfo.Columns.BugStatus).In(selectedStates);
+                else
+                    query.And(DAL.BugInfo.Columns.BugStatus).In(selectedStates);
             }
-
             using (var reader = query.ExecuteReader())
             {
                 while (reader.Read())
@@ -77,7 +92,7 @@ namespace TeamView.Common.DaoImpl
 
         public IEnumerable<Logs.CompleteTaskLogEntity> QueryCompleteTasks(string dealMan, DateTime startDate, DateTime endDate, int completeTaskFlag)
         {
-         
+
             using (var reader = new SubSonic.Select(DAL.ChangeLog.BugNumColumn,
                 DAL.ChangeLog.CreateDateColumn,
                 DAL.BugInfo.DescriptionColumn,
@@ -93,7 +108,8 @@ namespace TeamView.Common.DaoImpl
             {
                 while (reader.Read())
                 {
-                    yield return new Logs.CompleteTaskLogEntity { 
+                    yield return new Logs.CompleteTaskLogEntity
+                    {
                         Burned = reader[DAL.BugInfo.Columns.Fired].ToInt32(),
                         CompleteTime = reader[DAL.ChangeLog.Columns.CreateDate].ToDateTime(),
                         Dealman = reader[DAL.BugInfo.Columns.DealMan].ToString(),
