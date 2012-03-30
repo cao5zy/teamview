@@ -157,7 +157,9 @@ namespace TeamView
                     row.Version = n.version;
                     row.size = Math.Round((double)n.size / 60, 2);
                     row.Priority = n.priority;
-                    row.fired = n.bugStatus == States.Start ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) : Math.Round((double)n.fired / 60, 2);
+                    row.fired = n.bugStatus == States.Start 
+                        ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) 
+                        : Math.Round((double)n.fired / 60, 2);
                     row.timeStamp = n.timeStamp;
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
                     itemCount++;

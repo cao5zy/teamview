@@ -120,9 +120,6 @@ namespace TeamView
         {
             hardLevelCombo.DataSource = _hardLevel.HardLevels;
 
-            //conver to hours
-            _model.Current.fired = _model.Current.fired / 60;
-
             mDataSource.Add(_model.Current);
 
             mSimpleEditor.Load(_model.LoadDoc(_model.Current.bugNum));
