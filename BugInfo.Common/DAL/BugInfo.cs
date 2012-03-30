@@ -195,7 +195,7 @@ namespace DAL
 				TableSchema.TableColumn colvarDescription = new TableSchema.TableColumn(schema);
 				colvarDescription.ColumnName = "description";
 				colvarDescription.DataType = DbType.AnsiString;
-				colvarDescription.MaxLength = 200;
+				colvarDescription.MaxLength = 500;
 				colvarDescription.AutoIncrement = false;
 				colvarDescription.IsNullable = true;
 				colvarDescription.IsPrimaryKey = false;
