@@ -149,9 +149,6 @@
     <EmbeddedResource Include="SimpleEditor.resx">
       <DependentUpon>SimpleEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StateControl.resx">
-      <DependentUpon>StateControl.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -199,12 +196,6 @@
       <DependentUpon>SimpleEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Starter.cs" />
-    <Compile Include="StateControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StateControl.Designer.cs">
-      <DependentUpon>StateControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="StateSequence.cs" />
     <Compile Include="Utility\BindingCollection.cs" />
     <Compile Include="Utility\ListOrder.cs" />

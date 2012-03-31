@@ -45,7 +45,6 @@ namespace TeamView
             this.hardLevelCombo = new System.Windows.Forms.ComboBox();
             this.mDealManTextBox = new System.Windows.Forms.TextBox();
             this.BIAssessment = new System.Windows.Forms.Label();
-            this.mStateControl = new TeamView.StateControl();
             this.mPriorityCombo = new System.Windows.Forms.ComboBox();
             this.BIPriority = new System.Windows.Forms.Label();
             this.mSizeTextBox = new System.Windows.Forms.TextBox();
@@ -162,7 +161,6 @@ namespace TeamView
             this.mBaseInfoGroupBox.Controls.Add(this.hardLevelCombo);
             this.mBaseInfoGroupBox.Controls.Add(this.mDealManTextBox);
             this.mBaseInfoGroupBox.Controls.Add(this.BIAssessment);
-            this.mBaseInfoGroupBox.Controls.Add(this.mStateControl);
             this.mBaseInfoGroupBox.Controls.Add(this.mPriorityCombo);
             this.mBaseInfoGroupBox.Controls.Add(this.BIPriority);
             this.mBaseInfoGroupBox.Controls.Add(this.mSizeTextBox);
@@ -212,15 +210,6 @@ namespace TeamView
             this.BIAssessment.Size = new System.Drawing.Size(71, 12);
             this.BIAssessment.TabIndex = 24;
             this.BIAssessment.Text = "Evaluation:";
-            // 
-            // mStateControl
-            // 
-            this.mStateControl.CurrentState = TeamView.Common.StatesEnum.Start;
-            this.mStateControl.Location = new System.Drawing.Point(741, 17);
-            this.mStateControl.Name = "mStateControl";
-            this.mStateControl.Size = new System.Drawing.Size(79, 77);
-            this.mStateControl.TabIndex = 7;
-            this.mStateControl.StateChanged += new System.EventHandler<TeamView.StateControl.StateChangedArgs>(this.mStateControl_StateChanged);
             // 
             // mPriorityCombo
             // 
@@ -335,7 +324,6 @@ namespace TeamView
         private System.Windows.Forms.Panel mEditorPanel;
         private System.Windows.Forms.Label BIPriority;
         private System.Windows.Forms.ComboBox mPriorityCombo;
-        private StateControl mStateControl;
         private System.Windows.Forms.Label BIAssessment;
         private BugInfoSet bugInfoSet;
         private System.Windows.Forms.TextBox mDealManTextBox;

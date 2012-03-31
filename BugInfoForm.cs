@@ -123,35 +123,6 @@ namespace TeamView
             mDataSource.Add(_model.Current);
 
             mSimpleEditor.Load(_model.LoadDoc(_model.Current.bugNum));
-
-            mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
-        }
-
-        private void mStateControl_StateChanged(object sender, StateControl.StateChangedArgs e)
-        {
-            string oldStatus = _model.Current.bugStatus;
-            _model.Current.bugStatus = StatesConverter.ToStateString(e.NewState);
-            var checkResult = _model.ChangeStatusCheck();
-            if (!string.IsNullOrEmpty(checkResult))
-            {
-                e.Canceled = true;
-                MessageBox.Show(checkResult);
-                _model.Current.bugStatus = oldStatus;
-                mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
-                return;
-            }
-
-            var changeResult = _model.CommitStatus();
-                using (TransactionScope trans = new TransactionScope())
-                {
-                    _repository.UpdateItem(_model.Current);
-                    _repository.AddLog(_model.Current.bugNum, string.Empty, changeResult.LogTypeId);
-                    trans.Complete();
-
-                    mStateControl.CurrentState = StatesConverter.ToStateEnum(_model.Current.bugStatus);
-                }
-
-
         }
 
         private void BugInfoForm_FormClosing(object sender, FormClosingEventArgs e)
