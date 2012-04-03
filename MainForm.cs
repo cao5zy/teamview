@@ -17,6 +17,7 @@ using TeamView.Common.Models;
 using TeamView.Common.Dao;
 using System.Transactions;
 using TeamView.Abstracts;
+using System.Threading;
 
 namespace TeamView
 {
@@ -168,8 +169,43 @@ namespace TeamView
                 }
                 );
 
-            //ShowSummary(results.Count, (decimal)results.Sum(n => n.size), results.Sum(n => n.fired / 60));
             ShowSummary(itemCount, totalSize, totalHours);
+
+            AsyncShowBugFeedbacks();
+        }
+
+        private object mLockObj = new object();
+        private volatile Thread mCalFeedbackThread = null;
+        private void AsyncShowBugFeedbacks()
+        {
+            if (mCalFeedbackThread != null)
+                mCalFeedbackThread.Abort();
+            else
+            {
+                lock (mLockObj)
+                {
+                    if (mCalFeedbackThread != null)
+                        mCalFeedbackThread.Abort();
+                }
+            }
+
+            mCalFeedbackThread = new Thread(() => CalFeedbak());
+            mCalFeedbackThread.Start();
+        }
+
+        private object CalFeedbak()
+        {
+            (from BugInfoSet.BugInfoTableRow r in mBugInfoSet.BugInfoTable.Rows
+             select r)
+             .ToList()
+             .ForEach(
+                n => {
+                    int i = _query.CountFeedbacks(n.bugNum);
+                    n.FeedBackCount = i;
+                }
+             );
+            mBugInfoListDataGridView.RefreshEdit();
+            return null;
         }
 
 

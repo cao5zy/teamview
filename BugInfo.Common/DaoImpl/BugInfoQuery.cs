@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TeamView.Common.Dao;
 using Dev3Lib.Algorithms;
+using SubSonic;
 
 namespace TeamView.Common.DaoImpl
 {
@@ -120,6 +121,21 @@ namespace TeamView.Common.DaoImpl
                 }
             }
 
+        }
+
+
+        public int CountFeedbacks(string itemId)
+        {
+            int count = DAL.DB
+                .Select()
+                .From<DAL.ChangeLog>()
+                .Where(DAL.ChangeLog.Columns.BugNum).IsEqualTo(itemId)
+                .And(DAL.ChangeLog.Columns.LogTypeID).IsEqualTo((int)LogTypeEnum.Submit)
+                .GetRecordCount() - 1;
+
+            return count < 0
+                ? 0
+                : count;
         }
     }
 }

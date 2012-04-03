@@ -59,6 +59,7 @@
             this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.feedBackCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).BeginInit();
@@ -112,7 +113,8 @@
             this.description,
             this.Priority,
             this.Size,
-            this.fired});
+            this.fired,
+            this.feedBackCountDataGridViewTextBoxColumn});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
             this.mBugInfoListDataGridView.DataMember = "BugInfoTable";
             this.mBugInfoListDataGridView.DataSource = this.mBugInfoSetBindingSource;
@@ -324,6 +326,13 @@
             this.fired.Name = "fired";
             this.fired.ReadOnly = true;
             // 
+            // feedBackCountDataGridViewTextBoxColumn
+            // 
+            this.feedBackCountDataGridViewTextBoxColumn.DataPropertyName = "FeedBackCount";
+            this.feedBackCountDataGridViewTextBoxColumn.HeaderText = "FeedBackCount";
+            this.feedBackCountDataGridViewTextBoxColumn.Name = "feedBackCountDataGridViewTextBoxColumn";
+            this.feedBackCountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -381,5 +390,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
+        private System.Windows.Forms.DataGridViewTextBoxColumn feedBackCountDataGridViewTextBoxColumn;
     }
 }
