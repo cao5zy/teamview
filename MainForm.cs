@@ -171,7 +171,58 @@ namespace TeamView
 
             ShowSummary(itemCount, totalSize, totalHours);
 
+            ShowColorStatus();
+
             AsyncShowBugFeedbacks();
+        }
+
+        private void ShowColorStatus()
+        {
+            (from DataGridViewRow row in mBugInfoListDataGridView.Rows
+             select row)
+             .ToList()
+             .ForEach(
+             n => {
+                 if (n.DataBoundItem != null)
+                 {
+                     BugInfoSet.BugInfoTableRow row = ((DataRowView)n.DataBoundItem).Row as BugInfoSet.BugInfoTableRow;
+                     if (row != null)
+                     {
+                         if (row.bugStatus == "Processing")
+                         {
+                             n.Cells["bugStatus"].Style.BackColor = Color.Green;
+                             n.Cells["bugStatus"].Style.ForeColor = Color.White;
+                         }
+                         else
+                         {
+                             n.Cells["bugStatus"].Style.BackColor = Color.White;
+                             n.Cells["bugStatus"].Style.ForeColor = Color.Black;
+                         }
+
+                         if (row.fired > row.size / 2 && row.fired <= row.size)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Yellow;
+                             n.Cells["fired"].Style.ForeColor = Color.White;
+                         }
+                         else if (row.fired > row.size && row.fired <= row.size * 2)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Red;
+                             n.Cells["fired"].Style.ForeColor = Color.White;
+                         }
+                         else if (row.fired > row.size * 2)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Purple;
+                             n.Cells["fired"].Style.ForeColor = Color.White;
+                         }
+                         else
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.White;
+                             n.Cells["fired"].Style.ForeColor = Color.Black;
+                         }
+                     }
+                 }
+             }
+             );
         }
 
         private object mLockObj = new object();
@@ -191,6 +242,7 @@ namespace TeamView
 
             mCalFeedbackThread = new Thread(() => CalFeedbak());
             mCalFeedbackThread.Start();
+
         }
 
         private object CalFeedbak()
@@ -205,6 +257,8 @@ namespace TeamView
                 }
              );
             mBugInfoListDataGridView.RefreshEdit();
+            
+
             return null;
         }
 
@@ -330,6 +384,8 @@ namespace TeamView
             currentSelected.fired = Math.Round((double)item.fired / 60, 2);
             currentSelected.bugStatus = item.bugStatus;
             currentSelected.timeStamp = item.timeStamp;
+
+            ShowColorStatus();
 
         }
 
