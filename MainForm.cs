@@ -202,7 +202,7 @@ namespace TeamView
                          if (row.fired > row.size / 2 && row.fired <= row.size)
                          {
                              n.Cells["fired"].Style.BackColor = Color.Yellow;
-                             n.Cells["fired"].Style.ForeColor = Color.White;
+                             n.Cells["fired"].Style.ForeColor = Color.Black;
                          }
                          else if (row.fired > row.size && row.fired <= row.size * 2)
                          {
@@ -387,6 +387,16 @@ namespace TeamView
 
             ShowColorStatus();
 
+        }
+
+        private void mBugInfoListDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private void mBugInfoListDataGridView_Sorted(object sender, EventArgs e)
+        {
+            ShowColorStatus();
         }
 
     }
