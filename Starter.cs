@@ -12,7 +12,7 @@ using TeamView.Abstracts;
 
 namespace TeamView
 {
-    class Starter
+    sealed class Starter
     {
         IContainer mContainer;
         public Starter()

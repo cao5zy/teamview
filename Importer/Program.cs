@@ -9,6 +9,12 @@ namespace Importer
     {
         static void Main(string[] args)
         {
+            string reporterName = args[0];
+            string handlerName = args[1];
+            string importedFileName = args[2];
+
+            var importController = new Starter().BuildJIRAImportContainer();
+
         }
     }
 }

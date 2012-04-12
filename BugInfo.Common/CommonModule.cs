@@ -17,6 +17,7 @@ namespace TeamView.Common
             builder.RegisterType<BugInfoViewModel>();
             builder.RegisterType<KeyModel>();
             builder.RegisterType<BugInfoQuery>().As<IQuery>();
+            builder.RegisterType<JIRAImporter>().As<IItemImporter>();
         }
     }
 }

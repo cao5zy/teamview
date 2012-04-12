@@ -46,8 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JIRAImportController.cs" />
+    <Compile Include="JIRAImportModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Starter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugInfo.Common\TeamView.Common.csproj">
+      <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
+      <Name>TeamView.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
