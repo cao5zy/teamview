@@ -7,7 +7,7 @@ namespace TeamView.Common
 {
     public interface IItemImporter
     {
-        void Import(string xmlFileName, string reporter, string iniDealMan);
+        void Import(string xmlFileName, string iniDealMan);
 
         IEnumerable<string> ImportedList { get; }
     }

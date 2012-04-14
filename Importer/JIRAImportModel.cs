@@ -9,8 +9,6 @@ namespace Importer
     {
         public string ImportFile { get; set; }
 
-        public string Reporter { get; set; }
-
         public string Handler { get; set; }
 
     }

@@ -9,6 +9,8 @@ using TeamView.Dao;
 using System.Text.RegularExpressions;
 using TeamView.Common.Models;
 using TeamView.Common.Dao;
+using System.Xml.Linq;
+using Dev3Lib.Algorithms;
 
 namespace TeamView.Common
 {
@@ -25,38 +27,39 @@ namespace TeamView.Common
             _bugInfoModel = bugInfoModel;
             _repository = repository;
         }
-        public void Import(string xmlFileName,string reporter, string iniDealMan)
+        public void Import(string xmlFileName, string iniDealMan)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xmlFileName);
+            XDocument xDoc = XDocument.Load(xmlFileName);
+            (from item in xDoc.Descendants("item")
+             select new
+             {
+                 BugNum = item.Element(XName.Get("key")).Value,
+                 Description = item.Element(XName.Get("summary")).Value,
+                 Priority = short.Parse(item.Element(XName.Get("priority")).Value.Substring(0, 1)),
+                 Version = GetVersionNumber(item.Element(XName.Get("fixVersion")).Value),
+             })
+                          .SafeForEach(
+                          n =>
+                          {
+                              var item = _bugInfoModel.New();
 
-            List<BugInfoEntity> items = new List<BugInfoEntity>();
-            foreach (var node in doc.SelectNodes("//item"))
-            {
-                XmlElement n = node as XmlElement;
-                if (n == null) continue;
-                var item = _bugInfoModel.New();
+                              item.bugNum = n.BugNum;
+                              item.description = n.Description;
+                              item.dealMan = iniDealMan;
+                              item.priority = n.Priority;
+                              item.size = 0;
+                              item.bugStatus = States.Pending;
+                              item.version = n.Version;
+                              item.createdTime = DateTime.Now;
+                              var saveResult = _bugInfoModel.Save();
 
-                item.bugNum = GetSubElementInnerText(n, "key");
-                item.description= GetSubElementInnerText(n, "summary");
-                item.dealMan = reporter;
-                item.priority = short.Parse(GetSubElementInnerText(n,"priority").Substring(0,1));
-                item.size = 0;
-                item.bugStatus = States.Pending;
-                item.version = GetVersionNumber(GetSubElementInnerText(n, "fixVersion"));
-
-                var saveResult = _bugInfoModel.Save();
-
-                if(saveResult.State)
-                {
-                    _repository.UpdateItem(saveResult.Object);
-                    mImportedList.Add(item.bugNum);
-                }
-                else
-                {
-                    mImportedList.Add(item.bugNum + " save failed");
-                }
-            }
+                              if (saveResult.State)
+                              {
+                                  _repository.UpdateItem(saveResult.Object);
+                                  mImportedList.Add(item.bugNum);
+                              }
+                          }
+                          );
         }
 
 
@@ -67,11 +70,6 @@ namespace TeamView.Common
                 return match.Groups[1].Value;
             else
                 return versionStr;
-        }
-
-        private static string GetSubElementInnerText(XmlElement element, string subElementName)
-        {
-            return element.GetElementsByTagName(subElementName).Item(0).InnerText;
         }
 
         #endregion
