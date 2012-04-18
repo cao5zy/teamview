@@ -5,7 +5,7 @@ using System.Text;
 using Autofac;
 using TeamView.Common;
 
-namespace Importer
+namespace JIRAImporter
 {
     sealed class Starter
     {

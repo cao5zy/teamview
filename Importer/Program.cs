@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dev3Lib.Algorithms;
 
-namespace Importer
+namespace JIRAImporter
 {
     class Program
     {

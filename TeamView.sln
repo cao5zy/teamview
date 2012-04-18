@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report", "TeamView
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Test", "TeamView.Test\TeamView.Test.csproj", "{FEAF2643-28D3-4654-AB54-D6E644462DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Importer", "Importer\Importer.csproj", "{A7096742-5D80-432A-847B-788B3D93FC1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIRAImporter", "Importer\JIRAImporter.csproj", "{A7096742-5D80-432A-847B-788B3D93FC1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

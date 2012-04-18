@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TeamView.Common;
 
-namespace Importer
+namespace JIRAImporter
 {
     public class JIRAImportController
     {
