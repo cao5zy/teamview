@@ -10,15 +10,13 @@ namespace JIRAImporter
     {
         static void Main(string[] args)
         {
-            string handlerName = args[0];
-            string importedFileName = args[1];
+            string importedFileName = args[0];
 
             var importController = new Starter().BuildJIRAImportContainer();
 
             importController.Import(new JIRAImportModel
             {
-                Handler = args[0],
-                ImportFile = args[1],
+                ImportFile = args[0],
             });
 
             if (importController.ImportedList.IsNullOrEmpty())

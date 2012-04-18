@@ -15,6 +15,7 @@ namespace JIRAImporter
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<JIRAImportController>();
+            builder.RegisterType<JIRAImporter>().As<IItemImporter>();
             builder.RegisterModule<CommonModule>();
 
             mContainer = builder.Build();

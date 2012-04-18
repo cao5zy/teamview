@@ -98,7 +98,6 @@
     <Compile Include="ExtendDataConversion.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />
-    <Compile Include="JIRAImporter.cs" />
     <Compile Include="KeyGenerator.cs" />
     <Compile Include="Logs\BugLogReader.cs" />
     <Compile Include="Logs\BugNumLogReader.cs" />

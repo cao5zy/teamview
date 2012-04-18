@@ -8,8 +8,5 @@ namespace JIRAImporter
     public class JIRAImportModel
     {
         public string ImportFile { get; set; }
-
-        public string Handler { get; set; }
-
     }
 }

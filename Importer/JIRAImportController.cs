@@ -21,8 +21,7 @@ namespace JIRAImporter
         }
         public void Import(JIRAImportModel model)
         {
-            mItemImporter.Import(model.ImportFile,
-                model.Handler);
+            mItemImporter.Import(model.ImportFile);
         }
     }
 }

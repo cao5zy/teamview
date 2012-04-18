@@ -43,6 +43,7 @@
       <HintPath>..\Dependencies\Dev3Lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JIRAImportController.cs" />
+    <Compile Include="JIRAImporter.cs" />
     <Compile Include="JIRAImportModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
