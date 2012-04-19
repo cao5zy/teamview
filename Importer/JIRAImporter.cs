@@ -47,7 +47,8 @@ namespace JIRAImporter
                     };
                 });
 
-            Func<XElement, int> getHours = (element) => {
+            Func<XElement, int> getHours = (element) =>
+            {
                 if (element == null)
                     return 0;
                 else
@@ -74,8 +75,8 @@ namespace JIRAImporter
                      Version = GetVersionNumber(item.Element(XName.Get("fixVersion")).Value),
                      JIRAAssignee = item.Element(XName.Get("assignee")).Value,
                      SizeInHours = getHours((from customField in item.Element(XName.Get("customfields")).Descendants("customfield")
-                                    where customField.Element(XName.Get("customfieldname")).Value == "Size"
-                                    select customField)
+                                             where customField.Element(XName.Get("customfieldname")).Value == "Size"
+                                             select customField)
                                     .SingleOrDefault()),
 
                  })
@@ -100,7 +101,7 @@ namespace JIRAImporter
                         if (saveResult.State)
                         {
                             _repository.UpdateItem(saveResult.Object);
-                            mImportedList.Add(string.Format("{0} {1}",item.bugNum, item.dealMan));
+                            mImportedList.Add(string.Format("{0} {1}", item.bugNum, item.dealMan));
                         }
                     }
                     else
@@ -112,33 +113,46 @@ namespace JIRAImporter
                         }
                         else
                         {
-                            bool changed = false;
+                            bool statusChanged = false;
+                            bool sizeChanged = false;
+
                             if (existingItem.bugStatus == States.Complete)
                             {
                                 //assume that the issues fixed in 
                                 existingItem.bugStatus = States.Pending;
-                                RecordBugFeedBack(existingItem.bugNum);
-                                changed = true;
+                                statusChanged = true;
                             }
 
-
+                            int oldSize = 0;
                             if (existingItem.size != n.SizeInHours * 60)
                             {
                                 //size changed
+                                oldSize = existingItem.size;
                                 existingItem.size = n.SizeInHours * 60;
-                                RecordSizeChanged(existingItem.size, n.SizeInHours * 60);
-                                changed = true;
+                                sizeChanged = true;
                             }
 
-                            if (changed)
+                            if (sizeChanged || statusChanged)
                             {
-                                string error = SaveFlow(existingItem);
+                                string error = SaveFlow(existingItem, sizeChanged, statusChanged);
                                 if (!string.IsNullOrEmpty(error))
                                 {
                                     Console.WriteLine(string.Format("Fail to change {0}", existingItem.bugNum));
                                 }
                                 else
+                                {
                                     mImportedList.Add(string.Format("{0} status changed, {1}", existingItem.bugNum, existingItem.dealMan));
+
+                                    if (statusChanged)
+                                    {
+                                        RecordBugFeedBack(existingItem.bugNum);
+                                    }
+
+                                    if (sizeChanged)
+                                    {
+                                        RecordSizeChanged(oldSize, n.SizeInHours * 60);
+                                    }
+                                }
                             }
                         }
                     }
@@ -186,24 +200,48 @@ namespace JIRAImporter
             xDoc.Save(fileName);
         }
 
-        private string SaveFlow(BugInfoEntity1 item)
+        private string SaveFlow(BugInfoEntity1 item, bool sizedChanged, bool statusChanged)
         {
-            var checkResult = _bugInfoModel.ChangeStatusCheck();
-            if (!string.IsNullOrEmpty(checkResult))
+            if (statusChanged)
             {
-                return checkResult;
+                var checkResult = _bugInfoModel.ChangeStatusCheck();
+                if (!string.IsNullOrEmpty(checkResult))
+                {
+                    return checkResult;
+                }
+
+                var result = _bugInfoModel.CommitStatus();
+
+                using (TransactionScope trans = new TransactionScope())
+                {
+                    _repository.UpdateItem(item);
+                    _repository.AddLog(item.bugNum, string.Empty, result.LogTypeId);
+                    trans.Complete();
+                }
+
+                return string.Empty;
             }
 
-            var result = _bugInfoModel.CommitStatus();
-
-            using (TransactionScope trans = new TransactionScope())
+            if (sizedChanged)
             {
-                _repository.UpdateItem(item);
-                _repository.AddLog(item.bugNum, string.Empty, result.LogTypeId);
-                trans.Complete();
+                var checkResult = _bugInfoModel.SaveCheck();
+                if (!string.IsNullOrEmpty(checkResult))
+                {
+                    return checkResult;
+                }
+
+                var result = _bugInfoModel.Save();
+
+                using (TransactionScope trans = new TransactionScope())
+                {
+                    _repository.UpdateItem(result.Object);
+                    trans.Complete();
+                }
+
+                return string.Empty;
             }
 
-            return string.Empty;
+            return "Nothing saved";
         }
 
 
