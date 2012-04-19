@@ -12,6 +12,9 @@ using TeamView.Common.Dao;
 using System.Xml.Linq;
 using Dev3Lib.Algorithms;
 using System.Configuration;
+using TeamView.Common.Entity;
+using System.Transactions;
+using System.IO;
 
 namespace JIRAImporter
 {
@@ -68,25 +71,117 @@ namespace JIRAImporter
             .SafeForEach(
             n =>
             {
-                var item = _bugInfoModel.New();
-
-                item.bugNum = n.BugNum;
-                item.description = n.Description;
-                item.dealMan = assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan;
-                item.priority = n.Priority;
-                item.size = n.SizeInHours * 60;
-                item.bugStatus = States.Pending;
-                item.version = n.Version;
-                item.createdTime = DateTime.Now;
-                var saveResult = _bugInfoModel.Save();
-
-                if (saveResult.State)
+                var existingItem = _bugInfoModel.Load(n.BugNum);
+                if (existingItem == null)
                 {
-                    _repository.UpdateItem(saveResult.Object);
-                    mImportedList.Add(item.bugNum);
+                    var item = _bugInfoModel.New();
+
+                    item.bugNum = n.BugNum;
+                    item.description = n.Description;
+                    item.dealMan = assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan;
+                    item.priority = n.Priority;
+                    item.size = n.SizeInHours * 60;
+                    item.bugStatus = States.Pending;
+                    item.version = n.Version;
+                    item.createdTime = DateTime.Now;
+                    var saveResult = _bugInfoModel.Save();
+
+                    if (saveResult.State)
+                    {
+                        _repository.UpdateItem(saveResult.Object);
+                        mImportedList.Add(item.bugNum);
+                    }
+                }
+                else
+                {
+                    if (existingItem.dealMan != assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan)
+                    {
+                        //dealMan changed
+                        Console.WriteLine(string.Format("Deal Man changed from {0} to {1}", existingItem.dealMan, assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan));
+                    }
+                    else
+                    {
+                        if (existingItem.bugStatus == States.Complete)
+                        {
+                            //assume that the issues fixed in 
+                            existingItem.bugStatus = States.Pending;
+                            RecordBugFeedBack(existingItem.bugNum);
+                        }
+
+
+                        if (existingItem.size != n.SizeInHours * 60)
+                        {
+                            //size changed
+                            existingItem.size = n.SizeInHours * 60;
+                            RecordSizeChanged(existingItem.size, n.SizeInHours * 60);
+                        }
+
+                        string error = SaveFlow(existingItem);
+                        if (!string.IsNullOrEmpty(error))
+                        {
+                            Console.WriteLine(string.Format("Fail to change {0}", existingItem.bugStatus));
+                        }
+                        else
+                            mImportedList.Add(string.Format("{0} status changed", existingItem.bugNum));
+                    }
                 }
             }
             );
+        }
+
+        private static void RecordSizeChanged(int originalSize, int newSize)
+        {
+            string fileName = "ImportSizeChanged.xml";
+            if (!File.Exists(fileName))
+            {
+                File.AppendAllText(fileName, @"<SizeChanges/>");
+            }
+            XDocument xDoc = XDocument.Load(fileName);
+            xDoc.Element("SizeChanges")
+                .AddFirst(new XElement("Change",
+                    new XElement[] {
+                        new XElement("Time",DateTime.Now),
+                        new XElement("Old", originalSize),
+                        new XElement("New", newSize),
+                    }));
+            xDoc.Save(fileName);
+        }
+
+        private static void RecordBugFeedBack(string bugNum)
+        {
+            string fileName = "ImportBugFeedback.xml";
+            if (!File.Exists(fileName))
+            {
+                File.AppendAllText(fileName, @"<BugFeedBacks/>");
+            }
+            XDocument xDoc = XDocument.Load(fileName);
+            xDoc.Element("BugFeedBacks")
+                .AddFirst(new XElement("BugFeedBack",
+                    new XElement[] {
+                        new XElement("Time",DateTime.Now),
+                        new XElement("BugNum", bugNum)
+                    }));
+            xDoc.Save(fileName);
+        }
+
+        private string SaveFlow(BugInfoEntity1 item)
+        {
+            var checkResult = _bugInfoModel.ChangeStatusCheck();
+            if (!string.IsNullOrEmpty(checkResult))
+            {
+                return checkResult;
+            }
+
+            var result = _bugInfoModel.CommitStatus();
+
+            using (TransactionScope trans = new TransactionScope())
+            {
+                _repository.UpdateItem(item);
+                _repository.AddLog(item.bugNum, string.Empty, result.LogTypeId);
+                trans.Complete();
+            }
+
+            return string.Empty;
         }
 
 

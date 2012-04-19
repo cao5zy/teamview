@@ -62,10 +62,15 @@ namespace TeamView.Common.Models
         public BugInfoEntity1 Load(string bugNum)
         {
             var item = _repository.GetItem(bugNum);
+
             _state = item != null;
             _isNew = item == null;
+            _current = null;
             _old = item;
-            _current = item.Clone();
+            if (item != null)
+            {
+                _current = item.Clone();
+            }
 
             return _current;
         }

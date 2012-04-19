@@ -21,7 +21,7 @@ using System.Threading;
 
 namespace TeamView
 {
-    partial class MainForm : Form
+    sealed partial class MainForm : Form
     {
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
@@ -365,11 +365,27 @@ namespace TeamView
 
             item.bugStatus = StatesConverter.ToStateString((StatesEnum)Enum.Parse(typeof(StatesEnum), e.ClickedItem.Text));
 
+            string error = SaveFlow(item);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+
+            currentSelected.fired = Math.Round((double)item.fired / 60, 2);
+            currentSelected.bugStatus = item.bugStatus;
+            currentSelected.timeStamp = item.timeStamp;
+
+            ShowColorStatus();
+
+        }
+
+        private string SaveFlow(Common.Entity.BugInfoEntity1 item)
+        {
             var checkResult = _bugInfoModel.ChangeStatusCheck();
             if (!string.IsNullOrEmpty(checkResult))
             {
-                MessageBox.Show(checkResult);
-                return;
+                return checkResult;
             }
 
             var result = _bugInfoModel.CommitStatus();
@@ -381,12 +397,7 @@ namespace TeamView
                 trans.Complete();
             }
 
-            currentSelected.fired = Math.Round((double)item.fired / 60, 2);
-            currentSelected.bugStatus = item.bugStatus;
-            currentSelected.timeStamp = item.timeStamp;
-
-            ShowColorStatus();
-
+            return string.Empty;
         }
 
         private void mBugInfoListDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
