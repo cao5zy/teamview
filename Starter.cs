@@ -26,7 +26,6 @@ namespace TeamView
             builder.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
             builder.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
             builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
-            builder.RegisterType<JIRAImporter>().As<IItemImporter>();
             builder.RegisterModule<IniDbModule>();
             builder.RegisterModule<LogsModule>();
             builder.RegisterModule<CommonModule>();

@@ -47,86 +47,108 @@ namespace JIRAImporter
                     };
                 });
 
-            XDocument xDoc = XDocument.Load(xmlFileName);
-            (from item in xDoc.Descendants("item")
-             where assigneeMap.SafeExists(n => n.JIRAAssignee == item.Element(XName.Get("assignee")).Value)
-             select new
-             {
-                 BugNum = item.Element(XName.Get("key")).Value,
-                 Description = item.Element(XName.Get("summary")).Value,
-                 Priority = short.Parse(item.Element(XName.Get("priority")).Value.Substring(0, 1)),
-                 Version = GetVersionNumber(item.Element(XName.Get("fixVersion")).Value),
-                 JIRAAssignee = item.Element(XName.Get("assignee")).Value,
-                 SizeInHours = (from customField in item.Element(XName.Get("customfields")).Descendants("customfield")
-                                where customField.Element(XName.Get("customfieldname")).Value == "Size"
-                                select customField)
-                                .Single()
-                                .Descendants("customfieldvalue")
-                                .Single()
-                                .Value
-                                .ToDecimal()
-                                .ToInt32()
-
-             })
-            .SafeForEach(
-            n =>
-            {
-                var existingItem = _bugInfoModel.Load(n.BugNum);
-                if (existingItem == null)
-                {
-                    var item = _bugInfoModel.New();
-
-                    item.bugNum = n.BugNum;
-                    item.description = n.Description;
-                    item.dealMan = assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan;
-                    item.priority = n.Priority;
-                    item.size = n.SizeInHours * 60;
-                    item.bugStatus = States.Pending;
-                    item.version = n.Version;
-                    item.createdTime = DateTime.Now;
-                    var saveResult = _bugInfoModel.Save();
-
-                    if (saveResult.State)
-                    {
-                        _repository.UpdateItem(saveResult.Object);
-                        mImportedList.Add(item.bugNum);
-                    }
-                }
+            Func<XElement, int> getHours = (element) => {
+                if (element == null)
+                    return 0;
                 else
                 {
-                    if (existingItem.dealMan != assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan)
+                    return element
+                        .Descendants("customfieldvalue")
+                        .Single()
+                        .Value
+                        .ToDecimal()
+                        .ToInt32();
+                }
+            };
+
+            XDocument xDoc = XDocument.Load(xmlFileName);
+            try
+            {
+                (from item in xDoc.Descendants("item")
+                 where assigneeMap.SafeExists(n => n.JIRAAssignee == item.Element(XName.Get("assignee")).Value)
+                 select new
+                 {
+                     BugNum = item.Element(XName.Get("key")).Value,
+                     Description = item.Element(XName.Get("summary")).Value,
+                     Priority = short.Parse(item.Element(XName.Get("priority")).Value.Substring(0, 1)),
+                     Version = GetVersionNumber(item.Element(XName.Get("fixVersion")).Value),
+                     JIRAAssignee = item.Element(XName.Get("assignee")).Value,
+                     SizeInHours = getHours((from customField in item.Element(XName.Get("customfields")).Descendants("customfield")
+                                    where customField.Element(XName.Get("customfieldname")).Value == "Size"
+                                    select customField)
+                                    .SingleOrDefault()),
+
+                 })
+                .SafeForEach(
+                n =>
+                {
+                    var existingItem = _bugInfoModel.Load(n.BugNum);
+                    if (existingItem == null)
                     {
-                        //dealMan changed
-                        Console.WriteLine(string.Format("Deal Man changed from {0} to {1}", existingItem.dealMan, assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan));
+                        var item = _bugInfoModel.New();
+
+                        item.bugNum = n.BugNum;
+                        item.description = n.Description;
+                        item.dealMan = assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan;
+                        item.priority = n.Priority;
+                        item.size = n.SizeInHours * 60;
+                        item.bugStatus = States.Pending;
+                        item.version = n.Version;
+                        item.createdTime = DateTime.Now;
+                        var saveResult = _bugInfoModel.Save();
+
+                        if (saveResult.State)
+                        {
+                            _repository.UpdateItem(saveResult.Object);
+                            mImportedList.Add(string.Format("{0} {1}",item.bugNum, item.dealMan));
+                        }
                     }
                     else
                     {
-                        if (existingItem.bugStatus == States.Complete)
+                        if (existingItem.dealMan != assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan)
                         {
-                            //assume that the issues fixed in 
-                            existingItem.bugStatus = States.Pending;
-                            RecordBugFeedBack(existingItem.bugNum);
-                        }
-
-
-                        if (existingItem.size != n.SizeInHours * 60)
-                        {
-                            //size changed
-                            existingItem.size = n.SizeInHours * 60;
-                            RecordSizeChanged(existingItem.size, n.SizeInHours * 60);
-                        }
-
-                        string error = SaveFlow(existingItem);
-                        if (!string.IsNullOrEmpty(error))
-                        {
-                            Console.WriteLine(string.Format("Fail to change {0}", existingItem.bugStatus));
+                            //dealMan changed
+                            Console.WriteLine(string.Format("Deal Man changed from {0} to {1}", existingItem.dealMan, assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan));
                         }
                         else
-                            mImportedList.Add(string.Format("{0} status changed", existingItem.bugNum));
+                        {
+                            bool changed = false;
+                            if (existingItem.bugStatus == States.Complete)
+                            {
+                                //assume that the issues fixed in 
+                                existingItem.bugStatus = States.Pending;
+                                RecordBugFeedBack(existingItem.bugNum);
+                                changed = true;
+                            }
+
+
+                            if (existingItem.size != n.SizeInHours * 60)
+                            {
+                                //size changed
+                                existingItem.size = n.SizeInHours * 60;
+                                RecordSizeChanged(existingItem.size, n.SizeInHours * 60);
+                                changed = true;
+                            }
+
+                            if (changed)
+                            {
+                                string error = SaveFlow(existingItem);
+                                if (!string.IsNullOrEmpty(error))
+                                {
+                                    Console.WriteLine(string.Format("Fail to change {0}", existingItem.bugNum));
+                                }
+                                else
+                                    mImportedList.Add(string.Format("{0} status changed, {1}", existingItem.bugNum, existingItem.dealMan));
+                            }
+                        }
                     }
                 }
+                );
             }
-            );
+            catch (Exception ex)
+            {
+                mImportedList.Add(ex.Message);
+            }
         }
 
         private static void RecordSizeChanged(int originalSize, int newSize)
