@@ -309,5 +309,10 @@ namespace TeamView.Common.Models
 
             return new MoveDealManResult(true) { NewItem = newObj };
         }
+
+        public bool HasLog(string bugNum)
+        {
+            return _repository.HasLog(bugNum);
+        }
     }
 }

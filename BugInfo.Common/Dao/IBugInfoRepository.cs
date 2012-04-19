@@ -29,5 +29,7 @@ namespace TeamView.Common.Dao
         void AddLog(string bugNum, string desc, int logTypeId);
 
         bool CheckTimeStamp(string itemId, DateTime timeStamp);
+
+        bool HasLog(string bugNum);
     }
 }

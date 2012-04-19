@@ -110,23 +110,45 @@ namespace TeamView
         {
             var item = _bugInfoModel.Load(CurrentSelectedItem.bugNum);
             item.timeStamp = CurrentSelectedItem.timeStamp;
-
             string newIssueHandler = e.ClickedItem.Text;
 
-            using (TransactionScope trans = new TransactionScope())
+            if (_bugInfoModel.HasLog(CurrentSelectedItem.bugNum))
             {
-                var checkMoveState = _bugInfoModel.CheckMoveDealMan(newIssueHandler);
-                if (!string.IsNullOrEmpty(checkMoveState))
+
+                using (TransactionScope trans = new TransactionScope())
                 {
-                    MessageBox.Show(checkMoveState);
-                    return;
+                    var checkMoveState = _bugInfoModel.CheckMoveDealMan(newIssueHandler);
+                    if (!string.IsNullOrEmpty(checkMoveState))
+                    {
+                        MessageBox.Show(checkMoveState);
+                        return;
+                    }
+
+                    var result = _bugInfoModel.MoveDealMan(newIssueHandler);
+
+                    _repository.UpdateItem(result.NewItem);
+
+                    trans.Complete();
                 }
+            }
+            else
+            {
+                using (TransactionScope trans = new TransactionScope())
+                {
+                    item.dealMan = newIssueHandler;
+                    var checkResult = _bugInfoModel.SaveCheck();
+                    if (!string.IsNullOrEmpty(checkResult))
+                    {
+                        MessageBox.Show(checkResult);
+                        return;
+                    }
 
-                var result = _bugInfoModel.MoveDealMan(newIssueHandler);
+                    var result = _bugInfoModel.Save();
 
-                _repository.UpdateItem(result.NewItem);
+                    _repository.UpdateItem(result.Object);
 
-                trans.Complete();
+                    trans.Complete();
+                }
             }
 
         }
@@ -158,8 +180,8 @@ namespace TeamView
                     row.Version = n.version;
                     row.size = Math.Round((double)n.size / 60, 2);
                     row.Priority = n.priority;
-                    row.fired = n.bugStatus == States.Start 
-                        ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2) 
+                    row.fired = n.bugStatus == States.Start
+                        ? Math.Round((double)n.fired / 60, 2) + Math.Round(DateTime.Now.Subtract(n.lastStateTime).TotalMinutes / 60, 2)
                         : Math.Round((double)n.fired / 60, 2);
                     row.timeStamp = n.timeStamp;
                     mBugInfoSet.BugInfoTable.Rows.Add(row);
@@ -182,7 +204,8 @@ namespace TeamView
              select row)
              .ToList()
              .ForEach(
-             n => {
+             n =>
+             {
                  if (n.DataBoundItem != null)
                  {
                      BugInfoSet.BugInfoTableRow row = ((DataRowView)n.DataBoundItem).Row as BugInfoSet.BugInfoTableRow;
@@ -251,13 +274,14 @@ namespace TeamView
              select r)
              .ToList()
              .ForEach(
-                n => {
+                n =>
+                {
                     int i = _query.CountFeedbacks(n.bugNum);
                     n.FeedBackCount = i;
                 }
              );
             mBugInfoListDataGridView.RefreshEdit();
-            
+
 
             return null;
         }

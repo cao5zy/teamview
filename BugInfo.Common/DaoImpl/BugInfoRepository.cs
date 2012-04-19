@@ -184,5 +184,14 @@ namespace TeamView.Common.DaoImpl
                 .Load()
                 .FirstOrDefault() != null;
         }
+
+
+        public bool HasLog(string bugNum)
+        {
+            return new DAL.ChangeLogCollection()
+                .Where(DAL.ChangeLog.Columns.BugNum, bugNum)
+                .Load()
+                .Count != 0;
+        }
     }
 }
