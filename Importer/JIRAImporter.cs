@@ -109,7 +109,10 @@ namespace JIRAImporter
                         if (existingItem.dealMan != assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan)
                         {
                             //dealMan changed
-                            Console.WriteLine(string.Format("Deal Man changed from {0} to {1}", existingItem.dealMan, assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan));
+                            Console.WriteLine(string.Format("Deal Man changed from {0} to {1} on {2}", 
+                                existingItem.dealMan, 
+                                assigneeMap.SafeFind(m => m.JIRAAssignee == n.JIRAAssignee).TeamViewDealMan,
+                                existingItem.bugNum));
                         }
                         else
                         {
