@@ -55,10 +55,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.mQueryControlContainer = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.mNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.mNotifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mShowMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mExitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
@@ -66,7 +62,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.mNotifyContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
@@ -294,39 +289,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1073, 576);
             this.tableLayoutPanel1.TabIndex = 30;
             // 
-            // mNotifyIcon
-            // 
-            this.mNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.mNotifyIcon.BalloonTipText = "New incomming list";
-            this.mNotifyIcon.BalloonTipTitle = "Incomming";
-            this.mNotifyIcon.ContextMenuStrip = this.mNotifyContextMenu;
-            this.mNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("mNotifyIcon.Icon")));
-            this.mNotifyIcon.Text = "BugInfoManagement";
-            this.mNotifyIcon.Visible = true;
-            this.mNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mNotifyIcon_MouseDoubleClick);
-            // 
-            // mNotifyContextMenu
-            // 
-            this.mNotifyContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mShowMenu,
-            this.mExitMenu});
-            this.mNotifyContextMenu.Name = "mNotifyContextMenu";
-            this.mNotifyContextMenu.Size = new System.Drawing.Size(101, 48);
-            // 
-            // mShowMenu
-            // 
-            this.mShowMenu.Name = "mShowMenu";
-            this.mShowMenu.Size = new System.Drawing.Size(100, 22);
-            this.mShowMenu.Text = "Show";
-            this.mShowMenu.Click += new System.EventHandler(this.mShowMenu_Click);
-            // 
-            // mExitMenu
-            // 
-            this.mExitMenu.Name = "mExitMenu";
-            this.mExitMenu.Size = new System.Drawing.Size(100, 22);
-            this.mExitMenu.Text = "Exit";
-            this.mExitMenu.Click += new System.EventHandler(this.mExitMenu_Click);
-            // 
             // mImageList
             // 
             this.mImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("mImageList.ImageStream")));
@@ -345,7 +307,6 @@
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "TeamView";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).EndInit();
             this.mFlowMenu.ResumeLayout(false);
@@ -354,7 +315,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.mNotifyContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,10 +329,6 @@
         private System.Windows.Forms.Label mTipLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.NotifyIcon mNotifyIcon;
-        private System.Windows.Forms.ContextMenuStrip mNotifyContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem mShowMenu;
-        private System.Windows.Forms.ToolStripMenuItem mExitMenu;
         private System.Windows.Forms.ImageList mImageList;
         private System.Windows.Forms.ContextMenuStrip mFlowMenu;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;

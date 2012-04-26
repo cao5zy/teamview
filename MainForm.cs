@@ -318,21 +318,6 @@ namespace TeamView
             this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() + "/estimated " + totalHours.ToString() + " hours" + "/fired " + totalFired.ToString() + " hours";
         }
 
-        private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            this.Visible = true;
-            this.WindowState = FormWindowState.Normal;
-            this.ShowInTaskbar = true;
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!mIsClose)
-            {
-                e.Cancel = true;
-                this.Visible = false;
-            }
-        }
 
         private void mShowMenu_Click(object sender, EventArgs e)
         {
