@@ -138,11 +138,10 @@ namespace JIRAImporter
 
                             if (existingItem.version != n.Version)
                             {
-                                existingItem.version = n.Version;
                                 versionChanged = true;
                             }
 
-                            if (sizeChanged || statusChanged || versionChanged)
+                            if (sizeChanged || statusChanged)
                             {
                                 string error = SaveFlow(existingItem, sizeChanged, statusChanged, versionChanged);
                                 if (!string.IsNullOrEmpty(error))
@@ -165,6 +164,10 @@ namespace JIRAImporter
                                             n.SizeInHours * 60);
                                     }
                                 }
+                            }
+                            else if (versionChanged)
+                            {
+                                Console.WriteLine(string.Format("version changed from {0} to {1}", existingItem.version, n.Version));
                             }
                         }
                     }
