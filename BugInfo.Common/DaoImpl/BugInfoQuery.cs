@@ -99,7 +99,9 @@ namespace TeamView.Common.DaoImpl
                 DAL.BugInfo.DescriptionColumn,
                 DAL.BugInfo.SizeColumn,
                 DAL.BugInfo.FiredColumn,
-                DAL.BugInfo.DealManColumn).From<DAL.ChangeLog>()
+                DAL.BugInfo.DealManColumn,
+                DAL.BugInfo.VersionColumn
+                ).From<DAL.ChangeLog>()
                 .InnerJoin<DAL.BugInfo>()
                 .Where(DAL.BugInfo.DealManColumn).IsEqualTo(dealMan)
                 .And(DAL.ChangeLog.CreateDateColumn).IsGreaterThanOrEqualTo(startDate)
@@ -117,6 +119,7 @@ namespace TeamView.Common.DaoImpl
                         Description = reader[DAL.BugInfo.Columns.Description].ToString(),
                         Estimate = reader[DAL.BugInfo.Columns.Size].ToInt32(),
                         ItemId = reader[DAL.BugInfo.Columns.BugNum].ToString(),
+                        Version = reader[DAL.BugInfo.Columns.Version].ToString(),
                     };
                 }
             }

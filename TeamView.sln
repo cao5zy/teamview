@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Test", "TeamView.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIRAImporter", "Importer\JIRAImporter.csproj", "{A7096742-5D80-432A-847B-788B3D93FC1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report2", "TeamView.Report2\TeamView.Report2.csproj", "{DF6BCC95-6621-415A-8ABE-18503AD8D60C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,16 @@ Global
 		{A7096742-5D80-432A-847B-788B3D93FC1D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A7096742-5D80-432A-847B-788B3D93FC1D}.Release|x86.ActiveCfg = Release|x86
 		{A7096742-5D80-432A-847B-788B3D93FC1D}.Release|x86.Build.0 = Release|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Debug|x86.ActiveCfg = Debug|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Debug|x86.Build.0 = Debug|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|Any CPU.ActiveCfg = Release|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|x86.ActiveCfg = Release|x86
+		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

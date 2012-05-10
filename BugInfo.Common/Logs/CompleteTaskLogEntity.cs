@@ -14,5 +14,6 @@ namespace TeamView.Common.Logs
         public decimal Burned { get; set; }
         public string Description { get; set; }
         public DateTime CompleteTime { get; set; }
+        public string Version { get; set; }
     }
 }
