@@ -41,9 +41,9 @@ namespace TeamView.Common.DaoImpl
             if (!string.IsNullOrEmpty(version))
             {
                 if (!query.HasWhere)
-                    query.Where(DAL.BugInfo.Columns.Version).IsEqualTo(version);
+                    query.Where(DAL.BugInfo.Columns.Version).Like(version + "%");
                 else
-                    query.And(DAL.BugInfo.Columns.Version).IsEqualTo(version);
+                    query.And(DAL.BugInfo.Columns.Version).Like(version + "%");
             }
 
             if (!string.IsNullOrEmpty(description))

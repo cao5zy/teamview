@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="FileProvider.cs" />
     <Compile Include="IFileProvider.cs" />
     <Compile Include="ILogReader.cs" />

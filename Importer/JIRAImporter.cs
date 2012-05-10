@@ -118,6 +118,7 @@ namespace JIRAImporter
                         {
                             bool statusChanged = false;
                             bool sizeChanged = false;
+                            bool versionChanged = false;
 
                             if (existingItem.bugStatus == States.Complete)
                             {
@@ -135,9 +136,15 @@ namespace JIRAImporter
                                 sizeChanged = true;
                             }
 
-                            if (sizeChanged || statusChanged)
+                            if (existingItem.version != n.Version)
                             {
-                                string error = SaveFlow(existingItem, sizeChanged, statusChanged);
+                                existingItem.version = n.Version;
+                                versionChanged = true;
+                            }
+
+                            if (sizeChanged || statusChanged || versionChanged)
+                            {
+                                string error = SaveFlow(existingItem, sizeChanged, statusChanged, versionChanged);
                                 if (!string.IsNullOrEmpty(error))
                                 {
                                     Console.WriteLine(string.Format("Fail to change {0}", existingItem.bugNum));
@@ -153,7 +160,9 @@ namespace JIRAImporter
 
                                     if (sizeChanged)
                                     {
-                                        RecordSizeChanged(oldSize, n.SizeInHours * 60);
+                                        RecordSizeChanged(existingItem.bugNum,
+                                            oldSize, 
+                                            n.SizeInHours * 60);
                                     }
                                 }
                             }
@@ -168,7 +177,9 @@ namespace JIRAImporter
             }
         }
 
-        private static void RecordSizeChanged(int originalSize, int newSize)
+        private static void RecordSizeChanged(string itemId, 
+            int originalSize, 
+            int newSize)
         {
             string fileName = "ImportSizeChanged.xml";
             if (!File.Exists(fileName))
@@ -203,7 +214,10 @@ namespace JIRAImporter
             xDoc.Save(fileName);
         }
 
-        private string SaveFlow(BugInfoEntity1 item, bool sizedChanged, bool statusChanged)
+        private string SaveFlow(BugInfoEntity1 item, 
+            bool sizedChanged, 
+            bool statusChanged,
+            bool versionChanged)
         {
             if (statusChanged)
             {
@@ -225,7 +239,7 @@ namespace JIRAImporter
                 return string.Empty;
             }
 
-            if (sizedChanged)
+            if (sizedChanged || versionChanged)
             {
                 var checkResult = _bugInfoModel.SaveCheck();
                 if (!string.IsNullOrEmpty(checkResult))

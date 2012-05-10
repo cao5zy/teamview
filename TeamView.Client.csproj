@@ -189,6 +189,7 @@
       <DependentUpon>QueryControl.cs</DependentUpon>
     </Compile>
     <Compile Include="QueryControlModel.cs" />
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="SimpleEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="CommonModule.cs" />
     <Compile Include="CompareCode.cs" />
     <Compile Include="DAL\AllStructs.cs" />
