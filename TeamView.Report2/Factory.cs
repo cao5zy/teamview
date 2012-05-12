@@ -35,6 +35,7 @@ namespace TeamView.Report2
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule<CommonModule>();
             builder.RegisterModule<GeneralViewModule>();
+            builder.RegisterType<ReportForm>();
 
             _container = builder.Build();
         }

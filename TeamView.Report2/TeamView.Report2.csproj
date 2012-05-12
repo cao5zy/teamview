@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TeamView.Report2</RootNamespace>
     <AssemblyName>TeamView.Report2</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -66,7 +67,6 @@
       <DependentUpon>GeneralViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneralView\GeneralViewModule.cs" />
-    <Compile Include="GeneralView\IBugInfoRepository.cs" />
     <Compile Include="GeneralView\Report.cs" />
     <Compile Include="GeneralView\ReportEntity.cs" />
     <Compile Include="ReportForm.cs">
@@ -91,7 +91,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

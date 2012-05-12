@@ -11,15 +11,17 @@ namespace TeamView.Report2.GeneralView
 {
     partial class GeneralViewControl : UserControl
     {
-        private IBugInfoRepository _repository;
+        private Report.Factory _reportFactory;
+
         public GeneralViewControl()
         {
             InitializeComponent();
         }
 
-        public GeneralViewControl(IBugInfoRepository repository) : this()
+        public GeneralViewControl(Report.Factory reportFactory)
+            : this()
         {
-            _repository = repository;
+            _reportFactory = reportFactory;
         }
 
         private void _searchButton_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TeamView.Common.Dao;
 
 namespace TeamView.Report2.GeneralView
 {
@@ -12,10 +13,16 @@ namespace TeamView.Report2.GeneralView
         public readonly DateTime _endDate;
         public readonly ReportEntity[] _list;
         public readonly int _advancedHours;
-        
+        private IBugInfoRepository _bugInfoRepository;
+
+        public delegate Report Factory(string programmer,
+            DateTime startDate,
+            DateTime endDate);
         public Report(string programmer,
             DateTime startDate,
-            DateTime endDate)
+            DateTime endDate,
+            IBugInfoRepository bugInfoRepository
+            )
         {
             _programmer = programmer;
             _startDate = startDate;
