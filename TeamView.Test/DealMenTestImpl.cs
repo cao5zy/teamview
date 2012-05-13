@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TeamView.Entity;
-using TeamView.Abstracts;
+using TeamView.Common.Abstracts;
+using TeamView.Common.Entity;
 
 namespace TeamView.Test
 {
@@ -11,10 +12,10 @@ namespace TeamView.Test
     {
         #region IDealMen Members
 
-        public virtual List<TeamView.Entity.ProgrammerBaseInfo> DealMen
+        public virtual List<ProgrammerBaseInfo> DealMen
         {
             get {
-                return new List<TeamView.Entity.ProgrammerBaseInfo> { 
+                return new List<ProgrammerBaseInfo> { 
                     new ProgrammerBaseInfo{
                         ID = 0,
                         Name = string.Empty

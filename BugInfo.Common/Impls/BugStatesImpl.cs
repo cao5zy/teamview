@@ -5,9 +5,10 @@ using System.Text;
 using TeamView.Entity;
 using System.Configuration;
 using FxLib.Algorithms;
-using TeamView.Abstracts;
+using TeamView.Common.Abstracts;
+using TeamView.Common.Entity;
 
-namespace TeamView.Impls
+namespace TeamView.Common.Impls
 {
     public class BugStatesImpl : IBugStates
     {
@@ -31,7 +32,7 @@ namespace TeamView.Impls
         }
         #region IBugStates Members
 
-        public List<TeamView.Entity.BugStateBaseInfo> States
+        public List<BugStateBaseInfo> States
         {
             get { return STATES; }
         }

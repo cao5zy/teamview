@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FxLib.Algorithms;
 using TeamView.Abstracts;
+using TeamView.Common.Abstracts;
 
 namespace TeamView
 {

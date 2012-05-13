@@ -83,8 +83,12 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Abstracts\IBugStates.cs" />
+    <Compile Include="Abstracts\IDealMen.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="CompareCode.cs" />
+    <Compile Include="Configs\BugStatesConfig.cs" />
+    <Compile Include="Configs\DealManConfig.cs" />
     <Compile Include="DAL\AllStructs.cs" />
     <Compile Include="DAL\BugInfo.cs" />
     <Compile Include="DAL\BugInfoController.cs" />
@@ -101,6 +105,8 @@
     <Compile Include="ExtendDataConversion.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />
+    <Compile Include="Impls\BugStatesImpl.cs" />
+    <Compile Include="Impls\DealMenImpl.cs" />
     <Compile Include="KeyGenerator.cs" />
     <Compile Include="Logs\BugLogReader.cs" />
     <Compile Include="Logs\BugNumLogReader.cs" />

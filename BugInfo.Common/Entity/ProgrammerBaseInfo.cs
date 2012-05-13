@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TeamView.Entity
+namespace TeamView.Common.Entity
 {
     public class ProgrammerBaseInfo
     {

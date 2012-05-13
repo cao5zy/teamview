@@ -23,8 +23,6 @@ namespace TeamView
             builder.RegisterType<BugInfoForm>().InstancePerDependency();
             builder.RegisterType<QueryControl>();
             builder.RegisterType<QueryControlModel>();
-            builder.RegisterType<DealMenImpl>().As<IDealMen>().InstancePerDependency();
-            builder.RegisterType<BugStatesImpl>().As<IBugStates>().InstancePerDependency();
             builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterModule<IniDbModule>();
             builder.RegisterModule<LogsModule>();

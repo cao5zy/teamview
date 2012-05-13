@@ -5,9 +5,11 @@ using System.Text;
 using TeamView.Entity;
 using System.Configuration;
 using FxLib.Algorithms;
-using TeamView.Abstracts;
+using TeamView.Common.Abstracts;
+using TeamView.Common.Entity;
+using TeamView.Common.Configs;
 
-namespace TeamView.Impls
+namespace TeamView.Common.Impls
 {
     public class DealMenImpl : IDealMen
     {
@@ -17,7 +19,7 @@ namespace TeamView.Impls
         {
             try
             {
-                var config = (Configs.DealManConfig)ConfigurationManager.GetSection("DealManConfig");
+                var config = (DealManConfig)ConfigurationManager.GetSection("DealManConfig");
                 if (string.IsNullOrEmpty(config.DealMen))
                 {
                     DEALMEN = new List<ProgrammerBaseInfo>();
@@ -42,7 +44,7 @@ namespace TeamView.Impls
         }
         #region IDealMen Members
 
-        public List<TeamView.Entity.ProgrammerBaseInfo> DealMen
+        public List<ProgrammerBaseInfo> DealMen
         {
             get { return DEALMEN; }
         }
