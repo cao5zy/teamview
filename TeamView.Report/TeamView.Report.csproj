@@ -80,7 +80,6 @@
     </Compile>
     <Compile Include="FileProvider.cs" />
     <Compile Include="IFileProvider.cs" />
-    <Compile Include="ILogReader.cs" />
     <Compile Include="LogRecord.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="StringManipulation.cs" />

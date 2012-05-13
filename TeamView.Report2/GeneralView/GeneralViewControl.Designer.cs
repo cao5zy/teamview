@@ -37,8 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this._programmerDropdownlist = new System.Windows.Forms.ComboBox();
-            this._dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this._dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this._searchEnd = new System.Windows.Forms.DateTimePicker();
+            this._searchStart = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this._progressSize = new System.Windows.Forms.Label();
@@ -86,8 +86,8 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this._programmerDropdownlist);
-            this.panel1.Controls.Add(this._dateTimePicker2);
-            this.panel1.Controls.Add(this._dateTimePicker1);
+            this.panel1.Controls.Add(this._searchEnd);
+            this.panel1.Controls.Add(this._searchStart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
@@ -150,19 +150,19 @@
             this._programmerDropdownlist.Size = new System.Drawing.Size(121, 20);
             this._programmerDropdownlist.TabIndex = 2;
             // 
-            // _dateTimePicker2
+            // _searchEnd
             // 
-            this._dateTimePicker2.Location = new System.Drawing.Point(329, 31);
-            this._dateTimePicker2.Name = "_dateTimePicker2";
-            this._dateTimePicker2.Size = new System.Drawing.Size(200, 21);
-            this._dateTimePicker2.TabIndex = 1;
+            this._searchEnd.Location = new System.Drawing.Point(329, 31);
+            this._searchEnd.Name = "_searchEnd";
+            this._searchEnd.Size = new System.Drawing.Size(200, 21);
+            this._searchEnd.TabIndex = 1;
             // 
-            // _dateTimePicker1
+            // _searchStart
             // 
-            this._dateTimePicker1.Location = new System.Drawing.Point(329, 3);
-            this._dateTimePicker1.Name = "_dateTimePicker1";
-            this._dateTimePicker1.Size = new System.Drawing.Size(200, 21);
-            this._dateTimePicker1.TabIndex = 0;
+            this._searchStart.Location = new System.Drawing.Point(329, 3);
+            this._searchStart.Name = "_searchStart";
+            this._searchStart.Size = new System.Drawing.Size(200, 21);
+            this._searchStart.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
@@ -331,8 +331,8 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker _dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker _dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker _searchEnd;
+        private System.Windows.Forms.DateTimePicker _searchStart;
         private System.Windows.Forms.ComboBox _programmerDropdownlist;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;

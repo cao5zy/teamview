@@ -16,7 +16,10 @@ namespace TeamView.Common.Dao
             string description,
             IEnumerable<int> selectedPriorities,
             IEnumerable<string> selectedStates);
+
         IEnumerable<CompleteTaskLogEntity> QueryCompleteTasks(string dealMan, DateTime startDate, DateTime endDate, int completeTaskFlag);
+
+        TaskLogEntity[] QueryTasks(QueryTaskParameter parameter);
 
         int CountFeedbacks(string itemId);
     }

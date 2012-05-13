@@ -101,7 +101,9 @@
     <Compile Include="DaoImpl\BugInfoRepository.cs" />
     <Compile Include="Dao\IBugInfoRepository.cs" />
     <Compile Include="Dao\IQuery.cs" />
+    <Compile Include="Dao\QueryTaskParameter.cs" />
     <Compile Include="Entity\BugInfoEntity1.cs" />
+    <Compile Include="Entity\TaskLogEntity.cs" />
     <Compile Include="ExtendDataConversion.cs" />
     <Compile Include="ExtendedEnumerable.cs" />
     <Compile Include="IItemImporter.cs" />

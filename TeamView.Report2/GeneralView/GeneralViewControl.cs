@@ -34,7 +34,13 @@ namespace TeamView.Report2.GeneralView
 
         private void _searchButton_Click(object sender, EventArgs e)
         {
-            
+            Report report = _reportFactory(
+                _programmerDropdownlist.Text,
+                _searchStart.Value,
+                _searchEnd.Value);
+
+            _bindingSource.DataSource = report._list;
+
         }
     }
 }

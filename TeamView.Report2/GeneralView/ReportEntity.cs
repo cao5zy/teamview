@@ -9,8 +9,6 @@ namespace TeamView.Report2.GeneralView
     {
         public string Programmer { get; set; }
         public string BugNum { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
         public int _sizeInMins;
         public int _burnedMins;
         public string SizeInHours

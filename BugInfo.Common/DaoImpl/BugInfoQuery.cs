@@ -5,6 +5,8 @@ using System.Text;
 using TeamView.Common.Dao;
 using Dev3Lib.Algorithms;
 using SubSonic;
+using TeamView.Common.Entity;
+using DAL;
 
 namespace TeamView.Common.DaoImpl
 {
@@ -139,6 +141,55 @@ namespace TeamView.Common.DaoImpl
             return count < 0
                 ? 0
                 : count;
+        }
+
+
+        public TaskLogEntity[] QueryTasks(QueryTaskParameter parameter)
+        {
+            List<string> bugNums = new List<string>(16);
+            using (var reader = new SubSonic.Select(DAL.ChangeLog.BugNumColumn
+                ).From<DAL.ChangeLog>()
+                .InnerJoin<DAL.BugInfo>()
+                .Where(DAL.BugInfo.DealManColumn).IsEqualTo(parameter._programmer)
+                .And(DAL.ChangeLog.CreateDateColumn).IsGreaterThanOrEqualTo(parameter._searchStart)
+                .And(DAL.ChangeLog.CreateDateColumn).IsLessThanOrEqualTo(parameter._searchEnd)
+                .Distinct()
+                .ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bugNums.Add(reader[0].ToString());
+                }
+            }
+
+            TaskLogEntity[] items = new TaskLogEntity[bugNums.Count];
+            if (items.Length == 0)
+                return items;
+
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                BugInfo bugInfo = new BugInfo();
+                bugInfo.LoadByKey(bugNums[i]);
+                if (bugInfo.IsLoaded)
+                {
+                    items[i] = new TaskLogEntity
+                    {
+                        ItemId = bugNums[i],
+                        Status = bugInfo.BugStatus,
+                        Version = bugInfo.Version,
+                        Estimate = bugInfo.Size,
+                        Burned = bugInfo.Fired,
+                        Description = bugInfo.Description,
+                        Dealman = bugInfo.DealMan,
+                    };
+
+                }
+                else
+                    throw new ArgumentException(string.Format("Invalid bugNum {0}", bugNums[i]));
+            }
+
+            return items;
         }
     }
 }

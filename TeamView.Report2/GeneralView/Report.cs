@@ -13,7 +13,7 @@ namespace TeamView.Report2.GeneralView
         public readonly DateTime _endDate;
         public readonly ReportEntity[] _list;
         public readonly int _advancedHours;
-        private IBugInfoRepository _bugInfoRepository;
+        private IQuery _query;
 
         public delegate Report Factory(string programmer,
             DateTime startDate,
@@ -21,12 +21,13 @@ namespace TeamView.Report2.GeneralView
         public Report(string programmer,
             DateTime startDate,
             DateTime endDate,
-            IBugInfoRepository bugInfoRepository
+            IQuery query
             )
         {
             _programmer = programmer;
             _startDate = startDate;
             _endDate = endDate;
+            _query = query;
 
             _list = GetList(programmer, startDate, endDate);
         }
@@ -35,7 +36,21 @@ namespace TeamView.Report2.GeneralView
             DateTime startDate, 
             DateTime endDate)
         {
-            return null;
+
+            return _query.QueryTasks(new QueryTaskParameter
+            {
+                _programmer = programmer,
+                _searchStart = startDate,
+                _searchEnd = endDate
+            })
+            .Select(n => new ReportEntity { 
+                BugNum = n.ItemId,
+                Programmer = n.Dealman,
+                _burnedMins = n.Burned,
+                _sizeInMins = n.Estimate
+                
+            })
+            .ToArray();
         }
     }
 }
