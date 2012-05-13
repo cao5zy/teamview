@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this._searchButton = new System.Windows.Forms.Button();
@@ -40,10 +41,26 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this._grid = new System.Windows.Forms.DataGridView();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeInHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.burnedHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._totalSizeLabel = new System.Windows.Forms.Label();
+            this._totalSize = new System.Windows.Forms.Label();
+            this._totalBurnedLabel = new System.Windows.Forms.Label();
+            this._totalBurned = new System.Windows.Forms.Label();
+            this._progressSizeLabel = new System.Windows.Forms.Label();
+            this._progressSize = new System.Windows.Forms.Label();
+            this._onlyCompletedOption = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,6 +80,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this._onlyCompletedOption);
             this.panel1.Controls.Add(this._searchButton);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -152,6 +170,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this._progressSize);
+            this.panel2.Controls.Add(this._progressSizeLabel);
+            this.panel2.Controls.Add(this._totalBurned);
+            this.panel2.Controls.Add(this._totalBurnedLabel);
+            this.panel2.Controls.Add(this._totalSize);
+            this.panel2.Controls.Add(this._totalSizeLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 306);
             this.panel2.Name = "panel2";
@@ -160,13 +184,128 @@
             // 
             // _grid
             // 
+            this._grid.AutoGenerateColumns = false;
             this._grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.programmerDataGridViewTextBoxColumn,
+            this.bugNumDataGridViewTextBoxColumn,
+            this.startTimeDataGridViewTextBoxColumn,
+            this.endTimeDataGridViewTextBoxColumn,
+            this.sizeInHoursDataGridViewTextBoxColumn,
+            this.burnedHoursDataGridViewTextBoxColumn});
+            this._grid.DataSource = this._bindingSource;
             this._grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this._grid.Location = new System.Drawing.Point(3, 3);
             this._grid.Name = "_grid";
             this._grid.RowTemplate.Height = 23;
             this._grid.Size = new System.Drawing.Size(641, 297);
             this._grid.TabIndex = 1;
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
+            // 
+            // programmerDataGridViewTextBoxColumn
+            // 
+            this.programmerDataGridViewTextBoxColumn.DataPropertyName = "Programmer";
+            this.programmerDataGridViewTextBoxColumn.HeaderText = "Programmer";
+            this.programmerDataGridViewTextBoxColumn.Name = "programmerDataGridViewTextBoxColumn";
+            // 
+            // bugNumDataGridViewTextBoxColumn
+            // 
+            this.bugNumDataGridViewTextBoxColumn.DataPropertyName = "BugNum";
+            this.bugNumDataGridViewTextBoxColumn.HeaderText = "BugNum";
+            this.bugNumDataGridViewTextBoxColumn.Name = "bugNumDataGridViewTextBoxColumn";
+            // 
+            // startTimeDataGridViewTextBoxColumn
+            // 
+            this.startTimeDataGridViewTextBoxColumn.DataPropertyName = "StartTime";
+            this.startTimeDataGridViewTextBoxColumn.HeaderText = "StartTime";
+            this.startTimeDataGridViewTextBoxColumn.Name = "startTimeDataGridViewTextBoxColumn";
+            // 
+            // endTimeDataGridViewTextBoxColumn
+            // 
+            this.endTimeDataGridViewTextBoxColumn.DataPropertyName = "EndTime";
+            this.endTimeDataGridViewTextBoxColumn.HeaderText = "EndTime";
+            this.endTimeDataGridViewTextBoxColumn.Name = "endTimeDataGridViewTextBoxColumn";
+            // 
+            // sizeInHoursDataGridViewTextBoxColumn
+            // 
+            this.sizeInHoursDataGridViewTextBoxColumn.DataPropertyName = "SizeInHours";
+            this.sizeInHoursDataGridViewTextBoxColumn.HeaderText = "SizeInHours";
+            this.sizeInHoursDataGridViewTextBoxColumn.Name = "sizeInHoursDataGridViewTextBoxColumn";
+            this.sizeInHoursDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // burnedHoursDataGridViewTextBoxColumn
+            // 
+            this.burnedHoursDataGridViewTextBoxColumn.DataPropertyName = "BurnedHours";
+            this.burnedHoursDataGridViewTextBoxColumn.HeaderText = "BurnedHours";
+            this.burnedHoursDataGridViewTextBoxColumn.Name = "burnedHoursDataGridViewTextBoxColumn";
+            this.burnedHoursDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // _totalSizeLabel
+            // 
+            this._totalSizeLabel.AutoSize = true;
+            this._totalSizeLabel.Location = new System.Drawing.Point(29, 10);
+            this._totalSizeLabel.Name = "_totalSizeLabel";
+            this._totalSizeLabel.Size = new System.Drawing.Size(65, 12);
+            this._totalSizeLabel.TabIndex = 0;
+            this._totalSizeLabel.Text = "total size";
+            // 
+            // _totalSize
+            // 
+            this._totalSize.AutoSize = true;
+            this._totalSize.Location = new System.Drawing.Point(100, 10);
+            this._totalSize.Name = "_totalSize";
+            this._totalSize.Size = new System.Drawing.Size(11, 12);
+            this._totalSize.TabIndex = 1;
+            this._totalSize.Text = "0";
+            // 
+            // _totalBurnedLabel
+            // 
+            this._totalBurnedLabel.AutoSize = true;
+            this._totalBurnedLabel.Location = new System.Drawing.Point(17, 33);
+            this._totalBurnedLabel.Name = "_totalBurnedLabel";
+            this._totalBurnedLabel.Size = new System.Drawing.Size(77, 12);
+            this._totalBurnedLabel.TabIndex = 2;
+            this._totalBurnedLabel.Text = "total burned";
+            // 
+            // _totalBurned
+            // 
+            this._totalBurned.AutoSize = true;
+            this._totalBurned.Location = new System.Drawing.Point(100, 33);
+            this._totalBurned.Name = "_totalBurned";
+            this._totalBurned.Size = new System.Drawing.Size(11, 12);
+            this._totalBurned.TabIndex = 3;
+            this._totalBurned.Text = "0";
+            // 
+            // _progressSizeLabel
+            // 
+            this._progressSizeLabel.AutoSize = true;
+            this._progressSizeLabel.Location = new System.Drawing.Point(17, 57);
+            this._progressSizeLabel.Name = "_progressSizeLabel";
+            this._progressSizeLabel.Size = new System.Drawing.Size(77, 12);
+            this._progressSizeLabel.TabIndex = 4;
+            this._progressSizeLabel.Text = "total burned";
+            // 
+            // _progressSize
+            // 
+            this._progressSize.AutoSize = true;
+            this._progressSize.Location = new System.Drawing.Point(100, 57);
+            this._progressSize.Name = "_progressSize";
+            this._progressSize.Size = new System.Drawing.Size(11, 12);
+            this._progressSize.TabIndex = 5;
+            this._progressSize.Text = "0";
+            // 
+            // _onlyCompletedOption
+            // 
+            this._onlyCompletedOption.AutoSize = true;
+            this._onlyCompletedOption.Location = new System.Drawing.Point(96, 40);
+            this._onlyCompletedOption.Name = "_onlyCompletedOption";
+            this._onlyCompletedOption.Size = new System.Drawing.Size(108, 16);
+            this._onlyCompletedOption.TabIndex = 7;
+            this._onlyCompletedOption.Text = "only completed";
+            this._onlyCompletedOption.UseVisualStyleBackColor = true;
             // 
             // GeneralViewControl
             // 
@@ -179,7 +318,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._bindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +340,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView _grid;
+        private System.Windows.Forms.BindingSource _bindingSource;
+        private System.Windows.Forms.Label _totalBurned;
+        private System.Windows.Forms.Label _totalBurnedLabel;
+        private System.Windows.Forms.Label _totalSize;
+        private System.Windows.Forms.Label _totalSizeLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn programmerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bugNumDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeInHoursDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn burnedHoursDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label _progressSize;
+        private System.Windows.Forms.Label _progressSizeLabel;
+        private System.Windows.Forms.CheckBox _onlyCompletedOption;
     }
 }

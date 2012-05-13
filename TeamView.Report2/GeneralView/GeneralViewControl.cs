@@ -26,7 +26,7 @@ namespace TeamView.Report2.GeneralView
 
         private void _searchButton_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
