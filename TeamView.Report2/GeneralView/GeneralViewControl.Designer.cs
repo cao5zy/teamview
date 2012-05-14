@@ -51,7 +51,6 @@
             this._totalSize = new System.Windows.Forms.Label();
             this._totalSizeLabel = new System.Windows.Forms.Label();
             this._grid = new System.Windows.Forms.DataGridView();
-            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +58,7 @@
             this.burnedHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pointsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -303,10 +303,7 @@
             this._grid.RowTemplate.Height = 23;
             this._grid.Size = new System.Drawing.Size(641, 297);
             this._grid.TabIndex = 1;
-            // 
-            // _bindingSource
-            // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
+            this._grid.DoubleClick += new System.EventHandler(this._grid_DoubleClick);
             // 
             // programmerDataGridViewTextBoxColumn
             // 
@@ -351,6 +348,10 @@
             this.resultPointDataGridViewTextBoxColumn.DataPropertyName = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.HeaderText = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.Name = "resultPointDataGridViewTextBoxColumn";
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
             // 
             // GeneralViewControl
             // 

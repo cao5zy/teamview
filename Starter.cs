@@ -20,15 +20,10 @@ namespace TeamView
             var builder = new ContainerBuilder();
 
 
-            builder.RegisterType<BugInfoForm>().InstancePerDependency();
-            builder.RegisterType<QueryControl>();
-            builder.RegisterType<QueryControlModel>();
-            builder.RegisterType<MainForm>().PropertiesAutowired().InstancePerDependency();
             builder.RegisterModule<IniDbModule>();
             builder.RegisterModule<LogsModule>();
             builder.RegisterModule<CommonModule>();
-            builder.RegisterType<AddNewForm>();
-            builder.RegisterType<HardLevelImpl>().As<IHardLevel>();
+            builder.RegisterModule<ClientModule>();
 
 
             mContainer = builder.Build();

@@ -110,6 +110,10 @@
       <Project>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</Project>
       <Name>TeamView.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TeamView.Client.csproj">
+      <Project>{033A9DB1-71C5-4691-8A21-9E1459962524}</Project>
+      <Name>TeamView.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

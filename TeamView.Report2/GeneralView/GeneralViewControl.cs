@@ -19,17 +19,20 @@ namespace TeamView.Report2.GeneralView
         private Report.Factory _reportFactory;
         private IDealMen _dealMen;
         private ReportEntity[] _reportEntities;
+        private BugInfoForm.Factory _bugInfoFormFactory;
         public GeneralViewControl()
         {
             InitializeComponent();
         }
 
         public GeneralViewControl(Report.Factory reportFactory,
-            IDealMen dealMen
+            IDealMen dealMen,
+            BugInfoForm.Factory bugInfoFormFactory
             )
             : this()
         {
             _reportFactory = reportFactory;
+            _bugInfoFormFactory = bugInfoFormFactory;
             _dealMen = dealMen;
 
             _programmerDropdownlist.DataSource = _dealMen.DealMen;
@@ -113,11 +116,11 @@ namespace TeamView.Report2.GeneralView
                     new XElement("Points", n.Points),
                     new XElement("ResultPoint", n.ResultPoint)
                     )))).Save(tempFileName);
-            
+
         }
 
         private static bool LoadReport(out ReportEntity[] reportEntities)
-        { 
+        {
             reportEntities = null;
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
@@ -137,17 +140,28 @@ namespace TeamView.Report2.GeneralView
             XDocument doc = XDocument.Load(fileName);
 
             return (from n in doc.Descendants("ReportEntity")
-                   select new ReportEntity {
-                       _burnedMins = n.Element("_burnedMins").Value.ToInt32(),
-                       _sizeInMins = n.Element("_sizeInMins").Value.ToInt32(),
-                       BugNum = n.Element("BugNum").Value,
-                       Points = n.Element("Points").Value.ToInt32(),
-                       Programmer = n.Element("Programmer").Value,
-                       ResultPoint = n.Element("ResultPoint").Value.ToInt32(),
-                   }).ToArray();
+                    select new ReportEntity
+                    {
+                        _burnedMins = n.Element("_burnedMins").Value.ToInt32(),
+                        _sizeInMins = n.Element("_sizeInMins").Value.ToInt32(),
+                        BugNum = n.Element("BugNum").Value,
+                        Points = n.Element("Points").Value.ToInt32(),
+                        Programmer = n.Element("Programmer").Value,
+                        ResultPoint = n.Element("ResultPoint").Value.ToInt32(),
+                    }).ToArray();
 
         }
 
-        
+        private void _grid_DoubleClick(object sender, EventArgs e)
+        {
+            if (_grid.SelectedRows.Count != 0)
+            {
+                var form = _bugInfoFormFactory();
+                form.Init(_reportEntities[_grid.SelectedRows[0].Index].BugNum);
+                form.Show();
+            }
+        }
+
+
     }
 }

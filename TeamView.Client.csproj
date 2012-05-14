@@ -99,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BugInfoSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ClientModule.cs" />
     <Compile Include="Configs\HardLevelConfig.cs" />
     <Compile Include="AddNewForm.cs">
       <SubType>Form</SubType>
