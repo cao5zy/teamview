@@ -50,8 +50,6 @@
             this._grid = new System.Windows.Forms.DataGridView();
             this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeInHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.burnedHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -254,8 +252,6 @@
             this._grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.programmerDataGridViewTextBoxColumn,
             this.bugNumDataGridViewTextBoxColumn,
-            this.startTimeDataGridViewTextBoxColumn,
-            this.endTimeDataGridViewTextBoxColumn,
             this.sizeInHoursDataGridViewTextBoxColumn,
             this.burnedHoursDataGridViewTextBoxColumn});
             this._grid.DataSource = this._bindingSource;
@@ -277,18 +273,6 @@
             this.bugNumDataGridViewTextBoxColumn.DataPropertyName = "BugNum";
             this.bugNumDataGridViewTextBoxColumn.HeaderText = "BugNum";
             this.bugNumDataGridViewTextBoxColumn.Name = "bugNumDataGridViewTextBoxColumn";
-            // 
-            // startTimeDataGridViewTextBoxColumn
-            // 
-            this.startTimeDataGridViewTextBoxColumn.DataPropertyName = "StartTime";
-            this.startTimeDataGridViewTextBoxColumn.HeaderText = "StartTime";
-            this.startTimeDataGridViewTextBoxColumn.Name = "startTimeDataGridViewTextBoxColumn";
-            // 
-            // endTimeDataGridViewTextBoxColumn
-            // 
-            this.endTimeDataGridViewTextBoxColumn.DataPropertyName = "EndTime";
-            this.endTimeDataGridViewTextBoxColumn.HeaderText = "EndTime";
-            this.endTimeDataGridViewTextBoxColumn.Name = "endTimeDataGridViewTextBoxColumn";
             // 
             // sizeInHoursDataGridViewTextBoxColumn
             // 
@@ -348,8 +332,6 @@
         private System.Windows.Forms.Label _totalSizeLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn programmerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugNumDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn startTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn endTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeInHoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn burnedHoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label _progressSize;

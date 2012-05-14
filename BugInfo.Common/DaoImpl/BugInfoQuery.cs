@@ -7,6 +7,7 @@ using Dev3Lib.Algorithms;
 using SubSonic;
 using TeamView.Common.Entity;
 using DAL;
+using TeamView.Common.Logs;
 
 namespace TeamView.Common.DaoImpl
 {
@@ -179,7 +180,10 @@ namespace TeamView.Common.DaoImpl
                         Status = bugInfo.BugStatus,
                         Version = bugInfo.Version,
                         Estimate = bugInfo.Size,
-                        Burned = bugInfo.Fired,
+                        Burned = new BurnedHistory(bugNums[i],
+                            parameter._searchStart, 
+                            parameter._searchEnd)
+                                ._burnedTotalMinuts,
                         Description = bugInfo.Description,
                         Dealman = bugInfo.DealMan,
                     };
