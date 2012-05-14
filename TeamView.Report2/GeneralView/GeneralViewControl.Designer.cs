@@ -41,6 +41,9 @@
             this._searchStart = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this._calButton = new System.Windows.Forms.Button();
+            this._saveButton = new System.Windows.Forms.Button();
+            this._loadButton = new System.Windows.Forms.Button();
             this._progressSize = new System.Windows.Forms.Label();
             this._progressSizeLabel = new System.Windows.Forms.Label();
             this._totalBurned = new System.Windows.Forms.Label();
@@ -48,11 +51,14 @@
             this._totalSize = new System.Windows.Forms.Label();
             this._totalSizeLabel = new System.Windows.Forms.Label();
             this._grid = new System.Windows.Forms.DataGridView();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeInHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.burnedHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pointsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -179,6 +185,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this._calButton);
+            this.panel2.Controls.Add(this._saveButton);
+            this.panel2.Controls.Add(this._loadButton);
             this.panel2.Controls.Add(this._progressSize);
             this.panel2.Controls.Add(this._progressSizeLabel);
             this.panel2.Controls.Add(this._totalBurned);
@@ -190,6 +199,36 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(641, 94);
             this.panel2.TabIndex = 0;
+            // 
+            // _calButton
+            // 
+            this._calButton.Location = new System.Drawing.Point(470, 5);
+            this._calButton.Name = "_calButton";
+            this._calButton.Size = new System.Drawing.Size(75, 23);
+            this._calButton.TabIndex = 8;
+            this._calButton.Text = "calculate";
+            this._calButton.UseVisualStyleBackColor = true;
+            this._calButton.Click += new System.EventHandler(this._calButton_Click);
+            // 
+            // _saveButton
+            // 
+            this._saveButton.Location = new System.Drawing.Point(563, 34);
+            this._saveButton.Name = "_saveButton";
+            this._saveButton.Size = new System.Drawing.Size(75, 23);
+            this._saveButton.TabIndex = 7;
+            this._saveButton.Text = "save";
+            this._saveButton.UseVisualStyleBackColor = true;
+            this._saveButton.Click += new System.EventHandler(this._saveButton_Click);
+            // 
+            // _loadButton
+            // 
+            this._loadButton.Location = new System.Drawing.Point(563, 5);
+            this._loadButton.Name = "_loadButton";
+            this._loadButton.Size = new System.Drawing.Size(75, 23);
+            this._loadButton.TabIndex = 6;
+            this._loadButton.Text = "load";
+            this._loadButton.UseVisualStyleBackColor = true;
+            this._loadButton.Click += new System.EventHandler(this._loadButton_Click);
             // 
             // _progressSize
             // 
@@ -252,8 +291,11 @@
             this._grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.programmerDataGridViewTextBoxColumn,
             this.bugNumDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn,
             this.sizeInHoursDataGridViewTextBoxColumn,
-            this.burnedHoursDataGridViewTextBoxColumn});
+            this.burnedHoursDataGridViewTextBoxColumn,
+            this.pointsDataGridViewTextBoxColumn,
+            this.resultPointDataGridViewTextBoxColumn});
             this._grid.DataSource = this._bindingSource;
             this._grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this._grid.Location = new System.Drawing.Point(3, 3);
@@ -261,6 +303,10 @@
             this._grid.RowTemplate.Height = 23;
             this._grid.Size = new System.Drawing.Size(641, 297);
             this._grid.TabIndex = 1;
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
             // 
             // programmerDataGridViewTextBoxColumn
             // 
@@ -273,6 +319,12 @@
             this.bugNumDataGridViewTextBoxColumn.DataPropertyName = "BugNum";
             this.bugNumDataGridViewTextBoxColumn.HeaderText = "BugNum";
             this.bugNumDataGridViewTextBoxColumn.Name = "bugNumDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             // 
             // sizeInHoursDataGridViewTextBoxColumn
             // 
@@ -288,9 +340,17 @@
             this.burnedHoursDataGridViewTextBoxColumn.Name = "burnedHoursDataGridViewTextBoxColumn";
             this.burnedHoursDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // _bindingSource
+            // pointsDataGridViewTextBoxColumn
             // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
+            this.pointsDataGridViewTextBoxColumn.DataPropertyName = "Points";
+            this.pointsDataGridViewTextBoxColumn.HeaderText = "Points";
+            this.pointsDataGridViewTextBoxColumn.Name = "pointsDataGridViewTextBoxColumn";
+            // 
+            // resultPointDataGridViewTextBoxColumn
+            // 
+            this.resultPointDataGridViewTextBoxColumn.DataPropertyName = "ResultPoint";
+            this.resultPointDataGridViewTextBoxColumn.HeaderText = "ResultPoint";
+            this.resultPointDataGridViewTextBoxColumn.Name = "resultPointDataGridViewTextBoxColumn";
             // 
             // GeneralViewControl
             // 
@@ -330,12 +390,18 @@
         private System.Windows.Forms.Label _totalBurnedLabel;
         private System.Windows.Forms.Label _totalSize;
         private System.Windows.Forms.Label _totalSizeLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn programmerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bugNumDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeInHoursDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn burnedHoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label _progressSize;
         private System.Windows.Forms.Label _progressSizeLabel;
         private System.Windows.Forms.CheckBox _onlyCompletedOption;
+        private System.Windows.Forms.Button _saveButton;
+        private System.Windows.Forms.Button _loadButton;
+        private System.Windows.Forms.Button _calButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn programmerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bugNumDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeInHoursDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn burnedHoursDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pointsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn resultPointDataGridViewTextBoxColumn;
     }
 }

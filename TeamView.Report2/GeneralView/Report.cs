@@ -47,7 +47,8 @@ namespace TeamView.Report2.GeneralView
                 BugNum = n.ItemId,
                 Programmer = n.Dealman,
                 _burnedMins = n.Burned,
-                _sizeInMins = n.Estimate
+                _sizeInMins = n.Estimate,
+                Description = n.Description,
                 
             })
             .ToArray();
