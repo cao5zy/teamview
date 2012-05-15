@@ -56,7 +56,7 @@ namespace TeamView.Report2.GeneralView
             ReportEntity[] entities;
             if (LoadReport(out entities))
             {
-
+                _reportEntities = entities;
                 _bindingSource.DataSource = entities;
             }
         }
@@ -73,8 +73,8 @@ namespace TeamView.Report2.GeneralView
                 _reportEntities[i].Cal();
             }
             _bindingSource.EndEdit();
-
             _grid.RefreshEdit();
+            _grid.Update();
         }
 
         private static void Save(ReportEntity[] reportEntities)
@@ -91,7 +91,7 @@ namespace TeamView.Report2.GeneralView
 
                     string tempFileName = Path.GetTempFileName();
 
-                    WriteToFile(tempFileName, reportEntities);
+                    ReportFileData.WriteToFile(tempFileName, reportEntities);
 
                     if (overwrite)
                     {
@@ -103,21 +103,6 @@ namespace TeamView.Report2.GeneralView
             }
         }
 
-        private static void WriteToFile(string tempFileName, ReportEntity[] reportEntities)
-        {
-            new XDocument(
-                new XElement("ReportEntities",
-                reportEntities.Select(
-                n => new XElement("ReportEntity",
-                    new XElement("BugNum", n.BugNum),
-                    new XElement("_burnedMins", n._burnedMins),
-                    new XElement("_sizeInMins", n._sizeInMins),
-                    new XElement("Programmer", n.Programmer),
-                    new XElement("Points", n.Points),
-                    new XElement("ResultPoint", n.ResultPoint)
-                    )))).Save(tempFileName);
-
-        }
 
         private static bool LoadReport(out ReportEntity[] reportEntities)
         {
@@ -126,7 +111,7 @@ namespace TeamView.Report2.GeneralView
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    reportEntities = LoadFromFile(dlg.FileName);
+                    reportEntities = ReportFileData.LoadFromFile(dlg.FileName);
 
                     return true;
                 }
@@ -135,22 +120,7 @@ namespace TeamView.Report2.GeneralView
             }
         }
 
-        private static ReportEntity[] LoadFromFile(string fileName)
-        {
-            XDocument doc = XDocument.Load(fileName);
-
-            return (from n in doc.Descendants("ReportEntity")
-                    select new ReportEntity
-                    {
-                        _burnedMins = n.Element("_burnedMins").Value.ToInt32(),
-                        _sizeInMins = n.Element("_sizeInMins").Value.ToInt32(),
-                        BugNum = n.Element("BugNum").Value,
-                        Points = n.Element("Points").Value.ToInt32(),
-                        Programmer = n.Element("Programmer").Value,
-                        ResultPoint = n.Element("ResultPoint").Value.ToInt32(),
-                    }).ToArray();
-
-        }
+        
 
         private void _grid_DoubleClick(object sender, EventArgs e)
         {

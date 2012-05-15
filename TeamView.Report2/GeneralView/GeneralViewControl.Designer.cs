@@ -51,14 +51,15 @@
             this._totalSize = new System.Windows.Forms.Label();
             this._totalSizeLabel = new System.Windows.Forms.Label();
             this._grid = new System.Windows.Forms.DataGridView();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeInHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.burnedHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pointsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fixedPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -295,6 +296,7 @@
             this.sizeInHoursDataGridViewTextBoxColumn,
             this.burnedHoursDataGridViewTextBoxColumn,
             this.pointsDataGridViewTextBoxColumn,
+            this.fixedPointDataGridViewTextBoxColumn,
             this.resultPointDataGridViewTextBoxColumn});
             this._grid.DataSource = this._bindingSource;
             this._grid.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -304,6 +306,10 @@
             this._grid.Size = new System.Drawing.Size(641, 297);
             this._grid.TabIndex = 1;
             this._grid.DoubleClick += new System.EventHandler(this._grid_DoubleClick);
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
             // 
             // programmerDataGridViewTextBoxColumn
             // 
@@ -343,15 +349,17 @@
             this.pointsDataGridViewTextBoxColumn.HeaderText = "Points";
             this.pointsDataGridViewTextBoxColumn.Name = "pointsDataGridViewTextBoxColumn";
             // 
+            // fixedPointDataGridViewTextBoxColumn
+            // 
+            this.fixedPointDataGridViewTextBoxColumn.DataPropertyName = "FixedPoint";
+            this.fixedPointDataGridViewTextBoxColumn.HeaderText = "FixedPoint";
+            this.fixedPointDataGridViewTextBoxColumn.Name = "fixedPointDataGridViewTextBoxColumn";
+            // 
             // resultPointDataGridViewTextBoxColumn
             // 
             this.resultPointDataGridViewTextBoxColumn.DataPropertyName = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.HeaderText = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.Name = "resultPointDataGridViewTextBoxColumn";
-            // 
-            // _bindingSource
-            // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
             // 
             // GeneralViewControl
             // 
@@ -403,6 +411,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeInHoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn burnedHoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pointsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fixedPointDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn resultPointDataGridViewTextBoxColumn;
     }
 }

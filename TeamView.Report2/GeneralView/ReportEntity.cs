@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace TeamView.Report2.GeneralView
 {
-    sealed class ReportEntity
+    public sealed class ReportEntity
     {
         public string Programmer { get; set; }
         public string BugNum { get; set; }
@@ -30,37 +30,55 @@ namespace TeamView.Report2.GeneralView
         }
 
         public int Points { get; set; }
+        public double FixedPoint { get; set; }
         public double ResultPoint { get; set; }
-
+        
         public void Cal()
         {
+            if (FixedPoint != 0)
+            {
+                ResultPoint = FixedPoint;
+                return;
+            }
+            else
+                ResultPoint = 0;
+
             int len = _calList.Length;
             Trace.Assert(len > 1);
 
-            int remainingBurnedMins = _burnedMins;
+            double remainingBurnedHours = CellHours((double)_burnedMins / 60);
+            double sizeInHours = _sizeInMins / 60;
             bool completed = false;
             for (int i = 0; i < len - 1; i++)
             {
-                int temp = _sizeInMins * i - remainingBurnedMins;
+                double temp = sizeInHours - remainingBurnedHours;
                 if (temp > 0)
                 {
-                    ResultPoint += remainingBurnedMins * Points * _calList[i];
+                    ResultPoint += remainingBurnedHours * Points * _calList[i];
                     completed = true;
                     break;
                 }
                 else
                 {
-                    ResultPoint += _sizeInMins * Points * _calList[i];
-                    remainingBurnedMins = Math.Abs(temp);
+                    ResultPoint += sizeInHours * Points * _calList[i];
+                    remainingBurnedHours = Math.Abs(temp);
                 }
             }
 
             if (!completed)
             {
-                ResultPoint += remainingBurnedMins * Points * _calList[len - 1];
+                ResultPoint += remainingBurnedHours * Points * _calList[len - 1];
             }
 
-            ResultPoint = ResultPoint / 100;
+            ResultPoint = ResultPoint / 10;
+        }
+
+        private static double CellHours(double hourValue)
+        {
+            if (hourValue <= 0.5)
+                return 0.5;
+            else
+                return hourValue;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace TeamView.Report2.GeneralView
         public readonly DateTime _startDate;
         public readonly DateTime _endDate;
         public readonly ReportEntity[] _list;
-        public readonly int _advancedHours;
         private IQuery _query;
 
         public delegate Report Factory(string programmer,
