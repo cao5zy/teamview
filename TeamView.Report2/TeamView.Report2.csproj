@@ -119,7 +119,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)*.dll" "$(SolutionDir)Packages\"
-copy "$(TargetDir)*.exe" "$(SolutionDir)Packages\"</PostBuildEvent>
+copy "$(TargetPath)" "$(SolutionDir)Packages\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

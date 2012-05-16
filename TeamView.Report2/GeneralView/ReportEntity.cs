@@ -13,7 +13,7 @@ namespace TeamView.Report2.GeneralView
         public string Description { get; set; }
         public int _sizeInMins;
         public int _burnedMins;
-        private readonly double[] _calList = new double[] { 1, 0.7, 0.5, 0.2, 0.1 };
+        private readonly double[] _calList = new double[] { 1, 0.6, 0.2, 0.05 };
         public string SizeInHours
         {
             get
@@ -29,7 +29,7 @@ namespace TeamView.Report2.GeneralView
             }
         }
 
-        public int Points { get; set; }
+        public double Points { get; set; }
         public double FixedPoint { get; set; }
         public double ResultPoint { get; set; }
         
@@ -69,8 +69,6 @@ namespace TeamView.Report2.GeneralView
             {
                 ResultPoint += remainingBurnedHours * Points * _calList[len - 1];
             }
-
-            ResultPoint = ResultPoint / 10;
         }
 
         private static double CellHours(double hourValue)

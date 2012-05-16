@@ -72,9 +72,10 @@ namespace TeamView.Report2.GeneralView
             {
                 _reportEntities[i].Cal();
             }
-            _bindingSource.EndEdit();
+
+            _totalPointsLabel.Text = Math.Round(_reportEntities.Sum(n => n.ResultPoint), 2).ToString();
             _grid.RefreshEdit();
-            _grid.Update();
+            _grid.Refresh();
         }
 
         private static void Save(ReportEntity[] reportEntities)

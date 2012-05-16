@@ -51,7 +51,6 @@
             this._totalSize = new System.Windows.Forms.Label();
             this._totalSizeLabel = new System.Windows.Forms.Label();
             this._grid = new System.Windows.Forms.DataGridView();
-            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.programmerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +59,9 @@
             this.pointsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fixedPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this._totalPointsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -186,6 +188,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this._totalPointsLabel);
+            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this._calButton);
             this.panel2.Controls.Add(this._saveButton);
             this.panel2.Controls.Add(this._loadButton);
@@ -307,10 +311,6 @@
             this._grid.TabIndex = 1;
             this._grid.DoubleClick += new System.EventHandler(this._grid_DoubleClick);
             // 
-            // _bindingSource
-            // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
-            // 
             // programmerDataGridViewTextBoxColumn
             // 
             this.programmerDataGridViewTextBoxColumn.DataPropertyName = "Programmer";
@@ -360,6 +360,28 @@
             this.resultPointDataGridViewTextBoxColumn.DataPropertyName = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.HeaderText = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.Name = "resultPointDataGridViewTextBoxColumn";
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(181, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "total points";
+            // 
+            // _totalPointsLabel
+            // 
+            this._totalPointsLabel.AutoSize = true;
+            this._totalPointsLabel.Location = new System.Drawing.Point(264, 10);
+            this._totalPointsLabel.Name = "_totalPointsLabel";
+            this._totalPointsLabel.Size = new System.Drawing.Size(11, 12);
+            this._totalPointsLabel.TabIndex = 10;
+            this._totalPointsLabel.Text = "0";
             // 
             // GeneralViewControl
             // 
@@ -413,5 +435,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pointsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fixedPointDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn resultPointDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label _totalPointsLabel;
+        private System.Windows.Forms.Label label4;
     }
 }

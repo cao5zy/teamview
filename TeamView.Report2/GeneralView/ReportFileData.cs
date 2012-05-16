@@ -37,7 +37,7 @@ namespace TeamView.Report2.GeneralView
                         _burnedMins = n.Element("_burnedMins").Value.ToInt32(),
                         _sizeInMins = n.Element("_sizeInMins").Value.ToInt32(),
                         BugNum = n.Element("BugNum").Value,
-                        Points = n.Element("Points").Value.ToInt32(),
+                        Points = n.Element("Points").Value.ToDouble(),
                         Programmer = n.Element("Programmer").Value,
                         ResultPoint = n.Element("ResultPoint").Value.ToDouble(),
                         Description = n.Element("Description").Value,

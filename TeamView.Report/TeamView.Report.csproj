@@ -127,6 +127,6 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)*.dll" "$(SolutionDir)Packages\"
-copy "$(TargetDir)*.exe" "$(SolutionDir)Packages\"</PostBuildEvent>
+copy "$(TargetPath)" "$(SolutionDir)Packages\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
