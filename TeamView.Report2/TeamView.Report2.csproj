@@ -70,6 +70,12 @@
     <Compile Include="GeneralView\Report.cs" />
     <Compile Include="GeneralView\ReportEntity.cs" />
     <Compile Include="GeneralView\ReportFileData.cs" />
+    <Compile Include="GeneralView\WorkLoadLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GeneralView\WorkLoadLayoutControl.Designer.cs">
+      <DependentUpon>WorkLoadLayoutControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GeneralView\GeneralViewControl.resx">
       <DependentUpon>GeneralViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralView\WorkLoadLayoutControl.resx">
+      <DependentUpon>WorkLoadLayoutControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
