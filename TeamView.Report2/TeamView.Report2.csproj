@@ -76,6 +76,7 @@
     <Compile Include="GeneralView\WorkLoadLayoutControl.Designer.cs">
       <DependentUpon>WorkLoadLayoutControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneralView\WorkLoadLayoutEntity.cs" />
     <Compile Include="GeneralView\WorkLoadLayoutReport.cs" />
     <Compile Include="ReportForm.cs">
       <SubType>Form</SubType>
