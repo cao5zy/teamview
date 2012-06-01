@@ -16,7 +16,7 @@ namespace TeamView.Report2.GeneralView
 {
     partial class GeneralViewControl : UserControl
     {
-        private Report.Factory _reportFactory;
+        private GeneralViewReport.Factory _reportFactory;
         private IDealMen _dealMen;
         private ReportEntity[] _reportEntities;
         private BugInfoForm.Factory _bugInfoFormFactory;
@@ -25,7 +25,7 @@ namespace TeamView.Report2.GeneralView
             InitializeComponent();
         }
 
-        public GeneralViewControl(Report.Factory reportFactory,
+        public GeneralViewControl(GeneralViewReport.Factory reportFactory,
             IDealMen dealMen,
             BugInfoForm.Factory bugInfoFormFactory
             )

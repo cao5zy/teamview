@@ -13,7 +13,7 @@ namespace TeamView.Report2.GeneralView
             base.Load(builder);
             builder.RegisterType<GeneralViewControl>();
             builder.RegisterType<WorkLoadLayoutControl>();
-            builder.RegisterType<Report>();
+            builder.RegisterType<GeneralViewReport>();
         }
     }
 }

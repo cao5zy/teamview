@@ -6,7 +6,7 @@ using TeamView.Common.Dao;
 
 namespace TeamView.Report2.GeneralView
 {
-    sealed class Report
+    sealed class GeneralViewReport
     {
         public readonly string _programmer;
         public readonly DateTime _startDate;
@@ -14,10 +14,10 @@ namespace TeamView.Report2.GeneralView
         public readonly ReportEntity[] _list;
         private IQuery _query;
 
-        public delegate Report Factory(string programmer,
+        public delegate GeneralViewReport Factory(string programmer,
             DateTime startDate,
             DateTime endDate);
-        public Report(string programmer,
+        public GeneralViewReport(string programmer,
             DateTime startDate,
             DateTime endDate,
             IQuery query

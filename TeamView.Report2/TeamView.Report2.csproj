@@ -67,7 +67,7 @@
       <DependentUpon>GeneralViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneralView\GeneralViewModule.cs" />
-    <Compile Include="GeneralView\Report.cs" />
+    <Compile Include="GeneralView\GeneralViewReport.cs" />
     <Compile Include="GeneralView\ReportEntity.cs" />
     <Compile Include="GeneralView\ReportFileData.cs" />
     <Compile Include="GeneralView\WorkLoadLayoutControl.cs">
