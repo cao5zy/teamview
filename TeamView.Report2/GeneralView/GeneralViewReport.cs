@@ -11,7 +11,7 @@ namespace TeamView.Report2.GeneralView
         public readonly string _programmer;
         public readonly DateTime _startDate;
         public readonly DateTime _endDate;
-        public readonly ReportEntity[] _list;
+        public readonly GeneralViewReportEntity[] _list;
         private IQuery _query;
 
         public delegate GeneralViewReport Factory(string programmer,
@@ -31,7 +31,7 @@ namespace TeamView.Report2.GeneralView
             _list = GetList(programmer, startDate, endDate);
         }
 
-        private ReportEntity[] GetList(string programmer, 
+        private GeneralViewReportEntity[] GetList(string programmer, 
             DateTime startDate, 
             DateTime endDate)
         {
@@ -42,7 +42,7 @@ namespace TeamView.Report2.GeneralView
                 _searchStart = startDate,
                 _searchEnd = endDate
             })
-            .Select(n => new ReportEntity { 
+            .Select(n => new GeneralViewReportEntity { 
                 BugNum = n.ItemId,
                 Programmer = n.Dealman,
                 _burnedMins = n.Burned,

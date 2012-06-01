@@ -18,7 +18,7 @@ namespace TeamView.Report2.GeneralView
     {
         private GeneralViewReport.Factory _reportFactory;
         private IDealMen _dealMen;
-        private ReportEntity[] _reportEntities;
+        private GeneralViewReportEntity[] _reportEntities;
         private BugInfoForm.Factory _bugInfoFormFactory;
         public GeneralViewControl()
         {
@@ -53,7 +53,7 @@ namespace TeamView.Report2.GeneralView
 
         private void _loadButton_Click(object sender, EventArgs e)
         {
-            ReportEntity[] entities;
+            GeneralViewReportEntity[] entities;
             if (LoadReport(out entities))
             {
                 _reportEntities = entities;
@@ -78,7 +78,7 @@ namespace TeamView.Report2.GeneralView
             _grid.Refresh();
         }
 
-        private static void Save(ReportEntity[] reportEntities)
+        private static void Save(GeneralViewReportEntity[] reportEntities)
         {
             if (reportEntities.IsNullOrEmpty())
                 return;
@@ -105,7 +105,7 @@ namespace TeamView.Report2.GeneralView
         }
 
 
-        private static bool LoadReport(out ReportEntity[] reportEntities)
+        private static bool LoadReport(out GeneralViewReportEntity[] reportEntities)
         {
             reportEntities = null;
             using (OpenFileDialog dlg = new OpenFileDialog())

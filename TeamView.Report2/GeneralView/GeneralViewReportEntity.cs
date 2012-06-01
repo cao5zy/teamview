@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace TeamView.Report2.GeneralView
 {
-    public sealed class ReportEntity
+    public sealed class GeneralViewReportEntity
     {
         public string Programmer { get; set; }
         public string BugNum { get; set; }

@@ -363,7 +363,7 @@
             // 
             // _bindingSource
             // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.ReportEntity);
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.GeneralViewReportEntity);
             // 
             // label4
             // 

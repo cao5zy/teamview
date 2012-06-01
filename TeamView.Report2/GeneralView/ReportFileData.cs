@@ -9,7 +9,7 @@ namespace TeamView.Report2.GeneralView
 {
     public sealed class ReportFileData
     {
-        public static void WriteToFile(string tempFileName, ReportEntity[] reportEntities)
+        public static void WriteToFile(string tempFileName, GeneralViewReportEntity[] reportEntities)
         {
             new XDocument(
                 new XElement("ReportEntities",
@@ -27,12 +27,12 @@ namespace TeamView.Report2.GeneralView
 
         }
 
-        public static ReportEntity[] LoadFromFile(string fileName)
+        public static GeneralViewReportEntity[] LoadFromFile(string fileName)
         {
             XDocument doc = XDocument.Load(fileName);
 
             return (from n in doc.Descendants("ReportEntity")
-                    select new ReportEntity
+                    select new GeneralViewReportEntity
                     {
                         _burnedMins = n.Element("_burnedMins").Value.ToInt32(),
                         _sizeInMins = n.Element("_sizeInMins").Value.ToInt32(),

@@ -70,7 +70,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Normal_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 90;
             target.Points = 1;
@@ -82,7 +82,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Overtime1_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 150;
             target.Points = 1;
@@ -94,7 +94,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Overtime2_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 240;
             target.Points = 1;
@@ -106,7 +106,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Overtime3_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 360;
             target.Points = 1;
@@ -118,7 +118,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Overtime4_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 480;
             target.Points = 1;
@@ -130,7 +130,7 @@ namespace TeamView.Test
         [TestMethod()]
         public void Cal_Overtime5_Test()
         {
-            ReportEntity target = new ReportEntity();
+            GeneralViewReportEntity target = new GeneralViewReportEntity();
             target._sizeInMins = 120;
             target._burnedMins = 540;
             target.Points = 1;
