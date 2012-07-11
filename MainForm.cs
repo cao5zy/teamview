@@ -170,6 +170,11 @@ namespace TeamView
             int itemCount = 0;
             decimal totalSize = 0;
             decimal totalHours = 0;
+
+            if (_smartPlan.Checked)
+            {
+                results = results.SafeSort(n => n.Add(m => m.priority).Add(m => m.size));
+            }
             results.SafeForEach(
                 n =>
                 {
@@ -418,6 +423,14 @@ namespace TeamView
         private void mBugInfoListDataGridView_Sorted(object sender, EventArgs e)
         {
             ShowColorStatus();
+        }
+
+        private void mBugInfoListDataGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (_smartPlan.Checked)
+            {
+                e.SortResult = 0;
+            }
         }
 
     }

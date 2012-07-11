@@ -53,6 +53,7 @@
             this.mEditButton = new System.Windows.Forms.Button();
             this.mTipLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this._smartPlan = new System.Windows.Forms.CheckBox();
             this.mQueryControlContainer = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mImageList = new System.Windows.Forms.ImageList(this.components);
@@ -123,6 +124,7 @@
             this.mBugInfoListDataGridView.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.mBugInfoListDataGridView_CellContextMenuStripNeeded);
             this.mBugInfoListDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.mBugInfoListDataGridView_DataError);
             this.mBugInfoListDataGridView.SelectionChanged += new System.EventHandler(this.mBugInfoListDataGridView_SelectionChanged);
+            this.mBugInfoListDataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.mBugInfoListDataGridView_SortCompare);
             this.mBugInfoListDataGridView.Sorted += new System.EventHandler(this.mBugInfoListDataGridView_Sorted);
             // 
             // version
@@ -256,6 +258,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this._smartPlan);
             this.panel1.Controls.Add(this.mQueryControlContainer);
             this.panel1.Controls.Add(this.mEditButton);
             this.panel1.Controls.Add(this.mTipLabel);
@@ -266,6 +269,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1067, 152);
             this.panel1.TabIndex = 29;
+            // 
+            // _smartPlan
+            // 
+            this._smartPlan.AutoSize = true;
+            this._smartPlan.Location = new System.Drawing.Point(848, 129);
+            this._smartPlan.Name = "_smartPlan";
+            this._smartPlan.Size = new System.Drawing.Size(117, 18);
+            this._smartPlan.TabIndex = 28;
+            this._smartPlan.Text = "Apply Smart Plan";
+            this._smartPlan.UseVisualStyleBackColor = true;
             // 
             // mQueryControlContainer
             // 
@@ -349,5 +362,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
         private System.Windows.Forms.DataGridViewTextBoxColumn feedBackCountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.CheckBox _smartPlan;
     }
 }

@@ -129,7 +129,7 @@ namespace DAL
 				TableSchema.TableColumn colvarVersion = new TableSchema.TableColumn(schema);
 				colvarVersion.ColumnName = "version";
 				colvarVersion.DataType = DbType.AnsiString;
-				colvarVersion.MaxLength = 15;
+				colvarVersion.MaxLength = 50;
 				colvarVersion.AutoIncrement = false;
 				colvarVersion.IsNullable = false;
 				colvarVersion.IsPrimaryKey = false;

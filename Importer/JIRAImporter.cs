@@ -167,7 +167,7 @@ namespace JIRAImporter
                             }
                             else if (versionChanged)
                             {
-                                Console.WriteLine(string.Format("version changed from {0} to {1}", existingItem.version, n.Version));
+                                Console.WriteLine(string.Format("version changed from {0} to {1} in {2}", existingItem.version, n.Version, existingItem.bugNum));
                             }
                         }
                     }
