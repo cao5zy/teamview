@@ -174,6 +174,13 @@ namespace TeamView
             if (_smartPlan.Checked)
             {
                 results = results.SafeSort(n => n.Add(m => m.priority).Add(m => m.size));
+                mBugInfoSetBindingSource.DataSource = results;
+                mBugInfoSetBindingSource.DataMember = null;
+            }
+            else
+            {
+                mBugInfoSetBindingSource.DataSource = mBugInfoSet;
+                mBugInfoSetBindingSource.DataMember = "BugInfoTable";
             }
             results.SafeForEach(
                 n =>
@@ -214,40 +221,39 @@ namespace TeamView
              {
                  if (n.DataBoundItem != null)
                  {
-                     BugInfoSet.BugInfoTableRow row = ((DataRowView)n.DataBoundItem).Row as BugInfoSet.BugInfoTableRow;
-                     if (row != null)
+                     string bugStatus = n.Cells["bugStatus"].Value.ToString();
+                     double fired = double.Parse(n.Cells["fired"].Value.ToString());
+                     double size = double.Parse(n.Cells["size"].Value.ToString());
+                     if (bugStatus == "Processing")
                      {
-                         if (row.bugStatus == "Processing")
-                         {
-                             n.Cells["bugStatus"].Style.BackColor = Color.Green;
-                             n.Cells["bugStatus"].Style.ForeColor = Color.White;
-                         }
-                         else
-                         {
-                             n.Cells["bugStatus"].Style.BackColor = Color.White;
-                             n.Cells["bugStatus"].Style.ForeColor = Color.Black;
-                         }
+                         n.Cells["bugStatus"].Style.BackColor = Color.Green;
+                         n.Cells["bugStatus"].Style.ForeColor = Color.White;
+                     }
+                     else
+                     {
+                         n.Cells["bugStatus"].Style.BackColor = Color.White;
+                         n.Cells["bugStatus"].Style.ForeColor = Color.Black;
+                     }
 
-                         if (row.fired > row.size / 2 && row.fired <= row.size)
-                         {
-                             n.Cells["fired"].Style.BackColor = Color.Yellow;
-                             n.Cells["fired"].Style.ForeColor = Color.Black;
-                         }
-                         else if (row.fired > row.size && row.fired <= row.size * 2)
-                         {
-                             n.Cells["fired"].Style.BackColor = Color.Red;
-                             n.Cells["fired"].Style.ForeColor = Color.White;
-                         }
-                         else if (row.fired > row.size * 2)
-                         {
-                             n.Cells["fired"].Style.BackColor = Color.Purple;
-                             n.Cells["fired"].Style.ForeColor = Color.White;
-                         }
-                         else
-                         {
-                             n.Cells["fired"].Style.BackColor = Color.White;
-                             n.Cells["fired"].Style.ForeColor = Color.Black;
-                         }
+                     if (fired > size / 2 && fired <= size)
+                     {
+                         n.Cells["fired"].Style.BackColor = Color.Yellow;
+                         n.Cells["fired"].Style.ForeColor = Color.Black;
+                     }
+                     else if (fired > size && fired <= size * 2)
+                     {
+                         n.Cells["fired"].Style.BackColor = Color.Red;
+                         n.Cells["fired"].Style.ForeColor = Color.White;
+                     }
+                     else if (fired > size * 2)
+                     {
+                         n.Cells["fired"].Style.BackColor = Color.Purple;
+                         n.Cells["fired"].Style.ForeColor = Color.White;
+                     }
+                     else
+                     {
+                         n.Cells["fired"].Style.BackColor = Color.White;
+                         n.Cells["fired"].Style.ForeColor = Color.Black;
                      }
                  }
              }
