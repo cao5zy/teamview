@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{132CA63C-85AB-4E7A-89B3-EE60F213EE72}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TeamView.Common</RootNamespace>
+    <AssemblyName>TeamView.Common</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Dev3Lib">
+      <HintPath>..\Dependencies\Dev3Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="SubSonic, Version=2.2.0.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\SubSonic.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Abstracts\IBugStates.cs" />
+    <Compile Include="Abstracts\IDealMen.cs" />
+    <Compile Include="CommonModule.cs" />
+    <Compile Include="CompareCode.cs" />
+    <Compile Include="Configs\BugStatesConfig.cs" />
+    <Compile Include="Configs\DealManConfig.cs" />
+    <Compile Include="DAL\AllStructs.cs" />
+    <Compile Include="DAL\BugInfo.cs" />
+    <Compile Include="DAL\BugInfoController.cs" />
+    <Compile Include="DAL\ChangeLog.cs" />
+    <Compile Include="DAL\ChangeLogController.cs" />
+    <Compile Include="DAL\KeyInfo.cs" />
+    <Compile Include="DAL\KeyInfoController.cs" />
+    <Compile Include="DAL\StoredProcedures.cs" />
+    <Compile Include="DaoImpl\BugInfoQuery.cs" />
+    <Compile Include="DaoImpl\BugInfoRepository.cs" />
+    <Compile Include="Dao\IBugInfoRepository.cs" />
+    <Compile Include="Dao\IQuery.cs" />
+    <Compile Include="Dao\QueryTaskParameter.cs" />
+    <Compile Include="Entity\BugInfoEntity1.cs" />
+    <Compile Include="Entity\TaskLogEntity.cs" />
+    <Compile Include="ExtendDataConversion.cs" />
+    <Compile Include="ExtendedEnumerable.cs" />
+    <Compile Include="IItemImporter.cs" />
+    <Compile Include="Impls\BugStatesImpl.cs" />
+    <Compile Include="Impls\DealMenImpl.cs" />
+    <Compile Include="KeyGenerator.cs" />
+    <Compile Include="Logs\BugLogReader.cs" />
+    <Compile Include="Logs\BugNumLogReader.cs" />
+    <Compile Include="Dao\BugInfoParameterAttribute.cs" />
+    <Compile Include="Logs\BurnedHistory.cs" />
+    <Compile Include="Logs\CompleteTaskLogEntity.cs" />
+    <Compile Include="Logs\DbItem.cs" />
+    <Compile Include="Logs\DBItemReader.cs" />
+    <Compile Include="Logs\DBProvider.cs" />
+    <Compile Include="Entity\BugInfoEntity.cs" />
+    <Compile Include="Entity\BugStateBaseInfo.cs" />
+    <Compile Include="Entity\PointsEnum.cs" />
+    <Compile Include="Entity\ProgrammerBaseInfo.cs" />
+    <Compile Include="Entity\ProgrammerPoint.cs" />
+    <Compile Include="Logs\IDbProvider.cs" />
+    <Compile Include="Logs\LogEntity.cs" />
+    <Compile Include="Logs\LogRecord.cs" />
+    <Compile Include="Logs\LogsModule.cs" />
+    <Compile Include="Logs\PointsLogReader.cs" />
+    <Compile Include="LogTypeEnum.cs" />
+    <Compile Include="Models\BugInfoViewModel.cs" />
+    <Compile Include="Models\HardLevelModel.cs" />
+    <Compile Include="Models\KeyModel.cs" />
+    <Compile Include="Models\StateViewModel.cs" />
+    <Compile Include="PointsParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States.cs" />
+    <Compile Include="StatesConverter.cs" />
+    <Compile Include="StatesEnum.cs" />
+    <Compile Include="Logs\TaskRecord.cs" />
+    <Compile Include="Logs\TaskRecordParser.cs" />
+    <Compile Include="StateSequence.cs" />
+    <Compile Include="TimeHelper.cs" />
+    <Compile Include="TimeRange.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
