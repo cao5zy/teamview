@@ -62,7 +62,15 @@ namespace TeamView
             };
         }
 
-        private BugInfoSet.BugInfoTableRow CurrentSelectedItem
+        class SelectedItem
+        {
+            public string bugNum { get; set; }
+            public DateTime timeStamp { get; set; }
+            public string bugStatus { get; set; }
+            public double fired { get; set; }
+        }
+
+        private SelectedItem CurrentSelectedItem
         {
             get
             {
@@ -72,7 +80,16 @@ namespace TeamView
                 if (mBugInfoSet.BugInfoTable.Rows.Count <= mBugInfoListDataGridView.CurrentRow.Index)
                     return null;
 
-                return (BugInfoSet.BugInfoTableRow)((DataRowView)mBugInfoListDataGridView.CurrentRow.DataBoundItem).Row;
+                var bindItem = mBugInfoListDataGridView.CurrentRow.DataBoundItem;
+                var properties = TypeDescriptor.GetProperties(bindItem);
+
+                return new SelectedItem {
+                    bugNum = properties.Find("bugNum", true).GetValue(bindItem).ToString(),
+                    timeStamp = Convert.ToDateTime(properties.Find("timeStamp", true).GetValue(bindItem)),
+                    bugStatus = properties.Find("bugStatus", true).GetValue(bindItem).ToString(),
+                    fired = Convert.ToDouble(properties.Find("fired", true).GetValue(bindItem)),
+                };
+
             }
         }
 
