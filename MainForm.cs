@@ -24,6 +24,7 @@ namespace TeamView
 {
     sealed partial class MainForm : Form
     {
+        private DataView _bindingView;
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
@@ -49,9 +50,11 @@ namespace TeamView
             _repository = repository;
             _query = bugQuery;
             _dealMen = dealMen;
-
+            _bindingView = new DataView(mBugInfoSet.BugInfoTable);
+            mBugInfoListDataGridView.DataSource = _bindingView;
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
+
 
             mQueryControl = queryControl;
             mQueryControlContainer.Controls.Add(queryControl);
@@ -171,10 +174,7 @@ namespace TeamView
             decimal totalSize = 0;
             decimal totalHours = 0;
 
-            if (_smartPlan.Checked)
-            {
-                results = results.SafeSort(n => n.Add(m => m.priority).Add(m => m.size));
-            }
+
             results.SafeForEach(
                 n =>
                 {
@@ -196,6 +196,13 @@ namespace TeamView
                     totalSize += (decimal)row.size;
                 }
                 );
+
+            if (_smartPlan.Checked)
+            {
+                _bindingView.Sort = "Priority, size";
+            }
+            else
+                _bindingView.Sort = "";
 
             ShowSummary(itemCount, totalSize, totalHours);
 

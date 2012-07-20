@@ -42,13 +42,11 @@
             this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.feedBackCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mFlowMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mBugInfoSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mBugInfoSet = new TeamView.BugInfoSet();
             this.mEditButton = new System.Windows.Forms.Button();
             this.mTipLabel = new System.Windows.Forms.Label();
@@ -59,7 +57,6 @@
             this.mImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -97,7 +94,6 @@
             // 
             // mBugInfoListDataGridView
             // 
-            this.mBugInfoListDataGridView.AutoGenerateColumns = false;
             this.mBugInfoListDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.mBugInfoListDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.mBugInfoListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -109,11 +105,8 @@
             this.description,
             this.Priority,
             this.Size,
-            this.fired,
-            this.feedBackCountDataGridViewTextBoxColumn});
+            this.fired});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
-            this.mBugInfoListDataGridView.DataMember = "BugInfoTable";
-            this.mBugInfoListDataGridView.DataSource = this.mBugInfoSetBindingSource;
             this.mBugInfoListDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mBugInfoListDataGridView.Location = new System.Drawing.Point(3, 161);
             this.mBugInfoListDataGridView.Name = "mBugInfoListDataGridView";
@@ -183,13 +176,6 @@
             this.fired.Name = "fired";
             this.fired.ReadOnly = true;
             // 
-            // feedBackCountDataGridViewTextBoxColumn
-            // 
-            this.feedBackCountDataGridViewTextBoxColumn.DataPropertyName = "FeedBackCount";
-            this.feedBackCountDataGridViewTextBoxColumn.HeaderText = "FeedBackCount";
-            this.feedBackCountDataGridViewTextBoxColumn.Name = "feedBackCountDataGridViewTextBoxColumn";
-            this.feedBackCountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // mFlowMenu
             // 
             this.mFlowMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -224,11 +210,6 @@
             this.pendingToolStripMenuItem.Name = "pendingToolStripMenuItem";
             this.pendingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pendingToolStripMenuItem.Text = "Pending";
-            // 
-            // mBugInfoSetBindingSource
-            // 
-            this.mBugInfoSetBindingSource.DataSource = this.mBugInfoSet;
-            this.mBugInfoSetBindingSource.Position = 0;
             // 
             // mBugInfoSet
             // 
@@ -323,7 +304,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).EndInit();
             this.mFlowMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -349,7 +329,6 @@
         private System.Windows.Forms.ToolStripMenuItem completeToolStripMenuItem;
         private System.Windows.Forms.Panel mQueryControlContainer;
         private BugInfoSet mBugInfoSet;
-        private System.Windows.Forms.BindingSource mBugInfoSetBindingSource;
         private System.Windows.Forms.DataGridView mBugInfoListDataGridView;
         private System.Windows.Forms.ToolStripMenuItem pendingToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderDataGridViewTextBoxColumn;
@@ -361,7 +340,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn feedBackCountDataGridViewTextBoxColumn;
         private System.Windows.Forms.CheckBox _smartPlan;
     }
 }
