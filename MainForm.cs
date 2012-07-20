@@ -24,6 +24,7 @@ namespace TeamView
 {
     sealed partial class MainForm : Form
     {
+        private DataView _bindingView;
         public IDealMen DealMen { get; set; }
         public IBugStates BugStates { get; set; }
         private BugInfoForm.Factory CreateBugInfoForm { get; set; }
@@ -49,9 +50,11 @@ namespace TeamView
             _repository = repository;
             _query = bugQuery;
             _dealMen = dealMen;
-
+            _bindingView = new DataView(mBugInfoSet.BugInfoTable);
+            mBugInfoListDataGridView.DataSource = _bindingView;
             mAddButton.Text = BugInfoManagement_Resource.mAddButton;
             mEditButton.Text = BugInfoManagement_Resource.mEditButton;
+
 
             mQueryControl = queryControl;
             mQueryControlContainer.Controls.Add(queryControl);
@@ -62,15 +65,7 @@ namespace TeamView
             };
         }
 
-        class SelectedItem
-        {
-            public string bugNum { get; set; }
-            public DateTime timeStamp { get; set; }
-            public string bugStatus { get; set; }
-            public double fired { get; set; }
-        }
-
-        private SelectedItem CurrentSelectedItem
+        private BugInfoSet.BugInfoTableRow CurrentSelectedItem
         {
             get
             {
@@ -80,16 +75,7 @@ namespace TeamView
                 if (mBugInfoSet.BugInfoTable.Rows.Count <= mBugInfoListDataGridView.CurrentRow.Index)
                     return null;
 
-                var bindItem = mBugInfoListDataGridView.CurrentRow.DataBoundItem;
-                var properties = TypeDescriptor.GetProperties(bindItem);
-
-                return new SelectedItem {
-                    bugNum = properties.Find("bugNum", true).GetValue(bindItem).ToString(),
-                    timeStamp = Convert.ToDateTime(properties.Find("timeStamp", true).GetValue(bindItem)),
-                    bugStatus = properties.Find("bugStatus", true).GetValue(bindItem).ToString(),
-                    fired = Convert.ToDouble(properties.Find("fired", true).GetValue(bindItem)),
-                };
-
+                return (BugInfoSet.BugInfoTableRow)((DataRowView)mBugInfoListDataGridView.CurrentRow.DataBoundItem).Row;
             }
         }
 
@@ -188,17 +174,7 @@ namespace TeamView
             decimal totalSize = 0;
             decimal totalHours = 0;
 
-            if (_smartPlan.Checked)
-            {
-                results = results.SafeSort(n => n.Add(m => m.priority).Add(m => m.size));
-                mBugInfoSetBindingSource.DataSource = results;
-                mBugInfoSetBindingSource.DataMember = null;
-            }
-            else
-            {
-                mBugInfoSetBindingSource.DataSource = mBugInfoSet;
-                mBugInfoSetBindingSource.DataMember = "BugInfoTable";
-            }
+
             results.SafeForEach(
                 n =>
                 {
@@ -221,6 +197,11 @@ namespace TeamView
                 }
                 );
 
+            if (_smartPlan.Checked)
+                _bindingView.Sort = "Priority, size";
+            else
+                _bindingView.Sort = "";
+
             ShowSummary(itemCount, totalSize, totalHours);
 
             ShowColorStatus();
@@ -238,39 +219,40 @@ namespace TeamView
              {
                  if (n.DataBoundItem != null)
                  {
-                     string bugStatus = n.Cells["bugStatus"].Value.ToString();
-                     double fired = double.Parse(n.Cells["fired"].Value.ToString());
-                     double size = double.Parse(n.Cells["size"].Value.ToString());
-                     if (bugStatus == "Processing")
+                     BugInfoSet.BugInfoTableRow row = ((DataRowView)n.DataBoundItem).Row as BugInfoSet.BugInfoTableRow;
+                     if (row != null)
                      {
-                         n.Cells["bugStatus"].Style.BackColor = Color.Green;
-                         n.Cells["bugStatus"].Style.ForeColor = Color.White;
-                     }
-                     else
-                     {
-                         n.Cells["bugStatus"].Style.BackColor = Color.White;
-                         n.Cells["bugStatus"].Style.ForeColor = Color.Black;
-                     }
+                         if (row.bugStatus == "Processing")
+                         {
+                             n.Cells["bugStatus"].Style.BackColor = Color.Green;
+                             n.Cells["bugStatus"].Style.ForeColor = Color.White;
+                         }
+                         else
+                         {
+                             n.Cells["bugStatus"].Style.BackColor = Color.White;
+                             n.Cells["bugStatus"].Style.ForeColor = Color.Black;
+                         }
 
-                     if (fired > size / 2 && fired <= size)
-                     {
-                         n.Cells["fired"].Style.BackColor = Color.Yellow;
-                         n.Cells["fired"].Style.ForeColor = Color.Black;
-                     }
-                     else if (fired > size && fired <= size * 2)
-                     {
-                         n.Cells["fired"].Style.BackColor = Color.Red;
-                         n.Cells["fired"].Style.ForeColor = Color.White;
-                     }
-                     else if (fired > size * 2)
-                     {
-                         n.Cells["fired"].Style.BackColor = Color.Purple;
-                         n.Cells["fired"].Style.ForeColor = Color.White;
-                     }
-                     else
-                     {
-                         n.Cells["fired"].Style.BackColor = Color.White;
-                         n.Cells["fired"].Style.ForeColor = Color.Black;
+                         if (row.fired > row.size / 2 && row.fired <= row.size)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Yellow;
+                             n.Cells["fired"].Style.ForeColor = Color.Black;
+                         }
+                         else if (row.fired > row.size && row.fired <= row.size * 2)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Red;
+                             n.Cells["fired"].Style.ForeColor = Color.White;
+                         }
+                         else if (row.fired > row.size * 2)
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.Purple;
+                             n.Cells["fired"].Style.ForeColor = Color.White;
+                         }
+                         else
+                         {
+                             n.Cells["fired"].Style.BackColor = Color.White;
+                             n.Cells["fired"].Style.ForeColor = Color.Black;
+                         }
                      }
                  }
              }
