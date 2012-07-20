@@ -34,20 +34,6 @@
             this.mAddButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.mBugInfoListDataGridView = new System.Windows.Forms.DataGridView();
-            this.mFlowMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mBugInfoSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.mBugInfoSet = new TeamView.BugInfoSet();
-            this.mEditButton = new System.Windows.Forms.Button();
-            this.mTipLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this._smartPlan = new System.Windows.Forms.CheckBox();
-            this.mQueryControlContainer = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.mImageList = new System.Windows.Forms.ImageList(this.components);
             this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bugNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,10 +42,21 @@
             this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.feedBackCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mFlowMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mBugInfoSet = new TeamView.BugInfoSet();
+            this.mEditButton = new System.Windows.Forms.Button();
+            this.mTipLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this._smartPlan = new System.Windows.Forms.CheckBox();
+            this.mQueryControlContainer = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.mImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -97,7 +94,6 @@
             // 
             // mBugInfoListDataGridView
             // 
-            this.mBugInfoListDataGridView.AutoGenerateColumns = false;
             this.mBugInfoListDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.mBugInfoListDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.mBugInfoListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -109,11 +105,8 @@
             this.description,
             this.Priority,
             this.Size,
-            this.fired,
-            this.feedBackCountDataGridViewTextBoxColumn});
+            this.fired});
             this.mBugInfoListDataGridView.ContextMenuStrip = this.mFlowMenu;
-            this.mBugInfoListDataGridView.DataMember = "BugInfoTable";
-            this.mBugInfoListDataGridView.DataSource = this.mBugInfoSetBindingSource;
             this.mBugInfoListDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mBugInfoListDataGridView.Location = new System.Drawing.Point(3, 161);
             this.mBugInfoListDataGridView.Name = "mBugInfoListDataGridView";
@@ -126,6 +119,62 @@
             this.mBugInfoListDataGridView.SelectionChanged += new System.EventHandler(this.mBugInfoListDataGridView_SelectionChanged);
             this.mBugInfoListDataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.mBugInfoListDataGridView_SortCompare);
             this.mBugInfoListDataGridView.Sorted += new System.EventHandler(this.mBugInfoListDataGridView_Sorted);
+            // 
+            // version
+            // 
+            this.version.DataPropertyName = "Version";
+            this.version.HeaderText = global::TeamView.BugInfoManagement_Resource.dVersion;
+            this.version.Name = "version";
+            this.version.ReadOnly = true;
+            // 
+            // bugStatus
+            // 
+            this.bugStatus.DataPropertyName = "bugStatus";
+            this.bugStatus.HeaderText = "Status";
+            this.bugStatus.Name = "bugStatus";
+            this.bugStatus.ReadOnly = true;
+            // 
+            // bugNum
+            // 
+            this.bugNum.DataPropertyName = "bugNum";
+            this.bugNum.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugNum;
+            this.bugNum.Name = "bugNum";
+            this.bugNum.ReadOnly = true;
+            // 
+            // dealMan
+            // 
+            this.dealMan.DataPropertyName = "dealMan";
+            this.dealMan.HeaderText = "Handler";
+            this.dealMan.Name = "dealMan";
+            this.dealMan.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = global::TeamView.BugInfoManagement_Resource.dDescription;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // Priority
+            // 
+            this.Priority.DataPropertyName = "Priority";
+            this.Priority.HeaderText = global::TeamView.BugInfoManagement_Resource.dPriority;
+            this.Priority.Name = "Priority";
+            this.Priority.ReadOnly = true;
+            // 
+            // Size
+            // 
+            this.Size.DataPropertyName = "size";
+            this.Size.HeaderText = global::TeamView.BugInfoManagement_Resource.dSize;
+            this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
+            // 
+            // fired
+            // 
+            this.fired.DataPropertyName = "fired";
+            this.fired.HeaderText = "fired";
+            this.fired.Name = "fired";
+            this.fired.ReadOnly = true;
             // 
             // mFlowMenu
             // 
@@ -161,11 +210,6 @@
             this.pendingToolStripMenuItem.Name = "pendingToolStripMenuItem";
             this.pendingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pendingToolStripMenuItem.Text = "Pending";
-            // 
-            // mBugInfoSetBindingSource
-            // 
-            this.mBugInfoSetBindingSource.DataSource = this.mBugInfoSet;
-            this.mBugInfoSetBindingSource.Position = 0;
             // 
             // mBugInfoSet
             // 
@@ -247,69 +291,6 @@
             this.mImageList.Images.SetKeyName(1, "state-pickup.ico");
             this.mImageList.Images.SetKeyName(2, "state-reach.ico");
             // 
-            // version
-            // 
-            this.version.DataPropertyName = "Version";
-            this.version.HeaderText = global::TeamView.BugInfoManagement_Resource.dVersion;
-            this.version.Name = "version";
-            this.version.ReadOnly = true;
-            // 
-            // bugStatus
-            // 
-            this.bugStatus.DataPropertyName = "bugStatus";
-            this.bugStatus.HeaderText = "Status";
-            this.bugStatus.Name = "bugStatus";
-            this.bugStatus.ReadOnly = true;
-            // 
-            // bugNum
-            // 
-            this.bugNum.DataPropertyName = "bugNum";
-            this.bugNum.HeaderText = global::TeamView.BugInfoManagement_Resource.dBugNum;
-            this.bugNum.Name = "bugNum";
-            this.bugNum.ReadOnly = true;
-            // 
-            // dealMan
-            // 
-            this.dealMan.DataPropertyName = "dealMan";
-            this.dealMan.HeaderText = "Handler";
-            this.dealMan.Name = "dealMan";
-            this.dealMan.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.DataPropertyName = "description";
-            this.description.HeaderText = global::TeamView.BugInfoManagement_Resource.dDescription;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // Priority
-            // 
-            this.Priority.DataPropertyName = "Priority";
-            this.Priority.HeaderText = global::TeamView.BugInfoManagement_Resource.dPriority;
-            this.Priority.Name = "Priority";
-            this.Priority.ReadOnly = true;
-            // 
-            // Size
-            // 
-            this.Size.DataPropertyName = "size";
-            this.Size.HeaderText = global::TeamView.BugInfoManagement_Resource.dSize;
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
-            // 
-            // fired
-            // 
-            this.fired.DataPropertyName = "fired";
-            this.fired.HeaderText = "fired";
-            this.fired.Name = "fired";
-            this.fired.ReadOnly = true;
-            // 
-            // feedBackCountDataGridViewTextBoxColumn
-            // 
-            this.feedBackCountDataGridViewTextBoxColumn.DataPropertyName = "FeedBackCount";
-            this.feedBackCountDataGridViewTextBoxColumn.HeaderText = "FeedBackCount";
-            this.feedBackCountDataGridViewTextBoxColumn.Name = "feedBackCountDataGridViewTextBoxColumn";
-            this.feedBackCountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -323,7 +304,6 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).EndInit();
             this.mFlowMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -349,11 +329,9 @@
         private System.Windows.Forms.ToolStripMenuItem completeToolStripMenuItem;
         private System.Windows.Forms.Panel mQueryControlContainer;
         private BugInfoSet mBugInfoSet;
-        private System.Windows.Forms.BindingSource mBugInfoSetBindingSource;
         private System.Windows.Forms.DataGridView mBugInfoListDataGridView;
         private System.Windows.Forms.ToolStripMenuItem pendingToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderDataGridViewTextBoxColumn;
-        private System.Windows.Forms.CheckBox _smartPlan;
         private System.Windows.Forms.DataGridViewTextBoxColumn version;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn bugNum;
@@ -362,6 +340,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn feedBackCountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.CheckBox _smartPlan;
     }
 }
