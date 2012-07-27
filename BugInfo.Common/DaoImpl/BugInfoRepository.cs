@@ -3,39 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TeamView.Common.Dao;
+using System.Configuration;
+using System.Data.SqlClient;
+using Dev3Lib.Sql;
 
 namespace TeamView.Common.DaoImpl
 {
     class BugInfoRepository : IBugInfoRepository
     {
+        private string _connStr = ConfigurationManager.ConnectionStrings["bug_Db"].ConnectionString;
+
         #region IBugInfoRepository Members
 
         public TeamView.Common.Entity.BugInfoEntity1 GetItem(string itemId)
         {
-            DAL.BugInfoCollection coll = new DAL.BugInfoCollection();
-            var obj = coll.Where(DAL.BugInfo.Columns.BugNum, itemId)
-                .Load()
-                .FirstOrDefault();
+            using (var conn = new SqlConnection(_connStr))
+            {
+                conn.Open();
 
-            if (obj == null)
-                return null;
-            else
-                return new TeamView.Common.Entity.BugInfoEntity1
+                SqlTableSelectCmd cmd = new SqlTableSelectCmd(conn, "bugInfo");
+                cmd.AddParameterWithValue("bugnum", itemId);
+
+                return cmd.ExecuteList<TeamView.Common.Entity.BugInfoEntity1>(reader => new TeamView.Common.Entity.BugInfoEntity1
                 {
-                    bugNum = obj.BugNum,
-                    bugStatus = obj.BugStatus,
-                    createdTime = obj.CreatedTime,
-                    dealMan = obj.DealMan,
-                    description = obj.Description,
-                    fired = obj.Fired,
-                    hardLevel = obj.HardLevel,
-                    priority = obj.Priority,
-                    size = obj.Size,
-                    timeStamp = obj.TimeStamp,
-                    version = obj.Version,
-                    lastStateTime = obj.LatestStartTime.HasValue ? obj.LatestStartTime.Value : DateTime.MinValue
-                };
-
+                    version = Convert.IsDBNull(reader["version"]) ? string.Empty : Convert.ToString(reader["version"]),
+                    bugNum = Convert.IsDBNull(reader["bugNum"]) ? string.Empty : Convert.ToString(reader["bugNum"]),
+                    bugStatus = Convert.IsDBNull(reader["bugStatus"]) ? string.Empty : Convert.ToString(reader["bugStatus"]),
+                    dealMan = Convert.IsDBNull(reader["dealMan"]) ? string.Empty : Convert.ToString(reader["dealMan"]),
+                    createdTime = Convert.IsDBNull(reader["createdTime"]) ? System.DateTime.Now : Convert.ToDateTime(reader["createdTime"]),
+                    description = Convert.IsDBNull(reader["description"]) ? string.Empty : Convert.ToString(reader["description"]),
+                    size = Convert.IsDBNull(reader["size"]) ? 0 : Convert.ToInt32(reader["size"]),
+                    fired = Convert.IsDBNull(reader["fired"]) ? 0 : Convert.ToInt32(reader["fired"]),
+                    timeStamp = Convert.IsDBNull(reader["timeStamp"]) ? System.DateTime.Now : Convert.ToDateTime(reader["timeStamp"]),
+                    priority = Convert.IsDBNull(reader["priority"]) ? 0 : Convert.ToInt16(reader["priority"]),
+                    hardLevel = Convert.IsDBNull(reader["hardLevel"]) ? 0 : Convert.ToInt16(reader["hardLevel"]),
+                    latestStartTime = Convert.IsDBNull(reader["latestStartTime"]) ? System.DateTime.Now : Convert.ToDateTime(reader["latestStartTime"]),
+                })
+                    .SingleOrDefault();
+            }
         }
 
         public void UpdateItem(TeamView.Common.Entity.BugInfoEntity1 item)
@@ -59,10 +64,10 @@ namespace TeamView.Common.DaoImpl
                 bugInfo.Priority = (short)item.priority;
                 bugInfo.Size = item.size;
                 bugInfo.Version = item.version;
-                if (item.lastStateTime == DateTime.MinValue)
+                if (item.latestStartTime == DateTime.MinValue)
                     bugInfo.LatestStartTime = null;
                 else
-                    bugInfo.LatestStartTime = item.lastStateTime;
+                    bugInfo.LatestStartTime = item.latestStartTime;
                 bugInfo.TimeStamp = timeStamp;
                 bugInfo.Save();
             }
@@ -77,15 +82,15 @@ namespace TeamView.Common.DaoImpl
                 dbItem.Priority = (short)item.priority;
                 dbItem.Size = item.size;
                 dbItem.Version = item.version;
-                if (item.lastStateTime == DateTime.MinValue)
+                if (item.latestStartTime == DateTime.MinValue)
                     dbItem.LatestStartTime = null;
                 else
-                    dbItem.LatestStartTime = item.lastStateTime;
+                    dbItem.LatestStartTime = item.latestStartTime;
                 dbItem.TimeStamp = timeStamp;
                 dbItem.Save();
             }
 
-           
+
             item.timeStamp = timeStamp;
 
         }

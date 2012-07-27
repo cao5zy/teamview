@@ -14,7 +14,7 @@ namespace TeamView.Common.Entity
         public DateTime createdTime { get; set; }
         public string description { get; set; }
         public int size { get; set; }
-        public DateTime lastStateTime { get; set; }
+        public DateTime latestStartTime { get; set; }
         public int fired { get; set; }
         public DateTime timeStamp { get; set; }
         public int priority { get; set; }
@@ -31,7 +31,7 @@ namespace TeamView.Common.Entity
                 createdTime = this.createdTime,
                 description = this.description,
                 size = this.size,
-                lastStateTime = this.lastStateTime,
+                latestStartTime = this.latestStartTime,
                 fired = this.fired,
                 timeStamp = this.timeStamp,
                 priority = this.priority,
@@ -53,7 +53,7 @@ namespace TeamView.Common.Entity
         this.createdTime == other.createdTime && 
         this.description == other.description && 
         this.size == other.size && 
-        this.lastStateTime == other.lastStateTime && 
+        this.latestStartTime == other.latestStartTime && 
         this.fired == other.fired && 
         this.timeStamp == other.timeStamp && 
         this.priority == other.priority && 

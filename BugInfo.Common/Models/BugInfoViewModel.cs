@@ -188,11 +188,11 @@ namespace TeamView.Common.Models
 
             if (_current.bugStatus ==States.Complete || _current.bugStatus == States.Abort)
             {
-                _current.fired = _current.fired + (int)DateTime.Now.Subtract(_current.lastStateTime).TotalMinutes;
-                _current.lastStateTime= DateTime.MinValue;
+                _current.fired = _current.fired + (int)DateTime.Now.Subtract(_current.latestStartTime).TotalMinutes;
+                _current.latestStartTime= DateTime.MinValue;
             }
             if (_current.bugStatus == States.Start)
-                _current.lastStateTime = DateTime.Now;
+                _current.latestStartTime = DateTime.Now;
 
             result.State = true;
 
@@ -301,7 +301,7 @@ namespace TeamView.Common.Models
                 description = _current.description,
                 fired = 0,
                 hardLevel = _current.hardLevel,
-                lastStateTime = DateTime.MinValue,
+                latestStartTime = DateTime.MinValue,
                 priority = newPriority,
                 size = newSize,
                 version = _current.version,

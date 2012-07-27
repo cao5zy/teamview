@@ -86,7 +86,7 @@ namespace TeamView.Common.DaoImpl
                             size = reader[DAL.BugInfo.Columns.Size].ToInt32(),
                             timeStamp = Convert.ToDateTime(reader[DAL.BugInfo.Columns.TimeStamp]),
                             version = reader[DAL.BugInfo.Columns.Version].ToString(),
-                            lastStateTime = Convert.IsDBNull(reader[DAL.BugInfo.Columns.LatestStartTime]) ? DateTime.MinValue : Convert.ToDateTime(reader[DAL.BugInfo.Columns.LatestStartTime]),
+                            latestStartTime = Convert.IsDBNull(reader[DAL.BugInfo.Columns.LatestStartTime]) ? DateTime.MinValue : Convert.ToDateTime(reader[DAL.BugInfo.Columns.LatestStartTime]),
                             fired = reader[DAL.BugInfo.Columns.Fired].ToInt32(),
                         };
                 }

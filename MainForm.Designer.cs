@@ -184,31 +184,31 @@
             this.completeToolStripMenuItem,
             this.pendingToolStripMenuItem});
             this.mFlowMenu.Name = "mFlowMenu";
-            this.mFlowMenu.Size = new System.Drawing.Size(153, 114);
+            this.mFlowMenu.Size = new System.Drawing.Size(133, 92);
             this.mFlowMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mFlowMenu_ItemClicked);
             // 
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.startToolStripMenuItem.Text = "Start";
             // 
             // abortToolStripMenuItem
             // 
             this.abortToolStripMenuItem.Name = "abortToolStripMenuItem";
-            this.abortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abortToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.abortToolStripMenuItem.Text = "Suspend";
             // 
             // completeToolStripMenuItem
             // 
             this.completeToolStripMenuItem.Name = "completeToolStripMenuItem";
-            this.completeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.completeToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.completeToolStripMenuItem.Text = "Complete";
             // 
             // pendingToolStripMenuItem
             // 
             this.pendingToolStripMenuItem.Name = "pendingToolStripMenuItem";
-            this.pendingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pendingToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.pendingToolStripMenuItem.Text = "Pending";
             // 
             // mBugInfoSet

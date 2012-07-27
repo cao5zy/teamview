@@ -630,7 +630,7 @@ namespace TeamView.Test
             Assert.IsTrue(result.State);
             Assert.IsTrue(result.State);
             Assert.AreEqual(States.Start, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime >= checkTime && model.Current.lastStateTime <= DateTime.Now);
+            Assert.IsTrue(model.Current.latestStartTime >= checkTime && model.Current.latestStartTime <= DateTime.Now);
         }
 
         private TeamView.Common.Entity.BugInfoEntity1 CreateEntity(string itemId,
@@ -672,7 +672,7 @@ namespace TeamView.Test
                     
                     size = 1,
                     version = "1.0",
-                    lastStateTime = DateTime.Now.AddHours(-1),
+                    latestStartTime = DateTime.Now.AddHours(-1),
                     timeStamp = dtStamp,
                 }
                 );
@@ -688,7 +688,7 @@ namespace TeamView.Test
             Assert.IsTrue(result.State);
             Assert.IsTrue(model.Current.fired > 1);
             Assert.AreEqual(States.Abort, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime == DateTime.MinValue);
+            Assert.IsTrue(model.Current.latestStartTime == DateTime.MinValue);
             Assert.AreEqual(61, model.Current.fired);
         }
 
@@ -727,7 +727,7 @@ namespace TeamView.Test
             Assert.IsTrue(result.State);
             Assert.IsTrue(model.Current.fired > 1);
             Assert.AreEqual(States.Complete, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime == DateTime.MinValue);
+            Assert.IsTrue(model.Current.latestStartTime == DateTime.MinValue);
         }
 
 
@@ -768,7 +768,7 @@ namespace TeamView.Test
 
             Assert.IsTrue(result.State);
             Assert.AreEqual(States.Start, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime >= checkTime && model.Current.lastStateTime <= DateTime.Now);
+            Assert.IsTrue(model.Current.latestStartTime >= checkTime && model.Current.latestStartTime <= DateTime.Now);
         }
 
         [TestMethod]
@@ -795,7 +795,7 @@ namespace TeamView.Test
 
             Assert.IsTrue(result.State);
             Assert.AreEqual(States.Pending, model.Current.bugStatus);
-            Assert.IsTrue(model.Current.lastStateTime == DateTime.MinValue);
+            Assert.IsTrue(model.Current.latestStartTime == DateTime.MinValue);
 
         }
 
@@ -997,7 +997,7 @@ namespace TeamView.Test
                 description = "description",
                 fired = 20,
                 hardLevel = 1,
-                lastStateTime = t2,
+                latestStartTime = t2,
                 priority = 1,
                 size = 3,
                 timeStamp = dtStamp,
@@ -1026,7 +1026,7 @@ namespace TeamView.Test
             Assert.AreEqual("description", newItem.description);
             Assert.AreEqual(0, newItem.fired);
             Assert.AreEqual(oldItem.hardLevel, newItem.hardLevel);
-            Assert.AreEqual(DateTime.MinValue, newItem.lastStateTime);
+            Assert.AreEqual(DateTime.MinValue, newItem.latestStartTime);
             Assert.AreEqual(oldItem.priority, newItem.priority);
             Assert.AreEqual(oldItem.size, newItem.size);
             Assert.AreEqual(DateTime.MinValue, newItem.timeStamp);
@@ -1052,7 +1052,7 @@ namespace TeamView.Test
                 description = "description",
                 fired = 20,
                 hardLevel = 1,
-                lastStateTime = t2,
+                latestStartTime = t2,
                 priority = 1,
                 size = 3,
                 timeStamp = dtStamp,
@@ -1082,7 +1082,7 @@ namespace TeamView.Test
             Assert.AreEqual("description", newItem.description);
             Assert.AreEqual(0, newItem.fired);
             Assert.AreEqual(oldItem.hardLevel, newItem.hardLevel);
-            Assert.AreEqual(DateTime.MinValue, newItem.lastStateTime);
+            Assert.AreEqual(DateTime.MinValue, newItem.latestStartTime);
             Assert.AreEqual(newPriority, newItem.priority);
             Assert.AreEqual(newSize, newItem.size);
             Assert.AreEqual(DateTime.MinValue, newItem.timeStamp);
