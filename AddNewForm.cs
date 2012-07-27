@@ -71,7 +71,7 @@ namespace TeamView
             _model.Current.description = formatNum.Description;
             _model.Current.fired = 0;
             _model.Current.hardLevel = _hardLevel.DefaultHardLevel;
-            _model.Current.lastStateTime = DateTime.MinValue;
+            _model.Current.latestStartTime = DateTime.MinValue;
             _model.Current.priority = formatNum.Priority;
             _model.Current.size = formatNum.Size;
             _model.Current.version = formatNum.Version;

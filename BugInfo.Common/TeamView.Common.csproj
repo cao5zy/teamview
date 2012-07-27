@@ -56,8 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Dev3Lib">
-      <HintPath>..\Dependencies\Dev3Lib.dll</HintPath>
+    <Reference Include="Dev3Lib, Version=1.1.1.39552, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Dev3Lib.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic, Version=2.2.0.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
