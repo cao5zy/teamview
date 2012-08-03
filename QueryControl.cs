@@ -54,18 +54,13 @@ namespace TeamView
             mModel.BugStates.SafeForEach(n =>
                 mSatesCheckList.Items.Add(n));
 
+            mSatesCheckList.SetItemChecked(0, true);
+            mSatesCheckList.SetItemChecked(1, true);
+            mSatesCheckList.SetItemChecked(2, true);
+
             mModel.PriorityNumbers.SafeForEach(n =>
                 mPrioirtyCheckList.Items.Add(n.ToString()));
 
-            mPrioirtyCheckList.SetItemChecked(
-                (
-                    (from string n in mPrioirtyCheckList.Items
-                     select n)
-                    .Select(n => Convert.ToInt32(n))
-                    .ToList()
-                    .IndexOf(mModel.SelectedPriorities.FirstOrDefault())
-                    ),
-                    true);
         }
         private void mQueryButton_Click(object sender, EventArgs e)
         {
