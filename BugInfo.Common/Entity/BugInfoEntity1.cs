@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using Dev3Lib.Algorithms;
 
 namespace TeamView.Common.Entity
 {
@@ -62,5 +64,46 @@ namespace TeamView.Common.Entity
         }
 
         #endregion
+
+        public static DataTable ToDataTable(IEnumerable<BugInfoEntity1> items)
+        {
+            //code format:tb.Columns.Add("{1}",typeof({2}));
+            DataTable tb = new DataTable();
+            tb.Columns.Add("version", typeof(string));
+            tb.Columns.Add("bugNum", typeof(string));
+            tb.Columns.Add("bugStatus", typeof(string));
+            tb.Columns.Add("dealMan", typeof(string));
+            tb.Columns.Add("createdTime", typeof(DateTime));
+            tb.Columns.Add("description", typeof(string));
+            tb.Columns.Add("size", typeof(int));
+            tb.Columns.Add("latestStartTime", typeof(DateTime));
+            tb.Columns.Add("fired", typeof(int));
+            tb.Columns.Add("timeStamp", typeof(DateTime));
+            tb.Columns.Add("priority", typeof(int));
+            tb.Columns.Add("hardLevel", typeof(int));
+
+            items.SafeForEach(n => {
+                var row = tb.NewRow();
+
+                //code format:row["{1}"] = n.{1};
+                row["version"] = n.version;
+                row["bugNum"] = n.bugNum;
+                row["bugStatus"] = n.bugStatus;
+                row["dealMan"] = n.dealMan;
+                row["createdTime"] = n.createdTime;
+                row["description"] = n.description;
+                row["size"] = n.size;
+                row["latestStartTime"] = n.latestStartTime;
+                row["fired"] = n.fired;
+                row["timeStamp"] = n.timeStamp;
+                row["priority"] = n.priority;
+                row["hardLevel"] = n.hardLevel;
+
+                tb.Rows.Add(row);
+            });
+
+
+            return tb;
+        }
     }
 }
