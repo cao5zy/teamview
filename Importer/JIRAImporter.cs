@@ -67,6 +67,7 @@ namespace JIRAImporter
             {
                 (from item in xDoc.Descendants("item")
                  where assigneeMap.SafeExists(n => n.JIRAAssignee == item.Element(XName.Get("assignee")).Value)
+                    && string.Compare(item.Element("status").Value, "closed",  StringComparison.OrdinalIgnoreCase) != 0
                  select new
                  {
                      BugNum = item.Element(XName.Get("key")).Value,

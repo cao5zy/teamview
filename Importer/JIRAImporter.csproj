@@ -38,9 +38,9 @@
     <Reference Include="Autofac">
       <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Dev3Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Dev3Lib, Version=1.1.1.39552, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Dev3Lib.dll</HintPath>
+      <HintPath>..\..\Dependencies\Dev3Lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
