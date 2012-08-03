@@ -19,6 +19,7 @@ using System.Transactions;
 using TeamView.Abstracts;
 using System.Threading;
 using TeamView.Common.Abstracts;
+using TeamView.UIComponents;
 
 namespace TeamView
 {
@@ -34,6 +35,7 @@ namespace TeamView
         private IBugInfoRepository _repository;
         private IQuery _query;
         private IDealMen _dealMen;
+        private CurrentTaskListControl.Factory _currentTaskListControlFac;
         public MainForm(
             BugInfoForm.Factory createBugInfoForm,
             QueryControl queryControl,
@@ -41,9 +43,11 @@ namespace TeamView
             BugInfoViewModel bugInfoModel,
             IBugInfoRepository repository,
             IQuery bugQuery,
-            IDealMen dealMen)
+            IDealMen dealMen,
+            CurrentTaskListControl.Factory currentTaskListControlFac)
         {
             InitializeComponent();
+            _currentTaskListControlFac = currentTaskListControlFac;
             CreateBugInfoForm = createBugInfoForm;
             _addFormFactory = addFormFactory;
             _bugInfoModel = bugInfoModel;
@@ -436,6 +440,14 @@ namespace TeamView
             {
                 e.SortResult = 0;
             }
+        }
+
+        private void _makePlan_Click(object sender, EventArgs e)
+        {
+            CommonForm<CurrentTaskListControl> form =
+                new CommonForm<CurrentTaskListControl>(_currentTaskListControlFac(), n => n.Load("曹宗颖"));
+
+            form.ShowDialog();
         }
 
     }

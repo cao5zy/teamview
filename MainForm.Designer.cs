@@ -55,6 +55,7 @@
             this.mQueryControlContainer = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mImageList = new System.Windows.Forms.ImageList(this.components);
+            this._makePlan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoListDataGridView)).BeginInit();
             this.mFlowMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mBugInfoSet)).BeginInit();
@@ -239,6 +240,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this._makePlan);
             this.panel1.Controls.Add(this._smartPlan);
             this.panel1.Controls.Add(this.mQueryControlContainer);
             this.panel1.Controls.Add(this.mEditButton);
@@ -291,6 +293,16 @@
             this.mImageList.Images.SetKeyName(1, "state-pickup.ico");
             this.mImageList.Images.SetKeyName(2, "state-reach.ico");
             // 
+            // _makePlan
+            // 
+            this._makePlan.Location = new System.Drawing.Point(848, 9);
+            this._makePlan.Name = "_makePlan";
+            this._makePlan.Size = new System.Drawing.Size(85, 29);
+            this._makePlan.TabIndex = 29;
+            this._makePlan.Text = "Make Plan";
+            this._makePlan.UseVisualStyleBackColor = true;
+            this._makePlan.Click += new System.EventHandler(this._makePlan_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -341,5 +353,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn fired;
         private System.Windows.Forms.CheckBox _smartPlan;
+        private System.Windows.Forms.Button _makePlan;
     }
 }

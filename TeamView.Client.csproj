@@ -107,6 +107,8 @@
     <Compile Include="AddNewForm.Designer.cs">
       <DependentUpon>AddNewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ControllerModule.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Impls\HardLevelImpl.cs" />
     <Compile Include="Abstracts\IHardLevel.cs" />
     <Compile Include="MainForm.cs">
@@ -149,6 +151,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UIComponents\CurrentTaskListControl.resx">
+      <DependentUpon>CurrentTaskListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -193,6 +198,13 @@
     </Compile>
     <Compile Include="Starter.cs" />
     <Compile Include="StateSequence.cs" />
+    <Compile Include="UIComponents\CurrentTaskListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\CurrentTaskListControl.Designer.cs">
+      <DependentUpon>CurrentTaskListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\UIComponentsModule.cs" />
     <Compile Include="Utility\BindingCollection.cs" />
     <Compile Include="Utility\ListOrder.cs" />
     <Compile Include="Utility\ObjectPRopertyCompare.cs" />

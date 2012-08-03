@@ -9,6 +9,8 @@ using TeamView.Common;
 using IniTeamView;
 using TeamView.Impls;
 using TeamView.Abstracts;
+using TeamView.UIComponents;
+using TeamView.Controllers;
 
 namespace TeamView
 {
@@ -24,6 +26,8 @@ namespace TeamView
             builder.RegisterModule<LogsModule>();
             builder.RegisterModule<CommonModule>();
             builder.RegisterModule<ClientModule>();
+            builder.RegisterModule<UIComponentsModule>();
+            builder.RegisterModule<ControllerModule>();
 
 
             mContainer = builder.Build();
