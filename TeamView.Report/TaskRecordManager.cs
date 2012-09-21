@@ -8,6 +8,7 @@ using TeamView.Dao;
 using TeamView.Common;
 using TeamView.Common.Logs;
 using TeamView.Common.Dao;
+using System.IO;
 
 namespace TeamView.Report
 {
@@ -36,7 +37,8 @@ namespace TeamView.Report
             string[] programmers,
             bool sortByBugNum,
             bool includePast,
-            bool onlyTask)
+            bool onlyTask,
+            bool reportSummary)
         {
             var bugNumList = DBProvider.ReadBugNums(start, end);
 
@@ -57,21 +59,86 @@ namespace TeamView.Report
 
             if (onlyTask)
             {
-                list = list.SafeUniqueItems(n =>  n.Add(m => m.BugNum).Add(m => m.Order)).ToList();
+                list = list.SafeUniqueItems(n => n.Add(m => m.BugNum).Add(m => m.Order)).ToList();
             }
 
             if (sortByBugNum)
             {
-                list = new List<TaskRecord>(list.SafeSort(n=>n.Add(m=>m.BugNum).Add(m=>m.StartTime)));
+                list = new List<TaskRecord>(list.SafeSort(n => n.Add(m => m.BugNum).Add(m => m.StartTime)));
                 Console.WriteLine("by bugNum");
             }
             else
             {
-                list = new List<TaskRecord>(list.SafeSort(n=>n.Add(m=>m.StartTime).Add(m=>m.BugNum)));
+                list = new List<TaskRecord>(list.SafeSort(n => n.Add(m => m.StartTime).Add(m => m.BugNum)));
                 Console.WriteLine("by Time");
             }
 
+            if (reportSummary)
+                list = PopulateSummary(list);
+
             FileProvider.WriteLogs(outputFile, list);
+        }
+
+        private static List<TaskRecord> PopulateSummary(List<TaskRecord> list)
+        {
+            string workingTimeFile = "workingtime.txt";
+            List<DateTime> extraWorkingDates = new List<DateTime>();
+            if (File.Exists(workingTimeFile))
+                extraWorkingDates.AddRange(File.ReadAllLines(workingTimeFile)
+                    .SafeConvertAll(n => Convert.ToDateTime(n)));
+
+            List<DateTime> legalHolidays = new List<DateTime>();
+            legalHolidays.AddRange(list.SafeFindAll(
+                n => n.StartTime.DayOfWeek == DayOfWeek.Saturday
+                    || n.StartTime.DayOfWeek == DayOfWeek.Sunday)
+                    .ConvertAll(n=>n.StartTime.Date));
+
+            legalHolidays = legalHolidays.SafeFindAll(
+                n => !extraWorkingDates.Contains(n));
+
+            TimeSpan legalStart = new TimeSpan(9, 0, 0);
+            TimeSpan legalEnd = new TimeSpan(18, 0, 0);
+
+            List<TaskRecord> result = new List<TaskRecord>();
+
+            //calculate the workload in legalHolidays
+            result.AddRange((from n in list
+                                  where legalHolidays.Contains(n.StartTime.Date)
+                                  group n by new {n.BugNum, n.Description} into g
+                                  select new TaskRecord {
+                                        BugNum = g.Key.BugNum,
+                                        Description = g.Key.Description,
+                                        Duration = g.Sum(m=>m.Duration),
+                                        IsOvertime = true,
+                                  }));
+
+            //calcuate the workload in legalWorkingTime
+            result.AddRange((from n in list
+                             where (!legalHolidays.Contains(n.StartTime.Date))
+                                && n.StartTime.TimeOfDay > legalEnd
+                             group n by new { n.BugNum, n.Description } into g
+                             select new TaskRecord
+                             {
+                                 BugNum = g.Key.BugNum,
+                                 Description = g.Key.Description,
+                                 Duration = g.Sum(m => m.Duration),
+                                 IsOvertime = true,
+                             }));
+
+            //calculate the workload in legalWorkingTime
+            result.AddRange((from n in list
+                             where (!legalHolidays.Contains(n.StartTime.Date)) &&
+                                n.StartTime.TimeOfDay >= legalStart && n.StartTime.TimeOfDay <= legalEnd
+                             group n by new { n.BugNum, n.Description } into g
+                             select new TaskRecord
+                             {
+                                 BugNum = g.Key.BugNum,
+                                 Description = g.Key.Description,
+                                 Duration = g.Sum(m => m.Duration),
+                                 IsOvertime = false,
+                             }));
+
+            return result;
         }
 
         private string GetPoint(string bugNum, string programmer)
