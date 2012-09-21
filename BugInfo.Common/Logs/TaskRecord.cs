@@ -7,6 +7,8 @@ namespace TeamView.Common.Logs
 {
     public class TaskRecord
     {
+        public bool IsOvertime { get; set; }
+
         public string Programmer { get; set; }
 
         public string BugNum { get; set; }
@@ -18,11 +20,20 @@ namespace TeamView.Common.Logs
         public DateTime EndTime { get; set; }
 
         public int Order { get; set; }
+
+        private Nullable<decimal> _durartion;
         public decimal Duration
         {
             get
             {
-                return Math.Round((decimal)EndTime.Subtract(StartTime).TotalMinutes / 60, 2);
+                if (_durartion == null)
+                    return Math.Round((decimal)EndTime.Subtract(StartTime).TotalMinutes / 60, 2);
+                else
+                    return _durartion.Value;
+            }
+            set
+            {
+                _durartion = value;
             }
         }
 

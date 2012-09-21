@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Threading;
 using FxLib.Algorithms;
 using System.IO;
+using Dev3Lib;
 
 namespace TeamView.Report
 {
@@ -33,6 +34,7 @@ namespace TeamView.Report
             bool onlyTask = false;
             bool taskHistory = false;
             bool commitHistory = false;
+            bool reportSummary = false;
 
             string versionnumber = string.Empty;
 
@@ -61,6 +63,11 @@ namespace TeamView.Report
                     else if (match.Groups[1].Value == "onlyTask")
                     {
                         onlyTask = true;
+                        continue;
+                    }
+                    else if (match.Groups[1].Value.OrdinalIngoreCaseCompare("reportsummary"))
+                    {
+                        reportSummary = true;
                         continue;
                     }
                     else if (match.Groups[1].Value == "u")
@@ -111,7 +118,7 @@ namespace TeamView.Report
             //Thread.Sleep(20000);
 #endif
 
-            if(taskHistory)
+            if (taskHistory)
             {
                 Console.WriteLine("parsing");
                 var s = builder.Resolve<TaskRecordManager>();
@@ -125,12 +132,13 @@ namespace TeamView.Report
                     string.IsNullOrEmpty(userNames) ? null : userNames.Split(new char[] { ',' }),
                     sortByBugNum,
                     includePast,
-                    onlyTask);
+                    onlyTask,
+                    reportSummary);
                 Console.WriteLine("parsing completed");
             }
             else if (commitHistory)
-            { 
-                 outFileName += ".csv";
+            {
+                outFileName += ".csv";
                 if (File.Exists(outFileName))
                     File.Delete(outFileName);
                 builder.Resolve<TaskRecordManager>().ParseCompleteTasksHistory(outFileName, userNames, start, end);
