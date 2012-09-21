@@ -30,6 +30,8 @@ namespace TeamView
         {
             get
             {
+                ApplySelection();
+
                 return mModel;
             }
         }
@@ -64,6 +66,11 @@ namespace TeamView
         }
         private void mQueryButton_Click(object sender, EventArgs e)
         {
+            OnQuery();
+        }
+
+        private void ApplySelection()
+        {
             List<string> selectedProgrammers = new List<string>();
 
             mModel.SelectedProgrammers = (from string n in mProgrammerCheckList.CheckedItems
@@ -86,8 +93,6 @@ namespace TeamView
                 mModel.Version = mVersionTextBox.Text;
             else
                 mModel.Version = string.Empty;
-
-            OnQuery();
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)

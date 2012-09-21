@@ -87,10 +87,9 @@ namespace TeamView
         {
             mBugInfoListDataGridView.AutoGenerateColumns = false;
 
-            var model = mQueryControl.Model;
-
-
             mQueryControl.Init();
+
+            var model = mQueryControl.Model;
 
             LoadBugInfos();
 
@@ -177,7 +176,7 @@ namespace TeamView
             int itemCount = 0;
             decimal totalSize = 0;
             decimal totalHours = 0;
-
+            decimal remaining = 0;
 
             results.SafeForEach(
                 n =>
@@ -198,6 +197,7 @@ namespace TeamView
                     itemCount++;
                     totalHours += (decimal)row.fired;
                     totalSize += (decimal)row.size;
+                    remaining += (decimal)(row.size < row.fired ? 0 : row.size - row.fired);
                 }
                 );
 
@@ -206,7 +206,7 @@ namespace TeamView
             else
                 _bindingView.Sort = "";
 
-            ShowSummary(itemCount, totalSize, totalHours);
+            ShowSummary(itemCount, totalSize, totalHours, remaining);
 
             ShowColorStatus();
 
@@ -328,9 +328,10 @@ namespace TeamView
             }
         }
 
-        private void ShowSummary(int count, decimal totalHours, decimal totalFired)
+        private void ShowSummary(int count, decimal totalHours, decimal totalFired, decimal remaining)
         {
-            this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() + "/estimated " + totalHours.ToString() + " hours" + "/fired " + totalFired.ToString() + " hours";
+            this.Text = "TeamView:" + BugInfoManagement_Resource.TotalRecord + " " + count.ToString() + "/estimated " + totalHours.ToString() + " hours" + "/fired " + totalFired.ToString() + " hours"
+                + "/remaining " + remaining.ToString("####.##");
         }
 
 
