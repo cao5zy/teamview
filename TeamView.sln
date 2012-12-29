@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6C97952B-2D7E-41DE-BA88-84078713B55A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Client", "TeamView.Client.csproj", "{033A9DB1-71C5-4691-8A21-9E1459962524}"
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIRAImporter", "Importer\JIRAImporter.csproj", "{A7096742-5D80-432A-847B-788B3D93FC1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report2", "TeamView.Report2\TeamView.Report2.csproj", "{DF6BCC95-6621-415A-8ABE-18503AD8D60C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Data.Abstract", "TeamView.Data.Abstract\TeamView.Data.Abstract.csproj", "{6AE4F87D-4758-400F-AB68-20C9F109DF3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,16 @@ Global
 		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|x86.ActiveCfg = Release|x86
 		{DF6BCC95-6621-415A-8ABE-18503AD8D60C}.Release|x86.Build.0 = Release|x86
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
