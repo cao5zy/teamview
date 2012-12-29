@@ -1,0 +1,9 @@
+
+syntax: regexp
+[\w\d./_\-]+\.(pdb|dll|exe|cache|txt|suo|resources|rar|tlog|csv|bat|user|force)
+syntax: glob
+Importer/bin/Debug/ImportBugFeedback.xml
+Importer/bin/Debug/ImportSizeChanged.xml
+_ReSharper.TeamView/ProjectModel/projectModel.dat
+Packages/TeamView 1.0.6.zip
+TeamView.Data.Abstract/obj
