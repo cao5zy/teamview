@@ -45,6 +45,8 @@
     <Compile Include="Entity\ProgrammerBaseInfo.cs" />
     <Compile Include="Entity\ProgrammerPoint.cs" />
     <Compile Include="Entity\TaskLogEntity.cs" />
+    <Compile Include="IBugInfoRepository.cs" />
+    <Compile Include="IQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
