@@ -8,3 +8,4 @@ _ReSharper.TeamView/ProjectModel/projectModel.dat
 Packages/TeamView 1.0.6.zip
 TeamView.Data.Abstract/obj
 TeamView.Data.Sql/obj
+BugInfo.Common/obj

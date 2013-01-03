@@ -35,6 +35,8 @@ namespace TeamView.Report
             bool taskHistory = false;
             bool commitHistory = false;
             bool reportSummary = false;
+            bool doSummary = false;
+            string summaryFileName = null;
 
             string versionnumber = string.Empty;
 
@@ -110,6 +112,11 @@ namespace TeamView.Report
                                 (int)DayOfWeek.Saturday - (int)DateTime.Today.DayOfWeek).AddDays(1);
                         }
                     }
+                    else if (match.Groups[1].Value.OrdinalIngoreCaseCompare("sum"))
+                    {
+                        doSummary = true;
+                        summaryFileName = match.Groups[2].Value.Substring(1);
+                    }
                 }
             }
 
@@ -143,6 +150,13 @@ namespace TeamView.Report
                     File.Delete(outFileName);
                 builder.Resolve<TaskRecordManager>().ParseCompleteTasksHistory(outFileName, userNames, start, end);
             }
+            else if (doSummary)
+            {
+                new SummaryTaskParser(summaryFileName).Parse();
+            }
+
+            Console.WriteLine("press any key to quit");
+            Console.ReadKey();
         }
 
     }
