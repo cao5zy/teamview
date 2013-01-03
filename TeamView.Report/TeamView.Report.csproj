@@ -82,11 +82,16 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CSVLineReader.cs" />
+    <Compile Include="Entities\SummaryEntity.cs" />
     <Compile Include="FileProvider.cs" />
     <Compile Include="IFileProvider.cs" />
+    <Compile Include="Abstracts\ILineReader.cs" />
+    <Compile Include="Abstracts\LineParser.cs" />
     <Compile Include="LogRecord.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="StringManipulation.cs" />
+    <Compile Include="SummaryTaskParser.cs" />
     <Compile Include="TaskRecordExtention.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,9 +123,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
