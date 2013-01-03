@@ -19,6 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Report2", "TeamVie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Data.Abstract", "TeamView.Data.Abstract\TeamView.Data.Abstract.csproj", "{6AE4F87D-4758-400F-AB68-20C9F109DF3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamView.Data.Sql", "TeamView.Data.Sql\TeamView.Data.Sql.csproj", "{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6AE4F87D-4758-400F-AB68-20C9F109DF3F} = {6AE4F87D-4758-400F-AB68-20C9F109DF3F}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +114,16 @@ Global
 		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6AE4F87D-4758-400F-AB68-20C9F109DF3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{884F578B-E75B-4F4C-B471-66E5AC2DEBA3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
