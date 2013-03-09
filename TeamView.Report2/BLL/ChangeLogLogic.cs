@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TeamView.Common;
 using TeamView.Report2.DAL.Interfaces;
 
 namespace TeamView.Report2.BLL
 {
-    class ChangeLogLogic : IChangeLogLogic
+    public class ChangeLogLogic : IChangeLogLogic
     {
         public bool HasLogs(string bugNum, DateTime startDate, DateTime endDate)
         {
@@ -18,10 +19,25 @@ namespace TeamView.Report2.BLL
         {
             var changeLogDal = DependencyFactory.Resolve<IChangeLog>();
 
-            int value = 0;
 
             var logList = changeLogDal.GetLogs(bugNum, startDate, endDate);
 
+            if (logList.Count != 0 && 
+                (logList[0].LogTypeID == (int)LogTypeEnum.MissionStop || logList[0].LogTypeID == (int)LogTypeEnum.Submit))
+            {
+                logList.RemoveAt(0);
+            }
+
+            DateTime startTime = DateTime.MinValue;
+            int value = 0;
+
+            foreach (var log in logList)
+            {
+                if (log.LogTypeID == (int)LogTypeEnum.MissionStart)
+                    startTime = log.CreateDate;
+                if(log.LogTypeID == (int)LogTypeEnum.MissionStop || log.LogTypeID == (int)LogTypeEnum.Submit)
+                    value += (int)log.CreateDate.Subtract(startTime).TotalMinutes;
+            }
 
 
             return value;
