@@ -78,5 +78,7 @@ namespace TeamView.Report2.GeneralView
             else
                 return hourValue;
         }
+
+        public int CurrentBurnedMins { get; set; }
     }
 }

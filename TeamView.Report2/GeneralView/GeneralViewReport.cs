@@ -1,12 +1,17 @@
-﻿using System;
+﻿using Dev3Lib;
+using Dev3Lib.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TeamView.Common.Dao;
+using TeamView.Report2.BLL;
+using TeamView.Report2.DAL.Interfaces;
+using TeamView.Report2.Entities;
 
 namespace TeamView.Report2.GeneralView
 {
-    sealed class GeneralViewReport
+    public sealed class GeneralViewReport
     {
         public readonly string _programmer;
         public readonly DateTime _startDate;
@@ -31,26 +36,41 @@ namespace TeamView.Report2.GeneralView
             _list = GetList(programmer, startDate, endDate);
         }
 
-        private GeneralViewReportEntity[] GetList(string programmer, 
+        public static GeneralViewReportEntity[] GetList(string programmer, 
             DateTime startDate, 
             DateTime endDate)
         {
-
-            return _query.QueryTasks(new QueryTaskParameter
+            using (DependencyFactory.BeginScope())
             {
-                _programmer = programmer,
-                _searchStart = startDate,
-                _searchEnd = endDate
-            })
-            .Select(n => new GeneralViewReportEntity { 
-                BugNum = n.ItemId,
-                Programmer = n.Dealman,
-                _burnedMins = n.Burned,
-                _sizeInMins = n.Estimate,
-                Description = n.Description,
-                
-            })
-            .ToArray();
+                DependencyFactory.Resolve<IDbContext>().BeginTransaction();
+                var bugInfo = DependencyFactory.Resolve<IBugInfoLogic>();
+                var changeLog = DependencyFactory.Resolve<IChangeLogLogic>();
+
+                var allBugNumbs = bugInfo.AllBugNums(programmer);
+
+                var resultList = new List<GeneralViewReportEntity>();
+
+                foreach (var bugNum in allBugNumbs)
+                {
+                    if (!changeLog.HasLogs(bugNum, startDate, endDate))
+                        continue;
+
+                    SimpleBugInfo item = bugInfo.GetSimpleBugInfo(bugNum);
+
+                    int currentFired = changeLog.CalculateCurrentBurnedMins(bugNum, startDate, endDate);
+
+                    resultList.Add(new GeneralViewReportEntity { 
+                        BugNum = item.bugNum,
+                        Description = item.description,
+                        Programmer = programmer,
+                        _sizeInMins = item.size,
+                        _burnedMins = item.fired,
+                        CurrentBurnedMins = currentFired,
+                    });
+                }
+
+                return resultList.ToArray();
+            }
         }
     }
 }

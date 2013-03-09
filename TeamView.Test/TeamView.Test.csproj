@@ -57,7 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Dev3Lib, Version=1.1.1.39552, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Dev3Lib, Version=1.1.1.39552, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Dev3Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -91,11 +94,13 @@
     <Compile Include="BugInfoViewModel_Test.cs" />
     <Compile Include="DealMenTestImpl.cs" />
     <Compile Include="EditorTest.cs" />
+    <Compile Include="GeneralViewReportTests.cs" />
     <Compile Include="JIRAImporterTest.cs" />
     <Compile Include="KeyModel_Test.cs" />
     <Compile Include="LogReader_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportEntityTest.cs" />
+    <Compile Include="ChangeLogLogicTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugInfo.Common\TeamView.Common.csproj">
