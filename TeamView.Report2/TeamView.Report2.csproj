@@ -45,6 +45,7 @@
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -59,10 +60,15 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BLL\ChangeLogLogic.cs" />
+    <Compile Include="BLL\IBugInfoLogic.cs" />
+    <Compile Include="BLL\IChangeLogLogic.cs" />
     <Compile Include="DAL\BugInfo.cs" />
     <Compile Include="DAL\ChangeLog.cs" />
     <Compile Include="DAL\Interfaces\IBugInfo.cs" />
     <Compile Include="DAL\Interfaces\IChangeLog.cs" />
+    <Compile Include="Entities\ChangeLogEntity.cs" />
+    <Compile Include="Entities\SimpleBugInfo.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="GeneralView\GeneralViewControl.cs">
       <SubType>UserControl</SubType>
