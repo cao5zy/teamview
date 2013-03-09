@@ -9,3 +9,5 @@ Packages/TeamView 1.0.6.zip
 TeamView.Data.Abstract/obj
 TeamView.Data.Sql/obj
 BugInfo.Common/obj
+TestResults/TeamView.TE.Tests.mdf
+TestResults/TeamView.TE.Tests_log.ldf
