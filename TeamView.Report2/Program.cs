@@ -23,6 +23,9 @@ namespace TeamView.Report2
                 ContainerBuilder builder = new ContainerBuilder();
                 builder.RegisterType<TeamView.Report2.DAL.BugInfo>().As<TeamView.Report2.DAL.Interfaces.IBugInfo>();
                 builder.RegisterType<Report2.DAL.ChangeLog>().As<Report2.DAL.Interfaces.IChangeLog>();
+                builder.RegisterType<BLL.BugInfoLogic>().As<BLL.IBugInfoLogic>();
+                builder.RegisterType<BLL.ChangeLogLogic>().As<BLL.IChangeLogLogic>();
+                builder.RegisterType<Dev3Lib.Sql.SqlSelector>().As<Dev3Lib.Sql.ISelector>();
                 builder.RegisterType<DefaultDbContext>().WithParameter(new TypedParameter(typeof(string), ConfigurationManager.ConnectionStrings["bug_db"].ConnectionString)).As<IDbContext>().InstancePerLifetimeScope();
 
                 return builder.Build();

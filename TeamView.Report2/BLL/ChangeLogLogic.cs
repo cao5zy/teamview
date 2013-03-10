@@ -12,7 +12,9 @@ namespace TeamView.Report2.BLL
     {
         public bool HasLogs(string bugNum, DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            var changeLogDal = DependencyFactory.Resolve<IChangeLog>();
+
+            return changeLogDal.HasLogs(bugNum, startDate, endDate);
         }
 
         public int CalculateCurrentBurnedMins(string bugNum, DateTime startDate, DateTime endDate)

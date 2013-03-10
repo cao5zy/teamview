@@ -35,7 +35,7 @@ namespace TeamView.Report2.DAL
                     fired = Convert.ToInt32(reader["fired"]),
                 },
                 "select * from bugInfo",
-                new WhereClause("bugNum", bugNum));
+                new WhereClause(bugNum, "bugNum"));
 
             if (list.Count == 0)
                 return null;

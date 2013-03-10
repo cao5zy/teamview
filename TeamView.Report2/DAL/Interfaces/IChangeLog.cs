@@ -10,5 +10,7 @@ namespace TeamView.Report2.DAL.Interfaces
     {
         List<ChangeLogEntity> GetLogs(string bugNum, DateTime startDate, DateTime endDate);
 
+
+        bool HasLogs(string bugNum, DateTime startDate, DateTime endDate);
     }
 }
