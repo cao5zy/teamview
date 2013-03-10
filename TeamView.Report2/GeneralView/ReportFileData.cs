@@ -22,7 +22,8 @@ namespace TeamView.Report2.GeneralView
                     new XElement("Points", n.Points),
                     new XElement("ResultPoint", n.ResultPoint),
                     new XElement("Description", n.Description),
-                    new XElement("FixedPoint", n.FixedPoint)
+                    new XElement("FixedPoint", n.FixedPoint),
+                    new XElement("_currentBurnedMins", n._currentBurnedMins)
                     )))).Save(tempFileName);
 
         }
@@ -42,6 +43,7 @@ namespace TeamView.Report2.GeneralView
                         ResultPoint = n.Element("ResultPoint").Value.ToDouble(),
                         Description = n.Element("Description").Value,
                         FixedPoint = n.Element("FixedPoint").Value.ToDouble(),
+                        _currentBurnedMins = n.Element("_currentBurnedMins").Value.ToInt32(),
                     }).ToArray();
 
         }
