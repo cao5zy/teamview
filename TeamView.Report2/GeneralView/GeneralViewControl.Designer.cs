@@ -41,6 +41,8 @@
             this._searchStart = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this._totalPointsLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this._calButton = new System.Windows.Forms.Button();
             this._saveButton = new System.Windows.Forms.Button();
             this._loadButton = new System.Windows.Forms.Button();
@@ -60,8 +62,7 @@
             this.fixedPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this._totalPointsLabel = new System.Windows.Forms.Label();
+            this.CurrentBurnedHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -205,6 +206,24 @@
             this.panel2.Size = new System.Drawing.Size(641, 94);
             this.panel2.TabIndex = 0;
             // 
+            // _totalPointsLabel
+            // 
+            this._totalPointsLabel.AutoSize = true;
+            this._totalPointsLabel.Location = new System.Drawing.Point(264, 10);
+            this._totalPointsLabel.Name = "_totalPointsLabel";
+            this._totalPointsLabel.Size = new System.Drawing.Size(11, 12);
+            this._totalPointsLabel.TabIndex = 10;
+            this._totalPointsLabel.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(181, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "total points";
+            // 
             // _calButton
             // 
             this._calButton.Location = new System.Drawing.Point(470, 5);
@@ -301,7 +320,8 @@
             this.burnedHoursDataGridViewTextBoxColumn,
             this.pointsDataGridViewTextBoxColumn,
             this.fixedPointDataGridViewTextBoxColumn,
-            this.resultPointDataGridViewTextBoxColumn});
+            this.resultPointDataGridViewTextBoxColumn,
+            this.CurrentBurnedHours});
             this._grid.DataSource = this._bindingSource;
             this._grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this._grid.Location = new System.Drawing.Point(3, 3);
@@ -365,23 +385,12 @@
             // 
             this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.GeneralViewReportEntity);
             // 
-            // label4
+            // CurrentBurnedHours
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(181, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "total points";
-            // 
-            // _totalPointsLabel
-            // 
-            this._totalPointsLabel.AutoSize = true;
-            this._totalPointsLabel.Location = new System.Drawing.Point(264, 10);
-            this._totalPointsLabel.Name = "_totalPointsLabel";
-            this._totalPointsLabel.Size = new System.Drawing.Size(11, 12);
-            this._totalPointsLabel.TabIndex = 10;
-            this._totalPointsLabel.Text = "0";
+            this.CurrentBurnedHours.DataPropertyName = "CurrentBurnedHours";
+            this.CurrentBurnedHours.HeaderText = "CurrentBurnedHours";
+            this.CurrentBurnedHours.Name = "CurrentBurnedHours";
+            this.CurrentBurnedHours.ReadOnly = true;
             // 
             // GeneralViewControl
             // 
@@ -437,5 +446,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn resultPointDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label _totalPointsLabel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentBurnedHours;
     }
 }

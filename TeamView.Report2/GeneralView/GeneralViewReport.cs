@@ -65,7 +65,7 @@ namespace TeamView.Report2.GeneralView
                         Programmer = programmer,
                         _sizeInMins = item.size,
                         _burnedMins = item.fired,
-                        CurrentBurnedMins = currentFired,
+                        _currentBurnedMins = currentFired,
                     });
                 }
 

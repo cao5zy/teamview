@@ -32,7 +32,7 @@ namespace TeamView.Report2.GeneralView
         public double Points { get; set; }
         public double FixedPoint { get; set; }
         public double ResultPoint { get; set; }
-        
+
         public void Cal()
         {
             if (FixedPoint != 0)
@@ -79,6 +79,12 @@ namespace TeamView.Report2.GeneralView
                 return hourValue;
         }
 
-        public int CurrentBurnedMins { get; set; }
+        public int _currentBurnedMins;
+
+        public string CurrentBurnedHours
+        {
+            get
+            { return Math.Round((decimal)_currentBurnedMins / 60, 2).ToString(); }
+        }
     }
 }
