@@ -8,9 +8,7 @@ namespace TeamView.Report2.DAL.Interfaces
 {
     public interface IBugInfo
     {
-        List<SimpleBugInfo> ReturnSimpleBugInfo(
-            string programmer,
-            DateTime startDate,
-            DateTime endDate);
+        List<string> AllBugNums(string programmer);
+        Entities.SimpleBugInfo GetSimpleBugInfo(string bugNum);
     }
 }
