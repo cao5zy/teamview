@@ -17,11 +17,11 @@ namespace TeamView.Report2.DAL
             {
                 CreateDate = Convert.IsDBNull(reader["CreateDate"]) ? System.DateTime.MinValue : Convert.ToDateTime(reader["CreateDate"]),
                 LogTypeID = Convert.IsDBNull(reader["LogTypeID"]) ? 0 : Convert.ToInt32(reader["LogTypeID"]),
-                    },
+            },
                 "select CreateDate,LogTypeID from ChangeLog",
-                new WhereClause(bugNum,"bugNum")
-                .And(new WhereClause(startDate, "CreateDate", Comparison.GreatorThanEqualTo)
-                .And(new WhereClause(endDate, "CreateDate", Comparison.LessTanEqualTo))));
+                new WhereClause(bugNum, "bugNum")
+                .And(new WhereClause(startDate, "CreateDate", "startDate", Comparison.GreatorThanEqualTo)
+                .And(new WhereClause(endDate, "CreateDate", "endDate", Comparison.LessTanEqualTo))));
         }
 
 
@@ -31,7 +31,7 @@ namespace TeamView.Report2.DAL
 
             return selector.Count("select count(*) from ChangeLog",
                 new WhereClause(bugNum, "bugNum")
-                .And(new WhereClause(startDate, "CreateDate", "startDate",Comparison.GreatorThanEqualTo)
+                .And(new WhereClause(startDate, "CreateDate", "startDate", Comparison.GreatorThanEqualTo)
                 .And(new WhereClause(endDate, "CreateDate", "endDate", Comparison.LessTanEqualTo)))) != 0;
         }
     }
