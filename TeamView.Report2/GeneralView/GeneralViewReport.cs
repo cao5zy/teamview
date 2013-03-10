@@ -46,6 +46,9 @@ namespace TeamView.Report2.GeneralView
                 var bugInfo = DependencyFactory.Resolve<IBugInfoLogic>();
                 var changeLog = DependencyFactory.Resolve<IChangeLogLogic>();
 
+                startDate = startDate.Date;
+                endDate = endDate.Date.AddDays(1);
+
                 var allBugNumbs = bugInfo.AllBugNums(programmer);
 
                 var resultList = new List<GeneralViewReportEntity>();
