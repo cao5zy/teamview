@@ -60,6 +60,7 @@
     <Compile Include="..\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BLL\BugInfoLogic.cs" />
     <Compile Include="BLL\ChangeLogLogic.cs" />
     <Compile Include="BLL\IBugInfoLogic.cs" />
     <Compile Include="BLL\IChangeLogLogic.cs" />
