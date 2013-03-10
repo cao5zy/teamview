@@ -31,8 +31,8 @@ namespace TeamView.Report2.DAL
 
             return selector.Count("select count(*) from ChangeLog",
                 new WhereClause(bugNum, "bugNum")
-                .And(new WhereClause(startDate, "CreateDate", Comparison.GreatorThanEqualTo)
-                .And(new WhereClause(endDate, "CreateDate", Comparison.LessTanEqualTo)))) != 0;
+                .And(new WhereClause(startDate, "CreateDate", "startDate",Comparison.GreatorThanEqualTo)
+                .And(new WhereClause(endDate, "CreateDate", "endDate", Comparison.LessTanEqualTo)))) != 0;
         }
     }
 }
