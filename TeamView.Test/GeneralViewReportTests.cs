@@ -75,7 +75,7 @@ namespace TeamView.Test
             Assert.AreEqual(description, list[0].Description);
             Assert.AreEqual(size, list[0]._sizeInMins);
             Assert.AreEqual(fired, list[0]._burnedMins);
-            Assert.AreEqual(currentBurned, list[0].CurrentBurnedMins);
+            Assert.AreEqual(currentBurned, list[0]._currentBurnedMins);
         }
     }
 }
