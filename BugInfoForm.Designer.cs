@@ -223,7 +223,12 @@ namespace TeamView
             "1",
             "2",
             "3",
-            "4"});
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "99"});
             this.mPriorityCombo.Location = new System.Drawing.Point(551, 14);
             this.mPriorityCombo.Name = "mPriorityCombo";
             this.mPriorityCombo.Size = new System.Drawing.Size(84, 20);

@@ -46,8 +46,6 @@
             this._calButton = new System.Windows.Forms.Button();
             this._saveButton = new System.Windows.Forms.Button();
             this._loadButton = new System.Windows.Forms.Button();
-            this._progressSize = new System.Windows.Forms.Label();
-            this._progressSizeLabel = new System.Windows.Forms.Label();
             this._totalBurned = new System.Windows.Forms.Label();
             this._totalBurnedLabel = new System.Windows.Forms.Label();
             this._totalSize = new System.Windows.Forms.Label();
@@ -61,8 +59,8 @@
             this.pointsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fixedPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultPointDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CurrentBurnedHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -194,8 +192,6 @@
             this.panel2.Controls.Add(this._calButton);
             this.panel2.Controls.Add(this._saveButton);
             this.panel2.Controls.Add(this._loadButton);
-            this.panel2.Controls.Add(this._progressSize);
-            this.panel2.Controls.Add(this._progressSizeLabel);
             this.panel2.Controls.Add(this._totalBurned);
             this.panel2.Controls.Add(this._totalBurnedLabel);
             this.panel2.Controls.Add(this._totalSize);
@@ -253,24 +249,6 @@
             this._loadButton.Text = "load";
             this._loadButton.UseVisualStyleBackColor = true;
             this._loadButton.Click += new System.EventHandler(this._loadButton_Click);
-            // 
-            // _progressSize
-            // 
-            this._progressSize.AutoSize = true;
-            this._progressSize.Location = new System.Drawing.Point(100, 57);
-            this._progressSize.Name = "_progressSize";
-            this._progressSize.Size = new System.Drawing.Size(11, 12);
-            this._progressSize.TabIndex = 5;
-            this._progressSize.Text = "0";
-            // 
-            // _progressSizeLabel
-            // 
-            this._progressSizeLabel.AutoSize = true;
-            this._progressSizeLabel.Location = new System.Drawing.Point(17, 57);
-            this._progressSizeLabel.Name = "_progressSizeLabel";
-            this._progressSizeLabel.Size = new System.Drawing.Size(77, 12);
-            this._progressSizeLabel.TabIndex = 4;
-            this._progressSizeLabel.Text = "total burned";
             // 
             // _totalBurned
             // 
@@ -381,16 +359,16 @@
             this.resultPointDataGridViewTextBoxColumn.HeaderText = "ResultPoint";
             this.resultPointDataGridViewTextBoxColumn.Name = "resultPointDataGridViewTextBoxColumn";
             // 
-            // _bindingSource
-            // 
-            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.GeneralViewReportEntity);
-            // 
             // CurrentBurnedHours
             // 
             this.CurrentBurnedHours.DataPropertyName = "CurrentBurnedHours";
             this.CurrentBurnedHours.HeaderText = "CurrentBurnedHours";
             this.CurrentBurnedHours.Name = "CurrentBurnedHours";
             this.CurrentBurnedHours.ReadOnly = true;
+            // 
+            // _bindingSource
+            // 
+            this._bindingSource.DataSource = typeof(TeamView.Report2.GeneralView.GeneralViewReportEntity);
             // 
             // GeneralViewControl
             // 
@@ -430,8 +408,6 @@
         private System.Windows.Forms.Label _totalBurnedLabel;
         private System.Windows.Forms.Label _totalSize;
         private System.Windows.Forms.Label _totalSizeLabel;
-        private System.Windows.Forms.Label _progressSize;
-        private System.Windows.Forms.Label _progressSizeLabel;
         private System.Windows.Forms.CheckBox _onlyCompletedOption;
         private System.Windows.Forms.Button _saveButton;
         private System.Windows.Forms.Button _loadButton;
