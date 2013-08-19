@@ -74,6 +74,7 @@ namespace TeamView.Report2.GeneralView
             }
 
             _totalPointsLabel.Text = Math.Round(_reportEntities.Sum(n => n.ResultPoint), 2).ToString();
+            _totalBurned.Text = Math.Round(_reportEntities.Sum(n => (double)n._currentBurnedMins/60), 2).ToString();
             _grid.RefreshEdit();
             _grid.Refresh();
         }
@@ -121,7 +122,7 @@ namespace TeamView.Report2.GeneralView
             }
         }
 
-        
+
 
         private void _grid_DoubleClick(object sender, EventArgs e)
         {
