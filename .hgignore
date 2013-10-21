@@ -11,3 +11,5 @@ TeamView.Data.Sql/obj
 BugInfo.Common/obj
 TestResults/TeamView.TE.Tests.mdf
 TestResults/TeamView.TE.Tests_log.ldf
+TeamView.Report2/obj
+obj

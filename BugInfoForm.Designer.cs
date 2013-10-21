@@ -249,7 +249,6 @@ namespace TeamView
             this.mSizeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.mDataSource, "Size", true));
             this.mSizeTextBox.Location = new System.Drawing.Point(335, 15);
             this.mSizeTextBox.Name = "mSizeTextBox";
-            this.mSizeTextBox.ReadOnly = true;
             this.mSizeTextBox.Size = new System.Drawing.Size(59, 21);
             this.mSizeTextBox.TabIndex = 11;
             // 
